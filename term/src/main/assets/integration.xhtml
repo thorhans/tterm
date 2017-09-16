@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Integration</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Integration</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Integration</h1>
+<!-- ************************************************************ -->
+
+<p>For integration with other apps, TTerm now responds to 
+  <a href="tea.xhtml">TEA</a>'s
+intents and broadcasts.</p>
+
+
+<h2>Intents</h2>
+<!-- ============================================================ -->
+
+<p>The intents are:</p>
+
+<ul>
+  <li>
+    <span class="code">jackpal.androidterm.OPEN_NEW_WINDOW</span>
+  
+    <p>Opens a new window.</p>
+  </li>
+
+  <li>
+    <span class="code">jackpal.androidterm.RUN_SCRIPT</span>
+
+    <p>Executes the shell code in 
+      <span class="code">jackpal.androidterm.iInitialCommand</span>.</p>
+
+    <p>Optionally, you can reuse a window with 
+      <span class="code">jackpal.androidterm.window_handle</span>.</p>
+  </li>
+ </ul>
+
+<p>See also TEA's documentation
+  <a href="https://github.com/jackpal/Android-Terminal-Emulator/wiki/Launching-Terminal-Emulator-for-Android-from-another-App"
+    >Launching TEA from another app</a>.</p>
+
+<p>See also source code <code>/docs/intents.txt</code>.</p>
+
+
+<h2>Broadcasts</h2>
+<!-- ============================================================ -->
+
+<p>The broadcasts are:</p>
+
+<ul>
+  <li><span class="code"
+            >jackpal.androidterm.broadcast.APPEND_TO_PATH</span></li>
+  
+  <li><span class="code"
+            >jackpal.androidterm.broadcast.PREPEND_TO_PATH</span></li>
+</ul>
+
+<p>When TTerm starts, it broadcasts
+  <span class="code">...APPEND_TO_PATH</span>
+and
+  <span class="code">...PREPEND_TO_PATH</span>
+as TEA does. Other applications can respond and tell TTerm to add
+paths to its
+  <span class="code">$PATH</span>.</p>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+
+Building TEA
+************************************************************
+
+- To compile version 1.0.70 of 2017-03-14, I had to do the following.
+
+
+(1) Install
+============================================================
+
+(a) Install "Android Studio"
+  
+    Install "Android Studio 2.3", Build #AI-162.3764568 built on
+    February 24, 2017
+
+(b) Install "SDK"
+
+    To install "SDK 22 (Android 5.1)" and "Build tools 22.0.1", open
+    "Android Studio", then:
+
+    - Select menu entry "Tools" / "Android" / "SDK Manager"
+
+    - Select tab "SDK Platforms"
+
+    - Check entry
+
+        Name:      Android 5.1 (Lollipop)
+        API level: 22
+        Revision:  2
+
+    - Select tab "SDK Tools"
+
+      - Check "Show package details"
+
+      - Check entries
+
+          - Android SDK Build-Tools
+            - 25.0.2 (newest available)
+
+          - Android SDK Platform-Tools 25.0.3
+
+          - Android SDK Tools 25.3.1
+
+(c) Install "NDK"
+
+    To install the "NDK", open "Android Studio", then:
+
+    - Select menu entry "Tools" / "Android" / "SDK Manager"
+
+    - Select tab "SDK Tools"
+
+    - Check "LLDB"
+
+    - Check "CMake"
+
+    - Check "NDK (r14)"
+
+    - These are the version numbers that are displayed after
+      installing:
+
+      - CMake
+        - 3.6.3155560   3.6.3155560
+
+      - LLDB
+        - 2.3           2.3.3614996
+
+      - NDK             14.0.3.3770861
+             
+
+(2) Update "Gradle" and "Android Gradle Plugin"
+============================================================
+
+(-) TEA comes with the old "Gradle 2.2.1" and "Android Gradle Plugin
+    1.0", as you can see in:
+
+      D:\java\proj-android-studio\tea-1.0.70\build.gradle
+      ============================================================
+
+      task wrapper(type: Wrapper) {
+          gradleVersion = '2.2.1'
+          distributionUrl = 
+            'https://services.gradle.org/distributions/gradle-2.2.1-all.zip'
+
+       buildscript {
+           dependencies {
+                classpath 'com.android.tools.build:gradle:1.0.0'
+
+(-) I got a message to update Gradle to 3.3. and the Android Gradle
+    Plugin to 2.3.0, so do that.
+    
+(a) Edit the project's `build.gradle´:
+
+      D:\java\proj-android-studio\tea-1.0.70\build.gradle
+      ============================================================
+
+      task wrapper(type: Wrapper) {
+          gradleVersion = '3.3'
+          distributionUrl = 
+            'https://services.gradle.org/distributions/gradle-3.3-all.zip'
+
+      buildscript {
+          dependencies {
+              classpath 'com.android.tools.build:gradle:2.3.0'
+              classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
+
+(b) Edit `build.gradle´ of the 5 modules:
+
+      */build.gradle
+      ============================================================
+
+      android {
+          compileSdkVersion 22
+          buildToolsVersion "25.0.2"
+
+          defaultConfig {
+              minSdkVersion 4
+              targetSdkVersion 22
+
+
+(3) Use `ndkBuild´
+============================================================
+
+(-) The C++ code wasn't compiling, I got the error:
+
+      Error:Execution failed for task ':libtermexec:compileReleaseNdk'.
+
+      > Error: Your project contains C++ files but it is not using a
+      > supported native build system. 
+
+      Consider using CMake or ndk-build integration with the stable
+      Android Gradle plugin: 
+
+       https://developer.android.com/studio/projects/add-native-code.html
+
+      or use the experimental plugin:
+
+       https://developer.android.com/studio/build/experimental-plugin.html
+
+(-) Apparently because the "Deprecated NDK" was used.
+
+(-) I tried adding
+
+      android.useDeprecatedNdk=true 
+
+    to
+
+      D:\java\proj-android-studio\tea-1.0.70\gradle.properties
+      D:\java\proj-android-studio\tea-1.0.70\libtermexec\gradle.properties
+
+    but it didn't work.
+
+    Ah, probably because I didn't also put it in
+    `...\term\gradle.properties´, which also has C++ code.
+
+(-) Since `useDeprecatedNdk´ didn't work, I tried to get `ndkBuild´ to
+    work. Apparently `ndkBuild´ is older than `CMake´, but it can use
+    TEA's `Android.mk´ from earlier versions.
+
+(a) Add two `Android.mk´ files:
+
+      D:\java\proj-android-studio\tea-1.0.70\libtermexec\src\main\jni\Android.mk
+      ============================================================
+
+      LOCAL_PATH:= $(call my-dir)
+      include $(CLEAR_VARS)
+
+      # This is the target being built.
+      LOCAL_MODULE:= libjackpal-termexec2
+
+      # All of the source files that we will compile.
+      LOCAL_SRC_FILES:= \
+        process.cpp
+
+      LOCAL_LDLIBS := -llog -lc
+
+      include $(BUILD_SHARED_LIBRARY)
+
+
+      D:\java\proj-android-studio\tea-1.0.70\term\src\main\jni\Android.mk
+      ============================================================
+
+      LOCAL_PATH:= $(call my-dir)
+      include $(CLEAR_VARS)
+
+      # This is the target being built.
+      LOCAL_MODULE:= libjackpal-androidterm5
+
+      # All of the source files that we will compile.
+      LOCAL_SRC_FILES:= \
+        common.cpp \
+        termExec.cpp \
+        fileCompat.cpp
+
+      LOCAL_LDLIBS := -ldl -llog
+
+      include $(BUILD_SHARED_LIBRARY)
+
+(b) Change two `build.gradle´ files:
+  
+       D:\java\proj-android-studio\tea-1.0.70\libtermexec\build.gradle
+        ============================================================
+
+        // android {
+        //     defaultConfig {
+        //         ndk {
+        //            moduleName 'libjackpal-termexec2'
+        //            abiFilters 'all'
+        //            ldLibs 'log', 'c'
+        //         }
+
+        android {
+            ...        
+            externalNativeBuild {
+                ndkBuild {
+                    path 'src/main/jni/Android.mk'
+                }
+            }
+  
+        D:\java\proj-android-studio\tea-1.0.70\term\build.gradle
+        ============================================================
+
+        // android {
+        //     defaultConfig {
+        //          ndk {
+        //             moduleName "libjackpal-androidterm5"
+        //             abiFilters 'armeabi', 'mips', 'x86'
+        //             ldLibs "log"
+        //          }
+
+        android {
+            ...        
+            externalNativeBuild {
+                ndkBuild {
+                    path 'src/main/jni/Android.mk'
+                }
+            }
+
+
+(4) Build and run
+============================================================
+
+(a) Configuration
+
+    - Select menu entry "Run" / "Edit configurations"
+
+    - Select the configuration "Android App" / "term"
+
+    - Select tab "Miscellaneous"
+
+    - Check "Show logcat automatically"
+
+    - Check "Clear log before launch"
+
+    - Select button "OK"
+

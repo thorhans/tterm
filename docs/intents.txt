@@ -1,0 +1,176 @@
+
+Intents
+************************************************************
+
+List of intents
+============================================================
+
+Abbreviations:
+
+  `action.´   = `android.intent.action.´
+  `category.´ = `android.intent.category.´
+
+
+Public activities
+------------------------------------------------------------
+
+  activity: Term {
+    intent-filter: {
+      action:   action.MAIN
+      category: category.LAUNCHER
+      category: category.MULTIWINDOW_LAUNCHER
+    }
+  }
+
+  ------------------------------------------------------------
+
+  // Opens a new terminal window.
+  // 
+  activity: RemoteInterface {
+    intent-filter: {
+      action:   jackpal.androidterm.OPEN_NEW_WINDOW
+      category: category.DEFAULT
+    }
+  }
+
+  // Opens a new terminal window in a directory.
+  // 
+  activity-alias: TermHere 
+          target: RemoteInterface 
+  {
+    intent-filter: {
+      action:   action.SEND
+      data:     mimeType: */*
+      category: category.DEFAULT
+    }
+  }
+
+  ------------------------------------------------------------
+
+  // Runs the script passed in `Intent.data´.
+  // 
+  activity: RunScript {
+    intent-filter: {
+      action:   jackpal.androidterm.RUN_SCRIPT
+      category: category.DEFAULT
+    }
+  }
+
+  ------------------------------------------------------------
+
+  // Runs a Shortcut.
+  // 
+  activity: RunShortcut {
+    intent-filter: {
+      action:   de.t2h.tterm.RUN_SHORTCUT
+      category: category.DEFAULT
+    }
+  }
+
+  ------------------------------------------------------------
+
+  // Widget "Term shortcut" creates a Shortcut.
+  //
+  activity: de.t2h.tterm.shortcuts.AddShortcut {
+    intent-filter: {
+      action:   action.MAIN
+    }
+    intent-filter: {
+      action:   action.CREATE_SHORTCUT
+    }
+    intent-filter: {
+      // ??? No action, that's illegal! ???
+      category: category.DEFAULT
+      data:     mimeType: text/*
+    }
+  }
+
+  ------------------------------------------------------------
+
+  // The Widget "Term shortcut" has a button "Find command" that calls
+  // this.
+  //
+  // TODO on: It's broken!
+  //
+  activity: de.t2h.tterm.shortcuts.FSNavigator {
+    intent-filter: {
+      action:   action.PICK
+      category: category.DEFAULT
+    }
+    intent-filter: {
+      action:   action.GET_CONTENT
+      category: category.DEFAULT
+      category: category.OPENABLE
+      data:     mimeType: */*
+    }
+  }
+  
+
+Public service
+------------------------------------------------------------
+
+  // TODO on: Not called by the Telnet sample, what is is used for?
+  // 
+  service: TermService {
+    intent-filter: {
+      action:   de.t2h.tterm.action.action.START_TERM.v1
+      category: category.DEFAULT
+    }
+  }
+
+
+Private activities
+------------------------------------------------------------
+
+  activity: HelpActivity {}
+
+  activity-alias: TermInternal 
+          target: Term 
+  {
+    intent-filter: {
+      action:   de.t2h.tterm.private.OPEN_NEW_WINDOW
+    }
+    intent-filter: {
+      action:   de.t2h.tterm.private.SWITCH_WINDOW
+    }
+  }
+
+  activity: TermPreferences {}
+
+  activity: WindowList {}
+
+
+(2) Using the intents
+============================================================
+
+- See 
+
+      /samples/intents
+      /src/main/java
+      /jackpal/androidterm/sample/intents/IntentSampleActivity.java
+
+  which has 3 examples with intents:
+  
+  - open new window:
+  
+      Intent intent = new Intent("jackpal.androidterm.OPEN_NEW_WINDOW");
+
+  - run script:
+
+      Intent intent = new Intent("jackpal.androidterm.RUN_SCRIPT");
+      intent.putExtra("jackpal.androidterm.iInitialCommand", command);
+
+  - run script save window (?):
+
+      Intent intent = new Intent("jackpal.androidterm.RUN_SCRIPT");
+      intent.putExtra("jackpal.androidterm.iInitialCommand", command);
+      intent.putExtra("jackpal.androidterm.window_handle", mHandle);
+
+- See also
+
+      /samples/telnet
+      /src/main/java
+      /jackpal/androidterm/sample/telnet/TermActivity.java
+
+  which might call `TermService´, or do something similar.
+

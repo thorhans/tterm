@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Android's shell</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="../";</script>
+  <script src="../lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Android's shell</div>
+
+<p><a href="../shells.xhtml">
+  Back to chapter "Shells and distributions".</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Running Android's shell in TTerm</h1>
+<!-- ************************************************************ -->
+
+<p>Android's default shell is <code>/system/bin/sh</code>. Since
+Android 4.0, it is the MirBSD Korn shell, also called Mksh. It has the
+home page
+  <a href="http://mirbsd.de/mksh"
+    >http://mirbsd.de/mksh</a>,
+you can also find it at
+  <a href="http://www.mirbsd.org/mksh.htm"
+     >http://www.mirbsd.org/mksh.htm</a>.</p>
+
+<p>By default, TTerm starts a shell with:</p>
+
+<p class="indent code">/system/bin/sh -</p>
+
+<p>The option <code>-</code> tells <code>sh</code> to start as a
+<em>login shell</em>, which means that it will read certain
+initialization files. On my devices, a login shell reads:</p>
+
+<table class="indent">
+  <tr>
+    <td>
+      <code>/system/etc/profile</code><br/>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>$HOME/.profile</code> 
+    </td>
+
+    <td style="padding-left: 1em">
+      You can configure 
+        <a href="../config.xhtml#HOME">
+          TTerm's setting for <code>$HOME</code></a>.</td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>$ENV</code> or <code>/system/etc/mkshrc</code>
+    </td>
+
+    <td style="padding-left: 1em">
+      TTerm doesn't currently provide a way to set <code>$ENV</code>
+      before it starts the shell.
+    </td>
+  </tr>
+</table>
+
+<p>If you remove the option <code>-</code>, Mksh starts as an
+<em>interactive shell</em> and executes different initialization
+files. On my devices it's:</p>
+
+<table class="indent">
+  <tr>
+    <td>
+      <code>$ENV</code> or <code>/system/etc/mkshrc</code>
+    </td>
+
+    <td style="padding-left: 1em">
+      TTerm doesn't currently provide a way to set <code>$ENV</code>
+      before it starts the shell.
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

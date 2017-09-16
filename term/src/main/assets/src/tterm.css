@@ -1,0 +1,28 @@
+h1, h2, h3{
+  font-size:     18pt;
+}
+
+.header {
+  font-size:     24pt;
+  font-weight:   bold;
+
+  background-color: #d0d0d0; 
+  margin:   0; 
+  padding: 10px;
+}
+
+.header::before {
+  content: url("../res/tterm72.png");
+
+  /* Remove the baseline. For unknown reasons, setting
+   * `vertical-align: middle´ does not work here. */
+  height: 72px;
+
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.setting {
+  font-style: italic;
+}

@@ -1,0 +1,7 @@
+
+Folder `docs/tea/org´
+************************************************************
+
+This folder contains original documentation for "Terminal Emulator for
+Android", which may no longer be up to date.
+

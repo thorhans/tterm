@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Bash</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="../";</script>
+  <script src="../lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Bash</div>
+
+<p><a href="../shells.xhtml">
+  Back to chapter "Shells and distributions".</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Getting Bash</h1>
+<!-- ************************************************************ -->
+
+<p>Android doesn't include the shell Bash, so you have to install it
+yourself. I recommend
+  <a href="termux.xhtml" >Termux</a>
+or 
+  <a href="debian.xhtml" >Debian</a>,
+which include Bash and do not require 
+  <a href="rooting">rooting</a>.
+But if you don't want to use them, I'll list alternatives that Iam
+aware of here.</p>
+
+
+<h1>Bash in LineageOS</h1>
+<!-- ************************************************************ -->
+
+<p>My LineageOS 14.1 build for my Samsung Galaxy Tab S 10.5 WiFi
+(SM-T800, chagallwifi) seems to include Bash, but I don't know if that
+is always the case.</p>
+
+<p>If you don't know LineageOS, it is a "custom ROM", an alternative
+version of Android that you can install instead of the Android
+provided by your manufacturer. It's very similar to ordinary Android,
+its main benefits is that it doesn't include all the additional junk
+that most manufacturer add to Android, and that you can often get
+newer versions of LineageOS when your manufacturer stops updating your
+device's Android. It's the successor of the popular CyagenMod.</p>
+
+<p>I'll add more info when time allows.</p>
+
+
+<h1>BusyBox Install (No Root)</h1>
+<!-- ************************************************************ -->
+
+<p>I used to use the app
+  <a href="https://play.google.com/store/apps/details/apps/details?id=burrows.apps.busybox"
+     >BusyBox Install (No Root)</a> 
+by Burrows, which is the smallest app that I've found that installs
+Bash without requiring rooting.</p>
+
+<p>This used to work:</p>
+
+<p class="indent code">
+  busybox=/data/data/burrows.apps.busybox/app_busybox<br/>
+  export PATH=$PATH:$busybox<br/>
+  export LD_LIBRARY_PATH=/system/lib:$busybox<br/>
+  exec bash
+</p>
+
+<p>But as of 2017-03 it's Bash wont start because the library
+<code>libncurses.so</code> is missing. I sent the developer an email,
+but never received an answer.</p>
+
+</body>
+</html>

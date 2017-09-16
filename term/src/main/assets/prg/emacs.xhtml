@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Emacs</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="../";</script>
+  <script src="../lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Emacs</div>
+
+<p><a href="../programs.xhtml">Back to chapter "Programs".</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Running Emacs in TTerm</h1>
+<!-- ************************************************************ -->
+
+<p>To get a working Emacs, install either Termux or GNURoot Debian:</p>
+
+<ul>
+  <li>In <a href="termux.xhtml" >Termux</a> you can Install Emacs 25.1
+  with <code>apt install emacs</code>. On my device, it crashes now
+  and then.</li>
+  
+  <li>In <a href="debian.xhtml" >GNURoot Debian</a> you can Install
+  Emacs 24.4.1 with <code>apt install emacs</code>. I have not used it
+  much yet, so I don't know how stable it is.</li>
+</ul>
+
+
+<h1>Gesture support</h1>
+<!-- ************************************************************ -->
+
+<p>To scroll with gestures, use:</p>
+
+<p class="indent code"> 
+  (xterm-mouse-mode 1)<br/>
+  (global-set-key [mouse-4] 'scroll-down-line)<br/>
+  (global-set-key [mouse-5] 'scroll-up-line)
+</p>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Introduction</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Introduction</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>What do you need TTerm for?</h1>
+<!-- ************************************************************ -->
+
+<p>Android runs on top of a (small) Linux layer. To call Linux
+commands interactively, you need a "shell" that runs in a "terminal
+emulator". The shell calls the Linux commands, the terminal emulator
+displays your input and the commands' output.</p>
+
+<p>Android comes with a shell, but not with a terminal emulator,
+that's what you need TTerm for.</p>
+
+<p>I'll try to explain everything that I found difficult when I
+started using Linux on Android. But you need familiarity with Linux or
+Unix to understand this. If you don't understand anything that's
+written here, have a look at a book about Linux for beginners before
+you continue. Yes, a book about Linux, not a book about Android.</p>
+
+
+<h1>Android's shell</h1>
+<!-- ************************************************************ -->
+
+<p>Android's shell is in <code>/system/bin/sh</code>. Since Android
+4.0 it is the MirBSD Korn shell, also called Mksh, see
+  <a href="mksh.xhtml" >Android's shell</a>.</p>
+
+<p>If you are used to a different shell or distribuition, you can
+install it and have TTerm start it, see
+  <a href="shells.xhtml" >Shells and distributions</a>.</p>
+
+
+<h1>For the impatient</h1>
+<!-- ************************************************************ -->
+
+<p>For the impatient that start using TTerm right away: If TTerm does
+not behave as you expect, look at the following settings:</p>
+
+<ul>
+  <li><span class="setting">UTF-8</span></li>
+  
+  <li><span class="setting">Input method</span>: character based or
+  word-based</li>
+
+  <li><span class="setting">Alt key sends ESC</span></li>
+
+  <li><span class="setting">Terminal type</span></li>
+
+  <li><span class="setting">Send mouse events</span></li>
+</ul>
+
+<p>I'll add more details in the future.</p>
+
+
+<h1>Starting a different shell</h1>
+<!-- ************************************************************ -->
+
+<p>You can change the shell that is started with the setting <span
+class="setting">Command line</span>. See
+  <a href="shells.xhtml" >Shells and distributions</a> 
+for examples.</p>
+
+<p>You can specify an <span class="setting">Initial command</span>
+that is sent to the shel as user input, i.e. as if you had typed
+it.</p>
+
+
+<h1>Running a command from the home screen</h1>
+<!-- ************************************************************ -->
+
+<p>You can use the TTerm widget to run a command from an icon on the
+home screen.</p>
+
+</body>
+</html>

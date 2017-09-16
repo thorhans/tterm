@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Configuration</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Configuration</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Environment variables</h1>
+<!-- ************************************************************ -->
+
+<p>Linux uses "environment variables" for configuration. To get a list
+of all environment variables, use <code>env</code> or <code>env | sort
+| more</code>.</p>
+
+<p>Note that not all "shell variables" are "environment variables",
+only those shell variables marked for export with <code>export</code>.
+To get a list of all shell variables and environment variables, use
+<code>set</code> or <code>set | more</code>.</p>
+
+<p>The following environment variables are relevant for TTerm:</p>
+
+<ul>
+  <li>
+    <code>$ENV</code>
+  
+    <p>Shell initialzation file, see 
+      <a href="run/sh.xhtml">
+        Android's shell</a>.
+    TTerm doesn't currently provide a way to set <code>$ENV</code>
+    before it starts the shell.</p>
+  </li>
+  
+  <li id="HOME">
+    <code>$HOME</code>
+  
+    <p>Your home directory. By default, TTerm sets it to</p>
+    
+    <p class="indent code">
+      /data/user/0/de.t2h.tterm/app_HOME
+    </p>
+    
+    <p>You can configure it in the setting <span class="setting">HOME
+    folder</span>. Or you can set it in one of your shell's
+    initialization files. For an example, see
+      <a href="run/sh.xhtml">Android's shell</a>.</p>
+  </li>
+
+  <li>
+    <code>$LD_LIBRARY_PATH</code>
+    
+    <p>Paths to search for libraries. For example, Bash needs the
+    library <code>libncurses.so</code>.</p>
+  </li>
+
+  <li>
+    <code>$PATH</code>
+    
+    <p>Paths to search for commands.</p>
+  </li>
+
+  <li id="TERM">
+    <code>$TERM</code>
+    
+    <p>Terminal type. Configure it in the setting <span
+    class="setting">Terminal type</span>, or in one of your shell's
+    initialization files.</p>
+    
+    <p>The setting <span class="setting">Terminal type</span> offers
+    the values:</p>
+    
+    <ul class="narrow">
+      <li><code>linux</code></li>
+      <li><code>screen</code> (default)</li>
+      <li><code>screen-256color</code></li>
+      <li><code>vt100</code></li>
+      <li><code>xterm</code></li>
+    </ul>
+    
+    <p>Changing this setting also changes the codes that TTerm sends
+    for some `Fn´ key combinations.</p>
+        
+    <p>You have to restart the shell after changing <code>$TERM</code>.</p>
+  </li>    
+
+  <li>
+    <code>$TERMINFO</code>
+    
+    <p>Path to the Terminfo database.</p>
+  </li>
+</ul>
+
+<p>I'll write more on <code>$TERM</code> and <code>$TERMINFO</code>
+when time allows.</p>
+
+</body>
+</html>

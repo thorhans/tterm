@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Usage</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Usage</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>GUI</h1>
+<!-- ************************************************************ -->
+
+<p>The following features are not immediately obvious:</p>
+
+<ul>
+  <li>Toggle the on-screen keyboard with a tap on the screen or with
+  the menu item "Toggle soft keyboard".</li>
+
+  <li>
+    <p>Press and hold the screen for the context menu "Edit text",
+    which offers:</p>
+    
+    <ul class="narrow">
+      <li>Select text</li>
+      <li>Copy all</li>
+      <li>Paste</li>
+      <li>Send control key (now also on a separate button)</li>
+      <li>Send fn key (now also on a separate button)</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h1 id="keyboard">Keyboard</h1>
+<!-- ************************************************************ -->
+
+<ul>
+  <li>Toggle the on-screen keyboard with a tap on the screen or with
+  the menu item "Toggle soft keyboard".</li>
+
+  <li>
+    Key combinations with `Ctrl´, `Esc´ and `Fn´ currently only work
+    when the setting <span class="setting">input mode</span> is set to
+    <i>character-based</i>.
+      [<a href="planned.xhtml#b001">Bug 001</a>]
+  </li>
+
+  <li>
+    <p>The modifier buttons `Ctrl´ and `Fn´ are "sticky" after one
+    press, "locked" after two presses. A sticky modifier turns green
+    and will modify the next key you press. A locked modifier turns
+    red and will modify all keys you press until you press the
+    modifier again.</p>
+
+    <p>The cursor also show the modifier state: 
+      <code class="cursor">&gt;</code> for sticky `Ctrl´, 
+      <code class="cursor">▶</code> for locked `Ctrl´; 
+      <code class="cursor">&lt;</code> for sticky `Fn´, 
+      <code class="cursor">◀</code> for locked `Fn´. 
+    But the different cursors are hard to distinguish when the cursor
+    isn't over a space, so I'll probably remove that in a future
+    version.</p>
+
+    <p>As in TEA, `Ctrl´ and `Fn´ can also be bound to an additional
+    key: the jog ball, the `@´ key, the `Left Alt´ key, the `Right
+    Alt´ key, the `Vol Up´ key, the `Vol Down´ key, the `Camera´ key.
+    I'll change that in a future version of TTerm.</p>
+  </li>
+
+  <li>If your on-screen or hardware keyboard has a `Ctrl´ or `Fn´ key,
+  they are independent of TTerm's `Ctrl´ and `Fn´ buttons.</li>
+</ul>
+
+
+<h2>Control keys</h2>
+<!-- ============================================================ -->
+
+<p>The control keys are currently:</p>
+
+<table class="border">
+  <tr><td>Ctrl+Space</td><td>Ctrl+@   </td><td>NUL</td></tr>
+  <tr><td>Ctrl+A..Z </td><td>Ctrl+A..Z</td><td>   </td></tr>
+  <tr><td>Ctrl+1    </td><td>Ctrl+[   </td><td>ESC</td></tr>
+  <tr><td>Ctrl+2    </td><td>Ctrl+\   </td><td>    </td></tr>
+  <tr><td>Ctrl+3    </td><td>Ctrl+]   </td><td>    </td></tr>
+  <tr><td>Ctrl+4    </td><td>Ctrl+^   </td><td>    </td></tr>
+  <tr><td>Ctrl+5    </td><td>Ctrl+_   </td><td>    </td></tr>
+</table>
+
+<p>I found this more intuitive than TEA's mappings. In a future version
+of TTerm, the mappings will be configurable.</p>
+
+<p>Note that some control keys have a special meaning in Unix:</p>
+
+<table class="border">
+  <tr><td>Ctrl+Q</td><td>Flow Control Off</td></tr>
+  <tr><td>Ctrl+S</td><td>Flow Control On </td></tr>
+  <tr><td>Ctrl+H</td><td>Backspace       </td></tr>
+  <tr><td>Ctrl+I</td><td>Tab             </td></tr>
+  <tr><td>Ctrl+J</td><td>Line Feed        </td></tr>
+  <tr><td>Ctrl+M</td><td>Carriage Return  </td></tr>
+</table>
+
+<p>If TTerm does not respond to key presses, you might have switched
+"flow control" on with `Ctrl+S´. When you switch flow control off with
+`Ctrl+Q´, the terminal will process all pending input. This is so
+confusing that I'll add a setting to switch it off in a future version
+of TTerm.</p>
+
+
+<h2>Function keys</h2>
+<!-- ============================================================ -->
+
+<p>The function keys are currently:</p>
+
+<table class="border">
+  <tr><td>Fn+Q</td><td>Home  </td><td> </td><td>Fn+A</td><td>Left    </td></tr>
+  <tr><td>Fn+W</td><td>Up    </td><td> </td><td>Fn+S</td><td>Down    </td></tr>
+  <tr><td>Fn+E</td><td>End   </td><td> </td><td>Fn+D</td><td>Right   </td></tr>
+  <tr><td>Fn+R</td><td>PageUp</td><td> </td><td>Fn+F</td><td>PageDown</td></tr>
+  <tr><td>    </td><td>      </td><td> </td><td>    </td><td>        </td></tr>
+  <tr><td>Fn+T</td><td>Tab   </td><td> </td><td>Fn+1..9
+                                                    </td><td>F1..F9  </td></tr>
+  <tr><td>Fn+I</td><td>Insert</td><td> </td><td>Fn+0</td><td>F10     </td></tr>
+  <tr><td>Fn+X</td><td>Delete</td><td> </td><td>Fn+O</td><td>F11     </td></tr>
+  <tr><td>    </td><td>      </td><td> </td><td>Fn+P</td><td>F12     </td></tr>
+</table>
+
+<p>I found this more intuitive than TEA's mappings. In a future version
+of TTerm, the mappings will be configurable.</p>
+
+
+<h1>Terminal settings</h1>
+<!-- ************************************************************ -->
+
+<ul>
+  <li>Setting the environment variable
+    <a href="config.xhtml#TERM"
+       ><code>$TERM</code></a>
+  </li>    
+</ul>
+
+
+<a name="Questions"></a>
+<h1>Questions?</h1>
+<!-- ************************************************************ -->
+
+<p>TTerm does not have its own community yet, but since it's based on
+<a href="tea.xhtml">TEA</a>, you can consult their 
+  <a href="https://github.com/jackpal/Android-Terminal-Emulator/wiki"
+      >wiki</a>
+and their 
+  <a href="https://plus.google.com/communities/106164413936367578283"
+      >Google+ community</a>.</p>
+
+<p>You can contact me at
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >thorbj.hansen@gmail.com</a>.</p>
+
+</body>
+</html>

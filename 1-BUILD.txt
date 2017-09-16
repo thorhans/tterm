@@ -1,0 +1,102 @@
+
+TEA 1.0.70
+************************************************************
+
+This is my *modified* copy of TEA (Terminal Emulator for Android)
+version 1.0.70 from
+
+  https://github.com/jackpal/Android-Terminal-Emulator
+
+
+# Install tools
+============================================================
+
+- I use Windows 8.1 with 64-bit.
+
+- I downloaded Android Studio on 2017-03-14:
+
+  From
+
+    https://developer.android.com/studio/index.html#downloads
+
+  I downloaded
+
+    android-studio-ide-162.3764568-windows.exe
+
+- I downloaded the Android SDK and the NDK on 2017-03-14:
+
+  - SDK Platform
+
+    Name                      API
+    ------------------------------------------------------------
+    Android 7.1.1 (Nougat)    25
+    Android 5.1   (Lollipop)  22
+
+  - SDK Tools
+  
+    Name                          Version
+    ------------------------------------------------------------
+    Android SDK Build-Tools    
+    - 25.0.2                      25.0.2
+    CMake                          
+    - 3.6.3155560                 3.6.3155560 
+    LLDB                           
+    - 2.3                         2.3.3614996
+    Android SDK Tools             25.3.1
+    NDK                           14.0.3770861
+    Support Repository
+    - Android Support Repository  45.0.0
+    - Google Repository           44
+
+
+# Install TEA
+============================================================
+
+- On 2017-03-14, I downloaded the source of TEA 1.0.70 from:
+
+    https://github.com/jackpal/Android-Terminal-Emulator
+
+- Subversion
+
+  - I deleted these files *before* I checked in the code using
+    Subversion:
+
+      .gitattributes
+      .gitignore
+      .idea/vcs.xml
+      emulatorview/.gitignore
+      libtermexec/.gitignore
+      samples/intents/.gitignore
+      samples/pathbroadcasts/.gitignore
+      samples/telnet/.gitignore
+      term/.gitignore
+
+  - I excluded the files listed in
+
+      svn-config.bash
+
+- I upgraded and changed the following build components:
+
+  - Upgrade from Gradle 2.2.1 to Gradle 3.3.
+
+  - Upgrade from `com.android.tools.build:gradle:1.0.0´ to 2.3.0.
+
+  - Upgrade `buildToolsVersion´ "22.0.1" to "25.0.2".
+
+  - Change compilation of C++ code in `term´ and `libtermexec´ from
+    `ndk´ to `externalNativeBuild´. Added necessary make file
+    `Android.mk´.
+
+  - The old versions were cached somewhere, I don't know how I finally
+    got Android Studio to accept that I had changed the versions.
+    
+- After that TEA ran on my tablet:
+
+    Company:              Samsung
+    Product name:         Galaxy Tab S 10.5 WiFi
+    Model name:           SM-T800
+    Android Product Name: chagallwifi
+    Android Device Name:  chagallwifi
+    
+  with LineageOS 14.1 (equivalent to Android 7.1 Nougat).
+  

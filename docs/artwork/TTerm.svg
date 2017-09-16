@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    id="Layer_1"
+    x="0px"
+    y="0px"
+    width="512px"
+    height="512px"
+    viewBox="0 0 512 512"
+    enable-background="new 0 0 512 512"
+>
+<defs id="defs109" />
+<path id="stand-bottom"
+    fill="#939288"
+    d="M504,488c0,8.837-7.163,16-16,16H24c-8.836,0-16-7.163-16-16V24c0-8.836,7.164-16,16-16h464  c8.837,0,16,7.164,16,16V488z"
+/>
+<linearGradient id="stand-gradient"
+    gradientUnits="userSpaceOnUse"
+    x1="255.9995" y1="24"
+    x2="255.9995" y2="489.0005">
+  <stop offset="0.9"    style="stop-color:#939288" />
+  <stop offset="0.9132" style="stop-color:#9F9E93" />
+  <stop offset="0.9427" style="stop-color:#B3B2A6" />
+  <stop offset="0.9719" style="stop-color:#C0BEB1" />
+  <stop offset="1"      style="stop-color:#C4C2B5" />
+</linearGradient>
+<path id="stand"
+    fill="url(#stand-gradient)"
+    d="M504,473c0,8.837-7.163,16-16,16H24c-8.836,0-16-7.163-16-16V40c0-8.836,7.164-16,16-16h464  c8.837,0,16,7.164,16,16V473z"
+/>
+<linearGradient id="frame-gradient"
+    gradientUnits="userSpaceOnUse"
+    x1="256.0005" y1="438"
+    x2="256.0005" y2="8.0005">
+  <stop offset="0"      style="stop-color:#B3B0A1" />
+  <stop offset="0.3701" style="stop-color:#B6B3A4" />
+  <stop offset="0.6672" style="stop-color:#BEBBAE" />
+  <stop offset="0.9383" style="stop-color:#CCCABF" />
+  <stop offset="1"      style="stop-color:#D0CEC4" />
+</linearGradient>
+<path id="frame"
+    fill="url(#frame-gradient)"
+    d="M504,423.204c0,8.172-7.163,14.796-16,14.796H24c-8.836,0-16-6.624-16-14.796V22.796  C8,14.625,15.164,8,24,8h464c8.837,0,16,6.625,16,14.796V423.204z"
+/>
+<g id="buttons-group">
+  <g id="left-button-group">
+    <linearGradient id="left-button-gradient"
+        gradientUnits="userSpaceOnUse"
+        x1="392" y1="456"
+        x2="392" y2="472">
+      <stop offset="0"      style="stop-color:#27AAE1" />
+      <stop offset="0.3003" style="stop-color:#26A7DF" />
+      <stop offset="0.4809" style="stop-color:#259FD9" />
+      <stop offset="0.6298" style="stop-color:#2291CF" />
+      <stop offset="0.7607" style="stop-color:#1E7DC1" />
+      <stop offset="0.8"    style="stop-color:#1C75BC" />
+    </linearGradient>
+    <rect id="left-button-1"
+        fill="url(#left-button-gradient)"
+        x="384" y="456"
+        width="16" height="16"
+    />
+    <polygon id="left-button-2"
+        opacity="0.15"
+        fill="#FFFFFF"
+        points="384,472 384,456 400,456"
+    />
+  </g>
+  <g id="right-button-group">
+    <linearGradient
+        id="right-button-gradient"
+        gradientUnits="userSpaceOnUse"
+        x1="448" y1="456"
+        x2="448" y2="472">
+      <stop offset="0"      style="stop-color:#27AAE1" />
+      <stop offset="0.3003" style="stop-color:#26A7DF" />
+      <stop offset="0.4809" style="stop-color:#259FD9" />
+      <stop offset="0.6298" style="stop-color:#2291CF" />
+      <stop offset="0.7607" style="stop-color:#1E7DC1" />
+      <stop offset="0.8"    style="stop-color:#1C75BC" />
+    </linearGradient>
+    <rect id="right-button-1" 
+        fill="url(#right-button-gradient)"
+        x="424" y="456"
+        width="48" height="16"
+    />
+    <polygon id="right-button-2" 
+        opacity="0.15"
+        fill="#FFFFFF"
+        points="424,472 424,456 472,456"
+    />
+  </g>
+</g>
+<path id="screen-background" 
+    fill="#808080"
+    d="M488,399.956c0,12.175-9.87,22.044-22.045,22.044H47.045C34.87,422,25,412.131,25,399.956V47.044  C25,34.87,34.87,25,47.045,25h418.91C478.13,25,488,34.87,488,47.044V399.956z" 
+/>
+<g id="Ts"
+    transform="scale(2.6667) translate(29,31)"
+>
+  <rect id="T1-top" 
+      fill="#000000"
+      x="0" y="0"
+      width="135" height="15"
+  />
+  <rect id="T1-stem" 
+      fill="#000000"
+      x="30" y="0"
+      width="15" height="105"
+  />
+  <rect id="T2-top" 
+      fill="#000000"
+      x="60" y="30"
+      width="75" height="15"
+  />
+  <rect id="T2-stem" 
+      fill="#000000"
+      x="90" y="30"
+      width="15" height="72"
+  />
+</g>
+</svg>

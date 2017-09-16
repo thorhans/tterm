@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>160</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>w = 16
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>100</y>
+      <w>40</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>100</y>
+      <w>40</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>100</y>
+      <w>40</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>100</y>
+      <w>40</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>60</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>w = 8</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>60</y>
+      <w>80</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>w = 8</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

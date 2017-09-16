@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Changelog</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Changelog</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Version 0.1.6 (beta) on 2017-07-27</h1>
+<!-- ============================================================ -->
+
+<ol>
+  <li>
+    <p>Bug fix for Google's keyboard GBoard for "locked Ctrl" and
+    "locked Fn".</p>
+   
+   <p>Tested on on-screen keyboards Google's GBoard, Hacker's
+   Keyboard, Multiling O Keyboard and Samsung's keyboard. Also tested
+   with a Bluetooth keyboard and a Bluetooth mini-keyboard. If it
+   misbehaves on your keyboard, send a bug report to
+     <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+        >thorbj.hansen@gmail.com</a>.</p>
+  </li>
+
+  <li>Bug fix for Google's keyboard GBoard for a feature of version
+  0.1.3: The setting <span class="setting">Close window on exit</span>
+  is now off by default. When the command in the window exits, simply
+  press Enter to close the window.</li>
+
+  <li>Bug fix: Action bar is now also black for Android 5+.</li>
+
+  <li>Improved documentation.</li>
+</ol>
+
+
+<h1>Version 0.1.5 (beta) on 2017-07-26</h1>
+<!-- ============================================================ -->
+
+<ol>
+  <li>Bug fix: Use "Theme Material" for Android 5+ devices (instead of "Theme
+  DeviceDefault").</li>
+</ol>
+
+
+<h1>Version 0.1.4 (beta) on 2017-07-26</h1>
+<!-- ============================================================ -->
+
+<ol>
+  <li>The button `Ctrl´ now works in Google's keyboard "GBoard" (when
+  typing, not when swiping).</li>
+
+  <li>Added a button for `Fn´.</li>
+
+  <li>The buttons `Ctrl´ and `Fn´ are "sticky" after one press,
+  "locked" after two presses, see
+    <a href="usage.xhtml#keyboard"
+       >Usage: Keyboard</a>.</li>
+
+  <li>Changed some of the mappings for `Ctrl´ and `Fn´, see
+    <a href="usage.xhtml#keyboard"
+       >Usage: Keyboard</a>.</li>
+
+  <li>Fixed bug in shortcut "TTerm shortcut". It should always show the
+  new window now.</li>
+
+  <li>"Preferences" are now called "Settings", have a gear icon and a
+  menu entry before "Help".</li>
+
+  <li>Removed 4×8 pixel font. It was too small to be useful and only
+  supported ASCII.</li>
+</ol>
+
+
+<h1>Version 0.1.3 (beta) on 2017-07-18</h1>
+<!-- ============================================================ -->
+
+<ol>
+  <li>TTerm now requires at least Android 4.4 to run. If you have an
+  older version of Android, use 
+    <a href="tea.xhtml">TEA</a>.</li>
+  
+  <li>Added keys for `/´ and `-´.</li>
+
+  <li>The setting <span class="setting">Close window on exit</span> is
+  now off by default. When the command in the window exits, simply press
+  Enter to close the window.</li>
+
+  <li>New service icon to distinguish TTerm from TEA, Termux and GNURoot
+  Debian.</li>
+
+  <li>Improved documentation.</li>
+</ol>
+
+
+<h1>Version 0.1.2 (beta) on 2015-01-19</h1>
+<!-- ============================================================ -->
+
+<ol>
+  <li>Improved documentation.</li>
+
+  <li>Published sources.</li>
+</ol>
+
+
+<h1>Version 0.1.1 (beta) on 2014-12-21</h1>
+<!-- ============================================================ -->
+
+<ol>
+  <li>
+    <p>Extra keys for `Ctrl´, `Tab´, `Esc´ and the cursor keys so that
+    you can continue using your favorite on-screen keyboard. The
+    cursor keys have auto-repeat.</p>
+    
+    <p>Key combinations with `Ctrl´ and `Esc´ currently only work when
+    the setting <span class="setting">Input mode</span> is set to
+    <i>character-based</i>.</p>
+  </li>
+  
+  <li>
+    <p>Suggestions for swiped words do not overwrite consecutive
+    text.</p>
+    
+    <p>Some swipe keyboards display a <em>suggestion</em> which you
+    have to <em>commit</em>, e.g. by pressing space or a punctuation
+    key, or <em>discard</em>, e.g. by pressing backspace. For an
+    example, try out the Google keyboard.</p>
+    
+    <p>When typing in the middle of a line, TEA's suggestion
+    <em>overwrites</em> the following text until you commit. TTerm
+    tries to move the following text to the right. (That's not always
+    the right thing to do, but in most cases it is more intuitive than
+    TEA's approach.)</p>
+    
+    <p>Example: Select the Google keyboard. Enter <code>one
+    two</code>. Put the cursor on <code>t</code>. Enter
+    <code>hello</code> without pressing space. Now TEA shows
+      <code>one <span class="selected">hello</span></code>,
+    and TTerm shows 
+      <code>one <span class="selected">hello</span>two</code>.
+    When you press space, TEA inserts <code>hello</code> and shows
+    <code>two</code> again. So no text is lost, but I find TEA's
+    behavior very confusing.</p>
+  </li>
+
+  <li>Local help files that you can read when you are offline.</li>
+
+  <li>
+    <p>At the moment, TTerm's GUI is in English, and I have no plans
+    to translate the GUI to other languages.</p>
+    
+    <p>To clarify: Programs running inside TTerm can run in any
+    language, but TTerm's menu and settings are in English.</p>
+    
+    <p>If you want your GUI in another language, you can use TEA, or
+    you can download TTerm's sources to translate and build it
+    yourself.</p>
+  </li>
+</ol>
+
+
+<h1>Code changes</h1>
+
+<h2>Version 0.1.4 (beta)</h2>
+
+<ol>
+  <li>Introduced a `dev´ version that builds faster.</li>
+
+  <li>Removed lots of code and resources for Android versions older
+  than 4.4.</li>
+
+  <li>Extracted class <code>TermInputConnection</code> from
+  <code>EmulatorView.onCreateInputConnection</code>.</li>
+</ol>
+
+
+<h2>Version 0.1.3 (beta)</h2>
+
+<ol>
+  <li>Updated to the current TEA, version 1.0.70. For details see
+  source in <code>/docs/tea/build-tea.txt</code>.</li>
+
+  <li>Increased <code>android:minSdkVersion</code> to 19 (Android
+  4.4).</li>
+
+  <li>TTerm now responds to <a href="integration.xhtml"
+    >TEA's intents and broadcasts</a>.</li>
+
+  <li>Converted TTerm's code to compile in Android Studio.</li>
+</ol>
+
+
+<h2>Version 0.1.1 (beta)</h2>
+
+<ol>
+  <li>Renamed package <code>jackpal.androidterm</code> to
+  <code>de.t2h.tterm</code> so that both TEA and TTerm can be
+  installed on a device. (That makes it harder to compare TEA and
+  TTerm sources. Is there a better way?)</li>
+
+  <li>Increased <code>android:minSdkVersion</code> from 3 to 11.</li>
+
+  <li>All code changes are marked with `T+ for additions´, `T-´ for
+  deletions and `T!´ for modifications.</li>
+</ol>
+
+</body>
+</html>

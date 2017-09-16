@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Planned features and known bugs</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Planned features and known bugs</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Planned features</h1>
+<!-- ************************************************************ -->
+
+<ul>
+  <li>Put sources on GitHub.</li>
+</ul>
+
+
+<h2>Keyboard</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li>Add an `Alt´/`Meta´ key .</li>
+
+  <li>Make the additional keys user-configurable.</li>
+  
+  <li>Provide a configurable on-screen character picker.</li>
+  
+  <li>
+    <p>Get swipe to work for</p>
+    
+    <ul>
+      <li>Swype
+
+        <!-- 
+        <ul>
+          <li>Should auto-capitalize</li>
+        
+          <li>Should not add spaces after symbols (e.g. after
+          <code>$</code> in <code>$TERM</code>).</li>
+        </ul>
+        -->
+      </li>
+
+      <li>
+        <p>Google's Gboard</p>
+      
+        <!--
+        <ul>
+          <li>Should automatically insert space between words</li>
+
+          <li>Enter should accept the suggested word cleanly</li>
+
+          <li>Should auto-capitalize</li>
+        </ul>
+        -->
+      </li>
+
+      <li>Other swipe keyboards</li>
+    </ul>
+  </li>
+  
+  <li>
+    <p>Can we support word-based input?</p>
+    
+    <p>As described in <a href="#B001">bug 001</a>, word-based input
+    (with a suggestion row) does not work with `Ctrl´ and `Esc´.</p>
+      
+    <p>I'm not sure if this can be fixed when you type directly to the
+    terminal. For example take the Emacs keyboard shortcut `Ctrl-x f´.
+    Can we tell the IME that `f´ is part of the shortcut, not the
+    start of a new word? There are analogous problems with keys like
+    `a´ and `i´ in <code>vi</code>.</p>
+
+    <p>Maybe we could provide a button to toggle between character-
+    and word-based input next to the `Ctrl´ button?</p>
+    
+    <p>Or we could use an idea from VX ConnectBot and provide a
+    separate input field where you swipe a whole line at a time, and
+    send it to the terminal when you're done. But then you can't use
+    file completion in the shell, nor use keyboard shortcuts in
+    editors.</p>
+  </li>
+
+  <li>
+    <p>Flow control</p>
+  
+    <p>If TTerm does not respond to key presses, you might have
+    switched "flow control" on with `Ctrl+S´. When you switch flow
+    control off with `Ctrl+Q´, the terminal will process all pending
+    input. This is so confusing that I'll add a setting to switch it
+    off in a future version of TTerm.</p>
+  </li>
+</ul>
+
+
+<h2>Settings</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li>Add explanations to the settings.</li>
+
+  <li>In the font size settings, show the resulting number of columns
+  and rows.</li>
+</ul>  
+
+
+<h2>Terminal</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li>
+    <!-- See `TODO.txt´, section "Terminal" -->
+
+    <p>Find out how to make `C-l´ clear the screen in Android's
+    default shell Mksh and in the Bash that comes with BusyBox by
+    Burrows, or provide an alternative.</p>
+  </li>
+
+  <li>
+    <p>Make "alternate screen" support optional</p>
+    
+    <p>Console programs (i.e. programs that write to any part of the
+    screen, like Emacs, <code>less</code> and <code>vi</code>, as
+    opposed to CLI commands that only write to the end of the screen
+    buffer) must use Termcap's <code>ti</code> or Terminfo's
+    <code>smcup</code> capability when they start, and Termcap's
+    <code>te</code> or Terminfo's <code>rmcup</code> capability when
+    they end.</p>
+    
+    <p>On terminals that support an "alternate screen",
+    <code>ti</code>/<code>smcup</code> also switch to the alternate
+    screen, and <code>te</code>/<code>rmcup</code> switch back. The
+    result is that quitting a program like <code>less</code> or
+    <code>vi</code> removes its output, which is extremely annoying
+    when you use them to look up something that you want to use
+    afterwards. So we'll provide a way to switch it off.</p>
+    
+    <p>You should actually be able to configure that with
+    <code>$TERM</code> (the setting <span class="setting">Report
+    terminal type</span> and <code>$TERMINFO</code>, but that does not
+    seem to work for several programs out in the wild.</p>
+  </li>
+</ul>
+
+
+<h2>Touch support</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li>Support selections. The obvious gesture "touch &amp; drag" is
+  already used to scroll. Also add paste button?</li>
+</ul>
+
+
+<h1>Known bugs</h1>
+<!-- ************************************************************ -->
+<!-- Next bug: 005. -->
+
+
+<h2>Keyboard</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li id="B001">Bug 001, low prio: Key combinations with `Ctrl´, `Esc´
+  and `Fn´ currently only work when the setting <span
+  class="setting">Input mode</span> is set to <i>character-based</i>.
+  There are analogous problems with keys like `a´ and `i´ in
+  <code>vi</code>.</li>
+
+  <li id="B003">
+    <p>Bug 003, low prio: The keyboard disappears after a long
+    inactivity, but the buttons stay.</p>
+    
+    <p>Fix: Tap screen twice.</p>
+  </li>
+
+  <li id="B005">Bug 005, Alt-Gr does not work on hardware
+  keyboards.</li>
+</ul>
+
+
+<h2>Terminal</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li id="B002">
+    <p>Bug 002, high prio: Programs get confused when screen height
+    changes</p> 
+
+    <p>I've seen the problem often in Emacs, sometimes in Vi (which I
+    only use rarely).</p>
+
+    <p>The problems are not always the same. Sometimes Emacs recovers
+    easily by running this function:</p>
+
+    <p class="indent code">
+    (defun x ()<br/>
+      (interactive)<br/>
+      (redraw-frame (selected-frame)))</p>
+      
+    <p>Other times you need to suspend Emacs and execute</p>
+    
+    <p class="indent code">stty rows 32 # Or whatever number is
+    appropriate.</p>
+
+    <p>In Unix, the terminal must inform the foreground job when when
+    the window height changes by sending the signal WINCH ("window
+    change"). Which part of the code handles that?</p>
+  </li>
+</ul>
+
+
+<h1>Other tasks</h1>
+<!-- ************************************************************ -->
+
+<ul>
+  <li>See TODOs in source files.</li>
+</ul>
+
+</body>
+</html>

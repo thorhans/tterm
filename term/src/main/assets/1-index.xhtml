@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<!-- ********************************************************** 
+ | Header
+ | ************************************************************ 
+-->
+
+<div class="header">TTerm version 0.1.6</div>
+
+<p style="text-align: center;"><a 
+    href="https://play.google.com/store/apps/details?id=de.t2h.tterm"
+    >TTerm in Google Play</a></p>
+
+<p id="website"><a href="../">Back to t2h.de/android.</a></p>
+<script>
+  if(window.location.href
+    .indexOf("http://t2h.de/android/tterm/") == -1
+  ) {
+    document.getElementById("website").style.display = "none";
+  }
+</script>
+
+<!-- ********************************************************** 
+ | Menus
+ | ************************************************************ 
+-->
+
+<style>
+  .menu {
+    display:           table; 
+    border-collapse:   collapse;
+                        
+    margin-top:        4pt;
+  }
+
+  /* Layout a row with two `div´s. */
+  .menu > div { 
+    display:           table-cell;
+    border:            4pt solid #d0d0d0; 
+    padding:           4pt;
+                        
+    width:             50%;
+                        
+    vertical-align:    top;
+  }                     
+                        
+  .menu-header {        
+    background-color:  #d0d0d0; 
+    margin:            -4pt;
+    margin-bottom:      0;
+    padding:            4pt;
+    
+    font-weight:  bold;
+  }
+
+  .menu ul, .menu li {
+    margin-top:    0.5em;
+    margin-bottom: 0.5em;
+  }
+
+</style>
+
+<div class="menu">
+  <div>
+    <div class="menu-header">Documentation</div>
+    <ul>
+      <li><a href="intro.xhtml"          >Introduction</a></li>
+      <li><a href="features.xhtml"       >Features</a></li>
+      <li><a href="config.xhtml"         >Configuration</a></li>
+      <li><a href="usage.xhtml"          >Usage</a></li>
+      <li><a href="shells.xhtml"         >Shells and distributions</a>
+        <ul>
+          <li><a href="run/sh.xhtml"     >Android's shell</a></li>
+          <li><a href="run/bash.xhtml"   >Bash</a></li>
+          <li><a href="run/termux.xhtml" >Termux</a></li>
+          <li><a href="run/debian.xhtml" >GNURoot Debian</a></li>
+        </ul>
+      </li>
+
+      <li><a href="programs.xhtml"       >Programs</a>
+                                          
+        <ul>                              
+          <li><a href="prg/emacs.xhtml"  >Emacs</a></li>
+        </ul>                             
+      </li>                               
+                                          
+      <li><a href="integration.xhtml"    >Integration</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="menu-header">Appendices</div>
+
+    <ul>
+      <li><a href="changelog.xhtml" >Changelog</a></li>
+      <li><a href="planned.xhtml"   >Planned features and known bugs</a></li>
+      <li><a href="rooting.xhtml"   >Rooting</a></li>
+      <li><a href="tea.xhtml"       >TEA</a></li>
+      <li><a href="licenses.xhtml"  >Licenses</a></li>
+      <li><a href="sources.xhtml"   >Sources</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ********************************************************** 
+ | Text
+ | ************************************************************ 
+-->
+
+<p>TTerm is a terminal emulator for Android with improved support for
+on-screen keyboards (also called virtual keyboards, soft keyboards or
+IMEs) and improved documentation. It has extra keys for `Ctrl´, `Tab´,
+`Esc´, `/, `-´, the cursor keys and `Fn´ so that you can continue
+using your favorite on-screen keyboard even if it lacks those
+keys.</p>
+
+<p>TTerm is based on 
+  <a href="tea.xhtml"
+    >Jack Palevich's "Terminal Emulator for Android"</a>, which I'll
+abbreviate as TEA.</p>
+
+<p>TTerm is available for Android 4.4+. The native code is compiled for
+the architectures arm64, armeabi, armeabi-v7a, mips, mips64, x86 and
+x86_64. Contact me at
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm">
+    thorbj.hansen@gmail.com</a>
+if you have an unsupported architecture.</p>
+
+<p>TTerm is still in beta, so remember to save your work early and
+often.</p>
+
+<p>If you find bugs or want to help, contact me at 
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >thorbj.hansen@gmail.com</a>.</p>
+
+<!-- ********************************************************** 
+ | Images
+ | ************************************************************ 
+-->
+
+<div class="figure stack">
+  <img src="res/screenshot-7-inch.png" 
+       style="height: 600px;" /> 
+
+  <p>7" tablet (portrait orientation)</p>
+</div>
+
+<div class="figure stack">
+  <img src="res/screenshot-phone.png"  
+       style="height: 360px;" />
+
+  <p>4.8" phone (portrait orientation)</p>
+</div>
+
+</body>
+</html>

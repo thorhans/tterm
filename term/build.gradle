@@ -1,0 +1,119 @@
+apply plugin: 'com.android.application'
+
+android {
+  //T+{ ------------------------------------------------------------
+  // Add builds `dev´ and `prod´, part 1.
+  signingConfigs {
+    release {
+      // Define these in the global Gradle config file, e.g.
+      //   `c:\Users\«user»\.gradle\gradle.properties´.
+      storeFile     file(ANDROID_STORE_FILE)
+      storePassword ANDROID_STORE_PASSWORD
+      keyAlias      ANDROID_KEY_ALIAS_TTerm
+      keyPassword   ANDROID_KEY_PASSWORD_TTerm
+    }
+  }
+  //T+} ------------------------------------------------------------
+
+  //T!{ ------------------------------------------------------------
+  //T! compileSdkVersion 25
+  //T!   buildToolsVersion "22.0.1"
+  compileSdkVersion 25
+  buildToolsVersion "25.0.3"
+  //T!} ------------------------------------------------------------
+
+  defaultConfig {
+    //T!{ ------------------------------------------------------------
+    //T! applicationId "jackpal.androidterm"
+    //T! minSdkVersion 4
+    applicationId "de.t2h.tterm"
+    minSdkVersion 19 // Android 4.4
+    //T!} ------------------------------------------------------------
+
+    //T-{ ------------------------------------------------------------
+    //T- ndk {
+    //T-     moduleName "libjackpal-androidterm5"
+    //T-     abiFilters 'armeabi', 'mips', 'x86'
+    //T-     ldLibs "log"
+    //T- }
+    //T-} ------------------------------------------------------------
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+      //T+{ ------------------------------------------------------------
+      // Add builds `dev´ and `prod´, part 2.
+      signingConfig signingConfigs.release
+      //T+} ------------------------------------------------------------
+    }
+    //T+{ ------------------------------------------------------------
+    // Diable Crashlytics in `debug´
+    debug {
+      ext.enableCrashlytics = false
+    }
+    //T+} ------------------------------------------------------------
+  }
+
+  //T+{ ------------------------------------------------------------
+  externalNativeBuild {
+    ndkBuild {
+      path 'src/main/jni/Android.mk'
+    }
+  }
+  //T+} ------------------------------------------------------------
+
+  //T+{ ------------------------------------------------------------
+  dexOptions {
+    preDexLibraries true
+  }
+  //T+} ------------------------------------------------------------
+
+  //T+{ ------------------------------------------------------------
+  // Add builds `dev´ and `prod´, part 3.
+  productFlavors {
+    dev {
+      minSdkVersion 22 // Android 5.1
+      // This is necessary, and gives you separate settings for `dev´ and `prod´.
+      // Without it, you can't install `prod´ without deinstalling `dev´ first,
+      // which deletes all TTerm Shortcuts on your Home Screens.
+      applicationIdSuffix ".dev"
+      versionNameSuffix '-dev'
+      resValue "string", "application_terminal", "TTerm debug"
+      resValue "string", "activity_shortcut_create", "TTerm debug shortcut"
+      ndk {
+        abiFilters "armeabi-v7a" // Only compile for Ten.
+      }
+      resConfigs "en", "xhdpi"   // Only compile for Ten.
+    }
+    prod {
+      resValue "string", "application_terminal", "TTerm (beta)"
+      resValue "string", "activity_shortcut_create", "TTerm shortcut"
+    }
+  }
+  //T+} ------------------------------------------------------------
+}
+
+//T+{ ------------------------------------------------------------
+// Add builds `dev´ and `prod´, part 4.
+configurations {
+  devDebugCompile
+  prodReleaseCompile
+}
+//T+} ------------------------------------------------------------
+
+dependencies {
+  compile project(':emulatorview')
+  //T!{ ------------------------------------------------------------
+  // Add builds `dev´ and `prod´, part 5.
+  //T! compile project(':libtermexec')
+  devDebugCompile    project(path: ':libtermexec', configuration: 'devDebug')
+  prodReleaseCompile project(path: ':libtermexec', configuration: 'prodRelease')
+  //T!} ------------------------------------------------------------
+}

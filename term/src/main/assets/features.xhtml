@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – Features</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Features</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Support for different keyboards</h1>
+<!-- ************************************************************ -->
+
+<p>I test TTerm regularly with the on-screen keyboards:</p>
+
+<ul class="narrow">
+  <li>Swype, my current favorite</li>
+  
+  <li>Google's GBoard</li>
+</ul>
+
+<p>and occasionally with the on-screen keyboards:</p>
+
+<ul class="narrow">
+  <li>Hacker's Keyboard</li>
+
+  <li>Multiling O Keyboard</li>
+
+  <li>Samsung's keyboard on a Samsung Galaxy Tab S2 8.0 WiFi (2016),
+  SM-T713, with Android 7</li>
+</ul>
+
+<p>and occasionally with Bluetooth keyboards.</p>
+
+<p>There are a surprising amount of differences between on-screen
+keyboards. If you find bugs on your favorite on-screen keyboard, send
+a bug report to
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >thorbj.hansen@gmail.com</a>.</p>
+
+<p>You currently must set the setting <span class="setting">input
+mode</span> to <i>character based</i>, then <em>typing</em> works in
+all keyboards I've tested (where <em>typing</em> means that you press
+a key, release it, then press the next key).</p>
+
+<p><em>Swiping</em> (also called <em>gesture typing</em>) is a
+different matter. Every swipe keyboard seems to behave differently, so
+I'll return to that later.</p>
+
+<p>Tested keyboards:</p>
+
+<table class="border">
+  <tr>
+    <th>Keyboard</th>
+    <th>Current state</th>
+  </tr>
+
+  <tr>
+    <td><a href="https://play.google.com/store/apps/details?id=com.google.android.inputmethod.latin"
+            >Gboard</a></td>
+
+    <td>As of version 0.1.6 in July 2017, typing works, swiping
+    doesn't. `Ctrl´ and `Fn´ finally work.</td>
+  </tr>
+
+  <tr>
+    <td><a href="https://play.google.com/store/apps/details?id=org.pocketworkstation.pckeyboard"
+           >Hacker's Keyboard</a></td>
+       
+    <td>As of version 0.1.6 in July 2017, typing works.</td>
+  </tr>
+
+  <tr>
+    <td><a href="https://play.google.com/store/apps/details?id=kl.ime.oh"
+            >Multiling O Keyboard</a></td>
+
+    <td>As of version 0.1.6 in July 2017, typing works, swiping
+    doesn't.</td>
+  </tr>
+
+  <tr>
+    <td>Samsung's Keyboard</td>
+
+    <td>I've tested Samsung's keyboard on a Samsung Galaxy Tab S2 8.0
+    WiFi (2016), SM-T713, with Android 7. As of version 0.1.6 in July
+    2017, typing works, swiping also works (with the setting <span
+    class="setting">input mode</span> is set to
+    <i>character-based</i>).</td>
+  </tr>
+
+  <tr>
+    <td><a href="https://play.google.com/store/apps/details?id=com.nuance.swype.dtc"
+           >Swype Keyboard</a></td>
+
+    <td>As of version 0.1.6 in July 2017, typing works, swiping
+    doesn't.</td>
+  </tr>
+</table>
+
+<p>Other keyboards:</p>
+
+<table class="border">
+  <tr>
+    <th>Keyboard</th>
+    <th>Current state</th>
+  </tr>
+
+  <tr>
+    <td><a href="https://play.google.com/store/apps/details?id=com.aitype.android"
+    >a.i.type keyboard Free</a></td>
+
+    <td>I won't test this keyboard until they support an English QUERTZ
+    layout. (Some German idiot decided to swap Y and Z so <u>z</u>ou
+    can't t<u>z</u>pe on an<u>z</u> other ke<u>z</u>board when
+    <u>z</u>ou have learned to t<u>z</u>pe on a German ke<u>z</u>board.)</td>
+  </tr>
+</table>
+
+<p>If you find bugs on a different keyboard, send a bug report to
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >thorbj.hansen@gmail.com</a>.</p>
+
+
+<h1>Devices</h1>
+<!-- ************************************************************ -->
+
+<p>I test TTerm regularly on:</p>
+
+<ul>
+  <li>a rooted Samsung Galaxy Tab S 10.5 WiFi (SM-T800, chagallwifi)
+  with a 10" screen and LineageOS 14.1 (equivalent to Android 7.1
+  Nougat)</li>
+
+  <li>a rooted Samsung Galaxy Tab S2 8.0 WiFi (2016), SM-T713 that has
+  a 8" screen and Android 7</li>
+</ul>
+
+<p>I occasionally test on:</p>
+
+<ul>
+  <li>an unrooted Galaxy S3 Neo (GT-I9301I) with a 4.8" screen and
+  Android 4.4</li>
+</ul>
+
+<p>If you find bugs an a different device, send a bug report to
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >thorbj.hansen@gmail.com</a>.</p>
+
+
+<h1>Changes to TEA</h1>
+<!-- ************************************************************ -->
+
+<p>TTerm has the same features as <a href="tea.xhtml">TEA</a>, with
+the changes listed below.</p>
+
+<p>For detailed changes, see the 
+  <a href="changelog.xhtml">changelog</a>.</p>
+
+
+<h2>Added features</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li>
+    <p>Extra keys for `Ctrl´, `Tab´, `Esc´, `/, `-´, the cursor keys
+    and `Fn´, so that you can continue using your favorite on-screen
+    keyboard. The cursor keys have auto-repeat. For details, see 
+      <a href="usage.xhtml#keyboard"
+         >Usage: Keyboard</a>.</p>
+
+    <p>Key combinations with `Ctrl´, `Esc´ and `Fn´ currently only work
+    when the setting <span class="setting">input mode</span> is set to
+    <i>character-based</i>.</p>
+  </li>
+  
+  <li>
+    <p>Suggestions for swiped words do not overwrite consecutive text.
+    (As of 2017-07, this no longer works, I'll investigate it
+    later.)</p>
+    
+    <p>Some swipe keyboards display a <em>suggestion</em> which you
+    have to <em>commit</em>, e.g. by pressing space or a punctuation
+    key, or <em>discard</em>, e.g. by pressing backspace. For an
+    example, try out the Google keyboard.</p>
+    
+    <p>When typing in the middle of a line, TEA's suggestion
+    <em>overwrites</em> the following text until you commit. TTerm
+    tries to move the following text to the right. (That's not always
+    the right thing to do, but in most cases it is more intuitive than
+    TEA's approach.)</p>
+    
+    <p>Example: Select the Google keyboard. Enter <code>one
+    two</code>. Put the cursor on <code>t</code>. Enter
+    <code>hello</code> without pressing space. Now TEA shows
+      <code>one <span class="selected">hello</span></code>,
+    and TTerm shows 
+      <code>one <span class="selected">hello</span>two</code>.
+    When you press space, TEA inserts <code>hello</code> and shows
+    <code>two</code> again. So no text is lost, but I find TEA's
+    behavior very confusing.</p>
+  </li>
+
+  <li>Local help files that you can read when you are offline.</li>
+
+  <li>The setting <span class="setting">Close window on exit</span> is
+  now off by default. When the command in the window exits, simply press
+  Enter to close the window.</li>
+</ul>
+
+
+<h2>Removed features</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li>TTerm requires Android 4.4 or newer to run.</li>
+
+  <li>
+    <p>At the moment, TTerm's GUI is in English, and I have no plans
+    to translate the GUI to other languages.</p>
+    
+    <p>To clarify: Programs running inside TTerm can run in any
+    language, but TTerm's menu and settings are in English.</p>
+    
+    <p>If you want your GUI in another language, use TEA.</p>
+  </li>
+</ul>
+
+
+
+<h2>Changed features</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li>I've changed some of the mappings for `Ctrl´ and `Fn´, see
+      <a href="usage.xhtml#keyboard"
+         >Usage: Keyboard</a>.</li>
+</ul>
+
+</body>
+</html>

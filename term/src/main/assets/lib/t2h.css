@@ -1,0 +1,330 @@
+/** de.t2h/css/t2h.css - Default style sheet. */
+
+/*
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
+/* ============================================================
+ * Basic settings
+ * ============================================================ */
+
+body {
+  font-family: "Arial", sans-serif;
+}
+/** Class `code´.
+ *
+ * Treat it like `<code>´.
+ */
+*.code { 
+  font-family: monospace; 
+}
+
+/* My Chrome defaults to 16px for `p´ but `13px´ for `code´, so set
+ * them to the same size. 
+ */ 
+/* TODO This did not work well, it also sets `code´ to 12pt when the
+ * surrounding text is bigger, e.g. in `h1´.
+ *
+ * p, code, pre {
+ *   font-size: 12pt;
+ * }
+ */
+
+.TODO {
+  background-color: lightBlue;
+}
+
+/* ============================================================
+ * Title and headings
+ * ============================================================
+
+/** Title */
+p.title {
+  font-size:   24pt;
+  font-weight: bold;
+  margin:      0.5em 0;
+  text-align:  center;
+}
+
+h1, h2, h3, h4 {
+  margin-top:     1em;
+  margin-bottom:  1rem; /* The smaller `rem´. */
+  border-bottom:  3pt solid #c0c0c0;
+  padding-bottom: 3pt;
+}
+
+h5 {
+  font-size: medium;  /* Same size as `p´. */
+  margin-bottom: 1em;
+}
+
+/* ============================================================
+ * Figures and images
+ * ============================================================
+ *
+ * I use "figure" for everything that has a caption and disallows page
+ * breaks, e.g. images, vector graphics, code, equations, ...). They
+ * can be "floating" or "non-floating".
+ *
+ * Ordinary tables are *not* figures, since they allow page breaks.
+ *
+ * See also HTML5's `<figure>´ and `<figcaption>´, which seem to be
+ * for floating figures.
+ */
+ 
+/** The class `figure´ produces a non-floating figure, one per line. */
+*.figure {
+  display: block; 
+
+  margin-left:  1em;
+  margin-right: 1em;
+}  
+
+/** The classes `figure stack´ produce a non-floating, stackable figure
+ * (several per line).
+ *
+ * By default, the figures are vertically centered.
+ */
+*.figure.stack { 
+  display: inline-block;
+
+  vertical-align: middle;
+}  
+
+/* ------------------------------------------------------------
+ * Figure content
+ * ------------------------------------------------------------ */
+
+/** Center images in figures. */
+*.figure > img {
+  /* Center image, see 
+   *   (info "(web) Center an image") 
+   */
+  display:       block;
+  margin-left:   auto;
+  margin-right:  auto;
+  /* End center images */
+}
+
+/** Center text in figures. 
+ *
+ * If you want captions with the default text style, a `<p>´ tag at
+ * the top or bottom of the element with class `figure´ is enough.
+ *
+ * If the caption is too wide, set `max-width´ on the element with
+ * class `figure´, e.g.
+ *
+ *  <div class="figure" style="max-width: 33%">
+ *    <p>...</p>
+ *  </div>
+ */
+*.figure > p {
+  /* Center text. */
+  text-align: center;
+}
+
+/** Center tables in figures. */
+*.figure > table {
+  /* Center table, see 
+   *   (info "(web) Center a table") 
+   */
+  margin-left:   auto;
+  margin-right:  auto;
+  /* End center table */
+}
+
+/* ------------------------------------------------------------
+ * Other figures and images
+ * ------------------------------------------------------------ */
+
+/** Standalone image of width 90%.
+ *
+ * A "standalone image" does not have a caption.
+ *
+ * I usually need a width of 90%.
+ */
+img.standalone90 {
+  /* Center image, see 
+   *   (info "(web) Center an image") 
+   */
+  display:       block;
+  margin-left:   auto;
+  margin-right:  auto;
+  /* End center image */
+
+  margin-top:    10pt;
+  margin-bottom: 10pt;
+
+  width:         90%;
+}
+
+/* ============================================================
+ * Indentation
+ * ============================================================ */
+
+/** Indent.
+ *
+ * To indent a single paragraph once, use the class `indent´ on `p´:
+ *
+ *   <p>Not indentend</p>
+ *   
+ *   <p class="indent">Indented once.</p>
+ *
+ * To indent several paragraphs or several times, nest `div´s:
+ *    
+ *   <div class="indent">
+ *     <p>Also indented once.</p>
+ *       
+ *     <div class="indent">
+ *       <p>Indented twice.</p>
+ *     </div>
+ *   </div>
+ */
+*.indent {
+  margin-left: 1em;
+}
+
+/* ============================================================
+ * Lists
+ * ============================================================ */
+
+/* ------------------------------------------------------------
+ * Bullet lists
+ * ------------------------------------------------------------
+ *
+ * - Horizontal spacing
+ *
+ *   I do not want the bullet to be indented, only the text after the
+ *   bullet.
+ *
+ *   That's a lot harder than it sounds, since each browser paints the
+ *   bullet at a different location and a different size.
+ *
+ *   So we don't use the browser's bullet, but a Unicode character
+ *   with `li::before´.
+ *
+ * - Vertical spacing
+ *
+ *   I want "wide lists" (lists with more vertical space between the
+ *   items) as the default.
+ *
+ *   To get narrow lists, use `<ul class="narrow">´, see below.
+ */
+ul { 
+  /* Horizontal spacing
+   * ------------------------------ */
+   
+  /* IE indents its default `ul´ with `margin-left´, Firefox with
+   * `padding-left, so reset both. */ 
+  margin-left:  0em; 
+  padding-left: 0em;
+}
+ul, ol {
+  /* Vertical spacing 
+   * ------------------------------ */
+  
+  margin-top:     1.0em;
+  margin-bottom:  1.0em;
+}
+
+/** Default list items.
+ *
+ * - Horizontal spacing: see `ul´ above.
+ * - Vertical spacing: see `ul´ above.
+ */
+ul > li {
+  /* Horizontal spacing
+   * ------------------------------ */
+
+  /* We set the bullet with `li::before´ below. */
+  list-style:   none;   
+
+  /* Distance between container's left margin and list item's left
+   * margin, ignoring bullet. */
+  margin-left:  1em;  
+}
+ul > li, ol > li {
+  /* Vertical spacing 
+   * ------------------------------ */
+  
+  margin-top:    1em;  /* `1em´ is Firefox's spacing of `p´. */
+  margin-bottom: 1em;  /* `1em´ is Firefox's spacing of `p´. */
+}
+
+/** Bullet for default list item. 
+ *
+ * If this layout does not work on a mobile device, look for "font
+ * boosting". {TODO Add details.}
+ */
+ul > li::before {
+  /* • bullet
+     ● black circle
+     – en dash
+   */
+  content: "●";  
+
+  /* Horizontal spacing
+   * ------------------------------ */
+
+  float: left;
+
+  margin-left:  -1.2em; /* assert: marginLeft == -li.paddingLeft  */
+  padding-left:  0.2em; /* Distance between container's left margin and
+                         * left margin of bullet. */
+}
+
+/** Narrow list items.
+ *
+ * To get a narrower list, use `<ul class="narrow">´, e.g.:
+ *
+ *   <ul class="narrow">
+ *     <li>One</li>
+ *     <li>Two</li>
+ *   </ul>
+ */
+ul.narrow li { 
+  /* Vertical spacing 
+   * ------------------------------ */
+
+  margin-top:     0.2em;
+  margin-bottom:  0.2em;
+}
+
+/* ------------------------------------------------------------
+ * Definition lists
+ * ------------------------------------------------------------ */
+ 
+dl {
+  margin-top:     1em;
+  margin-bottom:  1em;
+  margin-left:    1em;
+  padding-left:   0em;
+}
+
+dt, dd {
+  margin-top:     1em;
+}
+dd {
+  margin-left:    1em;
+}
+
+/* ============================================================
+ * Tables
+ * ============================================================ */
+
+th {
+  text-align: left;
+}
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – GNURoot Debian</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="../";</script>
+  <script src="../lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – GNURoot Debian</div>
+
+<p><a href="../shells.xhtml">
+  Back to chapter "Shells and distributions".</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Running GNURoot Debian in TTerm</h1>
+<!-- ************************************************************ -->
+
+<p>Android's Linux layer is very small. The excellent app
+  <a href="https://play.google.com/store/apps/details/apps/details?id=com.gnuroot.debian"
+     >GNURoot Debian</a>
+is a <b>full Debian Linux distribution</b> that runs as an app using 
+  <a href="https://proot-me.github.io" 
+    ><code>proot</code></a>.
+That means that it doesn't run on Android's Linux and file system like
+  <a href="termux.xhtml" >Termux</a>
+does, it has its own file system and starts Debian in it. It doesn't
+require <a href="rooting">rooting</a>. And it has 
+  <a href="emacs.xhtml" > Emacs</a>, 
+hooray!</p>
+
+<p>GNURoot Debian has its own terminal emulator, but on a rooted
+device you can use TTerm instead. (Currently the terminal emulator of
+GNURoot Debian handles resizing better than TTerm, you might want to
+wait until TTerm improves.)</p>
+
+<p>This seems to work:</p>
+
+<ul>
+  <li>Start TTerm and change to root with <code>su</code>, or to the GNURoot Debian user.
+  To find out the GNURoot Debian user, start it and enter <code>whoami</code>, then
+  return to TTerm. On my device it runs as user <code>u0_a81</code>, so I
+  change to it with <code>su u0_a81</code>.</li>
+
+  <li>
+    <p>Start Debian:</p>
+
+    <p class="indent code">
+    cd /data/data/com.gnuroot.debian/support<br/>
+    LD_PRELOAD=" " ./busybox sh execInPRoot</p>
+
+    <p>It shows two errors, but seems to work anyway.</p>
+  </li>
+</ul>
+
+<p>That's it, now you can start a Debian command, e.g.
+<code>bash</code> or <code>emacs</code> (after installing it with
+<code>apt install emacs</code>).</p>
+
+<p>If you don't want to root your device, you could try to find a SSH
+client that runs in TTerm and start a SSH server in Debian. I have not
+tried that yet.</p>
+
+</body>
+</html>

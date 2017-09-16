@@ -1,0 +1,7 @@
+include ':emulatorview', ':libtermexec'
+include ':term'
+//T-{ ------------------------------------------------------------
+//T- include ':samples:intents'
+//T- include ':samples:pathbroadcasts'
+//T- include ':samples:telnet'
+//T-} ------------------------------------------------------------
