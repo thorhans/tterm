@@ -2,4 +2,5 @@
 TTerm README
 ============================================================
 
-See `assets/index.xhtml´.
+See `/term/src/main/assets/1-index.xhtml´.
+
