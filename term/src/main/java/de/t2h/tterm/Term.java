@@ -478,7 +478,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             final int i2 = i;
             mExtraKeys[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    getCurrentEmulatorView().sendKey(mExtraKeyCodes[i2]);
+                    EmulatorView emv = getCurrentEmulatorView();
+                    if(emv != null) { emv.sendKey(mExtraKeyCodes[i2]); }
                 }
             });
         }
@@ -486,12 +487,14 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         // Key 3-4: `/´, `-´
         mExtraKeys[3].setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                getCurrentEmulatorView().getTermSession().write("/");
+                EmulatorView emv = getCurrentEmulatorView();
+                if(emv != null) { emv.getTermSession().write("/"); }
             }
         });
         mExtraKeys[4].setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                getCurrentEmulatorView().getTermSession().write("-");
+                EmulatorView emv = getCurrentEmulatorView();
+                if(emv != null) { emv.getTermSession().write("-"); }
             }
         });
 
@@ -506,7 +509,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                 Runnable mAction = new Runnable() {
                     @Override
                     public void run() {
-                        getCurrentEmulatorView().sendKey(mExtraKeyCodes[i2]);
+                        EmulatorView emv = getCurrentEmulatorView();
+                        if(emv != null) { emv.sendKey(mExtraKeyCodes[i2]); }
                         mHandler.postDelayed(this, 50);
                     }
                 };
@@ -516,7 +520,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                         case MotionEvent.ACTION_DOWN:
                             if (mHandler != null) return true;
                             mHandler = new Handler();
-                            getCurrentEmulatorView().sendKey(mExtraKeyCodes[i2]);
+                            EmulatorView emv = getCurrentEmulatorView();
+                            if(emv != null) { emv.sendKey(mExtraKeyCodes[i2]); }
                             mHandler.postDelayed(mAction, 200);
                             break;
                         case MotionEvent.ACTION_UP:
@@ -1273,11 +1278,19 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     //T+} ------------------------------------------------------------
 
     private void doSendControlKey() {
-        getCurrentEmulatorView().sendControlKey();
+        //T!{ ------------------------------------------------------------
+        //T! getCurrentEmulatorView().sendControlKey();
+        EmulatorView emv = getCurrentEmulatorView();
+        if(emv != null) { emv.sendControlKey(); }
+        //T!} ------------------------------------------------------------
     }
 
     private void doSendFnKey() {
-        getCurrentEmulatorView().sendFnKey();
+        //T!{ ------------------------------------------------------------
+        //T! getCurrentEmulatorView().sendFnKey();
+        EmulatorView emv = getCurrentEmulatorView();
+        if(emv != null) { emv.sendFnKey(); }
+        //T!} ------------------------------------------------------------
     }
 
     private void doDocumentKeys() {
