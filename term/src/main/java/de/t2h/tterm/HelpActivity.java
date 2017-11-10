@@ -49,11 +49,11 @@ public class HelpActivity extends Activity {
       setContentView(mWebView);
       try {
           InputStream fin = getAssets().open("1-index.xhtml");
-              byte[] buffer = new byte[fin.available()];
-              fin.read(buffer);
-              fin.close();
-              mWebView.loadDataWithBaseURL("file:///android_asset/", new String(buffer), 
-                  "application/xhtml+xml", "UTF-8", null);
+          byte[] buffer = new byte[fin.available()];
+          fin.read(buffer);
+          fin.close();
+          mWebView.loadDataWithBaseURL("file:///android_asset/", new String(buffer), 
+              "application/xhtml+xml", "UTF-8", null);
       } catch (IOException e) {
           e.printStackTrace();
       }    
