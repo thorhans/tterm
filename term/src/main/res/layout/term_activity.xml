@@ -57,9 +57,7 @@
       android:paddingRight="1dp" >
 
     <!-- Due to a bug in Android we can't use `android:layout_height="wrap_content"´ here. `25dp´ is just a
-     !   placeholder, we calculate a height in `Term.setKeySize´.
-     !
-     !   TODO ThH: Change margins from pixels to dps.
+     !   placeholder, we calculate a height in `Term.setExtraKeySize´.
      -->
     <Button
         android:id="@+id/extra_key_0"
@@ -67,6 +65,9 @@
         android:layout_width="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="Ctrl" />
 
     <!-- See `extra_key_0´. -->
@@ -76,6 +77,9 @@
         android:layout_width="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="Tab" />
 
     <!-- See `extra_key_0´. -->
@@ -85,6 +89,9 @@
         android:layout_width="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="Esc" />
 
     <!-- See `extra_key_0´. -->
@@ -94,6 +101,9 @@
         android:layout_width="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="/" />
 
     <!-- See `extra_key_0´. -->
@@ -103,6 +113,9 @@
         android:layout_width="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="-" />
 
     <!-- See `extra_key_0´. -->
@@ -112,7 +125,10 @@
         android:layout_height="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-          android:text="▲" />
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:text="▲" />
 
     <!-- See `extra_key_0´. -->
     <Button
@@ -121,6 +137,9 @@
         android:layout_height="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="▼" />
 
     <!-- See `extra_key_0´. -->
@@ -130,6 +149,9 @@
         android:layout_height="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="◀" />
 
     <!-- See `extra_key_0´. -->
@@ -139,6 +161,9 @@
         android:layout_height="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="▶" />
 
     <!-- See `extra_key_0´. -->
@@ -148,6 +173,9 @@
         android:layout_height="25dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:text="Fn" />
   </LinearLayout>
 </LinearLayout>
