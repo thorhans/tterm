@@ -479,6 +479,9 @@ class TermKeyListener {
             //T!     result = KEYCODE_OFFSET + KEYCODE_F12;
             //T! }
 
+            // If you test `Ctrl-0´..`Ctrl-9´ in Bash, press `Ctrl-V´ first, so that you see which char
+            // reaches Bash without Readline processing it.
+            // 
             if        ('a' <= result  && result <= 'z') { result = (char) (result - 'a' + 1);
             } else if ('A' <= result  && result <= 'Z') { result = (char) (result - 'A' + 1);
             } else if (result == ' '  || result == '@') { result = 0;
