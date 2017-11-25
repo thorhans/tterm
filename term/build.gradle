@@ -105,14 +105,6 @@ android {
   //T+} ------------------------------------------------------------
 }
 
-//T+{ ------------------------------------------------------------
-// Add builds `dev´ and `prod´, part 4.
-configurations {
-  devDebugCompile
-  prodReleaseCompile
-}
-//T+} ------------------------------------------------------------
-
 dependencies {
   compile 'com.android.support:support-annotations:21.0.0'
 }
