@@ -1,4 +1,4 @@
-package de.t2h.tterm.emulatorview;
+package emulatorview;
 
 final class TextStyle {
     // Effect bitmasks:

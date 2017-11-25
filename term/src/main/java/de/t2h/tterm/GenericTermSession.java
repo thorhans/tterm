@@ -25,9 +25,9 @@ import java.lang.reflect.Field;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
-import de.t2h.tterm.emulatorview.ColorScheme;
-import de.t2h.tterm.emulatorview.TermSession;
-import de.t2h.tterm.emulatorview.UpdateCallback;
+import emulatorview.ColorScheme;
+import emulatorview.TermSession;
+import emulatorview.UpdateCallback;
 
 import de.t2h.tterm.util.TermSettings;
 

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Collection;
 
-import de.t2h.tterm.emulatorview.TermSession;
-import de.t2h.tterm.emulatorview.UpdateCallback;
+import emulatorview.TermSession;
+import emulatorview.UpdateCallback;
 
 /**
  * An ArrayList of TermSessions which allows users to register callbacks in

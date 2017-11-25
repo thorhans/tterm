@@ -114,13 +114,5 @@ configurations {
 //T+} ------------------------------------------------------------
 
 dependencies {
-  compile project(':emulatorview')
-  //T!{ ------------------------------------------------------------
-  // Add builds `dev´ and `prod´, part 5.
-  //T! compile project(':libtermexec')
-  // devDebugCompile    project(path: ':libtermexec', configuration: 'devDebug')
-  // prodReleaseCompile project(path: ':libtermexec', configuration: 'prodRelease')
-  //T!} ------------------------------------------------------------
-
   compile 'com.android.support:support-annotations:21.0.0'
 }

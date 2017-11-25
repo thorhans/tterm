@@ -1,4 +1,4 @@
-package de.t2h.tterm.emulatorview.compat;
+package emulatorview.compat;
 
 //T-{ ------------------------------------------------------------
 //T- import android.annotation.SuppressLint;

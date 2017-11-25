@@ -31,9 +31,9 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import de.t2h.tterm.emulatorview.EmulatorView;
-import de.t2h.tterm.emulatorview.TermSession;
-import de.t2h.tterm.emulatorview.UpdateCallback;
+import emulatorview.EmulatorView;
+import emulatorview.TermSession;
+import emulatorview.UpdateCallback;
 
 //T-{ ------------------------------------------------------------
 //T- import de.t2h.tterm.compat.AndroidCompat;

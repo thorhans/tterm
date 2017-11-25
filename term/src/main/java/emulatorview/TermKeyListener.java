@@ -1,4 +1,4 @@
-package de.t2h.tterm.emulatorview;
+package emulatorview;
 
 //T-{ ------------------------------------------------------------
 //T- import de.t2h.tterm.emulatorview.compat.AndroidCompat;

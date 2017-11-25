@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package de.t2h.tterm.emulatorview;
+package emulatorview;
 
 import android.util.Log;
 

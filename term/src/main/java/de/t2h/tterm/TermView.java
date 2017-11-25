@@ -21,9 +21,9 @@ package de.t2h.tterm;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
-import de.t2h.tterm.emulatorview.ColorScheme;
-import de.t2h.tterm.emulatorview.EmulatorView;
-import de.t2h.tterm.emulatorview.TermSession;
+import emulatorview.ColorScheme;
+import emulatorview.EmulatorView;
+import emulatorview.TermSession;
 
 import de.t2h.tterm.util.TermSettings;
 

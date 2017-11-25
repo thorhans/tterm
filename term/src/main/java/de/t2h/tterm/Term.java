@@ -33,18 +33,18 @@ import de.t2h.tterm.compat.AndroidCompat;
 //T- import de.t2h.tterm.compat.MenuItemCompat;
 //T-} ------------------------------------------------------------
 
-import de.t2h.tterm.emulatorview.EmulatorView;
+import emulatorview.EmulatorView;
 //T+{ ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.KeyUpdater;
+import emulatorview.KeyUpdater;
 //T+} ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.TermSession;
+import emulatorview.TermSession;
 //T+{ ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.TextRenderer;
+import emulatorview.TextRenderer;
 //T+} ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.UpdateCallback;
+import emulatorview.UpdateCallback;
 //T!{ ------------------------------------------------------------
 //T! import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompat;
-import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
+import emulatorview.compat.ClipboardManagerCompatV11;
 //T! import de.t2h.tterm.emulatorview.compat.KeycodeConstants;
 //T!{ ------------------------------------------------------------
 import de.t2h.tterm.util.SessionList;
