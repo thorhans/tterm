@@ -64,14 +64,19 @@ android {
     //T+{ ------------------------------------------------------------
     // Add builds `dev´ and `prod´, part 6.
     publishNonDefault true
+
+    flavorDimensions "dev-or-prod"
+
     productFlavors {
         dev {
+            dimension "dev-or-prod"
             minSdkVersion 22 // Android 5.1
             ndk {
                 abiFilters "armeabi-v7a" // Only compile for Ten.
             }
         }
         prod {
+            dimension "dev-or-prod"
         }
     }
     //T+} ------------------------------------------------------------

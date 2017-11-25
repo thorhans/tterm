@@ -77,8 +77,12 @@ android {
 
   //T+{ ------------------------------------------------------------
   // Add builds `dev´ and `prod´, part 3.
+
+  flavorDimensions "dev-or-prod"
+
   productFlavors {
     dev {
+      dimension "dev-or-prod"
       minSdkVersion 22 // Android 5.1
       // This is necessary, and gives you separate settings for `dev´ and `prod´.
       // Without it, you can't install `prod´ without deinstalling `dev´ first,
@@ -93,6 +97,7 @@ android {
       resConfigs "en", "xhdpi"   // Only compile for Ten.
     }
     prod {
+      dimension "dev-or-prod"
       resValue "string", "application_terminal", "TTerm (beta)"
       resValue "string", "activity_shortcut_create", "TTerm shortcut"
     }
