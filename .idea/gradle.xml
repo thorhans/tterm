@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/emulatorview" />
-            <option value="$PROJECT_DIR$/libtermexec" />
             <option value="$PROJECT_DIR$/term" />
           </set>
         </option>

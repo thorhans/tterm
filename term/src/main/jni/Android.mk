@@ -1,25 +1,26 @@
 
-# This makefile supplies the rules for building a library of JNI code for
-# use by our example of how to bundle a shared library with an APK.
+HERE_PATH:= $(call my-dir)
 
-LOCAL_PATH:= $(call my-dir)
+# ============================================================
+
 include $(CLEAR_VARS)
+LOCAL_PATH:= $(HERE_PATH)/libtermexec
+LOCAL_MODULE:= libde-t2h-tterm-exec2
+LOCAL_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_SRC_FILES := \
+  process.cpp
+LOCAL_LDLIBS := -llog -lc
+include $(BUILD_SHARED_LIBRARY)
 
-# This is the target being built.
-#T- LOCAL_MODULE:= libjackpal-androidterm5
+# ============================================================
+
+include $(CLEAR_VARS)
+LOCAL_PATH:= $(HERE_PATH)/term
 LOCAL_MODULE:= libde-t2h-tterm5
-
-# All of the source files that we will compile.
-#T!{ ------------------------------------------------------------
-#T! LOCAL_SRC_FILES:= \
-#T!   common.cpp \
-#T!   termExec.cpp \
-#T!   fileCompat.cpp
-LOCAL_SRC_FILES:= \
+LOCAL_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_SRC_FILES := \
   common.cpp \
   termExec.cpp
-#T!} ------------------------------------------------------------
-
 LOCAL_LDLIBS := -ldl -llog
-
 include $(BUILD_SHARED_LIBRARY)
+

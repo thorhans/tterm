@@ -1,9 +1,8 @@
 
-TEA 1.0.70
+TTerm
 ************************************************************
 
-This is my *modified* copy of TEA (Terminal Emulator for Android)
-version 1.0.70 from
+I started with TEA (Terminal Emulator for Android) version 1.0.70 from
 
   https://github.com/jackpal/Android-Terminal-Emulator
 
@@ -13,7 +12,7 @@ version 1.0.70 from
 
 - I use Windows 8.1 with 64-bit.
 
-- I downloaded Android Studio on 2017-03-14:
+- I downloaded Android Studio 2.3.3 (162.3764568) on 2017-03-14:
 
   From
 
@@ -100,3 +99,21 @@ version 1.0.70 from
     
   with LineageOS 14.1 (equivalent to Android 7.1 Nougat).
   
+
+Update to Android Studio 3.0
+============================================================
+
+- Updated Android Studio to 3.0 (171.4443003, built 2017-11-09).
+
+- Updated Android Gradle Plugin to 3.0.1.
+
+- Updated Gradle 4.1.
+
+- Updated Android SDK Build Tools to 26.0.2.
+
+- I couldn't get the module `term´ to use the NDK part of module `libtermexec´.
+
+  Finally, I had merged `libtermexec´'s code code into `term´.
+
+- All other changes are in Git.
+
