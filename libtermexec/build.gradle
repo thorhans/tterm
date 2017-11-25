@@ -92,6 +92,14 @@ android.libraryVariants.all { variant ->
     variant.javaCompile.dependsOn packageAidl
 }
 
+//T+{ ------------------------------------------------------------
+// Add builds `dev´ and `prod´, part 7.
+configurations {
+  devDebug
+  prodRelease
+}
+//T+} ------------------------------------------------------------
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 

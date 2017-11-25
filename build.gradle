@@ -3,8 +3,8 @@ task wrapper (type:Wrapper) {
     //T!{ ------------------------------------------------------------
     //T! gradleVersion = '2.2.1'
     //T! distributionUrl = 'https://services.gradle.org/distributions/gradle-2.2.1-all.zip'
-    gradleVersion = '3.3'
-    distributionUrl = 'https://services.gradle.org/distributions/gradle-3.3-all.zip'
+    gradleVersion = '4.1'
+    distributionUrl = 'https://services.gradle.org/distributions/gradle-4.1-all.zip'
     //T!} ------------------------------------------------------------
 }
 
