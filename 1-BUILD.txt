@@ -111,6 +111,8 @@ Update to Android Studio 3.0
 
 - Updated Android SDK Build Tools to 26.0.2.
 
+- Updated LLDB to 3.0. 
+
 - I couldn't get the module `term´ to use the NDK part of module `libtermexec´.
 
   Finally, I had merged `libtermexec´'s code code into `term´.
