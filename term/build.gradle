@@ -15,20 +15,12 @@ android {
   }
   //T+} ------------------------------------------------------------
 
-  //T!{ ------------------------------------------------------------
-  //T! compileSdkVersion 25
-  //T!   buildToolsVersion "22.0.1"
   compileSdkVersion 25
-  // buildToolsVersion "25.0.3"
-  //T!} ------------------------------------------------------------
 
   defaultConfig {
-    //T!{ ------------------------------------------------------------
-    //T! applicationId "jackpal.androidterm"
-    //T! minSdkVersion 4
     applicationId "de.t2h.tterm"
-    minSdkVersion 19 // Android 4.4
-    //T!} ------------------------------------------------------------
+    minSdkVersion 19    // Android 4.4
+    targetSdkVersion 25 // Android 7.1
 
     //T-{ ------------------------------------------------------------
     //T- ndk {
