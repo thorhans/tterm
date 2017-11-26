@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 //T+{ ------------------------------------------------------------
 
@@ -45,18 +46,39 @@ public class HelpActivity extends Activity {
       settings.setJavaScriptEnabled(true);  // Enable JavaScript.
       settings.setBuiltInZoomControls(true);
       settings.setDisplayZoomControls(false);
-      
+
+      // Necessary since API 24 (7.0), otherwise you get a fatal exception when you click on a link. For
+      // example, when you click on the link to `changelog.xhtml´:
+      //   android.os.FileUriExposedException: file:///android_asset/changelog.xhtml exposed beyond app
+      //   through Intent.getData()
+      //
+      WebViewClient client = new WebViewClient() {
+          @Override
+          public boolean shouldOverrideUrlLoading(WebView view, String url) {
+              return false;
+          }
+      };
+      mWebView.setWebViewClient(client);
+
       setContentView(mWebView);
-      try {
-          InputStream fin = getAssets().open("1-index.xhtml");
-          byte[] buffer = new byte[fin.available()];
-          fin.read(buffer);
-          fin.close();
-          mWebView.loadDataWithBaseURL("file:///android_asset/", new String(buffer), 
-              "application/xhtml+xml", "UTF-8", null);
-      } catch (IOException e) {
-          e.printStackTrace();
-      }    
+
+      // LATER Is there some reason why this code is better than `loadUlr´?
+      //
+      //   try {
+      //       InputStream fin = getAssets().open("1-index.xhtml");
+      //       byte[] buffer = new byte[fin.available()];
+      //       fin.read(buffer);
+      //       fin.close();
+      //       mWebView.loadDataWithBaseURL(
+      //           /*baseUrl*/ "file:///android_asset/",
+      //           /*data*/    new String(buffer),
+      //           "application/xhtml+xml", "UTF-8", null);
+      //   } catch (IOException e) {
+      //       e.printStackTrace();
+      //   }
+      //
+      mWebView.loadUrl("file:///android_asset/1-index.xhtml");
+
   }
 
   @Override
