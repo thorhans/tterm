@@ -1,3 +1,7 @@
+// ************************************************************
+// LATER Does no longer work since I merged module `emulatorview´ with module `term´.
+// ************************************************************
+
 apply plugin: 'com.android.application'
 
 android {
@@ -5,7 +9,6 @@ android {
     //T! compileSdkVersion 25
     //T! buildToolsVersion "22.0.1"
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
     //T!} ------------------------------------------------------------
 
     defaultConfig {
@@ -31,5 +34,6 @@ android {
 }
 
 dependencies {
+    // LATER Does no longer work since I merged module `emulatorview´ with module `term´.
     compile project(':emulatorview')
 }

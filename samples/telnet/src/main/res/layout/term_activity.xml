@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <t2h.tterm.emulatorview.EmulatorView
+    <t2h.tterm.de.t2h.tterm.emulatorview.EmulatorView
         android:id="@+id/emulatorView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
