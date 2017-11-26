@@ -1,4 +1,4 @@
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 class GrowableIntArray {
     GrowableIntArray(int initalCapacity) {

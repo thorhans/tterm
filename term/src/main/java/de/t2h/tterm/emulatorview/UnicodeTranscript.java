@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 import android.util.Log;
 
 //T!{ ------------------------------------------------------------
-//T! import de.t2h.tterm.emulatorview.compat.AndroidCharacterCompat;
+//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.AndroidCharacterCompat;
 import android.text.AndroidCharacter;
-//T! import de.t2h.tterm.emulatorview.compat.AndroidCompat;
+//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.AndroidCompat;
 //T!} ------------------------------------------------------------
 
 /**

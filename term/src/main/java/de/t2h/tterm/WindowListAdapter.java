@@ -24,8 +24,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import emulatorview.TermSession;
-import emulatorview.UpdateCallback;
+import de.t2h.tterm.emulatorview.TermSession;
+import de.t2h.tterm.emulatorview.UpdateCallback;
 
 import de.t2h.tterm.util.SessionList;
 

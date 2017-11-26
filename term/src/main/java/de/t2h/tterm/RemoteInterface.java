@@ -31,7 +31,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import emulatorview.TermSession;
+import de.t2h.tterm.emulatorview.TermSession;
 
 import de.t2h.tterm.util.SessionList;
 import de.t2h.tterm.util.TermSettings;

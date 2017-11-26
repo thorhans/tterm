@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 import java.io.InputStream;
 import java.io.IOException;

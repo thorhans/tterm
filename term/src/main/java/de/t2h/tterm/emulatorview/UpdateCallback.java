@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 /**
  * Generic callback to be invoked to notify of updates.

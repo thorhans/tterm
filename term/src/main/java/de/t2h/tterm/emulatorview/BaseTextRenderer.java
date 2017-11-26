@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

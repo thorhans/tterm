@@ -1,8 +1,8 @@
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 //T-{ ------------------------------------------------------------
-//T- import de.t2h.tterm.emulatorview.compat.AndroidCompat;
-//T- import de.t2h.tterm.emulatorview.compat.KeyCharacterMapCompat;
+//T- import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.AndroidCompat;
+//T- import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.KeyCharacterMapCompat;
 //T-} ------------------------------------------------------------
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
 //T!{ ------------------------------------------------------------
-//T! import static de.t2h.tterm.emulatorview.compat.KeycodeConstants.*;
+//T! import static de.t2h.tterm.de.t2h.tterm.emulatorview.compat.KeycodeConstants.*;
 import static android.view.KeyEvent.*;
 //T!} ------------------------------------------------------------
 

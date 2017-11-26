@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 //T!{ ------------------------------------------------------------
-//T! import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompat;
-import emulatorview.compat.ClipboardManagerCompatV11;
-//T! import de.t2h.tterm.emulatorview.compat.KeycodeConstants;
-//T! import de.t2h.tterm.emulatorview.compat.Patterns;
+//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.ClipboardManagerCompat;
+import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
+//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.KeycodeConstants;
+//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.Patterns;
 import android.util.Patterns;
 //T!} ------------------------------------------------------------
 

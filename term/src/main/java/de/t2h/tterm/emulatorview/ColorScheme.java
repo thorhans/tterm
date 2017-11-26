@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 /**
  * A class describing a color scheme for an {@link EmulatorView}.

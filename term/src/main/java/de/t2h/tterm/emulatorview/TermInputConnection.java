@@ -1,4 +1,4 @@
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 import android.os.Bundle;
 import android.text.TextUtils;

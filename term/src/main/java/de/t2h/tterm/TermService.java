@@ -31,7 +31,7 @@ import android.util.Log;
 import android.app.Notification;
 import android.app.PendingIntent;
 
-import emulatorview.TermSession;
+import de.t2h.tterm.emulatorview.TermSession;
 
 //T-{ ------------------------------------------------------------
 //T- import de.t2h.tterm.compat.ServiceForegroundCompat;

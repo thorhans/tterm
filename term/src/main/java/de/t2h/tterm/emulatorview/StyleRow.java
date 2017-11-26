@@ -1,4 +1,4 @@
-package emulatorview;
+package de.t2h.tterm.emulatorview;
 
 /**
  * Utility class for dealing with text style lines.

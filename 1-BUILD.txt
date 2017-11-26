@@ -63,7 +63,7 @@ I started with TEA (Terminal Emulator for Android) version 1.0.70 from
       .gitattributes
       .gitignore
       .idea/vcs.xml
-      emulatorview/.gitignore
+      de.t2h.tterm.emulatorview/.gitignore
       libtermexec/.gitignore
       samples/intents/.gitignore
       samples/pathbroadcasts/.gitignore
