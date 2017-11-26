@@ -31,6 +31,19 @@
 <p id="thh-toc-toc"></p>
 
 
+<h1>Settings</h1>
+<!-- ************************************************************ -->
+
+<ul>
+  <li id="setting-utf8_by_default">
+    <b><span class="setting">Default to UTF-8</span></b>
+  
+    <p>If you use non-ASCII characters like "á ä æ ı š б א", you'll
+    want to check the checkbox <em>Default to UTF-8</em>.</p>
+  </li>
+</ul>
+
+
 <h1>Environment variables</h1>
 <!-- ************************************************************ -->
 
@@ -47,7 +60,7 @@ To get a list of all shell variables and environment variables, use
 
 <ul>
   <li>
-    <code>$ENV</code>
+    <b><code>$ENV</code></b>
   
     <p>Shell initialzation file, see 
       <a href="run/sh.xhtml">
@@ -57,7 +70,7 @@ To get a list of all shell variables and environment variables, use
   </li>
   
   <li id="HOME">
-    <code>$HOME</code>
+    <b><code>$HOME</code></b>
   
     <p>Your home directory. By default, TTerm sets it to</p>
     
@@ -65,34 +78,37 @@ To get a list of all shell variables and environment variables, use
       /data/user/0/de.t2h.tterm/app_HOME
     </p>
     
-    <p>You can configure it in the setting <span class="setting">HOME
-    folder</span>. Or you can set it in one of your shell's
-    initialization files. For an example, see
-      <a href="run/sh.xhtml">Android's shell</a>.</p>
+    <p>You can configure it in the setting 
+      <span class="setting">HOME folder</span>. 
+    Or you can set it in one of your shell's initialization files. For
+    an example, see
+      <a href="run/sh.xhtml">
+        Android's shell</a>.</p>
   </li>
 
   <li>
-    <code>$LD_LIBRARY_PATH</code>
+    <b><code>$LD_LIBRARY_PATH</code></b>
     
     <p>Paths to search for libraries. For example, Bash needs the
     library <code>libncurses.so</code>.</p>
   </li>
 
   <li>
-    <code>$PATH</code>
+    <b><code>$PATH</code></b>
     
     <p>Paths to search for commands.</p>
   </li>
 
   <li id="TERM">
-    <code>$TERM</code>
+    <b><code>$TERM</code></b>
     
-    <p>Terminal type. Configure it in the setting <span
-    class="setting">Terminal type</span>, or in one of your shell's
-    initialization files.</p>
+    <p>Terminal type. Configure it in the setting 
+      <span class="setting">Terminal type</span>, 
+    or in one of your shell's initialization files.</p>
     
-    <p>The setting <span class="setting">Terminal type</span> offers
-    the values:</p>
+    <p>The setting 
+      <span class="setting">Terminal type</span> 
+    offers the values:</p>
     
     <ul class="narrow">
       <li><code>linux</code></li>
@@ -109,7 +125,7 @@ To get a list of all shell variables and environment variables, use
   </li>    
 
   <li>
-    <code>$TERMINFO</code>
+    <b><code>$TERMINFO</code></b>
     
     <p>Path to the Terminfo database.</p>
   </li>
@@ -117,6 +133,85 @@ To get a list of all shell variables and environment variables, use
 
 <p>I'll write more on <code>$TERM</code> and <code>$TERMINFO</code>
 when time allows.</p>
+
+
+<h1 id="physical-keyboard">Physical keyboard</h1>
+<!-- ************************************************************ -->
+
+<p>If you have problems with a physical keyboard, try the following
+steps:</p>
+
+<ol>
+  <li>The most important step to get non-ASCII characters like "á ä æ
+  ı š б א" is in TTerm's Settings, where you have to check the
+  checkbox
+    <a href="#setting-utf8_by_default">
+      <span class="setting">Default to UTF-8</span></a>.
+  </li>
+
+  <li>
+    <p>You might have to configure your shell for UTF-8 input. 
+      <a href="run/bash.xhtml">
+        Bash</a>
+    is particularly picky.</p>
+      
+    <p>To test without the shell getting in the way, start a program
+    like <code>cat</code> or <code>vi</code>.</p>
+  </li>
+  
+  <li>
+    <p>You have to set the correct language-dependent <b>keyboard
+    layout</b> for your physical keyboard.</p>
+    
+    <p>In some versions of Android, the virtual keyboard interacts
+    with the physical keyboard, so you also have to set the correct
+    <b>virtual keyboard</b>.</p>
+    
+    <p>The exact steps depend on your device and Android version. For
+    example, this sets Google's virtual keyboard "Gboard" with a
+    German layout on a standard Android 7 device. Device- and
+    version-dependant steps are marked with (*).</p>
+
+    <ol>
+      <li>
+        <p>Start the Android app "Settings".</p>
+      
+        <p>You should see "Settings" at the top left. (*)</p>
+      </li>
+
+      <li>
+        <p>Search for "Languages &amp; input" or something similar, and
+        press it. (*)</p>
+      
+        <p>You should see "Languages &amp; input" or something similar
+        at the top left. (*)</p>
+      </li>
+
+      <li>
+        <p>Press "Physical keyboard". (*)</p>
+        
+        <p>You should see "Physical keybard" or something similar at
+        the top left. (*)</p>
+      </li>
+
+      <li>
+        <p>If you see a list of virtual keyboards, select the virtual
+        keyboard "Gboard". (*)</p>
+
+        <p>You should see "Keyboard layouts" or something similar at
+        the top left. (*)</p>
+      </li>
+        
+      <li>
+        <p>Select the correct layout, e.g. "German, Android
+        keyboard".</p>
+      </li>
+
+      <li>Return to TTerm.</li>
+    </ol>
+  </li>
+</ol>
+
 
 </body>
 </html>
