@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--T!{ ============================================================
- ! Changed:
- !T-
- !T- <manifest xmlns:android="http://schemas.android.com/apk/res/android"
- !T-    package="jackpal.androidterm"
- !T-      android:versionName="1.0.70"
- !T-      android:versionCode="71"
- !T-      android:installLocation="auto">
--->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="de.t2h.tterm"
         android:versionName="0.1.9 (beta) (ongoing)"
         android:versionCode="10"
         android:installLocation="auto">
-<!--T!} ============================================================ -->
 
-    <!--T+{ ============================================================ -->
     <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
-    <!--T+} ============================================================ -->
 
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,27 +13,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!--T!{ ============================================================
-     !T- <permission android:name="de.t2h.tterm.permission.RUN_SCRIPT"
-     !T-             android:label="@string/perm_run_script"
-     !T-             android:description="@string/permdesc_run_script"
-     !T-             android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
-     !T-             android:protectionLevel="dangerous" />
-     !T- <permission android:name="de.t2h.tterm.permission.APPEND_TO_PATH"
-     !T-             android:label="@string/perm_append_to_path"
-     !T-             android:description="@string/permdesc_append_to_path"
-     !T-             android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
-     !T-             android:protectionLevel="dangerous" />
-     !T- <permission android:name="de.t2h.tterm.permission.PREPEND_TO_PATH"
-     !T-             android:label="@string/perm_prepend_to_path"
-     !T-             android:description="@string/permdesc_prepend_to_path"
-     !T-             android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
-     !T-             android:protectionLevel="dangerous" />
-    -->
+    <!-- Keep TEA's permission name. -->
     <uses-permission android:name="jackpal.androidterm.permission.RUN_SCRIPT" />
+    <!-- Keep TEA's permission name. -->
     <uses-permission android:name="jackpal.androidterm.permission.APPEND_TO_PATH" />
+    <!-- Keep TEA's permission name. -->
     <uses-permission android:name="jackpal.androidterm.permission.PREPEND_TO_PATH" />
-    <!--T!} ============================================================ -->
 
     <!--T!{ ============================================================
      ! `@string/application_terminal´ is now set in `/term/build.gradle´.
@@ -70,19 +43,13 @@
                 android:targetActivity="Term"
                 android:exported="false">
             <intent-filter>
-                <!--T!{ ============================================================
-                 ! Changed `name´.
-                -->
+                <!-- Changed action name. -->
                 <action android:name="de.t2h.tterm.private.OPEN_NEW_WINDOW" />
-                <!--T!} ============================================================ -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <!--T!{ ============================================================
-                 ! Changed `name´.
-                -->
+                <!-- Changed action name. -->
                 <action android:name="de.t2h.tterm.private.SWITCH_WINDOW" />
-                <!--T!} ============================================================ -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity-alias>
@@ -90,9 +57,7 @@
         <activity android:name="RemoteInterface"
                 android:excludeFromRecents="true">
             <intent-filter>
-                <!--T+{ ============================================================
-                 ! Kept `name´.
-                 !T+} ============================================================ -->
+                <!-- Kept TEA's action name. -->
                 <action android:name="jackpal.androidterm.OPEN_NEW_WINDOW" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -110,16 +75,12 @@
             </intent-filter>
         </activity-alias>
 
-        <!--T+{ ============================================================
-         ! Kept `android:permision´.
-         !T+} ============================================================ -->
+        <!-- Kept TEA's permission. -->
         <activity android:name="RunScript"
                 android:excludeFromRecents="true"
                 android:permission="jackpal.androidterm.permission.RUN_SCRIPT">
             <intent-filter>
-                <!--T+{ ============================================================
-                 ! Kept `name´.
-                 !T+} ============================================================ -->
+                <!-- Kept TEA's action name. -->
                 <action android:name="jackpal.androidterm.RUN_SCRIPT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -128,11 +89,8 @@
         <activity android:name="RunShortcut"
                 android:excludeFromRecents="true">
             <intent-filter>
-                <!--T!{ ============================================================
-                 ! Changed `name´.
-                -->
+                <!-- Changed action name. -->
                 <action android:name="de.t2h.tterm.RUN_SHORTCUT" />
-                <!--T!} ============================================================ -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -145,11 +103,8 @@
 
         <service android:name="TermService" >
             <intent-filter>
-                <!--T!{ ============================================================
-                 ! Changed `name´.
-                -->
+                <!-- Changed action name. -->
                 <action android:name="de.t2h.tterm.action.START_TERM.v1"/>
-                <!--T!} ============================================================ -->
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
