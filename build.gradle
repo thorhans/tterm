@@ -1,5 +1,9 @@
-// Top-level build file where you can add configuration options common
-// to all sub-projects/modules.
+/// `/build.gradle´ - top-level build file
+///
+/// See `/1-BUILD.txt´.
+/// 
+/// Sync'ed 2017-12-03 with
+///   (info "(android) `top.gradle´")
 
 task wrapper (type:Wrapper) {
   gradleVersion = '4.3.1'
@@ -9,8 +13,8 @@ task wrapper (type:Wrapper) {
 
 buildscript {
   repositories {
+    google()
     jcenter()
-    google()   // Needed for `com.android.tools.build:gradle:3.0.1´.
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.0.1'
@@ -19,6 +23,7 @@ buildscript {
 
 allprojects {
   repositories {
+    google()
     jcenter()
   }
 }

@@ -2,6 +2,22 @@
 TTerm
 ************************************************************
 
+# Build
+============================================================
+
+- Install dev / debug on device:
+
+    gradle installDevDebug
+
+- Assemble and sign prod / release:
+
+    gradle assembleProdRelease
+
+
+
+# TODO update
+============================================================
+
 I started with TEA (Terminal Emulator for Android) version 1.0.70 from
 
   https://github.com/jackpal/Android-Terminal-Emulator

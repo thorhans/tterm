@@ -1,19 +1,85 @@
+/// `/term/build.gradle´ - module build file
+/// 
+/// See `/1-BUILD.txt´.
+
 apply plugin: 'com.android.application'
+
+// ============================================================
+// Query for the certificate store password.
+// ============================================================
+// 
+// From
+//   https://www.timroes.de/2014/01/19
+//     /using-password-prompts-with-gradle-build-files/
+//
+// - TODO Refactor into separate file.
+//
+// - TODO This will also query for the password when startet from the
+//   IDE Android Studio's menu "Build" / "Generate signed APK", where
+//   you already have specified the password in the IDE.
+
+// Switch headless AWT off *before* including Groovy's `SwingBuilder´.
+System.setProperty("java.awt.headless", "false");
+import groovy.swing.SwingBuilder
+
+gradle.taskGraph.whenReady { taskGraph ->
+  if(taskGraph.hasTask(':term:assembleProdRelease')) {
+
+    def password = ''
+    new SwingBuilder().edt {
+      dialog(
+        modal:       true,          // Wait until you close the dialog.
+        title:       'Enter password',
+        alwaysOnTop: true, 
+        resizable:   false,
+        locationRelativeTo: null,   // Place dialog in center of the screen.
+        pack:        true, 
+        show:        true  
+      ) {
+        vbox {                      // Put everything below each other.
+          label(text: "Please enter key passphrase:")
+          input = passwordField()
+          button(
+            defaultButton: true, 
+            text: 'OK', 
+            actionPerformed: {
+              // Convert array `input.password´ to a string.
+              password = '' + input.password;
+              dispose();            // Close dialog.
+          })
+    } } }
+
+    if(password.size() <= 0) {
+      throw new InvalidUserDataException(
+        "You must enter a password to proceed.")
+    }
+
+    android.signingConfigs.release.storePassword = password
+    android.signingConfigs.release.keyPassword   = password
+  }
+}
+
+// ============================================================
 
 android {
   //T+{ ------------------------------------------------------------
   // Add builds `dev´ and `prod´, part 1.
   signingConfigs {
+
     release {
-      // Define these in the global Gradle config file, e.g.
+      // Define `ANDROID_STORE_FILE´ in the global Gradle config file,
+      // e.g.
       //   `c:\Users\«user»\.gradle\gradle.properties´.
-      storeFile     file(ANDROID_STORE_FILE)
-      storePassword ANDROID_STORE_PASSWORD
-      keyAlias      ANDROID_KEY_ALIAS_TTerm
-      keyPassword   ANDROID_KEY_PASSWORD_TTerm
+         storeFile     file(ANDROID_STORE_FILE)
+      // storePassword              // Set above.
+         keyAlias      'tterm'
+      // keyPassword                // Set above.
     }
   }
   //T+} ------------------------------------------------------------
+}
+
+android {
 
   compileSdkVersion 25
 
@@ -39,7 +105,8 @@ android {
   buildTypes {
     release {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 
+        'proguard-rules.txt'
       //T+{ ------------------------------------------------------------
       // Add builds `dev´ and `prod´, part 2.
       signingConfig signingConfigs.release
@@ -100,3 +167,4 @@ android {
 dependencies {
   compile 'com.android.support:support-annotations:21.0.0'
 }
+
