@@ -80,8 +80,9 @@ android {
 }
 
 android {
-
   compileSdkVersion 25
+
+  buildToolsVersion "27.0.1"  // currently newest
 
   defaultConfig {
     applicationId "de.t2h.tterm"
@@ -107,17 +108,17 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 
         'proguard-rules.txt'
+
       //T+{ ------------------------------------------------------------
       // Add builds `dev´ and `prod´, part 2.
       signingConfig signingConfigs.release
       //T+} ------------------------------------------------------------
     }
-    //T+{ ------------------------------------------------------------
-    // Diable Crashlytics in `debug´
+
+    // Diable Crashlytics in `debug´.
     debug {
       ext.enableCrashlytics = false
     }
-    //T+} ------------------------------------------------------------
   }
 
   //T+{ ------------------------------------------------------------
@@ -128,11 +129,9 @@ android {
   }
   //T+} ------------------------------------------------------------
 
-  //T+{ ------------------------------------------------------------
   dexOptions {
     preDexLibraries true
   }
-  //T+} ------------------------------------------------------------
 
   //T+{ ------------------------------------------------------------
   // Add builds `dev´ and `prod´, part 3.
@@ -143,11 +142,14 @@ android {
     dev {
       dimension "dev-or-prod"
       minSdkVersion 22 // Android 5.1
-      // This is necessary, and gives you separate settings for `dev´ and `prod´.
-      // Without it, you can't install `prod´ without deinstalling `dev´ first,
-      // which deletes all TTerm Shortcuts on your Home Screens.
+
+      // This is necessary, and gives you separate settings for `dev´
+      // and `prod´. Without it, you can't install `prod´ without
+      // deinstalling `dev´ first, which deletes all TTerm Shortcuts
+      // on your Home Screens.
       applicationIdSuffix ".dev"
       versionNameSuffix '-dev'
+
       resValue "string", "application_terminal", "TTerm debug"
       resValue "string", "activity_shortcut_create", "TTerm debug shortcut"
       ndk {

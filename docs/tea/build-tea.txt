@@ -73,7 +73,7 @@ Building TEA
 (-) TEA comes with the old "Gradle 2.2.1" and "Android Gradle Plugin
     1.0", as you can see in:
 
-      D:\java\proj-android-studio\tea-1.0.70\build.gradle
+      tea-1.0.70/build.gradle
       ============================================================
 
       task wrapper(type: Wrapper) {
@@ -90,7 +90,7 @@ Building TEA
     
 (a) Edit the project's `build.gradle´:
 
-      D:\java\proj-android-studio\tea-1.0.70\build.gradle
+      tea-1.0.70/build.gradle
       ============================================================
 
       task wrapper(type: Wrapper) {
@@ -144,13 +144,13 @@ Building TEA
 
     to
 
-      D:\java\proj-android-studio\tea-1.0.70\gradle.properties
-      D:\java\proj-android-studio\tea-1.0.70\libtermexec\gradle.properties
+      tea-1.0.70/gradle.properties
+      tea-1.0.70/libtermexec/gradle.properties
 
     but it didn't work.
 
     Ah, probably because I didn't also put it in
-    `...\term\gradle.properties´, which also has C++ code.
+    `.../term/gradle.properties´, which also has C++ code.
 
 (-) Since `useDeprecatedNdk´ didn't work, I tried to get `ndkBuild´ to
     work. Apparently `ndkBuild´ is older than `CMake´, but it can use
@@ -158,7 +158,7 @@ Building TEA
 
 (a) Add two `Android.mk´ files:
 
-      D:\java\proj-android-studio\tea-1.0.70\libtermexec\src\main\jni\Android.mk
+      tea-1.0.70/libtermexec/src/main/jni/Android.mk
       ============================================================
 
       LOCAL_PATH:= $(call my-dir)
@@ -176,7 +176,7 @@ Building TEA
       include $(BUILD_SHARED_LIBRARY)
 
 
-      D:\java\proj-android-studio\tea-1.0.70\term\src\main\jni\Android.mk
+      tea-1.0.70/term/src/main/jni/Android.mk
       ============================================================
 
       LOCAL_PATH:= $(call my-dir)
@@ -197,7 +197,7 @@ Building TEA
 
 (b) Change two `build.gradle´ files:
   
-       D:\java\proj-android-studio\tea-1.0.70\libtermexec\build.gradle
+        tea-1.0.70/libtermexec/build.gradle
         ============================================================
 
         // android {
@@ -216,7 +216,7 @@ Building TEA
                 }
             }
   
-        D:\java\proj-android-studio\tea-1.0.70\term\build.gradle
+        tea-1.0.70/term/build.gradle
         ============================================================
 
         // android {
@@ -252,4 +252,7 @@ Building TEA
     - Check "Clear log before launch"
 
     - Select button "OK"
+
+    The old versions were cached somewhere, I don't know how I finally
+    got Android Studio to accept that I had changed the versions.
 
