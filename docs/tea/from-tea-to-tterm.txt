@@ -1,0 +1,43 @@
+
+From TEA 1.0.70 to TTerm 0.1.8
+************************************************************
+
+- I started with TEA 1.0.70.
+
+  Since the first TTerm version that I published on GitHub was TTerm
+  0.1.8, the changes from TEA 1.0.70 to TTerm 0.1.8 are not documented
+  on GitHub.
+
+  If you want to understand what I changed up to version 0.1.8, this
+  section outlines what I did.
+
+
+- On 2017-03-14, I downloaded the source of TEA 1.0.70 from:
+
+    https://github.com/jackpal/Android-Terminal-Emulator
+
+  The changes that I needed to do to get it to compile with Android
+  Studio 2.3 and Android SDK 22 (Android 5.1) are documented in
+
+    ./docs/tea/build-tea.txt
+
+
+- Major changes before I published TTerm 0.1.8 on GitHub
+
+  - The changes described in
+  
+      ./docs/tea/build-tea.txt
+
+  - The changes described in the change log in the section "Code
+    changes":
+  
+      ./term/src/main/assets/changelog.xhtml
+
+    Look at it in a browser with:
+
+      file://.../term/src/main/assets/changelog.xhtml#code-changes
+
+
+- For all other changes, consult GitHub, which has the changes since
+  TTerm 0.1.8.
+
