@@ -1,13 +1,12 @@
 /// `/top.gradle´ - top-level build file
 /// 
-/// Sync'ed 2017-12-04 with
+/// Sync'ed 2017-12-19 with
 ///   (info "(android) `top.gradle´")
 
 task wrapper (type: Wrapper) {
   //
-  // When you update the Gradle version, also update it in
-  //
-  //   ./gradle/wrapper/gradle-wrapper.properties
+  // After updating `gradleVersion´ below, call `gradle wrapper´ or
+  // `./gradlew wrapper´ to update the wrapper.
   //
   gradleVersion = '4.4'
   distributionUrl =
@@ -30,3 +29,8 @@ allprojects {
     jcenter()
   }
 }
+
+task clean (type: Delete) {
+  delete rootProject.buildDir
+}
+
