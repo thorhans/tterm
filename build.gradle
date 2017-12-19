@@ -9,9 +9,9 @@ task wrapper (type: Wrapper) {
   //
   //   ./gradle/wrapper/gradle-wrapper.properties
   //
-  gradleVersion = '4.3.1'
+  gradleVersion = '4.4'
   distributionUrl =
-    'https://services.gradle.org/distributions/gradle-4.3.1-all.zip'
+    'https://services.gradle.org/distributions/gradle-4.4-all.zip'
 }
 
 buildscript {
