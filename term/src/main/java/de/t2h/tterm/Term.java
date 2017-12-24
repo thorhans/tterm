@@ -18,44 +18,7 @@
 
 package de.t2h.tterm;
 
-import android.graphics.Color;
-import android.text.TextUtils;
-
-//T!{ ------------------------------------------------------------
-//T! import de.t2h.tterm.compat.ActionBarCompat;
 import android.app.ActionBar;
-//T! import de.t2h.tterm.compat.ActivityCompat;
-//T!} ------------------------------------------------------------
-
-import de.t2h.tterm.compat.AndroidCompat;
-
-//T-{ ------------------------------------------------------------
-//T- import de.t2h.tterm.compat.MenuItemCompat;
-//T-} ------------------------------------------------------------
-
-import de.t2h.tterm.emulatorview.EmulatorView;
-//T+{ ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.KeyUpdater;
-//T+} ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.TermSession;
-//T+{ ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.TextRenderer;
-//T+} ------------------------------------------------------------
-import de.t2h.tterm.emulatorview.UpdateCallback;
-//T!{ ------------------------------------------------------------
-//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.ClipboardManagerCompat;
-import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
-//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.KeycodeConstants;
-//T!{ ------------------------------------------------------------
-import de.t2h.tterm.util.SessionList;
-import de.t2h.tterm.util.TermSettings;
-
-import java.io.IOException;
-import java.text.Collator;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -71,6 +34,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -78,6 +42,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -98,6 +63,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 
+import de.t2h.tterm.compat.AndroidCompat;
+
+import de.t2h.tterm.emulatorview.EmulatorView;
+import de.t2h.tterm.emulatorview.KeyUpdater;
+import de.t2h.tterm.emulatorview.TermSession;
+import de.t2h.tterm.emulatorview.TextRenderer;
+import de.t2h.tterm.emulatorview.UpdateCallback;
+import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
+import de.t2h.tterm.key.Key;
+import de.t2h.tterm.util.SessionList;
+import de.t2h.tterm.util.TermSettings;
+
+import java.io.IOException;
+import java.text.Collator;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
+
 /**
  * A terminal emulator activity.
  */
@@ -110,13 +94,23 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
     //T+{ ------------------------------------------------------------
     private final static int cExtraKeysCount = 10;
-    private Button[] mExtraKeys = new Button[cExtraKeysCount];
-    private int[] mExtraKeyCodes = new int[]{0,
-        KeyEvent.KEYCODE_TAB, KeyEvent.KEYCODE_ESCAPE,
+    private Button[] mExtraKeyButtons = new Button[cExtraKeysCount];
+    private int[] mExtraKeyCodes = new int[]{
+        0 /*Control*/, KeyEvent.KEYCODE_TAB, KeyEvent.KEYCODE_ESCAPE,
         KeyEvent.KEYCODE_SLASH, KeyEvent.KEYCODE_MINUS,
         KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN,
-        KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT
+        KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT,
+        0 /*Fn*/
     };
+
+    // TODO Not used yet.
+    private Key[] mExtraKeys = new Key[]{
+        Key.Control, Key.Tab, Key.Esc,
+        Key.Slash, Key.Minus,
+        Key.Up, Key.Down, Key.Left, Key.Right,
+        Key.Fn1
+    };
+
     private int mExtraKeySize;
     int mExtraKeyDefaultColor;
     private int mExtraKeysShown;
@@ -453,21 +447,21 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         //T+{ ------------------------------------------------------------
         mExtraKeysRow = (LinearLayout) findViewById(R.id.extra_keys);
-        mExtraKeys[0] = (Button) findViewById(R.id.extra_key_0);
-        mExtraKeys[1] = (Button) findViewById(R.id.extra_key_1);
-        mExtraKeys[2] = (Button) findViewById(R.id.extra_key_2);
-        mExtraKeys[3] = (Button) findViewById(R.id.extra_key_3);
-        mExtraKeys[4] = (Button) findViewById(R.id.extra_key_4);
-        mExtraKeys[5] = (Button) findViewById(R.id.extra_key_5);
-        mExtraKeys[6] = (Button) findViewById(R.id.extra_key_6);
-        mExtraKeys[7] = (Button) findViewById(R.id.extra_key_7);
-        mExtraKeys[8] = (Button) findViewById(R.id.extra_key_8);
-        mExtraKeys[9] = (Button) findViewById(R.id.extra_key_9);
+        mExtraKeyButtons[0] = (Button) findViewById(R.id.extra_key_0);
+        mExtraKeyButtons[1] = (Button) findViewById(R.id.extra_key_1);
+        mExtraKeyButtons[2] = (Button) findViewById(R.id.extra_key_2);
+        mExtraKeyButtons[3] = (Button) findViewById(R.id.extra_key_3);
+        mExtraKeyButtons[4] = (Button) findViewById(R.id.extra_key_4);
+        mExtraKeyButtons[5] = (Button) findViewById(R.id.extra_key_5);
+        mExtraKeyButtons[6] = (Button) findViewById(R.id.extra_key_6);
+        mExtraKeyButtons[7] = (Button) findViewById(R.id.extra_key_7);
+        mExtraKeyButtons[8] = (Button) findViewById(R.id.extra_key_8);
+        mExtraKeyButtons[9] = (Button) findViewById(R.id.extra_key_9);
 
-        mExtraKeyDefaultColor = mExtraKeys[0].getTextColors().getDefaultColor();
+        mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
 
         // Key 0: `Control´
-        mExtraKeys[0].setOnClickListener(new View.OnClickListener() {
+        mExtraKeyButtons[0].setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 doSendControlKey();
             }
@@ -476,7 +470,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         // Key 1-2: `Tab´, `Esc´
         for (int i = 1; i <= 2; ++i) {
             final int i2 = i;
-            mExtraKeys[i].setOnClickListener(new View.OnClickListener() {
+            mExtraKeyButtons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     EmulatorView emv = getCurrentEmulatorView();
                     if(emv != null) { emv.sendKey(mExtraKeyCodes[i2]); }
@@ -485,13 +479,13 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         }
 
         // Key 3-4: `/´, `-´
-        mExtraKeys[3].setOnClickListener(new View.OnClickListener() {
+        mExtraKeyButtons[3].setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EmulatorView emv = getCurrentEmulatorView();
                 if(emv != null) { emv.getTermSession().write("/"); }
             }
         });
-        mExtraKeys[4].setOnClickListener(new View.OnClickListener() {
+        mExtraKeyButtons[4].setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EmulatorView emv = getCurrentEmulatorView();
                 if(emv != null) { emv.getTermSession().write("-"); }
@@ -502,7 +496,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         // Cursor keys have auto-repeat, after 200 ms every 50 ms.
         for (int i = 5; i <= 8; ++i) {
             final int i2 = i;
-            mExtraKeys[i].setOnTouchListener(new View.OnTouchListener() {
+            mExtraKeyButtons[i].setOnTouchListener(new View.OnTouchListener() {
 
                 private Handler mHandler;
 
@@ -536,7 +530,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         }
 
         // Key 9: `Fn´
-        mExtraKeys[9].setOnClickListener(new View.OnClickListener() {
+        mExtraKeyButtons[9].setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 doSendFnKey();
             }
@@ -1264,8 +1258,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     // `TermKeyListener.mFnKeyg.etUIMode()´, so as a quick hack I pass in a listener. Refactor code so
     // `mControlKey´ et al are part of the MVC model.
     class TermKeyUpdater implements KeyUpdater {
-        public void updateControl(int state) { update(mExtraKeys[0], state); }
-        public void updateFn(int state)      { update(mExtraKeys[9], state); }
+        public void updateControl(int state) { update(mExtraKeyButtons[0], state); }
+        public void updateFn(int state)      { update(mExtraKeyButtons[9], state); }
         private void update(Button button, int state) {
             switch (state) {
                 case TextRenderer.MODE_ON:     button.setTextColor(Color.GREEN); break;
@@ -1497,7 +1491,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     void setExtraKeySize(int size) {
       mExtraKeySize = size;
 
-      mExtraKeys[0].setTextSize(size);
+      mExtraKeyButtons[0].setTextSize(size);
 
       // Due to a bug in Android we can't use android:layout_height="wrap_content" here, since the buttons
       // don't shrink when we reduce the text size. So calculate height and width by hand.
@@ -1506,15 +1500,15 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
       //
       // TODO ThH: Since I don't understand layout metrics fully yet, the formulas are just a guess.
       float density = getResources().getDisplayMetrics().density;
-      int height = (int) (3*mExtraKeys[0].getTextSize() + 10*density);
-      int width = (int) (3*mExtraKeys[0].getTextSize() + 15*density);
+      int height = (int) (3* mExtraKeyButtons[0].getTextSize() + 10*density);
+      int width = (int) (3* mExtraKeyButtons[0].getTextSize() + 15*density);
       LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(width, height);
 
-      mExtraKeys[0].setLayoutParams(layoutparams);
+      mExtraKeyButtons[0].setLayoutParams(layoutparams);
 
       for(int i = 1; i < cExtraKeysCount; ++i) {
-        mExtraKeys[i].setTextSize(size);
-        mExtraKeys[i].setLayoutParams(layoutparams);
+        mExtraKeyButtons[i].setTextSize(size);
+        mExtraKeyButtons[i].setLayoutParams(layoutparams);
       }
     }
     //T+} ------------------------------------------------------------
