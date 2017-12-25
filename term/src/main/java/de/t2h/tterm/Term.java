@@ -444,41 +444,34 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         for(int i = 0; i < 10; ++i) {
           PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
             false); // Pass `false´ so that `inflater´ returns the button, not the row.
+          button.setModel(mExtraKeys[i]);
+
           mExtraKeysRow.addView(button);
-          button.setText(mExtraKeys[i].getLabel());
           mExtraKeyButtons[i] = button;
         }
 
         mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
 
-        // TODO Move this stuff into `PKey´ somehow.
+        // TODO Several buttons can use the same callback if we use the `View v´ parameter.
 
         // Key 0: `Control´
-        mExtraKeyButtons[0].setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                doSendControlKey();
-            }
-        });
+        mExtraKeyButtons[0].setCallback((View v) -> doSendControlKey());
 
         // Key 1-2: `Tab´, `Esc´
         for(int i = 1; i <= 2; ++i) {
             final int i2 = i;
-            mExtraKeyButtons[i].setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    EmulatorView emv = getCurrentEmulatorView();
-                    if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
-                }
+            mExtraKeyButtons[i].setCallback((View v) -> {
+                EmulatorView emv = getCurrentEmulatorView();
+                if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
             });
         }
 
         // Key 3-4: `/´, `-´
         for(int i = 3; i <= 4; ++i) {
             final int i2 = i;
-            mExtraKeyButtons[i].setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    EmulatorView emv = getCurrentEmulatorView();
-                    if(emv != null) { emv.getTermSession().write(mExtraKeys[i2].getText()); }
-                }
+            mExtraKeyButtons[i].setCallback((View v) -> {
+                EmulatorView emv = getCurrentEmulatorView();
+                if(emv != null) { emv.getTermSession().write(mExtraKeys[i2].getText()); }
             });
         }
 
@@ -486,45 +479,14 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         // Cursor keys have auto-repeat, after 200 ms every 50 ms.
         for (int i = 5; i <= 8; ++i) {
             final int i2 = i;
-            mExtraKeyButtons[i].setOnTouchListener(new View.OnTouchListener() {
-
-                private Handler mHandler;
-
-                Runnable mAction = new Runnable() {
-                    @Override
-                    public void run() {
-                        EmulatorView emv = getCurrentEmulatorView();
-                        if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
-                        mHandler.postDelayed(this, 50);
-                    }
-                };
-
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            if (mHandler != null) return true;
-                            mHandler = new Handler();
-                            EmulatorView emv = getCurrentEmulatorView();
-                            if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
-                            mHandler.postDelayed(mAction, 200);
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            if (mHandler == null) return true;
-                            mHandler.removeCallbacks(mAction);
-                            mHandler = null;
-                            break;
-                    }
-                    return false;
-                }
+            mExtraKeyButtons[i].setCallback((View v) -> {
+                EmulatorView emv = getCurrentEmulatorView();
+                if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
             });
         }
 
         // Key 9: `Fn´
-        mExtraKeyButtons[9].setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                doSendFnKey();
-            }
-        });
+        mExtraKeyButtons[9].setCallback((View v) -> doSendFnKey());
 
         //T+} ------------------------------------------------------------
 
