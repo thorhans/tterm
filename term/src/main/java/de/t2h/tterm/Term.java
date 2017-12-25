@@ -71,7 +71,7 @@ import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.emulatorview.TextRenderer;
 import de.t2h.tterm.emulatorview.UpdateCallback;
 import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
-import de.t2h.tterm.key.Key;
+import de.t2h.tterm.key.PKey;
 import de.t2h.tterm.util.SessionList;
 import de.t2h.tterm.util.TermSettings;
 
@@ -104,11 +104,11 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     };
 
     // TODO Not used yet.
-    private Key[] mExtraKeys = new Key[]{
-        Key.Control, Key.Tab, Key.Esc,
-        Key.Slash, Key.Minus,
-        Key.Up, Key.Down, Key.Left, Key.Right,
-        Key.Fn1
+    private PKey[] mExtraKeys = new PKey[]{
+        PKey.Control, PKey.Tab, PKey.Esc,
+        PKey.Slash, PKey.Minus,
+        PKey.Up, PKey.Down, PKey.Left, PKey.Right,
+        PKey.Fn1
     };
 
     private int mExtraKeySize;
