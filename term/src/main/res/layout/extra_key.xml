@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- A programmable key in the row `extra_keys´. -->
+
+<!-- Due to a bug in Android we can't use `android:layout_height="wrap_content"´ here. `25dp´ is just a
+ !   placeholder, we calculate a height in `Term.setExtraKeySize´.
+ -->
+<de.t2h.tterm.key.PKeyButton
+  xmlns:android = "http://schemas.android.com/apk/res/android"
+  android:id="@+id/extra_key_0"
+  android:layout_height="25dp"
+  android:layout_width="25dp"
+  android:layout_marginLeft="0dp"
+  android:layout_marginRight="0dp"
+  android:minWidth="0dp"
+  android:paddingLeft="0dp"
+  android:paddingRight="0dp"
+  android:text=""
+/>

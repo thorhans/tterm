@@ -50,6 +50,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -64,7 +65,6 @@ import android.widget.Toast;
 import android.widget.LinearLayout;
 
 import de.t2h.tterm.compat.AndroidCompat;
-
 import de.t2h.tterm.emulatorview.EmulatorView;
 import de.t2h.tterm.emulatorview.KeyUpdater;
 import de.t2h.tterm.emulatorview.TermSession;
@@ -72,6 +72,7 @@ import de.t2h.tterm.emulatorview.TextRenderer;
 import de.t2h.tterm.emulatorview.UpdateCallback;
 import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
 import de.t2h.tterm.key.PKey;
+import de.t2h.tterm.key.PKeyButton;
 import de.t2h.tterm.util.SessionList;
 import de.t2h.tterm.util.TermSettings;
 
@@ -80,7 +81,6 @@ import java.text.Collator;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
 
 /**
  * A terminal emulator activity.
@@ -94,16 +94,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
     //T+{ ------------------------------------------------------------
     private final static int cExtraKeysCount = 10;
-    private Button[] mExtraKeyButtons = new Button[cExtraKeysCount];
-    private int[] mExtraKeyCodes = new int[]{
-        0 /*Control*/, KeyEvent.KEYCODE_TAB, KeyEvent.KEYCODE_ESCAPE,
-        KeyEvent.KEYCODE_SLASH, KeyEvent.KEYCODE_MINUS,
-        KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN,
-        KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT,
-        0 /*Fn*/
-    };
-
-    // TODO Not used yet.
+    private PKeyButton[] mExtraKeyButtons = new PKeyButton[cExtraKeysCount];
     private PKey[] mExtraKeys = new PKey[]{
         PKey.Control, PKey.Tab, PKey.Esc,
         PKey.Slash, PKey.Minus,
@@ -447,18 +438,20 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         //T+{ ------------------------------------------------------------
         mExtraKeysRow = (LinearLayout) findViewById(R.id.extra_keys);
-        mExtraKeyButtons[0] = (Button) findViewById(R.id.extra_key_0);
-        mExtraKeyButtons[1] = (Button) findViewById(R.id.extra_key_1);
-        mExtraKeyButtons[2] = (Button) findViewById(R.id.extra_key_2);
-        mExtraKeyButtons[3] = (Button) findViewById(R.id.extra_key_3);
-        mExtraKeyButtons[4] = (Button) findViewById(R.id.extra_key_4);
-        mExtraKeyButtons[5] = (Button) findViewById(R.id.extra_key_5);
-        mExtraKeyButtons[6] = (Button) findViewById(R.id.extra_key_6);
-        mExtraKeyButtons[7] = (Button) findViewById(R.id.extra_key_7);
-        mExtraKeyButtons[8] = (Button) findViewById(R.id.extra_key_8);
-        mExtraKeyButtons[9] = (Button) findViewById(R.id.extra_key_9);
+
+        LayoutInflater infl = getLayoutInflater();
+
+        for(int i = 0; i < 10; ++i) {
+          PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
+            false); // Pass `false´ so that `inflater´ returns the button, not the row.
+          mExtraKeysRow.addView(button);
+          button.setText(mExtraKeys[i].getLabel());
+          mExtraKeyButtons[i] = button;
+        }
 
         mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
+
+        // TODO Move this stuff into `PKey´ somehow.
 
         // Key 0: `Control´
         mExtraKeyButtons[0].setOnClickListener(new View.OnClickListener() {
@@ -468,29 +461,26 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         });
 
         // Key 1-2: `Tab´, `Esc´
-        for (int i = 1; i <= 2; ++i) {
+        for(int i = 1; i <= 2; ++i) {
             final int i2 = i;
             mExtraKeyButtons[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     EmulatorView emv = getCurrentEmulatorView();
-                    if(emv != null) { emv.sendKey(mExtraKeyCodes[i2]); }
+                    if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
                 }
             });
         }
 
         // Key 3-4: `/´, `-´
-        mExtraKeyButtons[3].setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                EmulatorView emv = getCurrentEmulatorView();
-                if(emv != null) { emv.getTermSession().write("/"); }
-            }
-        });
-        mExtraKeyButtons[4].setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                EmulatorView emv = getCurrentEmulatorView();
-                if(emv != null) { emv.getTermSession().write("-"); }
-            }
-        });
+        for(int i = 3; i <= 4; ++i) {
+            final int i2 = i;
+            mExtraKeyButtons[i].setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    EmulatorView emv = getCurrentEmulatorView();
+                    if(emv != null) { emv.getTermSession().write(mExtraKeys[i2].getText()); }
+                }
+            });
+        }
 
         // Key 5-8: Cursor keys.
         // Cursor keys have auto-repeat, after 200 ms every 50 ms.
@@ -504,7 +494,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                     @Override
                     public void run() {
                         EmulatorView emv = getCurrentEmulatorView();
-                        if(emv != null) { emv.sendKey(mExtraKeyCodes[i2]); }
+                        if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
                         mHandler.postDelayed(this, 50);
                     }
                 };
@@ -515,7 +505,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                             if (mHandler != null) return true;
                             mHandler = new Handler();
                             EmulatorView emv = getCurrentEmulatorView();
-                            if(emv != null) { emv.sendKey(mExtraKeyCodes[i2]); }
+                            if(emv != null) { emv.sendKey(mExtraKeys[i2].getKeyCode()); }
                             mHandler.postDelayed(mAction, 200);
                             break;
                         case MotionEvent.ACTION_UP:

@@ -2,7 +2,7 @@ package de.t2h.tterm.key;
 
 import android.view.KeyEvent;
 
-/**
+/** A programmable key's model.
  */
 public class PKey {
 
@@ -10,28 +10,43 @@ public class PKey {
 
   Kind mKind;
   String mName;
-  String mLabel;
+  String mLabel;    public String getLabel () { return mLabel; }
   boolean mRepeat;
 
   /** Used for `Kind send´. */
   public int mKeyCode;
+  public int getKeyCode () {
+    if(mKind != Kind.send) throw new RuntimeException("PKey tried to get unset keycode.");
+    return mKeyCode;
+  }
 
   /** Used for `Kind write´. */
   public String mText;
+  public String getText () {
+    if(mKind != Kind.write) throw new RuntimeException("PKey tried to get unset Text.");
+    return mText;
+  }
 
-  public PKey (String name) { mName = name; }
+  // ------------------------------------------------------------
+
+  public PKey (String name) { mName = name; mLabel = name; }
 
   static PKey send (String name, int keyCode) { 
     PKey key = new PKey(name); key.mKind = Kind.send; key.mKeyCode = keyCode; 
-    return key; }
+    return key;
+  }
 
   static PKey write (String name) {
     PKey key = new PKey(name); key.mKind = Kind.write; key.mText = name;       
-    return key; }
+    return key;
+  }
 
   static PKey special (String name) { 
     PKey key = new PKey(name); key.mKind = Kind.special; 
-    return key; }
+    return key;
+  }
+
+  // ------------------------------------------------------------
 
   PKey repeat ()             { mRepeat = true; return this; }
   PKey label  (String label) { mLabel = label; return this; }

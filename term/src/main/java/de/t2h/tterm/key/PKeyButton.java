@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
 
-/**
+/** A programmable key's view.
  */
 public class PKeyButton extends Button {
   public PKeyButton(Context context) { super(context); }
