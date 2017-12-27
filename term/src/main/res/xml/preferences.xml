@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright (C) 2008 The Android Open Source Project
+ *
+ * With modifications (C) 2014-2018 Thorbjørn Hansen.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -32,26 +50,6 @@
                 android:entries="@array/entries_orientation_preference"
                 android:entryValues="@array/entryvalues_orientation_preference"
                 android:dialogTitle="@string/dialog_title_orientation_preference" />
-
-<!--
-        <ListPreference
-                android:key="cursorstyle"
-                android:defaultValue="@string/pref_cursorstyle_default"
-                android:title="@string/title_cursorstyle_preference"
-                android:summary="@string/summary_cursorstyle_preference"
-                android:entries="@array/entries_cursorstyle_preference"
-                android:entryValues="@array/entryvalues_cursorstyle_preference"
-                android:dialogTitle="@string/dialog_title_cursorstyle_preference" />
-
-        <ListPreference
-                android:key="cursorblink"
-                android:defaultValue="@string/pref_cursorblink_default"
-                android:title="@string/title_cursorblink_preference"
-                android:summary="@string/summary_cursorblink_preference"
-                android:entries="@array/entries_cursorblink_preference"
-                android:entryValues="@array/entryvalues_cursorblink_preference"
-                android:dialogTitle="@string/dialog_title_cursorblink_preference" />
--->
 
     </PreferenceCategory>
 
