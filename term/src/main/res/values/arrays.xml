@@ -18,6 +18,11 @@
 -->
 
 <resources>
+    <!-- ==========================================================
+     ! Section "Screen" 
+     ! ============================================================
+    -->
+
     <string-array name="entries_statusbar_preference">
         <item>Show status bar</item>
         <item>Hide status bar</item>
@@ -35,16 +40,16 @@
         <item>Portrait</item>
     </string-array>
 
-    <!--T+{ ============================================================
+    <!-- ==========================================================
+     ! Section "Text" 
+     ! ============================================================ 
+    -->
+
+    <!--
      ! When changing `entries_fontsize_preference´ in `arrays.xml´,
      ! also change `entryvalues_fontsize_preference´ in `arraysNoLocalize.xml´.
-     !T+} ============================================================ -->
+    -->
     <string-array name="entries_fontsize_preference">
-        <!--T-{ ============================================================
-        ! Remove font 4×8.
-        !
-        !T- <item>4 x 8 pixels</item>
-        !T-} ============================================================ -->
         <item>6 pt</item>
         <item>7 pt</item>
         <item>8 pt</item>
@@ -67,7 +72,6 @@
         <item>288 pt</item>
     </string-array>
 
-    <!--T+{ ============================================================ -->
     <string-array name="entries_extrakeysize_preference">
         <item>6 pt</item>
         <item>7 pt</item>
@@ -83,15 +87,12 @@
         <item>32 pt</item>
         <item>36 pt</item>
     </string-array>
-    <!--T+} ============================================================ -->
 
-    <!--T+[ ============================================================ -->
     <string-array name="entries_extrakeysshown_preference">
         <item>never</item>
         <item>always</item>
         <item>with soft keyboard</item>
     </string-array>
-    <!--T+} ============================================================ -->
 
     <string-array name="entries_color_preference">
         <item>Black text on white</item>
@@ -105,6 +106,11 @@
         <item>Solarized Dark</item>
         <item>Linux Console</item>
     </string-array>
+
+    <!-- ==========================================================
+     ! Section "Keyboard" 
+     ! ============================================================ 
+    -->
 
     <string-array name="entries_backaction_preference">
         <item>Closes all terminal windows</item>
@@ -125,55 +131,8 @@
         <item>None</item>
     </string-array>
 
-    <!--T-{ ============================================================
-     ! Identical to `entries_controlkey_preference´.
-     !
-     !T- <string-array name="entries_fnkey_preference">
-     !T-     <item>Jog ball</item>
-     !T-     <item>\@ key</item>
-     !T-     <item>Left Alt key</item>
-     !T-     <item>Right Alt key</item>
-     !T-     <item>Vol Up key</item>
-     !T-     <item>Vol Down key</item>
-     !T-     <item>Camera key</item>
-     !T-     <item>None</item>
-     !T- </string-array>
-     !T-} ============================================================ -->
-
     <string-array name="entries_ime_preference">
         <item>Character-based</item>
         <item>Word-based</item>
     </string-array>
-
-    <!-- These are the 'short' names for the control keys. They are used in the special keys dialog. -->
-    <!--T-{ ============================================================
-     ! Use the long names.
-     !
-     !T- <string-array name="control_keys_short_names">
-     !T-     <item>Ball</item>
-     !T-     <item>\@</item>
-     !T-     <item>Left-Alt</item>
-     !T-     <item>Right-Alt</item>
-     !T-     <item>Vol-Up</item>
-     !T-     <item>Vol-Dn</item>
-     !T-     <item>Camera</item>
-     !T-     <item>None</item>
-     !T- </string-array>
-     !T-} ============================================================ -->
-
-    <!-- These are the 'short' names for the Fn keys. They are used in the special keys dialog. -->
-    <!--T-{ ============================================================
-     ! Use the long names.
-     !
-     !T- <string-array name="fn_keys_short_names">
-     !T-     <item>Ball</item>
-     !T-     <item>\@</item>
-     !T-     <item>Left-Alt</item>
-     !T-     <item>Right-Alt</item>
-     !T-     <item>Vol-Up</item>
-     !T-     <item>Vol-Dn</item>
-     !T-     <item>Camera</item>
-     !T-     <item>None</item>
-     !T- </string-array>
-     !T-} ============================================================ -->
 </resources>
