@@ -34,21 +34,21 @@ public class TermSettings {
 
     // Section "Screen"
 
-    private int mStatusBar;             public boolean showStatusBar ()     { return (mStatusBar != 0); }
-    private int mActionBarMode;         public int actionBarMode ()         { return mActionBarMode; }
-    private int mOrientation;           public int getScreenOrientation ()  { return mOrientation; }
-
-    // Section "Text"
-
-    private int mFontSize;              public int getFontSize ()           { return mFontSize; }
-    private int mExtraKeySize;          public int getExtraKeySize ()       { return mExtraKeySize; }
-    private int mExtraKeysShown;        public int getExtraKeysShown ()     { return mExtraKeysShown; }
-    private int mColorId;               public int[] getColorScheme ()      { return COLOR_SCHEMES[mColorId]; }
-    private boolean mUTF8ByDefault;     public boolean defaultToUTF8Mode () { return mUTF8ByDefault; }
-
-    // Section "Keyboard"
-
-    private int mBackKeyAction;         public int getBackKeyAction ()      { return mBackKeyAction; }
+    private int mStatusBar;             public boolean showStatusBar ()      { return (mStatusBar != 0); }
+    private int mActionBarMode;         public int actionBarMode ()          { return mActionBarMode; }
+    private int mOrientation;           public int getScreenOrientation ()   { return mOrientation; }
+                                                                              
+    // Section "Text"                                                         
+                                                                              
+    private int mFontSize;              public int getFontSize ()            { return mFontSize; }
+    private int mExtraKeySize;          public int getExtraKeySize ()        { return mExtraKeySize; }
+    private int mExtraKeysShown;        public int getExtraKeysShown ()      { return mExtraKeysShown; }
+    private int mColorId;               public int[] getColorScheme ()       { return COLOR_SCHEMES[mColorId]; }
+    private boolean mUTF8ByDefault;     public boolean defaultToUTF8Mode ()  { return mUTF8ByDefault; }
+                                                                              
+    // Section "Keyboard"                                                     
+                                                                              
+    private int mBackKeyAction;         public int getBackKeyAction ()       { return mBackKeyAction; }
                                         public int getBackKeyCharacter () {
                                           switch (mBackKeyAction) {
                                             case BACK_KEY_SENDS_ESC: return 27;
@@ -56,12 +56,12 @@ public class TermSettings {
                                             default:                 return 0;
                                           }
                                         }
-    private int mControlKeyId;          public int getControlKeyId ()       { return mControlKeyId; }
-                                        public int getControlKeyCode()      { return CONTROL_KEY_SCHEMES[mControlKeyId]; }
-    private int mFnKeyId;               public int getFnKeyId ()            { return mFnKeyId; }
-                                        public int getFnKeyCode ()          { return FN_KEY_SCHEMES[mFnKeyId]; }
-    private int mUseCookedIME;          public boolean useCookedIME ()      { return (mUseCookedIME != 0); }
-    private boolean mAltSendsEsc;       public boolean getAltSendsEscFlag() { return mAltSendsEsc; }
+    private int mControlKeyId;          public int getControlKeyId ()        { return mControlKeyId; }
+                                        public int getControlKeyCode ()      { return CONTROL_KEY_SCHEMES[mControlKeyId]; }
+    private int mFnKeyId;               public int getFnKeyId ()             { return mFnKeyId; }
+                                        public int getFnKeyCode ()           { return FN_KEY_SCHEMES[mFnKeyId]; }
+    private int mUseCookedIME;          public boolean useCookedIME ()       { return (mUseCookedIME != 0); }
+    private boolean mAltSendsEsc;       public boolean getAltSendsEscFlag () { return mAltSendsEsc; }
     private boolean
         mUseKeyboardShortcuts;          public boolean getUseKeyboardShortcutsFlag () { return mUseKeyboardShortcuts; }
 
