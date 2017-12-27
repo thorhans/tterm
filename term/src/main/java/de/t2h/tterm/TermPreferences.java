@@ -16,15 +16,12 @@
 
 package de.t2h.tterm;
 
-//T!{ ------------------------------------------------------------
-//T! import de.t2h.tterm.compat.ActionBarCompat;
 import android.app.ActionBar;
-//T!} ------------------------------------------------------------
-
-import de.t2h.tterm.compat.AndroidCompat;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.MenuItem;
+
+import de.t2h.tterm.compat.AndroidCompat;
 
 public class TermPreferences extends PreferenceActivity {
     private static final String ACTIONBAR_KEY = "actionbar";
@@ -37,36 +34,19 @@ public class TermPreferences extends PreferenceActivity {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
-        //T- // Remove the action bar pref on older platforms without an action bar
-        //T- if (AndroidCompat.SDK < 11) {
-        //T-     Preference actionBarPref = findPreference(ACTIONBAR_KEY);
-        //T-      PreferenceCategory screenCategory =
-        //T-             (PreferenceCategory) findPreference(CATEGORY_SCREEN_KEY);
-        //T-      if ((actionBarPref != null) && (screenCategory != null)) {
-        //T-          screenCategory.removePreference(actionBarPref);
-        //T-      }
-        //T- }
-
         // Display up indicator on action bar home button
         if (AndroidCompat.V11ToV20) {
-            //T{ ------------------------------------------------------------
-            //T! ActionBarCompat bar = ActivityCompat.getActionBar(this);
             ActionBar bar = getActionBar();
             if (bar != null) {
-                //T! bar.setDisplayOptions(ActionBarCompat.DISPLAY_HOME_AS_UP, ActionBarCompat.DISPLAY_HOME_AS_UP);
                 bar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
             }
-            //T} ------------------------------------------------------------
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        //T!{ ------------------------------------------------------------
-        //T! case ActionBarCompat.ID_HOME:
         case android.R.id.home:
-        //T!} ------------------------------------------------------------
             // Action bar home button selected
             finish();
             return true;
