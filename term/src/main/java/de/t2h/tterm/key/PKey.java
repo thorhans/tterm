@@ -21,10 +21,10 @@ public class PKey {
     Esc     = send("Esc",   KEYCODE_ESCAPE),
     Tab     = send("Tab",   KEYCODE_TAB   ),
 
-    Left    = send("Left" , KEYCODE_DPAD_LEFT ).label("?").repeat(),
-    Right   = send("Right", KEYCODE_DPAD_RIGHT).label("?").repeat(),
-    Up      = send("Up"   , KEYCODE_DPAD_UP   ).label("?").repeat(),
-    Down    = send("Down" , KEYCODE_DPAD_DOWN ).label("?").repeat(),
+    Left    = send("Left" , KEYCODE_DPAD_LEFT ).label("◀").repeat(),
+    Right   = send("Right", KEYCODE_DPAD_RIGHT).label("▶").repeat(),
+    Up      = send("Up"   , KEYCODE_DPAD_UP   ).label("▲").repeat(),
+    Down    = send("Down" , KEYCODE_DPAD_DOWN ).label("▼").repeat(),
 
     Minus   = write("-"),
     Slash   = write("/");
