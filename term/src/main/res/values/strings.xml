@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
- * Copyright (C) 2008 The Android Open Source Project
- * 
- * T+ With modifications (C) 2014 Thorbjørn Hansen.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
--->
 <resources>
    <!--T-{ ============================================================
     ! Now set in `/term/build.gradle´.
@@ -68,14 +51,6 @@
    <string name="title_orientation_preference">Screen orientation</string>
    <string name="summary_orientation_preference">Choose the screen orientation behavior.</string>
    <string name="dialog_title_orientation_preference">Screen orientation behavior</string>
-
-   <string name="title_cursorstyle_preference">Cursor style</string>
-   <string name="summary_cursorstyle_preference">Choose cursor style.</string>
-   <string name="dialog_title_cursorstyle_preference">Cursor style</string>
-
-   <string name="title_cursorblink_preference">Cursor blink</string>
-   <string name="summary_cursorblink_preference">Choose cursor blink.</string>
-   <string name="dialog_title_cursorblink_preference">Cursor blink</string>
 
    <string name="text_preferences">Text</string>
 

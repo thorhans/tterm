@@ -33,8 +33,6 @@ public class TermSettings {
     private int mStatusBar;
     private int mActionBarMode;
     private int mOrientation;
-    private int mCursorStyle;
-    private int mCursorBlink;
     private int mFontSize;
     //T+{ ------------------------------------------------------------
     private int mExtraKeySize;
@@ -170,8 +168,6 @@ public class TermSettings {
         mStatusBar = Integer.parseInt(res.getString(R.string.pref_statusbar_default));
         mActionBarMode = res.getInteger(R.integer.pref_actionbar_default);
         mOrientation = res.getInteger(R.integer.pref_orientation_default);
-        mCursorStyle = Integer.parseInt(res.getString(R.string.pref_cursorstyle_default));
-        mCursorBlink = Integer.parseInt(res.getString(R.string.pref_cursorblink_default));
         mFontSize = Integer.parseInt(res.getString(R.string.pref_fontsize_default));
         //T+{ ------------------------------------------------------------
         mExtraKeySize = Integer.parseInt(res.getString(R.string.pref_extrakeysize_default));
@@ -262,14 +258,6 @@ public class TermSettings {
 
     public int getScreenOrientation() {
         return mOrientation;
-    }
-
-    public int getCursorStyle() {
-        return mCursorStyle;
-    }
-
-    public int getCursorBlink() {
-        return mCursorBlink;
     }
 
     public int getFontSize() {
