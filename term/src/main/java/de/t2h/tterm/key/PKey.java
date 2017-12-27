@@ -447,7 +447,7 @@ public class PKey {
   // ************************************************************
 
   private Kind mKind;
-
+  public Kind getKind () { return mKind; }
   private String mName;
 
   private String mLabel;
@@ -460,6 +460,7 @@ public class PKey {
    */
   private boolean mRepeat;
   private PKey repeat () { mRepeat = true; return this; }
+  public boolean getRepeat () { return mRepeat; }
 
   /** Used for `Kind.send´. */
   private int mKeyCode;

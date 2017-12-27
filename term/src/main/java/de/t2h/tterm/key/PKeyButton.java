@@ -27,8 +27,8 @@ public class PKeyButton extends Button {
   public void setModel(PKey model) {
     mModel = model;
     setText(mModel.getLabel());
-    if(mModel.mKind == PKey.Kind.send  && mSendOnClick  != null) setOnClickListener(mSendOnClick);
-    if(mModel.mKind == PKey.Kind.write && mWriteOnClick != null) setOnClickListener(mWriteOnClick);
+    if(mModel.getKind() == PKey.Kind.send  && mSendOnClick  != null) setOnClickListener(mSendOnClick);
+    if(mModel.getKind() == PKey.Kind.write && mWriteOnClick != null) setOnClickListener(mWriteOnClick);
   }
   public PKey getModel () { return mModel; }
   private PKey mModel;
@@ -53,7 +53,7 @@ public class PKeyButton extends Button {
   @Override
   public void setOnClickListener(OnClickListener onClick) {
     super.setOnClickListener(onClick);
-    if(mModel.mRepeat) {
+    if(mModel.getRepeat()) {
       setOnTouchListener(new PKeyButton.RepeatingOnTouchListener());
     }
   }
