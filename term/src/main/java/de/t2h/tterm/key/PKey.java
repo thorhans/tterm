@@ -1,5 +1,7 @@
 package de.t2h.tterm.key;
 
+import java.util.HashMap;
+
 import static android.view.KeyEvent.*;
 
 /** A programmable key's model.
@@ -11,6 +13,8 @@ public class PKey {
   // ************************************************************
 
   public enum Kind { send, write, special }
+
+  private static HashMap<String, PKey> sKeys = new HashMap<>();
 
   // TODO Merge with table below.
   //
@@ -160,7 +164,7 @@ public class PKey {
     send( 78 , "Num"           , KEYCODE_NUM           , "Number modifier", note078);
     send( 79 , "Headsethook"   , KEYCODE_HEADSETHOOK   , "Headset Hook");
     send( 80 , "Focus"         , KEYCODE_FOCUS         , "Camera Focus");
-    send( 81 , "Plus"          , KEYCODE_PLUS          , "'+'");
+   write( 81 , "Plus"          , KEYCODE_PLUS          , "'+'", "+");
     send( 82 , "Menu"          , KEYCODE_MENU          , "Menu");
     send( 83 , "Notification"  , KEYCODE_NOTIFICATION  , "Notification");
     send( 84 , "Search"        , KEYCODE_SEARCH        , "Search");
@@ -476,10 +480,20 @@ public class PKey {
     return mText;
   }
 
-
   // ************************************************************
   // Methods
   // ************************************************************
+
+   public static PKey[] parse (String keyString) {
+    String keyNames[] = keyString.split(" ");
+    int len = keyNames.length;
+    PKey[] keys = new PKey[len];
+    for(int i = 0; i < len; ++i) {
+      keys[i] = sKeys.get(keyNames[i]);
+      if(keys[i] == null) keys[i] = sKeys.get("X"); // @@@ TODO Continue here.
+    }
+    return keys;
+   }
 
   public PKey (String name) { mName = name; mLabel = name; }
 
@@ -489,19 +503,19 @@ public class PKey {
 
   private static PKey send (String name, int keyCode) {
     PKey key = new PKey(name); key.mKind = Kind.send; key.mKeyCode = keyCode;
-    // TODO Register the key
+    sKeys.put(name, key);
     return key;
   }
 
   private static PKey send (int nr, String name, int keyCode, String description) {
     PKey key = new PKey(name); key.mKind = Kind.send; key.mKeyCode = keyCode;
-    // TODO Register the key
+    sKeys.put(name, key);
     return key;
   }
 
   private static PKey send (int nr, String name, int keyCode, String description, String note) {
     PKey key = new PKey(name); key.mKind = Kind.send; key.mKeyCode = keyCode;
-    // TODO Register the key
+    sKeys.put(name, key);
     return key;
   }
 
@@ -509,13 +523,19 @@ public class PKey {
 
   private static PKey write (String name) {
     PKey key = new PKey(name); key.mKind = Kind.write; key.mText = name;
-    // TODO Register the key
+    sKeys.put(name, key);
     return key;
   }
 
   private static PKey special (String name) {
     PKey key = new PKey(name); key.mKind = Kind.special;
-    // TODO Register the key
+    sKeys.put(name, key);
+    return key;
+  }
+
+  private static PKey write (int nr, String name, int keyCode, String description, String text) {
+    PKey key = new PKey(name); key.mKind = Kind.write; key.mText = text;
+    sKeys.put(name, key);
     return key;
   }
 }

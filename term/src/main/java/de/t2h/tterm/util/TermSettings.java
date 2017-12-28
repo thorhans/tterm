@@ -101,7 +101,9 @@ public class TermSettings {
     // Section "Text"
 
     private static final String FONTSIZE_KEY           = "fontsize";
-    private static final String EXTRAKEYS_KEY          = "extrakeys";
+    private static final String EXTRAKEYS_KEY          = "extrakeysstring"; // We can't use `extrakeys´ here,
+                                                                            // up to 2017-12-28 I used that for
+                                                                            // `extrakeysshow´.
     private static final String EXTRAKEYSIZE_KEY       = "extrakeysize";
     private static final String EXTRAKEYSShOWN_KEY     = "extrakeysshow";
     private static final String COLOR_KEY              = "color";

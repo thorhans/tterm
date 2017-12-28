@@ -94,14 +94,15 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     private TermViewFlipper mViewFlipper;
 
     //T+{ ------------------------------------------------------------
-    private final static int cExtraKeysCount = 10;
-    private PKeyButton[] mExtraKeyButtons = new PKeyButton[cExtraKeysCount];
-    private PKey[] mExtraKeys = new PKey[]{
-        PKey.Control, PKey.Tab, PKey.Esc,
-        PKey.Slash, PKey.Minus,
-        PKey.Up, PKey.Down, PKey.Left, PKey.Right,
-        PKey.Fn1
-    };
+    private static int mExtraKeysCount = 0;
+    private PKeyButton[] mExtraKeyButtons;
+    private PKey[] mExtraKeys;
+    // = new PKey[]{
+    //     PKey.Control, PKey.Tab, PKey.Esc,
+    //     PKey.Slash, PKey.Minus,
+    //     PKey.Up, PKey.Down, PKey.Left, PKey.Right,
+    //     PKey.Fn1
+    // };
 
     private int mExtraKeySize;
     int mExtraKeyDefaultColor;
@@ -1389,15 +1390,17 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     // Extra keys
     // ------------------------------------------------------------
 
-    void setExtraKeys(String keys) {
-        mExtraKeysRow.removeAllViews();
+    void setExtraKeys(String keyString) {
+        mExtraKeys = PKey.parse(keyString);
+        mExtraKeysCount = mExtraKeys.length;
+        mExtraKeyButtons = new PKeyButton[mExtraKeysCount];
 
-        // @@@ TODO Continue here
+        mExtraKeysRow.removeAllViews();
 
         LayoutInflater infl = getLayoutInflater();
 
-        for(int i = 0; i < 10; ++i) {
-          PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
+        for(int i = 0; i < mExtraKeysCount; ++i) {
+            PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
             false); // Pass `false´ so that `inflater´ returns the button, not the row.
           button.setModel(mExtraKeys[i]);
 
@@ -1406,6 +1409,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         }
 
         mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
+
+        // @@@ TODO Continue here
 
         // Key 0: `Control´
         mExtraKeyButtons[0].setOnClickListener(view -> doSendControlKey());
@@ -1447,7 +1452,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
       mExtraKeyButtons[0].setLayoutParams(layoutparams);
 
-      for(int i = 1; i < cExtraKeysCount; ++i) {
+      for(int i = 1; i < mExtraKeysCount; ++i) {
         mExtraKeyButtons[i].setTextSize(size);
         mExtraKeyButtons[i].setLayoutParams(layoutparams);
       }
