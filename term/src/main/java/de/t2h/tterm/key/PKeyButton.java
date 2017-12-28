@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.HashMap;
+
 /** A programmable key's view.
  */
 public class PKeyButton extends Button {
@@ -24,11 +26,18 @@ public class PKeyButton extends Button {
   public static void registerWriteOnClick(OnClickListener onClick) { mWriteOnClick = onClick; }
   private static OnClickListener mWriteOnClick;
 
+  public static void registerSpecialOnClick(String name, OnClickListener onClick) {
+    mSpecialOnClick.put(name, onClick); }
+  private static HashMap<String, OnClickListener> mSpecialOnClick = new HashMap<>();
+
   public void setModel(PKey model) {
     mModel = model;
     setText(mModel.getLabel());
     if(mModel.getKind() == PKey.Kind.send  && mSendOnClick  != null) setOnClickListener(mSendOnClick);
     if(mModel.getKind() == PKey.Kind.write && mWriteOnClick != null) setOnClickListener(mWriteOnClick);
+    if(mModel.getKind() == PKey.Kind.special) {
+      setOnClickListener(mSpecialOnClick.get(mModel.getName()));
+    }
   }
   public PKey getModel () { return mModel; }
   private PKey mModel;

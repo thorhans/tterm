@@ -18,6 +18,7 @@
 
 package de.t2h.tterm;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -173,8 +174,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             }
         }
     };
-    // Available on API 12 and later
-    private static final int FLAG_INCLUDE_STOPPED_PACKAGES = 0x20;
 
     private TermService mTermService;
     private ServiceConnection mTSConnection = new ServiceConnection() {
@@ -399,11 +398,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         mPrefs.registerOnSharedPreferenceChangeListener(this);
 
         Intent broadcast = new Intent(ACTION_PATH_BROADCAST);
-        //T-{ ------------------------------------------------------------
-        //T- if (AndroidCompat.SDK >= 12) {
-        broadcast.addFlags(FLAG_INCLUDE_STOPPED_PACKAGES);
-        //T- }
-        //T-} ------------------------------------------------------------
+        broadcast.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
 
         mPendingPathBroadcasts++;
         sendOrderedBroadcast(broadcast, PERMISSION_PATH_BROADCAST, mPathReceiver, null, RESULT_OK, null, null);
@@ -451,6 +446,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             EmulatorView emv = getCurrentEmulatorView();
             if(emv != null) { emv.getTermSession().write(((PKeyButton) view).getModel().getText()); }
         });
+        PKeyButton.registerSpecialOnClick("Control", view -> doSendControlKey());
+        PKeyButton.registerSpecialOnClick("Fn1", view -> doSendFnKey());
 
         setExtraKeys(mSettings.getExtraKeys());
 
@@ -1401,22 +1398,14 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         for(int i = 0; i < mExtraKeysCount; ++i) {
             PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
-            false); // Pass `false´ so that `inflater´ returns the button, not the row.
-          button.setModel(mExtraKeys[i]);
+                false); // Pass `false´ so that `inflater´ returns the button, not the row.
+            button.setModel(mExtraKeys[i]);
 
-          mExtraKeysRow.addView(button);
-          mExtraKeyButtons[i] = button;
+            mExtraKeysRow.addView(button);
+            mExtraKeyButtons[i] = button;
         }
 
         mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
-
-        // @@@ TODO Continue here
-
-        // Key 0: `Control´
-        mExtraKeyButtons[0].setOnClickListener(view -> doSendControlKey());
-
-        // Key 9: `Fn´
-        mExtraKeyButtons[9].setOnClickListener(view -> doSendFnKey());
     }
 
     void setExtraKeysShown(int when) {
