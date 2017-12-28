@@ -132,6 +132,24 @@
     <string name="summary_fontsize_preference">Choose character height in points.</string>
     <string name="dialog_title_fontsize_preference">Font size</string>
 
+    <string name="title_color_preference">Colors</string>
+    <string name="summary_color_preference">Choose text color.</string>
+    <string name="dialog_title_color_preference">Text color</string>
+
+    <string name="title_utf8_by_default_preference">Default to UTF-8</string>
+    <string name="summary_utf8_by_default_preference">Whether UTF-8 mode is enabled by default.</string>
+
+    <!-- ==========================================================
+     ! Section "Extra keys"
+     ! ============================================================
+    -->
+
+    <string name="extrakeys_preferences">Extra keys</string>
+
+    <string name="title_extrakeys_preference">Extra keys</string>
+    <string name="summary_extrakeys_preference">Choose extra keys.</string>
+    <string name="dialog_title_extrakeys_preference">Extra keys</string>
+
     <string name="title_extrakeysize_preference">Extra keys\' size</string>
     <string name="summary_extrakeysize_preference">Choose character height in points.</string>
     <string name="dialog_title_extrakeysize_preference">Extra keys\' size</string>
@@ -139,13 +157,6 @@
     <string name="title_extrakeysshown_preference">Extra keys shown</string>
     <string name="summary_extrakeysshown_preference">When to display extra keys.</string>
     <string name="dialog_title_extrakeysshown_preference">Display extra keys</string>
-   
-    <string name="title_color_preference">Colors</string>
-    <string name="summary_color_preference">Choose text color.</string>
-    <string name="dialog_title_color_preference">Text color</string>
-
-    <string name="title_utf8_by_default_preference">Default to UTF-8</string>
-    <string name="summary_utf8_by_default_preference">Whether UTF-8 mode is enabled by default.</string>
 
     <!-- ==========================================================
      ! Section "Keyboard" 

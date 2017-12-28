@@ -35,10 +35,17 @@
     -->
 
    <string  name="pref_fontsize_default"       translatable="false">10</string>
-   <string  name="pref_extrakeysize_default"   translatable="false">16</string>
-   <string  name="pref_extrakeysshown_default" translatable="false">2</string>
    <string  name="pref_color_default"          translatable="false">1</string>
    <bool    name="pref_utf8_by_default_default"                    >true</bool>
+
+    <!-- ==========================================================
+     ! Section "Extra keys"
+     ! ============================================================
+    -->
+
+   <string  name="pref_extrakeys_default"      translatable="false">Control Tab Esc / - Up Down Left Right Fn1</string>
+   <string  name="pref_extrakeysize_default"   translatable="false">16</string>
+   <string  name="pref_extrakeysshown_default" translatable="false">2</string>
 
     <!-- ==========================================================
      ! Section "Keyboard" 

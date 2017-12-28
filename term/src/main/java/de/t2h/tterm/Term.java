@@ -73,6 +73,7 @@ import de.t2h.tterm.emulatorview.UpdateCallback;
 import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
 import de.t2h.tterm.key.PKey;
 import de.t2h.tterm.key.PKeyButton;
+import de.t2h.tterm.key.PKeyRow;
 import de.t2h.tterm.util.SessionList;
 import de.t2h.tterm.util.TermSettings;
 
@@ -436,8 +437,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         setContentView(R.layout.term_activity);
         mViewFlipper = (TermViewFlipper) findViewById(VIEW_FLIPPER);
 
-        //T+{ ------------------------------------------------------------
-        mExtraKeysRow = (LinearLayout) findViewById(R.id.extra_keys);
+        // Extra keys
+        // ------------------------------------------------------------
+
+        mExtraKeysRow = (PKeyRow) findViewById(R.id.extra_keys);
 
         PKeyButton.registerSendOnClick(view -> {
             EmulatorView emv = getCurrentEmulatorView();
@@ -448,26 +451,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             if(emv != null) { emv.getTermSession().write(((PKeyButton) view).getModel().getText()); }
         });
 
-        LayoutInflater infl = getLayoutInflater();
+        setExtraKeys(mSettings.getExtraKeys());
 
-        for(int i = 0; i < 10; ++i) {
-          PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
-            false); // Pass `false´ so that `inflater´ returns the button, not the row.
-          button.setModel(mExtraKeys[i]);
-
-          mExtraKeysRow.addView(button);
-          mExtraKeyButtons[i] = button;
-        }
-
-        mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
-
-        // Key 0: `Control´
-        mExtraKeyButtons[0].setOnClickListener(view -> doSendControlKey());
-
-        // Key 9: `Fn´
-        mExtraKeyButtons[9].setOnClickListener(view -> doSendFnKey());
-
-        //T+} ------------------------------------------------------------
+        // ------------------------------------------------------------
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TermDebug.LOG_TAG);
@@ -1399,13 +1385,39 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             startActivity(openLink);
     }
 
-    //T+{ ------------------------------------------------------------
+    // ------------------------------------------------------------
+    // Extra keys
+    // ------------------------------------------------------------
+
+    void setExtraKeys(String keys) {
+        mExtraKeysRow.removeAllViews();
+
+        // @@@ TODO Continue here
+
+        LayoutInflater infl = getLayoutInflater();
+
+        for(int i = 0; i < 10; ++i) {
+          PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
+            false); // Pass `false´ so that `inflater´ returns the button, not the row.
+          button.setModel(mExtraKeys[i]);
+
+          mExtraKeysRow.addView(button);
+          mExtraKeyButtons[i] = button;
+        }
+
+        mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
+
+        // Key 0: `Control´
+        mExtraKeyButtons[0].setOnClickListener(view -> doSendControlKey());
+
+        // Key 9: `Fn´
+        mExtraKeyButtons[9].setOnClickListener(view -> doSendFnKey());
+    }
+
     void setExtraKeysShown(int when) {
       setExtraKeysShown(when, isSoftKeyboardShown());
     }
-    //T+} ------------------------------------------------------------
 
-    //T+{ ------------------------------------------------------------
     void setExtraKeysShown(int when, boolean softKeyboardShown) {
       mExtraKeysShown = when;
       if(mExtraKeysShown == 0) {
@@ -1416,9 +1428,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         mExtraKeysRow.setVisibility(softKeyboardShown ? View.VISIBLE : View.GONE);
       }
     }
-    //T+} ------------------------------------------------------------
 
-    //T+{ ------------------------------------------------------------
     void setExtraKeySize(int size) {
       mExtraKeySize = size;
 
@@ -1442,17 +1452,13 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         mExtraKeyButtons[i].setLayoutParams(layoutparams);
       }
     }
-    //T+} ------------------------------------------------------------
 
-    //T+{ ------------------------------------------------------------
     /** Return the height off the keys row. */
     int getKeysHeight() {
       if(mExtraKeysRow == null || mExtraKeySize == 0 || mExtraKeysRow.getVisibility() == View.GONE) return 0;
       return mExtraKeysRow.getHeight();
     }
-    //T+} ------------------------------------------------------------
 
-    //T+{ ------------------------------------------------------------
     // Android wont't tell you if the soft keyboard is being shown, so try to guess based on the height
     // of `top_view´ (which is the root in the XML layout file, but not the root view returned by
     // `View.getRootView´.
@@ -1468,5 +1474,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
       boolean res = topHeight / windowHeight < 0.75;
       return res;
     }
-    //T+} ------------------------------------------------------------
+
+    // ------------------------------------------------------------
 }

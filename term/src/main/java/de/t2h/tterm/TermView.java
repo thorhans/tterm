@@ -37,21 +37,29 @@ public class TermView extends EmulatorView {
             scheme = new ColorScheme(settings.getColorScheme());
         }
 
-        setTextSize(settings.getFontSize());
+        // Section "Text"
 
-        //T+{ ------------------------------------------------------------
+        setTextSize(settings.getFontSize());
+        setColorScheme(scheme);
+
+        // Section "Extra keys"
+
+        ((Term) getContext()).setExtraKeys(settings.getExtraKeys());
         ((Term) getContext()).setExtraKeySize(settings.getExtraKeySize());
         // On my Nexus 7, the soft keyboard is always turned on after showing the preferences.
         // So make the extra keys visible, too.
         ((Term) getContext()).setExtraKeysShown(settings.getExtraKeysShown(), true);
-        //T+} ------------------------------------------------------------
 
-        setUseCookedIME(settings.useCookedIME());
-        setColorScheme(scheme);
+        // Section "Keyboard"
+
         setBackKeyCharacter(settings.getBackKeyCharacter());
-        setAltSendsEsc(settings.getAltSendsEscFlag());
         setControlKeyCode(settings.getControlKeyCode());
         setFnKeyCode(settings.getFnKeyCode());
+        setUseCookedIME(settings.useCookedIME());
+        setAltSendsEsc(settings.getAltSendsEscFlag());
+
+        // Section "Shell"
+
         setTermType(settings.getTermType());
         setMouseTracking(settings.getMouseTrackingFlag());
     }

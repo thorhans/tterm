@@ -36,7 +36,7 @@
       android:layout_weight="1"
       android:background="@android:color/black" />
 
-  <LinearLayout
+  <de.t2h.tterm.key.PKeyRow
       android:id="@+id/extra_keys"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -47,5 +47,5 @@
       android:paddingRight="1dp" >
 
       <!-- Keys are added here using layout `extra_key.xml´. -->
-  </LinearLayout>
+  </de.t2h.tterm.key.PKeyRow>
 </LinearLayout>

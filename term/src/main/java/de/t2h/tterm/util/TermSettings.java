@@ -41,13 +41,17 @@ public class TermSettings {
     // Section "Text"                                                         
                                                                               
     private int mFontSize;              public int getFontSize ()            { return mFontSize; }
-    private int mExtraKeySize;          public int getExtraKeySize ()        { return mExtraKeySize; }
-    private int mExtraKeysShown;        public int getExtraKeysShown ()      { return mExtraKeysShown; }
     private int mColorId;               public int[] getColorScheme ()       { return COLOR_SCHEMES[mColorId]; }
     private boolean mUTF8ByDefault;     public boolean defaultToUTF8Mode ()  { return mUTF8ByDefault; }
-                                                                              
-    // Section "Keyboard"                                                     
-                                                                              
+
+    // Section "Extra ekys"
+
+    private String mExtraKeys;          public String getExtraKeys()         { return mExtraKeys; }
+    private int mExtraKeySize;          public int getExtraKeySize ()        { return mExtraKeySize; }
+    private int mExtraKeysShown;        public int getExtraKeysShown ()      { return mExtraKeysShown; }
+
+    // Section "Keyboard"
+
     private int mBackKeyAction;         public int getBackKeyAction ()       { return mBackKeyAction; }
                                         public int getBackKeyCharacter () {
                                           switch (mBackKeyAction) {
@@ -97,8 +101,9 @@ public class TermSettings {
     // Section "Text"
 
     private static final String FONTSIZE_KEY           = "fontsize";
+    private static final String EXTRAKEYS_KEY          = "extrakeys";
     private static final String EXTRAKEYSIZE_KEY       = "extrakeysize";
-    private static final String EXTRAKEYSShOWN_KEY     = "extrakeys";
+    private static final String EXTRAKEYSShOWN_KEY     = "extrakeysshow";
     private static final String COLOR_KEY              = "color";
     private static final String UTF8_KEY               = "utf8_by_default";
 
@@ -220,10 +225,14 @@ public class TermSettings {
         // Section "Text"
 
         mFontSize             = str2int(res,    R.string.pref_fontsize_default                   );
-        mExtraKeySize         = str2int(res,    R.string.pref_extrakeysize_default               );
-        mExtraKeysShown       = str2int(res,    R.string.pref_extrakeysshown_default             );
         mColorId              = str2int(res,    R.string.pref_color_default                      );
         mUTF8ByDefault        = res.getBoolean( R.bool.pref_utf8_by_default_default              );
+
+        // Section "Extra keys"
+
+        mExtraKeys            = res.getString(  R.string.pref_extrakeys_default                  );
+        mExtraKeySize         = str2int(res,    R.string.pref_extrakeysize_default               );
+        mExtraKeysShown       = str2int(res,    R.string.pref_extrakeysshown_default             );
 
         // Section "Keyboard"
 
@@ -265,10 +274,14 @@ public class TermSettings {
         // Section "Text"
 
         mFontSize             = anInt(   FONTSIZE_KEY           , mFontSize       , 288                            );
-        mExtraKeySize         = anInt(   EXTRAKEYSIZE_KEY       , mExtraKeySize   , 36                             );
-        mExtraKeysShown       = anInt(   EXTRAKEYSShOWN_KEY     , mExtraKeysShown , 2                              );
         mColorId              = anInt(   COLOR_KEY              , mColorId        , COLOR_SCHEMES.length - 1       );
         mUTF8ByDefault        = aBool(   UTF8_KEY               , mUTF8ByDefault                                   );
+
+        // Section "Extra keys"
+
+        mExtraKeys            = aString( EXTRAKEYS_KEY          , mExtraKeys                                       );
+        mExtraKeySize         = anInt(   EXTRAKEYSIZE_KEY       , mExtraKeySize   , 36                             );
+        mExtraKeysShown       = anInt(   EXTRAKEYSShOWN_KEY     , mExtraKeysShown , 2                              );
 
         // Section "Keyboard"
 
