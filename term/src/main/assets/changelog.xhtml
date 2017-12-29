@@ -34,15 +34,19 @@
 <h1>Features</h1>
 <!-- ************************************************************ -->
 
-<h2>Version 0.1.9 (beta) on 2017-..-..</h2>
+<h2>Version 0.1.9 (beta) on 2018-..-..</h2>
 <!-- ============================================================ -->
 
 <ol>
+  <li>You can now <a href="config.xhtml#configure_extra_keys">
+      configure the extra keys</a>.
+    <b>TODO Write the section.</b></li>
+
   <li>The setting
-    <a href="#setting-utf8_by_default">
+    <a href="config.xhtml#settings/default_to_utf8">
       <span class="setting">Default to UTF-8</span></a>
   is now checked by default. This is necessary to get non-ASCII
-  characters like "á ä æ ı š б א".</li>
+  characters like "á ä æ ı š б".</li>
 
   <li id="B005">
     Fixed Bug 005, Alt-Gr does not work on hardware keyboards.
@@ -203,9 +207,9 @@
     <p>Example: Select the Google keyboard. Enter <code>one
     two</code>. Put the cursor on <code>t</code>. Enter
     <code>hello</code> without pressing space. Now TEA shows
-      <code>one <span class="selected">hello</span></code>,
+      <code>one <selected>hello</selected></code>,
     and TTerm shows 
-      <code>one <span class="selected">hello</span>two</code>.
+      <code>one <selected>hello</selected>two</code>.
     When you press space, TEA inserts <code>hello</code> and shows
     <code>two</code> again. So no text is lost, but I find TEA's
     behavior very confusing.</p>
@@ -230,7 +234,7 @@
 <h1 id="code-changes">Code changes</h1>
 <!-- ************************************************************ -->
 
-<h2>Version 0.1.9 (beta) on 2017-..-..</h2>
+<h2>Version 0.1.9 (beta) on 2018-..-..</h2>
 <!-- ============================================================ -->
 
 <ol>

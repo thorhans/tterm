@@ -10,6 +10,13 @@ import java.util.HashMap;
 import static android.view.KeyEvent.*;
 
 /** A programmable key's model.
+ *
+ * <p>There are 3 kinds of keys: they can "send" a key code, "write" a string, or be "special" and execute
+ * arbitrary code, which is handled by `PKeyButton´.</p>
+ *
+ * @see PKeyButton
+ *
+ * TODO `Kind.send´ does not work for all keys yet.
  */
 public class PKey {
 
@@ -17,14 +24,28 @@ public class PKey {
   // Constants
   // ************************************************************
 
-  public enum Kind { send, write, special }
+  public enum Kind {
+    /** The Key sends a key code. */
+    send,
+    /** The key sends a string. */
+    write,
+    /** A special key like Control. */
+    special
+  }
+
+  // ************************************************************
+  // Static attributes
+  // ************************************************************
+
+  /** Map key names to keys. */
+  private static HashMap<String, PKey> sKeysByName = new HashMap<>();
+
+  /** Map keycodes to keys. */
+  private static PKey[] sKeysByCode = new PKey[285];
 
   // ************************************************************
   // Attributes
   // ************************************************************
-
-  private static HashMap<String, PKey> sKeysByName = new HashMap<>();
-  private static PKey[] sKeysByCode = new PKey[285];
 
   private Kind mKind;
   public Kind getKind () { return mKind; }
@@ -65,8 +86,17 @@ public class PKey {
   // Methods
   // ************************************************************
 
-  // TODO Why is this called twice on startup?
-  //
+  /** Parse a key row in JSON.
+   *
+   * <p>Example:</p>
+   *
+   *   [ "[Control]",  // special
+   *     "[Tab]",      // send
+   *     "/", ".com"   // write
+   *   ]
+   *
+   * TODO Why is this called twice on startup?
+   */
   public static PKey[] parse (String keyString) {
     try {
       JSONArray array = (JSONArray) new JSONTokener(keyString).nextValue();
@@ -75,7 +105,13 @@ public class PKey {
       for(int i = 0; i < len; ++i) {
         Object obj = array.get(i);
         if(obj instanceof String) {
-          keys[i] = sKeysByName.get(obj);
+          String str = (String) obj;
+          int strlen = str.length();
+          if(strlen > 2 && str.charAt(0) == '[' && str.charAt(strlen - 1) == ']') {
+            keys[i] = sKeysByName.get(str.substring(1, strlen-1));
+          } else {
+            keys[i] = write(str);
+          }
         }
         if(keys[i] == null) keys[i] = sKeysByName.get("X"); // @@@ TODO Continue here.
       }
@@ -87,26 +123,12 @@ public class PKey {
 
   public PKey (String name) { mNames.add(name); mLabel = name; }
 
-  private static void section (String name) {
-    // TODO
-  }
-
-  // TODO Remove this method.
-  //
-  private static PKey send (String name, int keyCode) {
-    PKey key = new PKey(name); key.mKind = Kind.send; key.mKeyCode = keyCode;
-    sKeysByName.put(name, key);
-    return key;
-  }
-
   private static PKey send (int keyCode, String name, String description) {
     PKey key = new PKey(name); key.mKind = Kind.send; key.mKeyCode = keyCode;
     sKeysByCode[keyCode] = key;
     sKeysByName.put(name, key);
     return key;
   }
-
-  // ------------------------------------------------------------
 
   private static PKey write (String name) {
     PKey key = new PKey(name); key.mKind = Kind.write; key.mText = name;
@@ -126,26 +148,17 @@ public class PKey {
     return this;
   }
 
+  private static void section (String name) {
+    // TODO
+  }
+
   // ************************************************************
   // Key constants
   // ************************************************************
 
-  // TODO Merge with table below.
-  //
   public static final PKey
     Control = special("Control").label("Ctrl"),
-    Fn1     = special("Fn1"    ).label("Fn"),
-
-    Esc     = send("Esc",   KEYCODE_ESCAPE),
-    Tab     = send("Tab",   KEYCODE_TAB   ),
-
-    Left    = send("Left" , KEYCODE_DPAD_LEFT ).label("◀").repeat(),
-    Right   = send("Right", KEYCODE_DPAD_RIGHT).label("▶").repeat(),
-    Up      = send("Up"   , KEYCODE_DPAD_UP   ).label("▲").repeat(),
-    Down    = send("Down" , KEYCODE_DPAD_DOWN ).label("▼").repeat(),
-
-    Minus   = write("-"),
-    Slash   = write("/");
+    Fn1     = special("Fn1"    ).label("Fn");
 
   private static final String
     note001 = "Usually situated below the display on phones and used as a multi-function feature key for "
@@ -217,10 +230,10 @@ public class PKey {
     send( 16 , "9"             , "'9'"                       );
     send( 17 , "Star"          , "'*'"                       );
     send( 18 , "Pound"         , "'#'"                       );
-    send( 19 , "Dpad_Up"       , "Directional Pad Up"        ).note(note019);
-    send( 20 , "Dpad_Down"     , "Directional Pad Down"      ).note(note019);
-    send( 21 , "Dpad_Left"     , "Directional Pad Left"      ).note(note019);
-    send( 22 , "Dpad_Right"    , "Directional Pad Right"     ).note(note019);
+    send( 19 , "Dpad_Up"       , "Directional Pad Up"        ).alias("Up"   ).label("▲").repeat().note(note019);
+    send( 20 , "Dpad_Down"     , "Directional Pad Down"      ).alias("Down" ).label("▼").repeat().note(note019);
+    send( 21 , "Dpad_Left"     , "Directional Pad Left"      ).alias("Left" ).label("◀").repeat().note(note019);
+    send( 22 , "Dpad_Right"    , "Directional Pad Right"     ).alias("Right").label("▶").repeat().note(note019);
     send( 23 , "Dpad_Center"   , "Directional Pad Center"    ).note(note019);
     send( 24 , "Volume_Up"     , "Volume Up"                 );
     send( 25 , "Volume_Down"   , "Volume Down"               );
@@ -271,7 +284,7 @@ public class PKey {
     send( 70 , "Equals"        , "'='"                       );
     send( 71 , "Left_Bracket"  , "'['"                       );
     send( 72 , "Right_Bracket" , "']'"                       );
-    send( 73 , "Backslash"     , "'\'"                       );
+    send( 73 , "Backslash"     , "'\\'"                      );
     send( 74 , "Semicolon"     , "';'"                       );
     send( 75 , "Apostrophe"    , "''' (apostrophe)"          );
     send( 76 , "Slash"         , "'/'"                       );
@@ -321,7 +334,7 @@ public class PKey {
     section("General II");
     // ------------------------------------------------------------
 
-    send(111 , "Escape"      , "Escape"                        );
+    send(111 , "Esc"         , "Escape"                        ).alias("Escape");
     send(112 , "Forward_Del" , "Forward Delete"                ).note(note112);
     send(113 , "Ctrl_Left"   , "Left Control modifier"         );
     send(114 , "Ctrl_Right"  , "Right Control modifier"        );
@@ -385,7 +398,7 @@ public class PKey {
     send(160 , "Numpad_Enter"       , "numpad Enter" );
     send(161 , "Numpad_Equals"      , "numpad '='"   );
     send(162 , "Numpad_Left_Paren"  , "numpad '('"   );
-    send(163 , "Numpad_Right_Paren" , "numpad '      )'");
+    send(163 , "Numpad_Right_Paren" , "numpad ')'"   );
 
     section("TV I");
     // ------------------------------------------------------------

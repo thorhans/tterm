@@ -44,7 +44,10 @@
     -->
 
     <string  name="pref_extrakeys_default"      translatable="false">
-        [\"Control\", \"Tab\", \"Esc\", \"/\", \"-\", \"Up\", \"Down\", \"Left\", \"Right\", \"Fn1\"]
+        [
+          \"[Control]\",  \"[Tab]\",  \"[Esc]\",  \"[/]\",  \"[-]\",
+          \"[Up]\",  \"[Down]\",  \"[Left]\",  \"[Right]\",  \"[Fn1]\"
+        ]
     </string>
     <string  name="pref_extrakeysize_default"   translatable="false">16</string>
     <string  name="pref_extrakeysshown_default" translatable="false">2</string>

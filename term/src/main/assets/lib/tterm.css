@@ -27,8 +27,13 @@ h1, h2, h3{
   font-style: italic;
 }
 
+/* A key or key code. */
+key {
+  font-family: monospace;
+}
+
 /* Simulate selected text. */
-code span.selected {
+selected {
   background-color:  #d0d0d0;
 }
 
