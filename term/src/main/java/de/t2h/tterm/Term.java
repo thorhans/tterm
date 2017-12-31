@@ -92,7 +92,7 @@ public class Term extends Activity
     // Attributes
     // ************************************************************
     //
-    // ThH: I have cleaned up the attributes.
+    // ThH: I have cleaned up all attributes.
 
     /** The ViewFlipper which holds the collection of EmulatorView widgets. */
     private TermViewFlipper mViewFlipper;
@@ -279,8 +279,8 @@ public class Term extends Activity
      *
      * <ol>
      *   <li>Back</li>
-     *   <li>C-Tab, CS-Tab: next/previous window</li>
-     *   <li>CS-N: new window</li>
+     *   <li>C-Tab, CS-Tab: next/previous console window</li>
+     *   <li>CS-N: new console window</li>
      *   <li>CS-V: paste</li>
      * </ol>
      */
@@ -289,35 +289,29 @@ public class Term extends Activity
             return backkeyInterceptor(keyCode, event) || keyboardShortcuts(keyCode, event);
         }
 
-        /** Keyboard shortcuts (tab management, paste). */
+        /** Handle keyboard shortcuts.
+         *
+         * <p>See {@link Term#mKeyListener}.</p>
+         */
         private boolean keyboardShortcuts (int keyCode, KeyEvent event) {
             if(event.getAction() != KeyEvent.ACTION_DOWN) return false;
-            if(!mUseKeyboardShortcuts)                    return false;
+            if(! mUseKeyboardShortcuts)                   return false;
 
-            boolean isCtrlPressed = (event.getMetaState() & KeyEvent.META_CTRL_ON) != 0;
-            boolean isShiftPressed = (event.getMetaState() & KeyEvent.META_SHIFT_ON) != 0;
+            boolean ctrl  = ( event.getMetaState() & KeyEvent.META_CTRL_ON  ) != 0;
+            boolean shift = ( event.getMetaState() & KeyEvent.META_SHIFT_ON ) != 0;
 
-            if(keyCode == KeyEvent.KEYCODE_TAB && isCtrlPressed) {
-                if(isShiftPressed) {
-                    mViewFlipper.showPrevious();
-                } else {
-                    mViewFlipper.showNext();
-                }
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_N && isCtrlPressed && isShiftPressed) {
-                doCreateNewWindow();
-                return true;
-            } else if (keyCode == KeyEvent.KEYCODE_V && isCtrlPressed && isShiftPressed) {
-                doPaste();
-                return true;
-            } else {
-                return false;
-            }
+            if(keyCode == KeyEvent.KEYCODE_TAB && ctrl && ! shift) { mViewFlipper.showNext();     return true; }
+            if(keyCode == KeyEvent.KEYCODE_TAB && ctrl &&   shift) { mViewFlipper.showPrevious(); return true; }
+            if(keyCode == KeyEvent.KEYCODE_N   && ctrl &&   shift) { doCreateNewWindow();         return true; }
+            if(keyCode == KeyEvent.KEYCODE_V   && ctrl &&   shift) { doPaste();                   return true; }
+
+            return false;
         }
 
         /** Make sure the back button always leaves the application. */
-        private boolean backkeyInterceptor(int keyCode, KeyEvent event) {
-            if(keyCode == KeyEvent.KEYCODE_BACK && mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES
+        private boolean backkeyInterceptor (int keyCode, KeyEvent event) {
+            if(keyCode == KeyEvent.KEYCODE_BACK
+                && mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES
                 && mActionBar != null
                 && mActionBar.isShowing()
             ) {
@@ -340,32 +334,33 @@ public class Term extends Activity
     private class EmulatorViewGestureListener extends SimpleOnGestureListener {
         private EmulatorView view;
 
-        public EmulatorViewGestureListener(EmulatorView view) {
+        public EmulatorViewGestureListener (EmulatorView view) {
             this.view = view;
         }
 
         @Override
-        public boolean onSingleTapUp(MotionEvent e) {
-            // Let the EmulatorView handle taps if mouse tracking is active
-            if (view.isMouseTrackingActive()) return false;
+        public boolean onSingleTapUp (MotionEvent e) {
+            // Let the EmulatorView handle taps if mouse tracking is active.
+            if(view.isMouseTrackingActive()) return false;
 
-            // Check for link at tap location
+            // Check for link at tap location.
             String link = view.getURLat(e.getX(), e.getY());
-            if (link != null)
+            if(link != null) {
                 execURL(link);
-            else
+            } else {
                 doUIToggle((int) e.getX(), (int) e.getY(), view.getVisibleWidth(), view.getVisibleHeight());
+            }
             return true;
         }
 
         @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        public boolean onFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             float absVelocityX = Math.abs(velocityX);
             float absVelocityY = Math.abs(velocityY);
-            if (absVelocityX > Math.max(1000.0f, 2.0 * absVelocityY)) {
-                // Assume user wanted side to side movement
-                if (velocityX > 0) {
-                    // Left to right swipe -- previous window
+            if(absVelocityX > Math.max(1000.0f, 2.0 * absVelocityY)) {
+                // Assume user wanted side to side movement.
+                if(velocityX > 0) {
+                    // Left to right swipe -- previous window.
                     mViewFlipper.showPrevious();
                 } else {
                     // Right to left swipe -- next window
