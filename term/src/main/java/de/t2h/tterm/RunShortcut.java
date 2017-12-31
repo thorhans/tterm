@@ -16,39 +16,50 @@
 
 package de.t2h.tterm;
 
+import android.content.Intent;
+import android.util.Log;
+
 import de.t2h.tterm.util.ShortcutEncryption;
 
 import java.security.GeneralSecurityException;
 
-import android.content.Intent;
-import android.util.Log;
-
+// ThH: Cleaned up.
+//
 public final class RunShortcut extends RemoteInterface {
-    //T+{ ------------------------------------------------------------
+    // ************************************************************
+    // Constants
+    // ************************************************************
+
+    // ------------------------------------------------------------
     // Do *not* rename this strings to use `de.t2h.tterm´!
-    //T+} ------------------------------------------------------------
+    // ------------------------------------------------------------
+    //
     public static final String ACTION_RUN_SHORTCUT = "jackpal.androidterm.RUN_SHORTCUT";
 
-    //T!{ ------------------------------------------------------------
-    //T! public static final String EXTRA_WINDOW_HANDLE = "jackpal.androidterm.window_handle";
-    //T! public static final String EXTRA_SHORTCUT_COMMAND = "jackpal.androidterm.iShortcutCommand";
+    // ------------------------------------------------------------
+    // public static final String EXTRA_WINDOW_HANDLE = "jackpal.androidterm.window_handle";
+    // public static final String EXTRA_SHORTCUT_COMMAND = "jackpal.androidterm.iShortcutCommand";
     public static final String EXTRA_WINDOW_HANDLE = "de.t2h.tterm.window_handle";
     public static final String EXTRA_SHORTCUT_COMMAND = "de.t2h.tterm.iShortcutCommand";
-    //T!} ------------------------------------------------------------
+    // ------------------------------------------------------------
+
+    // ************************************************************
+    // Methods
+    // ************************************************************
 
     @Override
-    protected void handleIntent() {
+    protected void handleIntent () {
         TermService service = getTermService();
-        if (service == null) {
+        if(service == null) {
             finish();
             return;
         }
 
         Intent myIntent = getIntent();
         String action = myIntent.getAction();
-        if (action.equals(ACTION_RUN_SHORTCUT)) {
+        if(action.equals(ACTION_RUN_SHORTCUT)) {
             String encCommand = myIntent.getStringExtra(EXTRA_SHORTCUT_COMMAND);
-            if (encCommand == null) {
+            if(encCommand == null) {
                 Log.e(TermDebug.LOG_TAG, "No command provided in shortcut!");
                 finish();
                 return;
@@ -56,7 +67,7 @@ public final class RunShortcut extends RemoteInterface {
 
             // Decrypt and verify the command
             ShortcutEncryption.Keys keys = ShortcutEncryption.getKeys(this);
-            if (keys == null) {
+            if(keys == null) {
                 // No keys -- no valid shortcuts can exist
                 Log.e(TermDebug.LOG_TAG, "No shortcut encryption keys found!");
                 finish();
@@ -65,14 +76,14 @@ public final class RunShortcut extends RemoteInterface {
             String command;
             try {
                 command = ShortcutEncryption.decrypt(encCommand, keys);
-            } catch (GeneralSecurityException e) {
+            } catch(GeneralSecurityException e) {
                 Log.e(TermDebug.LOG_TAG, "Invalid shortcut: " + e.toString());
                 finish();
                 return;
             }
 
             String handle = myIntent.getStringExtra(EXTRA_WINDOW_HANDLE);
-            if (handle != null) {
+            if(handle != null) {
                 // Target the request at an existing window if open
                 handle = appendToWindow(handle, command);
             } else {

@@ -21,19 +21,17 @@ import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
-//T-{ ------------------------------------------------------------
-//T- import de.t2h.tterm.compat.FileCompat;
-//T-} ------------------------------------------------------------
 import de.t2h.tterm.util.TermSettings;
 
 import java.io.*;
 import java.util.ArrayList;
 
-/**
- * A terminal session, controlling the process attached to the session (usually
- * a shell). It keeps track of process PID and destroys it's process group
- * upon stopping.
+/** A terminal session, controlling the process attached to the session (usually a shell).
+ *
+ * <p>It keeps track of process PID and destroys it's process group upon stopping.</p>
  */
+// ThH: Cleaned up.
+//
 public class ShellTermSession extends GenericTermSession {
     private int mProcId;
     private Thread mWatcherThread;
@@ -42,20 +40,24 @@ public class ShellTermSession extends GenericTermSession {
 
     private static final int PROCESS_EXITED = 1;
     private Handler mMsgHandler = new Handler() {
+        // The compiler doesn't allow converting this to a lambda, I don't understand why.
         @Override
-        public void handleMessage(Message msg) {
-            if (!isRunning()) {
+        public void handleMessage (Message msg) {
+            if(! isRunning()) {
                 return;
             }
-            if (msg.what == PROCESS_EXITED) {
+            if(msg.what == PROCESS_EXITED) {
                 onProcessExit((Integer) msg.obj);
             }
         }
     };
 
-    public ShellTermSession(TermSettings settings, String initialCommand) throws IOException {
-        super(ParcelFileDescriptor.open(new File("/dev/ptmx"), ParcelFileDescriptor.MODE_READ_WRITE),
-                settings, false);
+    public ShellTermSession (TermSettings settings, String initialCommand)
+        throws IOException
+    {
+        super(ParcelFileDescriptor.open(new File("/dev/ptmx"),
+                ParcelFileDescriptor.MODE_READ_WRITE),
+            settings, false);
 
         initializeSession();
 
@@ -64,36 +66,33 @@ public class ShellTermSession extends GenericTermSession {
 
         mInitialCommand = initialCommand;
 
-        mWatcherThread = new Thread() {
-            @Override
-            public void run() {
-                Log.i(TermDebug.LOG_TAG, "waiting for: " + mProcId);
-                int result = TermExec.waitFor(mProcId);
-                Log.i(TermDebug.LOG_TAG, "Subprocess exited: " + result);
-                mMsgHandler.sendMessage(mMsgHandler.obtainMessage(PROCESS_EXITED, result));
-            }
-        };
+        mWatcherThread = new Thread(() -> {
+            Log.i(TermDebug.LOG_TAG, "waiting for: " + mProcId);
+            int result = TermExec.waitFor(mProcId);
+            Log.i(TermDebug.LOG_TAG, "Subprocess exited: " + result);
+            mMsgHandler.sendMessage(mMsgHandler.obtainMessage(PROCESS_EXITED, result));
+        });
         mWatcherThread.setName("Process watcher");
     }
 
-    private void initializeSession() throws IOException {
+    private void initializeSession () throws IOException {
         TermSettings settings = mSettings;
 
         String path = System.getenv("PATH");
-        if (settings.doPathExtensions()) {
+        if(settings.doPathExtensions()) {
             String appendPath = settings.getAppendPath();
-            if (appendPath != null && appendPath.length() > 0) {
+            if(appendPath != null && appendPath.length() > 0) {
                 path = path + ":" + appendPath;
             }
 
-            if (settings.allowPathPrepend()) {
+            if(settings.allowPathPrepend()) {
                 String prependPath = settings.getPrependPath();
-                if (prependPath != null && prependPath.length() > 0) {
+                if(prependPath != null && prependPath.length() > 0) {
                     path = prependPath + ":" + path;
                 }
             }
         }
-        if (settings.verifyPath()) {
+        if(settings.verifyPath()) {
             path = checkPath(path);
         }
         String[] env = new String[3];
@@ -104,15 +103,12 @@ public class ShellTermSession extends GenericTermSession {
         mProcId = createSubprocess(settings.getShell(), env);
     }
 
-    private String checkPath(String path) {
+    private String checkPath (String path) {
         String[] dirs = path.split(":");
         StringBuilder checkedPath = new StringBuilder(path.length());
-        for (String dirname : dirs) {
+        for(String dirname : dirs) {
             File dir = new File(dirname);
-            //T!{ ------------------------------------------------------------
-            //T! if (dir.isDirectory() && FileCompat.canExecute(dir)) {
-            if (dir.isDirectory() && dir.canExecute()) {
-            //T!{ ------------------------------------------------------------
+            if(dir.isDirectory() && dir.canExecute()) {
                 checkedPath.append(dirname);
                 checkedPath.append(":");
             }
@@ -121,20 +117,20 @@ public class ShellTermSession extends GenericTermSession {
     }
 
     @Override
-    public void initializeEmulator(int columns, int rows) {
+    public void initializeEmulator (int columns, int rows) {
         super.initializeEmulator(columns, rows);
 
         mWatcherThread.start();
         sendInitialCommand(mInitialCommand);
     }
 
-    private void sendInitialCommand(String initialCommand) {
-        if (initialCommand.length() > 0) {
+    private void sendInitialCommand (String initialCommand) {
+        if(initialCommand.length() > 0) {
             write(initialCommand + '\r');
         }
     }
 
-    private int createSubprocess(String shell, String[] env) throws IOException {
+    private int createSubprocess (String shell, String[] env) throws IOException {
         ArrayList<String> argList = parse(shell);
         String arg0;
         String[] args;
@@ -142,18 +138,15 @@ public class ShellTermSession extends GenericTermSession {
         try {
             arg0 = argList.get(0);
             File file = new File(arg0);
-            if (!file.exists()) {
+            if(! file.exists()) {
                 Log.e(TermDebug.LOG_TAG, "Shell " + arg0 + " not found!");
                 throw new FileNotFoundException(arg0);
-            //T!{ ------------------------------------------------------------
-            //T! } else if (!FileCompat.canExecute(file)) {
-            } else if (!file.canExecute()) {
-            //T!{ ------------------------------------------------------------
+            } else if(! file.canExecute()) {
                 Log.e(TermDebug.LOG_TAG, "Shell " + arg0 + " not executable!");
                 throw new FileNotFoundException(arg0);
             }
             args = argList.toArray(new String[1]);
-        } catch (Exception e) {
+        } catch(Exception e) {
             argList = parse(mSettings.getFailsafeShell());
             arg0 = argList.get(0);
             args = argList.toArray(new String[1]);
@@ -162,7 +155,7 @@ public class ShellTermSession extends GenericTermSession {
         return TermExec.createSubprocess(mTermFd, arg0, args, env);
     }
 
-    private ArrayList<String> parse(String cmd) {
+    private ArrayList<String> parse (String cmd) {
         final int PLAIN = 0;
         final int WHITESPACE = 1;
         final int INQUOTE = 2;
@@ -170,62 +163,63 @@ public class ShellTermSession extends GenericTermSession {
         ArrayList<String> result =  new ArrayList<String>();
         int cmdLen = cmd.length();
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < cmdLen; i++) {
+        for(int i = 0; i < cmdLen; i++) {
             char c = cmd.charAt(i);
-            if (state == PLAIN) {
-                if (Character.isWhitespace(c)) {
+            if(state == PLAIN) {
+                if(Character.isWhitespace(c)) {
                     result.add(builder.toString());
                     builder.delete(0,builder.length());
                     state = WHITESPACE;
-                } else if (c == '"') {
+                } else if(c == '"') {
                     state = INQUOTE;
                 } else {
                     builder.append(c);
                 }
-            } else if (state == WHITESPACE) {
-                if (Character.isWhitespace(c)) {
+            } else if(state == WHITESPACE) {
+                if(Character.isWhitespace(c)) {
                     // do nothing
-                } else if (c == '"') {
+                } else if(c == '"') {
                     state = INQUOTE;
                 } else {
                     state = PLAIN;
                     builder.append(c);
                 }
-            } else if (state == INQUOTE) {
-                if (c == '\\') {
-                    if (i + 1 < cmdLen) {
+            } else if(state == INQUOTE) {
+                if(c == '\\') {
+                    if(i + 1 < cmdLen) {
                         i += 1;
                         builder.append(cmd.charAt(i));
                     }
-                } else if (c == '"') {
+                } else if(c == '"') {
                     state = PLAIN;
                 } else {
                     builder.append(c);
                 }
             }
         }
-        if (builder.length() > 0) {
+        if(builder.length() > 0) {
             result.add(builder.toString());
         }
         return result;
     }
 
-    private void onProcessExit(int result) {
+    private void onProcessExit (int result) {
         onProcessExit();
     }
 
     @Override
-    public void finish() {
+    public void finish () {
         hangupProcessGroup();
         super.finish();
     }
 
-    /**
-     * Send SIGHUP to a process group, SIGHUP notifies a terminal client, that the terminal have been disconnected,
-     * and usually results in client's death, unless it's process is a daemon or have been somehow else detached
-     * from the terminal (for example, by the "nohup" utility).
+    /** Send SIGHUP to a process group.
+     *
+     * <p>SIGHUP notifies a terminal client, that the terminal have been disconnected, and usually results in
+     * client's death, unless it's process is a daemon or have been somehow else detached from the terminal
+     * (for example, by the `nohup´ utility).</p>
      */
-    void hangupProcessGroup() {
+    void hangupProcessGroup () {
         TermExec.sendSignal(-mProcId, 1);
     }
 }

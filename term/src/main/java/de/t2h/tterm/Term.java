@@ -85,6 +85,8 @@ import java.util.Locale;
 
 /** A terminal emulator activity.
  */
+// TODO Continue cleaning up at `onCreate´.
+//
 public class Term extends Activity
     implements UpdateCallback, SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -226,7 +228,9 @@ public class Term extends Activity
 
     private WindowListAdapter mWinListAdapter;
 
-    private class WindowListActionBarAdapter extends WindowListAdapter implements UpdateCallback {
+    private class WindowListActionBarAdapter extends WindowListAdapter
+        implements UpdateCallback
+    {
         public WindowListActionBarAdapter (SessionList sessions) {
             super(sessions);
         }
@@ -1060,11 +1064,11 @@ public class Term extends Activity
     }
 
     // ************************************************************
-    // Inner class TermKeyUpdater
+    // { Inner class TermKeyUpdater
     // ************************************************************
 
     // TODO ThH: `Term´ can't access `TermKeyListener.mControlKey.getUIMode()´ and
-    // `TermKeyListener.mFnKeyg.etUIMode()´, so as a quick hack I pass in a listener. Refactor code so
+    // `TermKeyListener.mFnKeyg.getUIMode()´, so as a quick hack I pass in a listener. Refactor code so
     // `mControlKey´ et al are part of the MVC model.
     class TermKeyUpdater implements KeyUpdater {
         public void updateControl(int state) { update(mExtraKeyButtons[0], state); }
@@ -1079,7 +1083,7 @@ public class Term extends Activity
         }
     }
 
-    // ************************************************************
+    // } ************************************************************
 
     private void doSendControlKey() {
         EmulatorView emv = getCurrentEmulatorView();

@@ -32,122 +32,121 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import de.t2h.tterm.emulatorview.TermSession;
-
 import de.t2h.tterm.util.SessionList;
 import de.t2h.tterm.util.TermSettings;
 
+// ThH: Cleaned up.
+//
 public class RemoteInterface extends Activity {
-    //T!{ ------------------------------------------------------------
-    //T! protected static final String PRIVACT_OPEN_NEW_WINDOW = "jackpal.androidterm.private.OPEN_NEW_WINDOW";
-    //T! protected static final String PRIVACT_SWITCH_WINDOW = "jackpal.androidterm.private.SWITCH_WINDOW";
-    //T!
-    //T! protected static final String PRIVEXTRA_TARGET_WINDOW = "jackpal.androidterm.private.target_window";
-    //T!
-    //T- protected static final String PRIVACT_ACTIVITY_ALIAS = "jackpal.androidterm.TermInternal";
+    // ************************************************************
+    // Constants
+    // ************************************************************
 
     protected static final String PRIVACT_OPEN_NEW_WINDOW = "de.t2h.tterm.private.OPEN_NEW_WINDOW";
-    protected static final String PRIVACT_SWITCH_WINDOW = "de.t2h.tterm.private.SWITCH_WINDOW";
+    protected static final String PRIVACT_SWITCH_WINDOW   = "de.t2h.tterm.private.SWITCH_WINDOW";
 
     protected static final String PRIVEXTRA_TARGET_WINDOW = "de.t2h.tterm.private.target_window";
 
     protected static final String PRIVACT_ACTIVITY_ALIAS = "de.t2h.tterm.TermInternal";
-    //T!} ------------------------------------------------------------
+
+    // ************************************************************
+    // Attributes
+    // ************************************************************
 
     private TermSettings mSettings;
 
     private TermService mTermService;
-    private Intent mTSIntent;
-    private ServiceConnection mTSConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className, IBinder service) {
+    protected TermService getTermService () {
+        return mTermService;
+    }
+
+    private Intent mTermServiceIntent;
+
+    private ServiceConnection mTermServiceConnection = new ServiceConnection() {
+        public void onServiceConnected (ComponentName className, IBinder service) {
             TermService.TSBinder binder = (TermService.TSBinder) service;
             mTermService = binder.getService();
             handleIntent();
         }
 
-        public void onServiceDisconnected(ComponentName className) {
+        public void onServiceDisconnected (ComponentName className) {
             mTermService = null;
         }
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         mSettings = new TermSettings(getResources(), prefs);
 
-        Intent TSIntent = new Intent(this, TermService.class);
-        mTSIntent = TSIntent;
-        startService(TSIntent);
-        if (!bindService(TSIntent, mTSConnection, BIND_AUTO_CREATE)) {
+        mTermServiceIntent = new Intent(this, TermService.class);
+        startService(mTermServiceIntent);
+        if(! bindService(mTermServiceIntent, mTermServiceConnection, BIND_AUTO_CREATE)) {
             Log.e(TermDebug.LOG_TAG, "bind to service failed!");
             finish();
         }
     }
 
     @Override
-    public void finish() {
-        ServiceConnection conn = mTSConnection;
-        if (conn != null) {
+    public void finish () {
+        ServiceConnection conn = mTermServiceConnection;
+        if(conn != null) {
             unbindService(conn);
 
             // Stop the service if no terminal sessions are running
             TermService service = mTermService;
-            if (service != null) {
+            if(service != null) {
                 SessionList sessions = service.getSessions();
-                if (sessions == null || sessions.size() == 0) {
-                    stopService(mTSIntent);
+                if(sessions == null || sessions.size() == 0) {
+                    stopService(mTermServiceIntent);
                 }
             }
 
-            mTSConnection = null;
+            mTermServiceConnection = null;
             mTermService = null;
         }
         super.finish();
     }
 
-    protected TermService getTermService() {
-        return mTermService;
-    }
-
-    protected void handleIntent() {
+    protected void handleIntent () {
         TermService service = getTermService();
-        if (service == null) {
+        if(service == null) {
             finish();
             return;
         }
 
         Intent myIntent = getIntent();
         String action = myIntent.getAction();
-        if (action.equals(Intent.ACTION_SEND)
-                && myIntent.hasExtra(Intent.EXTRA_STREAM)) {
-          /* "permission.RUN_SCRIPT" not required as this is merely opening a new window. */
+        if(action.equals(Intent.ACTION_SEND)
+            && myIntent.hasExtra(Intent.EXTRA_STREAM)
+        ) {
+            // `permission.RUN_SCRIPT´ not required as this is merely opening a new window.
             Object extraStream = myIntent.getExtras().get(Intent.EXTRA_STREAM);
-            if (extraStream instanceof Uri) {
+            if(extraStream instanceof Uri) {
                 String path = ((Uri) extraStream).getPath();
                 File file = new File(path);
                 String dirPath = file.isDirectory() ? path : file.getParent();
                 openNewWindow("cd " + quoteForBash(dirPath));
             }
         } else {
-            // Intent sender may not have permissions, ignore any extras
+            // Intent sender may not have permissions, ignore any extras.
             openNewWindow(null);
         }
 
         finish();
     }
 
-    /**
-     *  Quote a string so it can be used as a parameter in bash and similar shells.
-     */
-    public static String quoteForBash(String s) {
+    /** Quote a string so it can be used as a parameter in Bash and similar shells. */
+    public static String quoteForBash (String s) {
         StringBuilder builder = new StringBuilder();
         String specialChars = "\"\\$`!";
         builder.append('"');
         int length = s.length();
-        for (int i = 0; i < length; i++) {
+        for(int i = 0; i < length; i++) {
             char c = s.charAt(i);
-            if (specialChars.indexOf(c) >= 0) {
+            if(specialChars.indexOf(c) >= 0) {
                 builder.append('\\');
             }
             builder.append(c);
@@ -156,12 +155,12 @@ public class RemoteInterface extends Activity {
         return builder.toString();
     }
 
-    protected String openNewWindow(String iInitialCommand) {
+    protected String openNewWindow (String iInitialCommand) {
         TermService service = getTermService();
 
         String initialCommand = mSettings.getInitialCommand();
-        if (iInitialCommand != null) {
-            if (initialCommand != null) {
+        if(iInitialCommand != null) {
+            if(initialCommand != null) {
                 initialCommand += "\r" + iInitialCommand;
             } else {
                 initialCommand = iInitialCommand;
@@ -183,33 +182,33 @@ public class RemoteInterface extends Activity {
             startActivity(intent);
 
             return handle;
-        } catch (IOException e) {
+        } catch(IOException e) {
             return null;
         }
     }
 
-    protected String appendToWindow(String handle, String iInitialCommand) {
+    protected String appendToWindow (String handle, String iInitialCommand) {
         TermService service = getTermService();
 
         // Find the target window
         SessionList sessions = service.getSessions();
         GenericTermSession target = null;
         int index;
-        for (index = 0; index < sessions.size(); ++index) {
+        for(index = 0; index < sessions.size(); ++index) {
             GenericTermSession session = (GenericTermSession) sessions.get(index);
             String h = session.getHandle();
-            if (h != null && h.equals(handle)) {
+            if(h != null && h.equals(handle)) {
                 target = session;
                 break;
             }
         }
 
-        if (target == null) {
+        if(target == null) {
             // Target window not found, open a new one
             return openNewWindow(iInitialCommand);
         }
 
-        if (iInitialCommand != null) {
+        if(iInitialCommand != null) {
             target.write(iInitialCommand);
             target.write('\r');
         }

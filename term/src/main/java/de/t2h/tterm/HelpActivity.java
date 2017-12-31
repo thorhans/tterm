@@ -16,16 +16,11 @@
 
 package de.t2h.tterm;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-//T+{ ------------------------------------------------------------
 
 /** Help.
  *
@@ -36,7 +31,7 @@ public class HelpActivity extends Activity {
   WebView mWebView;
   
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate (Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.help_activity);
       
@@ -48,7 +43,7 @@ public class HelpActivity extends Activity {
       settings.setDisplayZoomControls(false);
 
       // Necessary since API 24 (7.0), otherwise you get a fatal exception when you click on a link. For
-      // example, when you click on the link to `changelog.xhtml´:
+      // example, when you click on the link to `changelog.xhtml´, you get:
       //   android.os.FileUriExposedException: file:///android_asset/changelog.xhtml exposed beyond app
       //   through Intent.getData()
       //
@@ -73,12 +68,11 @@ public class HelpActivity extends Activity {
       //           /*baseUrl*/ "file:///android_asset/",
       //           /*data*/    new String(buffer),
       //           "application/xhtml+xml", "UTF-8", null);
-      //   } catch (IOException e) {
+      //   } catch(IOException e) {
       //       e.printStackTrace();
       //   }
       //
       mWebView.loadUrl("file:///android_asset/1-index.xhtml");
-
   }
 
   @Override
@@ -89,4 +83,3 @@ public class HelpActivity extends Activity {
           super.onBackPressed();
   }  
 }
-//T+} ------------------------------------------------------------
