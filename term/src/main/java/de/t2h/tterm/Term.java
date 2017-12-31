@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -71,7 +72,6 @@ import de.t2h.tterm.emulatorview.KeyUpdater;
 import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.emulatorview.TextRenderer;
 import de.t2h.tterm.emulatorview.UpdateCallback;
-import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
 import de.t2h.tterm.key.PKey;
 import de.t2h.tterm.key.PKeyButton;
 import de.t2h.tterm.key.PKeyRow;
@@ -89,32 +89,27 @@ import java.util.Locale;
  */
 
 public class Term extends Activity implements UpdateCallback, SharedPreferences.OnSharedPreferenceChangeListener {
-    /**
-     * The ViewFlipper which holds the collection of EmulatorView widgets.
-     */
+
+    /** The ViewFlipper which holds the collection of EmulatorView widgets. */
     private TermViewFlipper mViewFlipper;
 
-    //T+{ ------------------------------------------------------------
+    /** The name of the ViewFlipper in the resources. */
+    private static final int VIEW_FLIPPER = R.id.view_flipper;
+
+    // ------------------------------------------------------------
+    // Extra keys
+    // ------------------------------------------------------------
+
     private static int mExtraKeysCount = 0;
     private PKeyButton[] mExtraKeyButtons;
     private PKey[] mExtraKeys;
-    // = new PKey[]{
-    //     PKey.Control, PKey.Tab, PKey.Esc,
-    //     PKey.Slash, PKey.Minus,
-    //     PKey.Up, PKey.Down, PKey.Left, PKey.Right,
-    //     PKey.Fn1
-    // };
 
     private int mExtraKeySize;
     int mExtraKeyDefaultColor;
     private int mExtraKeysShown;
     private LinearLayout mExtraKeysRow;
-    //T+} ------------------------------------------------------------
 
-    /**
-     * The name of the ViewFlipper in the resources.
-     */
-    private static final int VIEW_FLIPPER = R.id.view_flipper;
+    // ------------------------------------------------------------
 
     private SessionList mTermSessions;
 
@@ -133,11 +128,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
     public static final int REQUEST_CHOOSE_WINDOW = 1;
 
-    //T!{ ------------------------------------------------------------
     // TODO Should this be in `jackpal.androidterm´ or `de.t2h.tterm´?
-    //T-! public static final String EXTRA_WINDOW_ID = "jackpal.androidterm.window_id";
+    //   public static final String EXTRA_WINDOW_ID = "jackpal.androidterm.window_id";
     public static final String EXTRA_WINDOW_ID = "de.t2h.tterm.window_id";
-    //T!} ------------------------------------------------------------
 
     private int onResumeSelectWindow = -1;
     private ComponentName mPrivateAlias;
@@ -149,9 +142,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
     private boolean mBackKeyPressed;
 
-    //T+{ ------------------------------------------------------------
+    // ------------------------------------------------------------
     // Do *not* rename these 4 strings to use `de.t2h.tterm´!
-    //T+} ------------------------------------------------------------
+    // ------------------------------------------------------------
     private static final String ACTION_PATH_BROADCAST = "jackpal.androidterm.broadcast.APPEND_TO_PATH";
     private static final String ACTION_PATH_PREPEND_BROADCAST = "jackpal.androidterm.broadcast.PREPEND_TO_PATH";
     private static final String PERMISSION_PATH_BROADCAST = "jackpal.androidterm.permission.APPEND_TO_PATH";
@@ -192,10 +185,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         }
     };
 
-    //T!{ ------------------------------------------------------------
-    //T! private ActionBarCompat mActionBar;
     private ActionBar mActionBar;
-    //T!} ------------------------------------------------------------
 
     private int mActionBarMode = TermSettings.ACTION_BAR_MODE_NONE;
 
@@ -207,11 +197,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     }
 
     private class WindowListActionBarAdapter extends WindowListAdapter implements UpdateCallback {
-        //T-{ ------------------------------------------------------------
-        //T- // From android.R.style in API 13
-        //T- private static final int TextAppearance_Holo_Widget_ActionBar_Title = 0x01030112;
-        //T-} ------------------------------------------------------------
-
         public WindowListActionBarAdapter(SessionList sessions) {
             super(sessions);
         }
@@ -221,14 +206,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             TextView label = new TextView(Term.this);
             String title = getSessionTitle(position, getString(R.string.window_title, position + 1));
             label.setText(title);
-            //T-{ ------------------------------------------------------------
-            //T- if (AndroidCompat.SDK >= 13) {
-            //T-     label.setTextAppearance(Term.this, TextAppearance_Holo_Widget_ActionBar_Title);
-            //T- } else {
-            //T-     label.setTextAppearance(Term.this, android.R.style.TextAppearance_Medium);
-            //T- }
             label.setTextAppearance(Term.this, android.R.style.TextAppearance_Holo_Widget_ActionBar_Title);
-            //T-} ------------------------------------------------------------
             return label;
         }
 
@@ -243,10 +221,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         }
     }
 
-    //T!{ ------------------------------------------------------------
-    //T! private ActionBarCompat.OnNavigationListener mWinListItemSelected = new ActionBarCompat.OnNavigationListener() {
     private ActionBar.OnNavigationListener mWinListItemSelected = new ActionBar.OnNavigationListener() {
-        //T!{ ------------------------------------------------------------
         public boolean onNavigationItemSelected(int position, long id) {
             int oldPosition = mViewFlipper.getDisplayedChild();
             if (position != oldPosition) {
@@ -305,22 +280,16 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         }
     }
 
-    /**
-     * Should we use keyboard shortcuts?
-     */
+    /** Should we use keyboard shortcuts? */
     private boolean mUseKeyboardShortcuts;
 
-    /**
-     * Intercepts keys before the view/terminal gets it.
-     */
+    /** Intercepts keys before the view/terminal gets it. */
     private View.OnKeyListener mKeyListener = new View.OnKeyListener() {
         public boolean onKey(View v, int keyCode, KeyEvent event) {
             return backkeyInterceptor(keyCode, event) || keyboardShortcuts(keyCode, event);
         }
 
-        /**
-         * Keyboard shortcuts (tab management, paste)
-         */
+        /** Keyboard shortcuts (tab management, paste). */
         private boolean keyboardShortcuts(int keyCode, KeyEvent event) {
             if (event.getAction() != KeyEvent.ACTION_DOWN) {
                 return false;
@@ -328,17 +297,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             if (!mUseKeyboardShortcuts) {
                 return false;
             }
-            //T!{ ------------------------------------------------------------
-            //T! boolean isCtrlPressed = (event.getMetaState() & KeycodeConstants.META_CTRL_ON) != 0;
-            //T! boolean isShiftPressed = (event.getMetaState() & KeycodeConstants.META_SHIFT_ON) != 0;
             boolean isCtrlPressed = (event.getMetaState() & KeyEvent.META_CTRL_ON) != 0;
             boolean isShiftPressed = (event.getMetaState() & KeyEvent.META_SHIFT_ON) != 0;
-            //T!} ------------------------------------------------------------
 
-            //T!{ ------------------------------------------------------------
-            //T! if (keyCode == KeycodeConstants.KEYCODE_TAB && isCtrlPressed) {
             if (keyCode == KeyEvent.KEYCODE_TAB && isCtrlPressed) {
-                //T!} ------------------------------------------------------------
                 if (isShiftPressed) {
                     mViewFlipper.showPrevious();
                 } else {
@@ -346,17 +308,11 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                 }
 
                 return true;
-                //T!{ ------------------------------------------------------------
-                //T! } else if (keyCode == KeycodeConstants.KEYCODE_N && isCtrlPressed && isShiftPressed) {
             } else if (keyCode == KeyEvent.KEYCODE_N && isCtrlPressed && isShiftPressed) {
-                //T!} ------------------------------------------------------------
                 doCreateNewWindow();
 
                 return true;
-                //T!{ ------------------------------------------------------------
-                //T! } else if (keyCode == KeycodeConstants.KEYCODE_V && isCtrlPressed && isShiftPressed) {
             } else if (keyCode == KeyEvent.KEYCODE_V && isCtrlPressed && isShiftPressed) {
-                //T!} ------------------------------------------------------------
                 doPaste();
 
                 return true;
@@ -365,9 +321,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             }
         }
 
-        /**
-         * Make sure the back button always leaves the application.
-         */
+        /** Make sure the back button always leaves the application. */
         private boolean backkeyInterceptor(int keyCode, KeyEvent event) {
             if (keyCode == KeyEvent.KEYCODE_BACK && mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES && mActionBar != null && mActionBar.isShowing()) {
                 /* We need to intercept the key event before the view sees it,
@@ -411,8 +365,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         TSIntent = new Intent(this, TermService.class);
         startService(TSIntent);
 
-        //T-[ ------------------------------------------------------------
-        //T- if (AndroidCompat.SDK >= 11) {
         int actionBarMode = mSettings.actionBarMode();
         mActionBarMode = actionBarMode;
         if (AndroidCompat.V11ToV20) {
@@ -425,10 +377,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                     break;
             }
         }
-        //T- } else {
-        //T-     mActionBarMode = TermSettings.ACTION_BAR_MODE_ALWAYS_VISIBLE;
-        //T- }
-        //T-} ------------------------------------------------------------
 
         setContentView(R.layout.term_activity);
         mViewFlipper = (TermViewFlipper) findViewById(VIEW_FLIPPER);
@@ -456,33 +404,21 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TermDebug.LOG_TAG);
 
-        //T!{ ------------------------------------------------------------
-        //T! WifiManager wm = (WifiManager)getSystemService(Context.WIFI_SERVICE);
         WifiManager wm = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        //T!} ------------------------------------------------------------
 
         int wifiLockMode = WifiManager.WIFI_MODE_FULL;
-        //T-{ ------------------------------------------------------------
-        //T- if (AndroidCompat.SDK >= 12) {
         wifiLockMode = WIFI_MODE_FULL_HIGH_PERF;
-        //T- }
-        //T-} ------------------------------------------------------------
         mWifiLock = wm.createWifiLock(wifiLockMode, TermDebug.LOG_TAG);
 
-        //T!{ ------------------------------------------------------------
-        //T! ActionBarCompat actionBar = ActivityCompat.getActionBar(this);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             mActionBar = actionBar;
-            //T! actionBar.setNavigationMode(ActionBarCompat.NAVIGATION_MODE_LIST);
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-            //T! actionBar.setDisplayOptions(0, ActionBarCompat.DISPLAY_SHOW_TITLE);
             actionBar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
             if (mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
                 actionBar.hide();
             }
         }
-        //T!} ------------------------------------------------------------
 
         mHaveFullHwKeyboard = checkHaveFullHwKeyboard(getResources().getConfiguration());
 
@@ -545,12 +481,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             updatePrefs();
 
             if (onResumeSelectWindow >= 0) {
-                //T!{ ------------------------------------------------------------
-                //T! mViewFlipper.setDisplayedChild(onResumeSelectWindow);
                 mViewFlipper.setDisplayedChild(onResumeSelectWindow == Integer.MAX_VALUE
                     ? mViewFlipper.getChildCount() - 1
                     : onResumeSelectWindow);
-                //T!} ------------------------------------------------------------
                 onResumeSelectWindow = -1;
             }
             mViewFlipper.onResume();
@@ -622,9 +555,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         TermView emulatorView = new TermView(this, session, metrics);
 
-        //T+{ ------------------------------------------------------------
         emulatorView.attachKeyUpdater(new TermKeyUpdater());
-        //T+} ------------------------------------------------------------
 
         emulatorView.setExtGestureListener(new EmulatorViewGestureListener(emulatorView));
         emulatorView.setOnKeyListener(mKeyListener);
@@ -670,12 +601,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             WindowManager.LayoutParams params = win.getAttributes();
             final int FULLSCREEN = WindowManager.LayoutParams.FLAG_FULLSCREEN;
             int desiredFlag = mSettings.showStatusBar() ? 0 : FULLSCREEN;
-            //T!{ ------------------------------------------------------------
-            //T! if (desiredFlag != (params.flags & FULLSCREEN) || (AndroidCompat.SDK >= 11 && mActionBarMode != mSettings.actionBarMode())) {
-            if (desiredFlag != (params.flags & FULLSCREEN)
-                || mActionBarMode != mSettings.actionBarMode()
-                ) {
-                //T!} ------------------------------------------------------------
+            if (desiredFlag != (params.flags & FULLSCREEN) || mActionBarMode != mSettings.actionBarMode()) {
                 if (mAlreadyStarted) {
                     // Can't switch to/from fullscreen after
                     // starting the activity.
@@ -709,17 +635,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     public void onPause() {
         super.onPause();
 
-        //T-{ ------------------------------------------------------------
-        //T- if (AndroidCompat.SDK < 5) {
-        //T-     /* If we lose focus between a back key down and a back key up,
-        //T-        we shouldn't respond to the next back key up event unless
-        //T-        we get another key down first */
-        //T-     mBackKeyPressed = false;
-        //T- }
-        //T-} ------------------------------------------------------------
-        /* Explicitly close the input method
-           Otherwise, the soft keyboard could cover up whatever activity takes
-           our place */
+        // Explicitly close the input method.
+        //
+        // Otherwise, the soft keyboard could cover up whatever activity takes our place
+        //
         final IBinder token = mViewFlipper.getWindowToken();
         new Thread() {
             @Override
@@ -775,16 +694,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        //T!{ ------------------------------------------------------------
-        //T! MenuItemCompat.setShowAsAction(menu.findItem(R.id.menu_new_window), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-        //T! MenuItemCompat.setShowAsAction(menu.findItem(R.id.menu_close_window), MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
         menu.findItem(R.id.menu_new_window).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         menu.findItem(R.id.menu_close_window).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        //T!} ------------------------------------------------------------
 
-        //T+{ ------------------------------------------------------------
         menu.findItem(R.id.menu_settings).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        //T+} ------------------------------------------------------------
 
         return true;
     }
@@ -798,15 +711,14 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             doCreateNewWindow();
         } else if (id == R.id.menu_close_window) {
             confirmCloseWindow();
-            //T+{ ------------------------------------------------------------
         } else if (id == R.id.menu_settings) {
             doPreferences();
-            //T+} ------------------------------------------------------------
         } else if (id == R.id.menu_window_list) {
             startActivityForResult(new Intent(this, WindowList.class), REQUEST_CHOOSE_WINDOW);
         } else if (id == R.id.menu_reset) {
             doResetTerminal();
-            Toast toast = Toast.makeText(this, R.string.reset_toast_notification, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, R.string.reset_toast_notification,
+                Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         } else if (id == R.id.menu_send_email) {
@@ -820,15 +732,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         } else if (id == R.id.menu_toggle_wifilock) {
             doToggleWifiLock();
         } else if (id == R.id.action_help) {
-            //T!{ ------------------------------------------------------------
-            //T! Intent openHelp = new Intent(Intent.ACTION_VIEW,
-            //T! Uri.parse(getString(R.string.help_url)));
-            //T! startActivity(openHelp);
             Intent helpIntent = new Intent(this, HelpActivity.class);
             startActivity(helpIntent);
-            //T!} ------------------------------------------------------------
         }
-        // Hide the action bar if appropriate
+        // Hide the action bar if appropriate.
         if (mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
             mActionBar.hide();
         }
@@ -935,13 +842,11 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         switch (action) {
             case RemoteInterface.PRIVACT_OPEN_NEW_WINDOW:
                 onResumeSelectWindow = Integer.MAX_VALUE;
-                //T+{ ------------------------------------------------------------
                 // Sometimes Term.mTSConnection.onServiceConnected gets called *before* `onResumeSelectWindow´.
                 // As a quick fix, set displayed child again.
                 if (mViewFlipper != null && mViewFlipper.getChildCount() > 0) {
                     mViewFlipper.setDisplayedChild(mViewFlipper.getChildCount() - 1);
                 }
-                //T+} ------------------------------------------------------------
                 break;
             case RemoteInterface.PRIVACT_SWITCH_WINDOW:
                 int target = intent.getIntExtra(RemoteInterface.PRIVEXTRA_TARGET_WINDOW, -1);
@@ -1009,37 +914,13 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        //T-{ ------------------------------------------------------------
-        //T- /* The pre-Eclair default implementation of onKeyDown() would prevent
-        //T-    our handling of the Back key in onKeyUp() from taking effect, so
-        //T-    ignore it here */
-        //T- if (AndroidCompat.SDK < 5 && keyCode == KeyEvent.KEYCODE_BACK) {
-        //T-     /* Android pre-Eclair has no key event tracking, and a back key
-        //T-        down event delivered to an activity above us in the back stack
-        //T-        could be succeeded by a back key up event to us, so we need to
-        //T-        keep track of our own back key presses */
-        //T-     mBackKeyPressed = true;
-        //T-     return true;
-        //T- } else {
         return super.onKeyDown(keyCode, event);
-        //T- }
-        //T-} ------------------------------------------------------------
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                //T-{ ------------------------------------------------------------
-                //T- if (AndroidCompat.SDK < 5) {
-                //T-     if (!mBackKeyPressed) {
-                //T-         /* This key up event might correspond to a key down
-                //T-            delivered to another activity -- ignore */
-                //T-         return false;
-                //T-     }
-                //T-     mBackKeyPressed = false;
-                //T- }
-                //T-} ------------------------------------------------------------
                 if (mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES && mActionBar != null && mActionBar.isShowing()) {
                     mActionBar.hide();
                     return true;
@@ -1091,16 +972,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     }
 
     private boolean canPaste() {
-        //T!{ ------------------------------------------------------------
-        //T! ClipboardManagerCompat clip = ClipboardManagerCompatFactory
-        //T!        .getManager(getApplicationContext());
-        ClipboardManagerCompatV11 clip = ClipboardManagerCompatV11
-            .getManager(getApplicationContext());
-        //T!} ------------------------------------------------------------
-        if (clip.hasText()) {
-            return true;
-        }
-        return false;
+        ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        return clip.hasText();
     }
 
     private void doPreferences() {
@@ -1121,9 +994,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             // currently it's required, otherwise nobody
             // wants to handle the intent.
             String addr = "user@example.com";
-            Intent intent =
-                new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"
-                    + addr));
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + addr));
 
             String subject = getString(R.string.email_transcript_subject);
             String title = session.getTitle();
@@ -1131,8 +1002,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                 subject = subject + " - " + title;
             }
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-            intent.putExtra(Intent.EXTRA_TEXT,
-                session.getTranscriptText().trim());
+            intent.putExtra(Intent.EXTRA_TEXT, session.getTranscriptText().trim());
             try {
                 startActivity(Intent.createChooser(intent,
                     getString(R.string.email_transcript_chooser_title)));
@@ -1145,12 +1015,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     }
 
     private void doCopyAll() {
-        //T!{ ------------------------------------------------------------
-        //T! ClipboardManagerCompat clip = ClipboardManagerCompatFactory
-        //T!        .getManager(getApplicationContext());
-        ClipboardManagerCompatV11 clip = ClipboardManagerCompatV11
-            .getManager(getApplicationContext());
-        //T!} ------------------------------------------------------------
+        ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         clip.setText(getCurrentTermSession().getTranscriptText().trim());
     }
 
@@ -1158,17 +1023,11 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         if (!canPaste()) {
             return;
         }
-        //T!{ ------------------------------------------------------------
-        //T! ClipboardManagerCompat clip = ClipboardManagerCompatFactory
-        //T!        .getManager(getApplicationContext());
-        ClipboardManagerCompatV11 clip = ClipboardManagerCompatV11
-            .getManager(getApplicationContext());
-        //T!} ------------------------------------------------------------
+        ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         CharSequence paste = clip.getText();
         getCurrentTermSession().write(paste.toString());
     }
 
-    //T+{ ------------------------------------------------------------
     // TODO ThH: `Term´ can't access `TermKeyListener.mControlKey.getUIMode()´ and
     // `TermKeyListener.mFnKeyg.etUIMode()´, so as a quick hack I pass in a listener. Refactor code so
     // `mControlKey´ et al are part of the MVC model.
@@ -1184,40 +1043,22 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             }
         }
     }
-    //T+} ------------------------------------------------------------
 
     private void doSendControlKey() {
-        //T!{ ------------------------------------------------------------
-        //T! getCurrentEmulatorView().sendControlKey();
         EmulatorView emv = getCurrentEmulatorView();
         if(emv != null) { emv.sendControlKey(); }
-        //T!} ------------------------------------------------------------
     }
 
     private void doSendFnKey() {
-        //T!{ ------------------------------------------------------------
-        //T! getCurrentEmulatorView().sendFnKey();
         EmulatorView emv = getCurrentEmulatorView();
         if(emv != null) { emv.sendFnKey(); }
-        //T!} ------------------------------------------------------------
     }
 
     private void doDocumentKeys() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         Resources r = getResources();
         dialog.setTitle(r.getString(R.string.control_key_dialog_title));
-        //T!{ ------------------------------------------------------------
-        //T! dialog.setMessage(
-        //T!     formatMessage(mSettings.getControlKeyId(), TermSettings.CONTROL_KEY_ID_NONE,
-        //T!         r, R.array.control_keys_short_names,
-        //T!         R.string.control_key_dialog_control_text,
-        //T!         R.string.control_key_dialog_control_disabled_text, "CTRLKEY")
-        //T!         + "\n\n" +
-        //T!     formatMessage(mSettings.getFnKeyId(), TermSettings.FN_KEY_ID_NONE,
-        //T!         r, R.array.fn_keys_short_names,
-        //T!         R.string.control_key_dialog_fn_text,
-        //T!         R.string.control_key_dialog_fn_disabled_text, "FNKEY"));
-        StringBuffer msg = new StringBuffer();
+       StringBuffer msg = new StringBuffer();
 
         msg.append(r.getString(R.string.control_key_dialog_control_text))
             .append("\n");
@@ -1230,24 +1071,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             "FNKEY", mSettings.getFnKeyId(), TermSettings.FN_KEY_ID_NONE);
 
         dialog.setMessage(msg.toString());
-        //T!} ------------------------------------------------------------
-         dialog.show();
-     }
-
-    //T!{ ------------------------------------------------------------
-    //T! private String formatMessage(int keyId, int disabledKeyId,
-    //T!     Resources r, int arrayId,
-    //T!     int enabledId,
-    //T!     int disabledId, String regex) {
-    //T!     if (keyId == disabledKeyId) {
-    //T!         return r.getString(disabledId);
-    //T!     }
-    //T!     String[] keyNames = r.getStringArray(arrayId);
-    //T!     String keyName = keyNames[keyId];
-    //T!     String template = r.getString(enabledId);
-    //T!     String result = template.replaceAll(regex, keyName);
-    //T!     return result;
-    //T! }
+        dialog.show();
+    }
 
     /** Document mapping of Ctrl or Fn.
      *
@@ -1266,10 +1091,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                 .append("\n");
         }
     }
-    //T!} ------------------------------------------------------------
 
     private void doToggleSoftKeyboard() {
-        //T+{ ------------------------------------------------------------
+        // ------------------------------------------------------------
         // Also toggle the extra keys
         // ------------------------------------------------------------
         //
@@ -1288,15 +1112,11 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         boolean show = ! isSoftKeyboardShown();
 
         // (2) Toggle the soft keyboard.
-        //T+} ------------------------------------------------------------
 
-        InputMethodManager imm = (InputMethodManager)
-            getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 
-        //T+{ ------------------------------------------------------------
         setExtraKeysShown(mExtraKeysShown, show);
-        //T+} ------------------------------------------------------------
     }
 
     private void doToggleWakeLock() {
@@ -1305,10 +1125,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         } else {
             mWakeLock.acquire();
         }
-        //T!{ ------------------------------------------------------------
-        //T! ActivityCompat.invalidateOptionsMenu(this);
         invalidateOptionsMenu();
-        //T!} ------------------------------------------------------------
     }
 
     private void doToggleWifiLock() {
@@ -1317,17 +1134,11 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         } else {
             mWifiLock.acquire();
         }
-        //T!{ ------------------------------------------------------------
-        //T! ActivityCompat.invalidateOptionsMenu(this);
         invalidateOptionsMenu();
-        //T!} ------------------------------------------------------------
     }
 
     private void doToggleActionBar() {
-        //T!{ ------------------------------------------------------------
-        //T! ActionBarCompat bar = mActionBar;
         ActionBar bar = mActionBar;
-        //T!} ------------------------------------------------------------
         if (bar == null) {
             return;
         }
@@ -1341,10 +1152,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     private void doUIToggle(int x, int y, int width, int height) {
         switch (mActionBarMode) {
         case TermSettings.ACTION_BAR_MODE_NONE:
-            //T!{ ------------------------------------------------------------
-            //T! if (AndroidCompat.SDK >= 11 && (mHaveFullHwKeyboard || y < height / 2)) {
             if (mHaveFullHwKeyboard || y < height / 2) {
-            //T!} ------------------------------------------------------------
                 openOptionsMenu();
                 return;
             } else {
@@ -1368,9 +1176,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         getCurrentEmulatorView().requestFocus();
     }
 
-    /**
+    /** Send a URL up to Android to be handled by a browser.
      *
-     * Send a URL up to Android to be handled by a browser.
      * @param link The URL to be opened.
      */
     private void execURL(String link)
