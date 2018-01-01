@@ -85,7 +85,7 @@ import java.util.Locale;
 
 /** A terminal emulator activity.
  */
-// TODO Continue cleaning up at `onCreate´.
+// ThH: Cleaned up.
 //
 public class Term extends Activity
     implements UpdateCallback, SharedPreferences.OnSharedPreferenceChangeListener
