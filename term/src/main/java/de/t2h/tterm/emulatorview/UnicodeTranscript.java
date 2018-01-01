@@ -33,7 +33,7 @@ import android.text.AndroidCharacter;
  *   for example, if column 20 starts at index 23 in the array, then mOffset[20] = 3.</li>
  * </ul>
  *
- * <p>Style information is stored in a separate circular buffer of StyleRows.</p>nn
+ * <p>Style information is stored in a separate circular buffer of StyleRows.</p>
  *
  * <p>Rows are allocated on demand, when a character is first stored into them. A "basic" row is allocated
  * unless the store which triggers the allocation requires a "full" row. "Basic" rows are converted to "full"
