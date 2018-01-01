@@ -382,14 +382,14 @@ public class Term extends Activity
     // ************************************************************
 
     @Override
-    public void onCreate(Bundle icicle) {
+    public void onCreate (Bundle icicle) {
         super.onCreate(icicle);
 
         Log.v(TermDebug.LOG_TAG, "onCreate");
 
         mPrivateAlias = new ComponentName(this, RemoteInterface.PRIVACT_ACTIVITY_ALIAS);
 
-        if (icicle == null)
+        if(icicle == null)
             onNewIntent(getIntent());
 
         final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -412,14 +412,14 @@ public class Term extends Activity
 
         int actionBarMode = mSettings.actionBarMode();
         mActionBarMode = actionBarMode;
-        if (AndroidCompat.V11ToV20) {
-            switch (actionBarMode) {
-                case TermSettings.ACTION_BAR_MODE_ALWAYS_VISIBLE:
-                    setTheme(R.style.Theme_Holo);
-                    break;
-                case TermSettings.ACTION_BAR_MODE_HIDES:
-                    setTheme(R.style.Theme_Holo_ActionBarOverlay);
-                    break;
+        if(AndroidCompat.V11ToV20) {
+            switch(actionBarMode) {
+            case TermSettings.ACTION_BAR_MODE_ALWAYS_VISIBLE:
+                setTheme(R.style.Theme_Holo);
+                break;
+            case TermSettings.ACTION_BAR_MODE_HIDES:
+                setTheme(R.style.Theme_Holo_ActionBarOverlay);
+                break;
             }
         }
 
@@ -456,11 +456,11 @@ public class Term extends Activity
         mWifiLock = wm.createWifiLock(wifiLockMode, TermDebug.LOG_TAG);
 
         ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
+        if(actionBar != null) {
             mActionBar = actionBar;
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
             actionBar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-            if (mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
+            if(mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
                 actionBar.hide();
             }
         }
@@ -471,13 +471,8 @@ public class Term extends Activity
         mAlreadyStarted = true;
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        mSettings.readPrefs(sharedPreferences);
-    }
-
-    private String makePathFromBundle(Bundle extras) {
-        if (extras == null || extras.size() == 0) {
+    private String makePathFromBundle (Bundle extras) {
+        if(extras == null || extras.size() == 0) {
             return "";
         }
 
@@ -487,9 +482,9 @@ public class Term extends Activity
         Arrays.sort(keys, collator);
 
         StringBuilder path = new StringBuilder();
-        for (String key : keys) {
+        for(String key : keys) {
             String dir = extras.getString(key);
-            if (dir != null && !dir.equals("")) {
+            if(dir != null && ! dir.equals("")) {
                 path.append(dir);
                 path.append(":");
             }
@@ -499,22 +494,22 @@ public class Term extends Activity
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart () {
         super.onStart();
 
-        if (!bindService(TermSserviceIntent, mTSConnection, BIND_AUTO_CREATE)) {
+        if(! bindService(TermSserviceIntent, mTSConnection, BIND_AUTO_CREATE)) {
             throw new IllegalStateException("Failed to bind to TermService!");
         }
     }
 
-    private void populateViewFlipper() {
-        if (mTermService != null) {
+    private void populateViewFlipper () {
+        if(mTermService != null) {
             mTermSessions = mTermService.getSessions();
 
-            if (mTermSessions.size() == 0) {
+            if(mTermSessions.size() == 0) {
                 try {
                     mTermSessions.add(createTermSession());
-                } catch (IOException e) {
+                } catch(IOException e) {
                     Toast.makeText(this, "Failed to start terminal session", Toast.LENGTH_LONG).show();
                     finish();
                     return;
@@ -523,14 +518,14 @@ public class Term extends Activity
 
             mTermSessions.addCallback(this);
 
-            for (TermSession session : mTermSessions) {
+            for(TermSession session : mTermSessions) {
                 EmulatorView view = createEmulatorView(session);
                 mViewFlipper.addView(view);
             }
 
             updatePrefs();
 
-            if (onResumeSelectWindow >= 0) {
+            if(onResumeSelectWindow >= 0) {
                 mViewFlipper.setDisplayedChild(onResumeSelectWindow == Integer.MAX_VALUE
                     ? mViewFlipper.getChildCount() - 1
                     : onResumeSelectWindow);
@@ -540,7 +535,7 @@ public class Term extends Activity
         }
     }
 
-    private void populateWindowList() {
+    private void populateWindowList () {
         if(mActionBar == null)    return;
         if(mTermSessions == null) return;
 
@@ -557,31 +552,33 @@ public class Term extends Activity
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroy () {
         super.onDestroy();
 
         PreferenceManager.getDefaultSharedPreferences(this)
             .unregisterOnSharedPreferenceChangeListener(this);
 
-        if (mStopServiceOnFinish) {
+        if(mStopServiceOnFinish) {
             stopService(TermSserviceIntent);
         }
         mTermService = null;
         mTSConnection = null;
-        if (mWakeLock.isHeld()) {
+        if(mWakeLock.isHeld()) {
             mWakeLock.release();
         }
-        if (mWifiLock.isHeld()) {
+        if(mWifiLock.isHeld()) {
             mWifiLock.release();
         }
     }
 
-    private void restart() {
+    private void restart () {
         startActivity(getIntent());
         finish();
     }
 
-    protected static TermSession createTermSession(Context context, TermSettings settings, String initialCommand) throws IOException {
+    protected static TermSession createTermSession (Context context, TermSettings settings,
+        String initialCommand
+    ) throws IOException {
         GenericTermSession session = new ShellTermSession(settings, initialCommand);
         // XXX We should really be able to fetch this from within TermSession
         session.setProcessExitMessage(context.getString(R.string.process_exit_message));
@@ -589,13 +586,13 @@ public class Term extends Activity
         return session;
     }
 
-    private TermSession createTermSession() throws IOException {
+    private TermSession createTermSession () throws IOException {
         TermSession session = createTermSession(this, mSettings, mSettings.getInitialCommand());
         session.setFinishCallback(mTermService);
         return session;
     }
 
-    private TermView createEmulatorView(TermSession session) {
+    private TermView createEmulatorView (TermSession session) {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         TermView emulatorView = new TermView(this, session, metrics);
@@ -609,7 +606,12 @@ public class Term extends Activity
         return emulatorView;
     }
 
-    private void updatePrefs() {
+    @Override
+    public void onSharedPreferenceChanged (SharedPreferences sharedPreferences, String s) {
+        mSettings.readPrefs(sharedPreferences);
+    }
+
+    private void updatePrefs () {
         mUseKeyboardShortcuts = mSettings.getUseKeyboardShortcutsFlag();
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -617,13 +619,13 @@ public class Term extends Activity
 
         mViewFlipper.updatePrefs(mSettings);
 
-        for (View v : mViewFlipper) {
+        for(View v : mViewFlipper) {
             ((EmulatorView) v).setDensity(metrics);
             ((TermView) v).updatePrefs(mSettings);
         }
 
-        if (mTermSessions != null) {
-            for (TermSession session : mTermSessions) {
+        if(mTermSessions != null) {
+            for(TermSession session : mTermSessions) {
                 ((GenericTermSession) session).updatePrefs(mSettings);
             }
         }
@@ -633,15 +635,15 @@ public class Term extends Activity
             WindowManager.LayoutParams params = win.getAttributes();
             final int FULLSCREEN = WindowManager.LayoutParams.FLAG_FULLSCREEN;
             int desiredFlag = mSettings.showStatusBar() ? 0 : FULLSCREEN;
-            if (desiredFlag != (params.flags & FULLSCREEN) || mActionBarMode != mSettings.actionBarMode()) {
-                if (mAlreadyStarted) {
+            if(desiredFlag != (params.flags & FULLSCREEN) || mActionBarMode != mSettings.actionBarMode()) {
+                if(mAlreadyStarted) {
                     // Can't switch to/from fullscreen after
                     // starting the activity.
                     restart();
                 } else {
                     win.setFlags(desiredFlag, FULLSCREEN);
-                    if (mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
-                        if (mActionBar != null) {
+                    if(mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
+                        if(mActionBar != null) {
                             mActionBar.hide();
                         }
                     }
@@ -651,20 +653,20 @@ public class Term extends Activity
 
         int orientation = mSettings.getScreenOrientation();
         int o = 0;
-        if (orientation == 0) {
+        if(orientation == 0) {
             o = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
-        } else if (orientation == 1) {
+        } else if(orientation == 1) {
             o = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-        } else if (orientation == 2) {
+        } else if(orientation == 2) {
             o = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         } else {
-            /* Shouldn't be happened. */
+            // Shouldn't happen.
         }
         setRequestedOrientation(o);
     }
 
     @Override
-    public void onPause() {
+    public void onPause () {
         super.onPause();
 
         // Explicitly close the input method.
@@ -672,22 +674,19 @@ public class Term extends Activity
         // Otherwise, the soft keyboard could cover up whatever activity takes our place
         //
         final IBinder token = mViewFlipper.getWindowToken();
-        new Thread() {
-            @Override
-            public void run() {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(token, 0);
-            }
-        }.start();
+        new Thread(() -> {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(token, 0);
+        }).start();
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop () {
         mViewFlipper.onPause();
-        if (mTermSessions != null) {
+        if(mTermSessions != null) {
             mTermSessions.removeCallback(this);
 
-            if (mWinListAdapter != null) {
+            if(mWinListAdapter != null) {
                 mTermSessions.removeCallback(mWinListAdapter);
                 mTermSessions.removeTitleChangedListener(mWinListAdapter);
                 mViewFlipper.removeCallback(mWinListAdapter);
@@ -701,30 +700,30 @@ public class Term extends Activity
         super.onStop();
     }
 
-    private boolean checkHaveFullHwKeyboard(Configuration c) {
+    private boolean checkHaveFullHwKeyboard (Configuration c) {
         return (c.keyboard == Configuration.KEYBOARD_QWERTY) &&
             (c.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO);
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged (Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         mHaveFullHwKeyboard = checkHaveFullHwKeyboard(newConfig);
 
         EmulatorView v = (EmulatorView) mViewFlipper.getCurrentView();
-        if (v != null) {
+        if(v != null) {
             v.updateSize(false);
         }
 
-        if (mWinListAdapter != null) {
+        if(mWinListAdapter != null) {
             // Force Android to redraw the label in the navigation dropdown
             mWinListAdapter.notifyDataSetChanged();
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.menu_new_window).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         menu.findItem(R.id.menu_close_window).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -735,47 +734,47 @@ public class Term extends Activity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected (MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.menu_preferences) {
+        if(id == R.id.menu_preferences) {
             doPreferences();
-        } else if (id == R.id.menu_new_window) {
+        } else if(id == R.id.menu_new_window) {
             doCreateNewWindow();
-        } else if (id == R.id.menu_close_window) {
+        } else if(id == R.id.menu_close_window) {
             confirmCloseWindow();
-        } else if (id == R.id.menu_settings) {
+        } else if(id == R.id.menu_settings) {
             doPreferences();
-        } else if (id == R.id.menu_window_list) {
+        } else if(id == R.id.menu_window_list) {
             startActivityForResult(new Intent(this, WindowList.class), REQUEST_CHOOSE_WINDOW);
-        } else if (id == R.id.menu_reset) {
+        } else if(id == R.id.menu_reset) {
             doResetTerminal();
             Toast toast = Toast.makeText(this, R.string.reset_toast_notification,
                 Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-        } else if (id == R.id.menu_send_email) {
+        } else if(id == R.id.menu_send_email) {
             doEmailTranscript();
-        } else if (id == R.id.menu_special_keys) {
+        } else if(id == R.id.menu_special_keys) {
             doDocumentKeys();
-        } else if (id == R.id.menu_toggle_soft_keyboard) {
+        } else if(id == R.id.menu_toggle_soft_keyboard) {
             doToggleSoftKeyboard();
-        } else if (id == R.id.menu_toggle_wakelock) {
+        } else if(id == R.id.menu_toggle_wakelock) {
             doToggleWakeLock();
-        } else if (id == R.id.menu_toggle_wifilock) {
+        } else if(id == R.id.menu_toggle_wifilock) {
             doToggleWifiLock();
-        } else if (id == R.id.action_help) {
+        } else if(id == R.id.action_help) {
             Intent helpIntent = new Intent(this, HelpActivity.class);
             startActivity(helpIntent);
         }
         // Hide the action bar if appropriate.
-        if (mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
+        if(mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES) {
             mActionBar.hide();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void doCreateNewWindow() {
-        if (mTermSessions == null) {
+    private void doCreateNewWindow () {
+        if(mTermSessions == null) {
             Log.w(TermDebug.LOG_TAG, "Couldn't create new window because mTermSessions == null");
             return;
         }
@@ -790,214 +789,183 @@ public class Term extends Activity
 
             mViewFlipper.addView(view);
             mViewFlipper.setDisplayedChild(mViewFlipper.getChildCount() - 1);
-        } catch (IOException e) {
+        } catch(IOException e) {
             Toast.makeText(this, "Failed to create a session", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void confirmCloseWindow() {
+    private void confirmCloseWindow () {
         final AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setIcon(android.R.drawable.ic_dialog_alert);
         b.setMessage(R.string.confirm_window_close_message);
-        final Runnable closeWindow = new Runnable() {
-            public void run() {
-                doCloseWindow();
-            }
-        };
-        b.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+        final Runnable closeWindow = () -> { doCloseWindow(); };
+        b.setPositiveButton(android.R.string.yes,
+            (DialogInterface dialog, int id) -> {
                 dialog.dismiss();
                 mHandler.post(closeWindow);
-            }
         });
         b.setNegativeButton(android.R.string.no, null);
         b.show();
     }
 
-    private void doCloseWindow() {
-        if (mTermSessions == null) {
-            return;
-        }
+    private void doCloseWindow () {
+        if(mTermSessions == null) return;
 
         EmulatorView view = getCurrentEmulatorView();
-        if (view == null) {
-            return;
-        }
+        if(view == null) return;
+
         TermSession session = mTermSessions.remove(mViewFlipper.getDisplayedChild());
         view.onPause();
         session.finish();
         mViewFlipper.removeView(view);
-        if (mTermSessions.size() != 0) {
+        if(mTermSessions.size() != 0) {
             mViewFlipper.showNext();
         }
     }
 
     @Override
-    protected void onActivityResult(int request, int result, Intent data) {
-        switch (request) {
-            case REQUEST_CHOOSE_WINDOW:
-                if (result == RESULT_OK && data != null) {
-                    int position = data.getIntExtra(EXTRA_WINDOW_ID, -2);
-                    if (position >= 0) {
-                        // Switch windows after session list is in sync, not here
-                        onResumeSelectWindow = position;
-                    } else if (position == -1) {
-                        doCreateNewWindow();
-                        onResumeSelectWindow = mTermSessions.size() - 1;
-                    }
-                } else {
-                    // Close the activity if user closed all sessions
-                    // TODO the left path will be invoked when nothing happened, but this Activity was destroyed!
-                    if (mTermSessions == null || mTermSessions.size() == 0) {
-                        mStopServiceOnFinish = true;
-                        finish();
-                    }
+    protected void onActivityResult (int request, int result, Intent data) {
+        if(request == REQUEST_CHOOSE_WINDOW) {
+            if(result == RESULT_OK && data != null) {
+                int position = data.getIntExtra(EXTRA_WINDOW_ID, -2);
+                if(position >= 0) {
+                    // Switch windows after session list is in sync, not here
+                    onResumeSelectWindow = position;
+                } else if(position == -1) {
+                    doCreateNewWindow();
+                    onResumeSelectWindow = mTermSessions.size() - 1;
                 }
-                break;
+            } else {
+                // Close the activity if user closed all sessions
+                // TODO the left path will be invoked when nothing happened, but this Activity was destroyed!
+                if(mTermSessions == null || mTermSessions.size() == 0) {
+                    mStopServiceOnFinish = true;
+                    finish();
+                }
+            }
         }
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0) {
+    protected void onNewIntent (Intent intent) {
+        if((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0) {
             // Don't repeat action if intent comes from history
             return;
         }
 
         String action = intent.getAction();
-        if (TextUtils.isEmpty(action) || !mPrivateAlias.equals(intent.getComponent())) {
+        if(TextUtils.isEmpty(action) || ! mPrivateAlias.equals(intent.getComponent())) {
             return;
         }
 
         // huge number simply opens new window
         // TODO: add a way to restrict max number of windows per caller (possibly via reusing BoundSession)
-        switch (action) {
-            case RemoteInterface.PRIVACT_OPEN_NEW_WINDOW:
-                onResumeSelectWindow = Integer.MAX_VALUE;
-                // Sometimes Term.mTSConnection.onServiceConnected gets called *before* `onResumeSelectWindow´.
-                // As a quick fix, set displayed child again.
-                if (mViewFlipper != null && mViewFlipper.getChildCount() > 0) {
-                    mViewFlipper.setDisplayedChild(mViewFlipper.getChildCount() - 1);
-                }
-                break;
-            case RemoteInterface.PRIVACT_SWITCH_WINDOW:
-                int target = intent.getIntExtra(RemoteInterface.PRIVEXTRA_TARGET_WINDOW, -1);
-                if (target >= 0) {
-                    onResumeSelectWindow = target;
-                }
-                break;
+        switch(action) {
+        case RemoteInterface.PRIVACT_OPEN_NEW_WINDOW:
+            onResumeSelectWindow = Integer.MAX_VALUE;
+            // Sometimes Term.mTSConnection.onServiceConnected gets called *before* `onResumeSelectWindow´.
+            // As a quick fix, set displayed child again.
+            if(mViewFlipper != null && mViewFlipper.getChildCount() > 0) {
+                mViewFlipper.setDisplayedChild(mViewFlipper.getChildCount() - 1);
+            }
+            break;
+        case RemoteInterface.PRIVACT_SWITCH_WINDOW:
+            int target = intent.getIntExtra(RemoteInterface.PRIVEXTRA_TARGET_WINDOW, -1);
+            if(target >= 0) {
+                onResumeSelectWindow = target;
+            }
+            break;
         }
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu (Menu menu) {
         MenuItem wakeLockItem = menu.findItem(R.id.menu_toggle_wakelock);
         MenuItem wifiLockItem = menu.findItem(R.id.menu_toggle_wifilock);
-        if (mWakeLock.isHeld()) {
-            wakeLockItem.setTitle(R.string.disable_wakelock);
-        } else {
-            wakeLockItem.setTitle(R.string.enable_wakelock);
-        }
-        if (mWifiLock.isHeld()) {
-            wifiLockItem.setTitle(R.string.disable_wifilock);
-        } else {
-            wifiLockItem.setTitle(R.string.enable_wifilock);
-        }
+        wakeLockItem.setTitle(mWakeLock.isHeld() ? R.string.disable_wakelock : R.string.enable_wakelock);
+        wifiLockItem.setTitle(mWifiLock.isHeld() ? R.string.disable_wifilock : R.string.enable_wifilock);
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu (ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.edit_text);
-        menu.add(0, SELECT_TEXT_ID, 0, R.string.select_text);
-        menu.add(0, COPY_ALL_ID, 0, R.string.copy_all);
-        menu.add(0, PASTE_ID, 0, R.string.paste);
-        menu.add(0, SEND_CONTROL_KEY_ID, 0, R.string.send_control_key);
-        menu.add(0, SEND_FN_KEY_ID, 0, R.string.send_fn_key);
-        if (!canPaste()) {
+        menu.add(0, SELECT_TEXT_ID      , 0, R.string.select_text);
+        menu.add(0, COPY_ALL_ID         , 0, R.string.copy_all);
+        menu.add(0, PASTE_ID            , 0, R.string.paste);
+        menu.add(0, SEND_CONTROL_KEY_ID , 0, R.string.send_control_key);
+        menu.add(0, SEND_FN_KEY_ID      , 0, R.string.send_fn_key);
+        if(! canPaste()) {
             menu.getItem(PASTE_ID).setEnabled(false);
         }
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case SELECT_TEXT_ID:
-                getCurrentEmulatorView().toggleSelectingText();
-                return true;
-            case COPY_ALL_ID:
-                doCopyAll();
-                return true;
-            case PASTE_ID:
-                doPaste();
-                return true;
-            case SEND_CONTROL_KEY_ID:
-                doSendControlKey();
-                return true;
-            case SEND_FN_KEY_ID:
-                doSendFnKey();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
+    public boolean onContextItemSelected (MenuItem item) {
+        switch(item.getItemId()) {
+        case SELECT_TEXT_ID:      getCurrentEmulatorView().toggleSelectingText(); return true;
+        case COPY_ALL_ID:         doCopyAll();                                    return true;
+        case PASTE_ID:            doPaste();                                      return true;
+        case SEND_CONTROL_KEY_ID: doSendControlKey();                             return true;
+        case SEND_FN_KEY_ID:      doSendFnKey();                                  return true;
+        default:                  return super.onContextItemSelected(item);
         }
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    public boolean onKeyDown (int keyCode, KeyEvent event) {
         return super.onKeyDown(keyCode, event);
     }
 
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                if(mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES
-                    && mActionBar != null
-                    && mActionBar.isShowing()
-                 ) {
-                    mActionBar.hide();
-                    return true;
-                }
-                switch (mSettings.getBackKeyAction()) {
-                    case TermSettings.BACK_KEY_STOPS_SERVICE:
-                        mStopServiceOnFinish = true;
-                    case TermSettings.BACK_KEY_CLOSES_ACTIVITY:
-                        finish();
-                        return true;
-                    case TermSettings.BACK_KEY_CLOSES_WINDOW:
-                        doCloseWindow();
-                        return true;
-                    default:
-                        return false;
-                }
-            case KeyEvent.KEYCODE_MENU:
-                if(mActionBar != null && ! mActionBar.isShowing()) {
-                    mActionBar.show();
-                    return true;
-                } else {
-                    return super.onKeyUp(keyCode, event);
-                }
+    public boolean onKeyUp (int keyCode, KeyEvent event) {
+        switch(keyCode) {
+        case KeyEvent.KEYCODE_BACK:
+            if(mActionBarMode == TermSettings.ACTION_BAR_MODE_HIDES
+                && mActionBar != null
+                && mActionBar.isShowing()
+             ) {
+                mActionBar.hide();
+                return true;
+            }
+            switch(mSettings.getBackKeyAction()) {
+            case TermSettings.BACK_KEY_STOPS_SERVICE:
+                mStopServiceOnFinish = true;
+                // Fall through
+            case TermSettings.BACK_KEY_CLOSES_ACTIVITY:
+                finish();
+                return true;
+            case TermSettings.BACK_KEY_CLOSES_WINDOW:
+                doCloseWindow();
+                return true;
             default:
+                return false;
+            }
+        case KeyEvent.KEYCODE_MENU:
+            if(mActionBar != null && ! mActionBar.isShowing()) {
+                mActionBar.show();
+                return true;
+            } else {
                 return super.onKeyUp(keyCode, event);
+            }
+        default:
+            return super.onKeyUp(keyCode, event);
         }
     }
 
     // Called when the list of sessions changes
-    public void onUpdate() {
+    public void onUpdate () {
         SessionList sessions = mTermSessions;
-        if (sessions == null) {
-            return;
-        }
+        if(sessions == null) return;
 
-        if (sessions.size() == 0) {
+        if(sessions.size() == 0) {
             mStopServiceOnFinish = true;
             finish();
-        } else if (sessions.size() < mViewFlipper.getChildCount()) {
-            for (int i = 0; i < mViewFlipper.getChildCount(); ++i) {
+        } else if(sessions.size() < mViewFlipper.getChildCount()) {
+            for(int i = 0; i < mViewFlipper.getChildCount(); ++i) {
                 EmulatorView v = (EmulatorView) mViewFlipper.getChildAt(i);
-                if (!sessions.contains(v.getTermSession())) {
+                if(! sessions.contains(v.getTermSession())) {
                     v.onPause();
                     mViewFlipper.removeView(v);
                     --i;
@@ -1006,56 +974,56 @@ public class Term extends Activity
         }
     }
 
-    private boolean canPaste() {
+    private boolean canPaste () {
         ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         return clip.hasText();
     }
 
-    private void doPreferences() {
+    private void doPreferences () {
         startActivity(new Intent(this, TermPreferences.class));
     }
 
-    private void doResetTerminal() {
+    private void doResetTerminal () {
         TermSession session = getCurrentTermSession();
-        if (session != null) {
+        if(session != null) {
             session.reset();
         }
     }
 
-    private void doEmailTranscript() {
+    private void doEmailTranscript () {
         TermSession session = getCurrentTermSession();
-        if (session != null) {
-            // Don't really want to supply an address, but
-            // currently it's required, otherwise nobody
-            // wants to handle the intent.
-            String addr = "user@example.com";
-            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + addr));
+        if(session == null) return;
 
-            String subject = getString(R.string.email_transcript_subject);
-            String title = session.getTitle();
-            if (title != null) {
-                subject = subject + " - " + title;
-            }
-            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-            intent.putExtra(Intent.EXTRA_TEXT, session.getTranscriptText().trim());
-            try {
-                startActivity(Intent.createChooser(intent,
-                    getString(R.string.email_transcript_chooser_title)));
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(this,
-                    R.string.email_transcript_no_email_activity_found,
-                    Toast.LENGTH_LONG).show();
-            }
+        // Don't really want to supply an address, but
+        // currently it's required, otherwise nobody
+        // wants to handle the intent.
+        String addr = "user@example.com";
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + addr));
+
+        String subject = getString(R.string.email_transcript_subject);
+        String title = session.getTitle();
+        if(title != null) {
+            subject = subject + " - " + title;
+        }
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, session.getTranscriptText().trim());
+        try {
+            startActivity(Intent.createChooser(intent,
+                getString(R.string.email_transcript_chooser_title)));
+        } catch(ActivityNotFoundException e) {
+            Toast.makeText(this,
+                R.string.email_transcript_no_email_activity_found,
+                Toast.LENGTH_LONG).show();
         }
     }
 
-    private void doCopyAll() {
+    private void doCopyAll () {
         ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         clip.setText(getCurrentTermSession().getTranscriptText().trim());
     }
 
-    private void doPaste() {
-        if (!canPaste()) {
+    private void doPaste () {
+        if(! canPaste()) {
             return;
         }
         ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -1071,31 +1039,31 @@ public class Term extends Activity
     // `TermKeyListener.mFnKeyg.getUIMode()´, so as a quick hack I pass in a listener. Refactor code so
     // `mControlKey´ et al are part of the MVC model.
     class TermKeyUpdater implements KeyUpdater {
-        public void updateControl(int state) { update(mExtraKeyButtons[0], state); }
-        public void updateFn(int state)      { update(mExtraKeyButtons[9], state); }
-        private void update(Button button, int state) {
-            switch (state) {
-                case TextRenderer.MODE_ON:     button.setTextColor(Color.GREEN); break;
-                case TextRenderer.MODE_LOCKED: button.setTextColor(Color.RED); break;
-                case TextRenderer.MODE_OFF:
-                default:                       button.setTextColor(mExtraKeyDefaultColor); break;
+        public void updateControl (int state) { update(mExtraKeyButtons[0], state); }
+        public void updateFn (int state)      { update(mExtraKeyButtons[9], state); }
+        private void update (Button button, int state) {
+            switch(state) {
+            case TextRenderer.MODE_ON:     button.setTextColor(Color.GREEN);           break;
+            case TextRenderer.MODE_LOCKED: button.setTextColor(Color.RED);             break;
+            case TextRenderer.MODE_OFF:
+            default:                       button.setTextColor(mExtraKeyDefaultColor); break;
             }
         }
     }
 
     // } ************************************************************
 
-    private void doSendControlKey() {
+    private void doSendControlKey () {
         EmulatorView emv = getCurrentEmulatorView();
         if(emv != null) { emv.sendControlKey(); }
     }
 
-    private void doSendFnKey() {
+    private void doSendFnKey () {
         EmulatorView emv = getCurrentEmulatorView();
         if(emv != null) { emv.sendFnKey(); }
     }
 
-    private void doDocumentKeys() {
+    private void doDocumentKeys () {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         Resources r = getResources();
         dialog.setTitle(r.getString(R.string.control_key_dialog_title));
@@ -1121,7 +1089,7 @@ public class Term extends Activity
      *
      * <blockquote>Ctrl is also mapped to Vol-Down.</blockquote>
      */
-    private void formatMessage(
+    private void formatMessage (
         StringBuffer msg, int textId,
         String regex, int keyId, int disabledKeyId
     ) {
@@ -1133,7 +1101,7 @@ public class Term extends Activity
         }
     }
 
-    private void doToggleSoftKeyboard() {
+    private void doToggleSoftKeyboard () {
         // ------------------------------------------------------------
         // Also toggle the extra keys
         // ------------------------------------------------------------
@@ -1160,40 +1128,26 @@ public class Term extends Activity
         setExtraKeysShown(mExtraKeysShown, show);
     }
 
-    private void doToggleWakeLock() {
-        if (mWakeLock.isHeld()) {
-            mWakeLock.release();
-        } else {
-            mWakeLock.acquire();
-        }
+    private void doToggleWakeLock () {
+        if(mWakeLock.isHeld()) { mWakeLock.release(); } else { mWakeLock.acquire(); }
         invalidateOptionsMenu();
     }
 
-    private void doToggleWifiLock() {
-        if (mWifiLock.isHeld()) {
-            mWifiLock.release();
-        } else {
-            mWifiLock.acquire();
-        }
+    private void doToggleWifiLock () {
+        if(mWifiLock.isHeld()) { mWifiLock.release(); } else { mWifiLock.acquire(); }
         invalidateOptionsMenu();
     }
 
-    private void doToggleActionBar() {
+    private void doToggleActionBar () {
         ActionBar bar = mActionBar;
-        if (bar == null) {
-            return;
-        }
-        if (bar.isShowing()) {
-            bar.hide();
-        } else {
-            bar.show();
-        }
+        if(bar == null) return;
+        if(bar.isShowing()) { bar.hide(); } else { bar.show(); }
     }
 
-    private void doUIToggle(int x, int y, int width, int height) {
-        switch (mActionBarMode) {
+    private void doUIToggle (int x, int y, int width, int height) {
+        switch(mActionBarMode) {
         case TermSettings.ACTION_BAR_MODE_NONE:
-            if (mHaveFullHwKeyboard || y < height / 2) {
+            if(mHaveFullHwKeyboard || y < height / 2) {
                 openOptionsMenu();
                 return;
             } else {
@@ -1201,12 +1155,12 @@ public class Term extends Activity
             }
             break;
         case TermSettings.ACTION_BAR_MODE_ALWAYS_VISIBLE:
-            if (!mHaveFullHwKeyboard) {
+            if(! mHaveFullHwKeyboard) {
                 doToggleSoftKeyboard();
             }
             break;
         case TermSettings.ACTION_BAR_MODE_HIDES:
-            if (mHaveFullHwKeyboard || y < height / 2) {
+            if(mHaveFullHwKeyboard || y < height / 2) {
                 doToggleActionBar();
                 return;
             } else {
@@ -1221,8 +1175,7 @@ public class Term extends Activity
      *
      * @param link The URL to be opened.
      */
-    private void execURL(String link)
-    {
+    private void execURL (String link) {
         Uri webLink = Uri.parse(link);
         Intent openLink = new Intent(Intent.ACTION_VIEW, webLink);
         PackageManager pm = getPackageManager();
@@ -1235,7 +1188,7 @@ public class Term extends Activity
     // Extra keys
     // ------------------------------------------------------------
 
-    void setExtraKeys(String keyString) {
+    private void setExtraKeys (String keyString) {
         mExtraKeys = PKey.parse(keyString);
         mExtraKeysCount = mExtraKeys.length;
         mExtraKeyButtons = new PKeyButton[mExtraKeysCount];
@@ -1256,11 +1209,11 @@ public class Term extends Activity
         mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
     }
 
-    void setExtraKeysShown(int when) {
+    private void setExtraKeysShown (int when) {
       setExtraKeysShown(when, isSoftKeyboardShown());
     }
 
-    void setExtraKeysShown(int when, boolean softKeyboardShown) {
+    private void setExtraKeysShown (int when, boolean softKeyboardShown) {
       mExtraKeysShown = when;
       if(mExtraKeysShown == 0) {
         mExtraKeysRow.setVisibility(View.GONE);
@@ -1271,7 +1224,7 @@ public class Term extends Activity
       }
     }
 
-    void setExtraKeySize(int size) {
+    private void setExtraKeySize (int size) {
       mExtraKeySize = size;
 
       mExtraKeyButtons[0].setTextSize(size);
@@ -1296,7 +1249,7 @@ public class Term extends Activity
     }
 
     /** Return the height off the keys row. */
-    int getKeysHeight() {
+    private int getKeysHeight () {
       if(mExtraKeysRow == null || mExtraKeySize == 0 || mExtraKeysRow.getVisibility() == View.GONE) return 0;
       return mExtraKeysRow.getHeight();
     }
@@ -1304,7 +1257,7 @@ public class Term extends Activity
     // Android wont't tell you if the soft keyboard is being shown, so try to guess based on the height
     // of `top_view´ (which is the root in the XML layout file, but not the root view returned by
     // `View.getRootView´.
-    boolean isSoftKeyboardShown() {
+    private boolean isSoftKeyboardShown () {
       // The height of the `top_view´ changes when you toggle the soft keyboard, on my Nexus 7 in portrait
       // mode between 1058 and 1662.
       View topView = findViewById(R.id.top_view);
