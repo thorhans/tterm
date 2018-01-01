@@ -18,13 +18,8 @@
 
 package de.t2h.tterm.emulatorview;
 
-//T!{ ------------------------------------------------------------
-//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.ClipboardManagerCompat;
-import de.t2h.tterm.emulatorview.compat.ClipboardManagerCompatV11;
-//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.KeycodeConstants;
-//T! import de.t2h.tterm.de.t2h.tterm.emulatorview.compat.Patterns;
+import android.content.ClipboardManager;
 import android.util.Patterns;
-//T!} ------------------------------------------------------------
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -997,10 +992,8 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
             mSelX2 = maxx;
             mSelY2 = maxy;
             if (action == MotionEvent.ACTION_UP) {
-                //T! ClipboardManagerCompat clip = ClipboardManagerCompatFactory
-                //T!         .getManager(getContext().getApplicationContext());
-                ClipboardManagerCompatV11 clip = ClipboardManagerCompatV11
-                        .getManager(getContext().getApplicationContext());
+                ClipboardManager clip = (ClipboardManager)
+                    getContext().getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 clip.setText(getSelectedText().trim());
                 toggleSelectingText();
             }
