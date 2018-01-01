@@ -1188,7 +1188,7 @@ public class Term extends Activity
     // Extra keys
     // ------------------------------------------------------------
 
-    private void setExtraKeys (String keyString) {
+    public void setExtraKeys (String keyString) {
         mExtraKeys = PKey.parse(keyString);
         mExtraKeysCount = mExtraKeys.length;
         mExtraKeyButtons = new PKeyButton[mExtraKeysCount];
@@ -1209,11 +1209,11 @@ public class Term extends Activity
         mExtraKeyDefaultColor = mExtraKeyButtons[0].getTextColors().getDefaultColor();
     }
 
-    private void setExtraKeysShown (int when) {
+    public void setExtraKeysShown (int when) {
       setExtraKeysShown(when, isSoftKeyboardShown());
     }
 
-    private void setExtraKeysShown (int when, boolean softKeyboardShown) {
+    public void setExtraKeysShown (int when, boolean softKeyboardShown) {
       mExtraKeysShown = when;
       if(mExtraKeysShown == 0) {
         mExtraKeysRow.setVisibility(View.GONE);
@@ -1224,7 +1224,7 @@ public class Term extends Activity
       }
     }
 
-    private void setExtraKeySize (int size) {
+    public void setExtraKeySize (int size) {
       mExtraKeySize = size;
 
       mExtraKeyButtons[0].setTextSize(size);
@@ -1249,7 +1249,7 @@ public class Term extends Activity
     }
 
     /** Return the height off the keys row. */
-    private int getKeysHeight () {
+    public int getKeysHeight () {
       if(mExtraKeysRow == null || mExtraKeySize == 0 || mExtraKeysRow.getVisibility() == View.GONE) return 0;
       return mExtraKeysRow.getHeight();
     }
@@ -1257,7 +1257,7 @@ public class Term extends Activity
     // Android wont't tell you if the soft keyboard is being shown, so try to guess based on the height
     // of `top_view´ (which is the root in the XML layout file, but not the root view returned by
     // `View.getRootView´.
-    private boolean isSoftKeyboardShown () {
+    public boolean isSoftKeyboardShown () {
       // The height of the `top_view´ changes when you toggle the soft keyboard, on my Nexus 7 in portrait
       // mode between 1058 and 1662.
       View topView = findViewById(R.id.top_view);
