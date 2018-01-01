@@ -1,13 +1,18 @@
 package de.t2h.tterm.emulatorview;
 
+// ThH: Cleaned up.
+//
 class GrowableIntArray {
-    GrowableIntArray(int initalCapacity) {
+    int[] mData;
+    int mLength;
+
+    GrowableIntArray (int initalCapacity) {
         mData = new int[initalCapacity];
         mLength = 0;
     }
 
-    void append(int i) {
-        if (mLength + 1 > mData.length) {
+    void append (int i) {
+        if(mLength + 1 > mData.length) {
             int newLength = Math.max((mData.length * 3) >> 1, 16);
             int[] temp = new int[newLength];
             System.arraycopy(mData, 0, temp, 0, mLength);
@@ -16,14 +21,11 @@ class GrowableIntArray {
         mData[mLength++] = i;
     }
 
-    int length() {
+    int length () {
         return mLength;
     }
 
-    int at(int index) {
+    int at (int index) {
         return mData[index];
     }
-
-    int[] mData;
-    int mLength;
 }
