@@ -30,64 +30,67 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-//T!{ ------------------------------------------------------------
-//T! import de.t2h.tterm.compat.ActionBarCompat;
 import android.app.ActionBar;
-//T! import de.t2h.tterm.compat.ActivityCompat;
-//T! import de.t2h.tterm.compat.AndroidCompat;
-//T!} ------------------------------------------------------------
 
 import de.t2h.tterm.util.SessionList;
 
+// ThH: Cleaned up.
+//
 public class WindowList extends ListActivity {
+    // ************************************************************
+    // Attributes
+    // ************************************************************
+
     private SessionList sessions;
     private WindowListAdapter mWindowListAdapter;
     private TermService mTermService;
 
-    /**
-     * View which isn't automatically in the pressed state if its parent is
-     * pressed.  This allows the window's entry to be pressed without the close
-     * button being triggered.
-     * Idea and code shamelessly borrowed from the Android browser's tabs list.
+    /** View which isn't automatically in the pressed state if its parent is pressed.
      *
-     * Used by layout xml.
+     * <p>This allows the window's entry to be pressed without the close button being triggered. Idea and code
+     * shamelessly borrowed from the Android browser's tabs list.</p>
+     *
+     * <p>Used by layout XML.</p>
      */
     public static class CloseButton extends ImageView {
-        public CloseButton(Context context) {
+        public CloseButton (Context context) {
             super(context);
         }
 
-        public CloseButton(Context context, AttributeSet attrs) {
+        public CloseButton (Context context, AttributeSet attrs) {
             super(context, attrs);
         }
 
-        public CloseButton(Context context, AttributeSet attrs, int style) {
+        public CloseButton (Context context, AttributeSet attrs, int style) {
             super(context, attrs, style);
         }
 
         @Override
-        public void setPressed(boolean pressed) {
-            if (pressed && ((View) getParent()).isPressed()) {
-                return;
-            }
+        public void setPressed (boolean pressed) {
+            if(pressed && ((View) getParent()).isPressed()) return;
+
             super.setPressed(pressed);
         }
     }
 
     private ServiceConnection mTSConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            TermService.TSBinder binder = (TermService.TSBinder) service;
+        public void onServiceConnected (ComponentName className, IBinder service) {
+            TermService.TermServiceBinder binder = (TermService.TermServiceBinder) service;
             mTermService = binder.getService();
             populateList();
         }
 
-        public void onServiceDisconnected(ComponentName arg0) {
+        public void onServiceDisconnected (ComponentName arg0) {
             mTermService = null;
         }
     };
 
+    // ************************************************************
+    // Methods
+    // ************************************************************
+
     @Override
-    public void onCreate(Bundle icicle) {
+    public void onCreate (Bundle icicle) {
         super.onCreate(icicle);
 
         ListView listView = getListView();
@@ -97,48 +100,42 @@ public class WindowList extends ListActivity {
         setResult(RESULT_CANCELED);
 
         // Display up indicator on action bar home button
-        //T!{ ------------------------------------------------------------
-        //T! if (AndroidCompat.SDK >= 11) {
-        //T!     ActionBarCompat bar = ActivityCompat.getActionBar(this);
         ActionBar bar = getActionBar();
-        if (bar != null) {
-            //T! bar.setDisplayOptions(ActionBarCompat.DISPLAY_HOME_AS_UP, ActionBarCompat.DISPLAY_HOME_AS_UP);
+        if(bar != null) {
             bar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
         }
-        //T! }
-        //T!} ------------------------------------------------------------
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume () {
         super.onResume();
 
         Intent TSIntent = new Intent(this, TermService.class);
-        if (!bindService(TSIntent, mTSConnection, BIND_AUTO_CREATE)) {
+        if(! bindService(TSIntent, mTSConnection, BIND_AUTO_CREATE)) {
             Log.w(TermDebug.LOG_TAG, "bind to service failed!");
         }
     }
 
     @Override
-    protected void onPause() {
+    protected void onPause () {
         super.onPause();
 
         WindowListAdapter adapter = mWindowListAdapter;
-        if (sessions != null) {
+        if(sessions != null) {
             sessions.removeCallback(adapter);
             sessions.removeTitleChangedListener(adapter);
         }
-        if (adapter != null) {
+        if(adapter != null) {
             adapter.setSessions(null);
         }
         unbindService(mTSConnection);
     }
 
-    private void populateList() {
+    private void populateList () {
         sessions = mTermService.getSessions();
         WindowListAdapter adapter = mWindowListAdapter;
 
-        if (adapter == null) {
+        if(adapter == null) {
             adapter = new WindowListAdapter(sessions);
             setListAdapter(adapter);
             mWindowListAdapter = adapter;
@@ -150,7 +147,7 @@ public class WindowList extends ListActivity {
     }
 
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
+    protected void onListItemClick (ListView l, View v, int position, long id) {
         Intent data = new Intent();
         data.putExtra(Term.EXTRA_WINDOW_ID, position-1);
         setResult(RESULT_OK, data);
@@ -158,12 +155,9 @@ public class WindowList extends ListActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        //T!{ ------------------------------------------------------------
-        //T! case ActionBarCompat.ID_HOME:
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch(item.getItemId()) {
         case android.R.id.home:
-        //T!} ------------------------------------------------------------
             // Action bar home button selected
             finish();
             return true;

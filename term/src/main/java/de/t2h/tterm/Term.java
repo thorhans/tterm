@@ -196,7 +196,7 @@ public class Term extends Activity
     private ServiceConnection mTSConnection = new ServiceConnection() {
         public void onServiceConnected (ComponentName className, IBinder service) {
             Log.i(TermDebug.LOG_TAG, "Bound to TermService");
-            TermService.TSBinder binder = (TermService.TSBinder) service;
+            TermService.TermServiceBinder binder = (TermService.TermServiceBinder) service;
             mTermService = binder.getService();
             if(mPendingPathBroadcasts <= 0) {
                 populateViewFlipper();

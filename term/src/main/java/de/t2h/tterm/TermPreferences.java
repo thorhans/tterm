@@ -23,29 +23,39 @@ import android.view.MenuItem;
 
 import de.t2h.tterm.compat.AndroidCompat;
 
+// ThH: Cleaned up.
+//
 public class TermPreferences extends PreferenceActivity {
+    // ************************************************************
+    // Constants
+    // ************************************************************
+
     private static final String ACTIONBAR_KEY = "actionbar";
     private static final String CATEGORY_SCREEN_KEY = "screen";
 
+    // ************************************************************
+    // Methods
+    // ************************************************************
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Load the preferences from an XML resource
+        // Load the preferences from an XML resource.
         addPreferencesFromResource(R.xml.preferences);
 
-        // Display up indicator on action bar home button
-        if (AndroidCompat.V11ToV20) {
+        // Display up indicator on action bar home button.
+        if(AndroidCompat.V11ToV20) {
             ActionBar bar = getActionBar();
-            if (bar != null) {
+            if(bar != null) {
                 bar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
             }
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch(item.getItemId()) {
         case android.R.id.home:
             // Action bar home button selected
             finish();

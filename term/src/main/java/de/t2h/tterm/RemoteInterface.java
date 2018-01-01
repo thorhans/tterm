@@ -64,7 +64,7 @@ public class RemoteInterface extends Activity {
 
     private ServiceConnection mTermServiceConnection = new ServiceConnection() {
         public void onServiceConnected (ComponentName className, IBinder service) {
-            TermService.TSBinder binder = (TermService.TSBinder) service;
+            TermService.TermServiceBinder binder = (TermService.TermServiceBinder) service;
             mTermService = binder.getService();
             handleIntent();
         }

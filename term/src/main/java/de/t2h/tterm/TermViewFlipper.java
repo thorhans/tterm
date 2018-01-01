@@ -41,10 +41,31 @@ import de.t2h.tterm.emulatorview.UpdateCallback;
 
 import de.t2h.tterm.util.TermSettings;
 
-public class TermViewFlipper extends ViewFlipper implements Iterable<View> {
+// ThH: Cleaned up.
+//
+public class TermViewFlipper extends ViewFlipper
+    implements Iterable<View>
+{
+    // ************************************************************
+    // Attributes
+    // ************************************************************
+
     private Context context;
     private Toast mToast;
+
     private LinkedList<UpdateCallback> callbacks;
+    public void addCallback (UpdateCallback callback) {
+        callbacks.add(callback);
+    }
+    public void removeCallback (UpdateCallback callback) {
+        callbacks.remove(callback);
+    }
+    private void notifyChange () {
+        for(UpdateCallback callback : callbacks) {
+            callback.onUpdate();
+        }
+    }
+
     private boolean mStatusBarVisible = false;
 
     private int mCurWidth;
@@ -54,139 +75,103 @@ public class TermViewFlipper extends ViewFlipper implements Iterable<View> {
     private LayoutParams mChildParams = null;
     private boolean mRedoLayout = false;
 
-    //T-{ ------------------------------------------------------------
-    //T- /**
-    //T-  * True if we must poll to discover if the view has changed size.
-    //T-  * This is the only known way to detect the view changing size due to
-    //T-  * the IME being shown or hidden in API level <= 7.
-    //T-  */
-    //T- private final boolean mbPollForWindowSizeChange = (AndroidCompat.SDK < 8);
-    //T-} ------------------------------------------------------------
     private static final int SCREEN_CHECK_PERIOD = 1000;
     private final Handler mHandler = new Handler();
     private Runnable mCheckSize = new Runnable() {
-            public void run() {
-                adjustChildSize();
-                mHandler.postDelayed(this, SCREEN_CHECK_PERIOD);
-            }
-        };
+        public void run () {
+            adjustChildSize();
+            mHandler.postDelayed(this, SCREEN_CHECK_PERIOD);
+        }
+    };
 
     class ViewFlipperIterator implements Iterator<View> {
         int pos = 0;
 
-        public boolean hasNext() {
+        public boolean hasNext () {
             return (pos < getChildCount());
         }
 
-        public View next() {
+        public View next () {
             return getChildAt(pos++);
         }
 
-        public void remove() {
+        public void remove () {
             throw new UnsupportedOperationException();
         }
     }
 
-    public TermViewFlipper(Context context) {
+    // ************************************************************
+    // Methods
+    // ************************************************************
+
+    public TermViewFlipper (Context context) {
         super(context);
         commonConstructor(context);
     }
 
-    public TermViewFlipper(Context context, AttributeSet attrs) {
+    public TermViewFlipper (Context context, AttributeSet attrs) {
         super(context, attrs);
         commonConstructor(context);
     }
 
-    private void commonConstructor(Context context) {
+    private void commonConstructor (Context context) {
         this.context = context;
         callbacks = new LinkedList<UpdateCallback>();
 
         updateVisibleRect();
         Rect visible = mVisibleRect;
-        mChildParams = new LayoutParams(visible.width(), visible.height(),
-            Gravity.TOP|Gravity.LEFT);
+        mChildParams = new LayoutParams(visible.width(), visible.height(), Gravity.TOP | Gravity.LEFT);
     }
 
-    public void updatePrefs(TermSettings settings) {
+    public void updatePrefs (TermSettings settings) {
         boolean statusBarVisible = settings.showStatusBar();
         int[] colorScheme = settings.getColorScheme();
         setBackgroundColor(colorScheme[1]);
         mStatusBarVisible = statusBarVisible;
     }
 
-    public Iterator<View> iterator() {
+    public Iterator<View> iterator () {
         return new ViewFlipperIterator();
     }
 
-    public void addCallback(UpdateCallback callback) {
-        callbacks.add(callback);
-    }
-
-    public void removeCallback(UpdateCallback callback) {
-        callbacks.remove(callback);
-    }
-
-    private void notifyChange() {
-        for (UpdateCallback callback : callbacks) {
-            callback.onUpdate();
-        }
-    }
-
-    public void onPause() {
-        //T-{ ------------------------------------------------------------
-        //T- if (mbPollForWindowSizeChange) {
-        //T-     mHandler.removeCallbacks(mCheckSize);
-        //T- }
-        //T-} ------------------------------------------------------------
+    public void onPause () {
         pauseCurrentView();
     }
 
-    public void onResume() {
-        //T-{ ------------------------------------------------------------
-        //T- if (mbPollForWindowSizeChange) {
-        //T-     mCheckSize.run();
-        //T- }
-        //T-} ------------------------------------------------------------
+    public void onResume () {
         resumeCurrentView();
     }
 
-    public void pauseCurrentView() {
+    public void pauseCurrentView () {
         EmulatorView view = (EmulatorView) getCurrentView();
-        if (view == null) {
-            return;
-        }
+        if(view == null) return;
+
         view.onPause();
     }
 
-    public void resumeCurrentView() {
+    public void resumeCurrentView () {
         EmulatorView view = (EmulatorView) getCurrentView();
-        if (view == null) {
-            return;
-        }
+        if(view == null) return;
+
         view.onResume();
         view.requestFocus();
     }
 
-    private void showTitle() {
-        if (getChildCount() == 0) {
-            return;
-        }
+    private void showTitle () {
+        if(getChildCount() == 0) return;
 
         EmulatorView view = (EmulatorView) getCurrentView();
-        if (view == null) {
-            return;
-        }
+        if(view == null) return;
+
         TermSession session = view.getTermSession();
-        if (session == null) {
-            return;
-        }
+        if(session == null) return;
 
         String title = context.getString(R.string.window_title,getDisplayedChild()+1);
-        if (session instanceof GenericTermSession) {
+        if(session instanceof GenericTermSession) {
             title = ((GenericTermSession) session).getTitle(title);
         }
 
-        if (mToast == null) {
+        if(mToast == null) {
             mToast = Toast.makeText(context, title, Toast.LENGTH_SHORT);
             mToast.setGravity(Gravity.CENTER, 0, 0);
         } else {
@@ -196,7 +181,7 @@ public class TermViewFlipper extends ViewFlipper implements Iterable<View> {
     }
 
     @Override
-    public void showPrevious() {
+    public void showPrevious () {
         pauseCurrentView();
         super.showPrevious();
         showTitle();
@@ -205,7 +190,7 @@ public class TermViewFlipper extends ViewFlipper implements Iterable<View> {
     }
 
     @Override
-    public void showNext() {
+    public void showNext () {
         pauseCurrentView();
         super.showNext();
         showTitle();
@@ -214,7 +199,7 @@ public class TermViewFlipper extends ViewFlipper implements Iterable<View> {
     }
 
     @Override
-    public void setDisplayedChild(int position) {
+    public void setDisplayedChild (int position) {
         pauseCurrentView();
         super.setDisplayedChild(position);
         showTitle();
@@ -223,98 +208,95 @@ public class TermViewFlipper extends ViewFlipper implements Iterable<View> {
     }
 
     @Override
-    public void addView(View v, int index) {
+    public void addView (View v, int index) {
         super.addView(v, index, mChildParams);
     }
 
     @Override
-    public void addView(View v) {
+    public void addView (View v) {
         super.addView(v, mChildParams);
     }
 
-    private void updateVisibleRect() {
+    private void updateVisibleRect () {
         Rect visible = mVisibleRect;
         Rect window = mWindowRect;
 
-        /* Get rectangle representing visible area of this view, as seen by
-           the activity (takes other views in the layout into account, but
-           not space used by the IME) */
+        // Get rectangle representing visible area of this view, as seen by the activity (takes other views in
+        // the layout into account, but not space used by the IME).
         getGlobalVisibleRect(visible);
 
-        /* Get rectangle representing visible area of this window (takes
-           IME into account, but not other views in the layout) */
+        // Get rectangle representing visible area of this window (takes IME into account, but not other views
+        // in the layout).
         getWindowVisibleDisplayFrame(window);
-        /* Work around bug in getWindowVisibleDisplayFrame on API < 10, and
-           avoid a distracting height change as status bar hides otherwise */
-        if (!mStatusBarVisible) {
-            window.top = 0;
-        }
 
-        //T+{ ------------------------------------------------------------
+        // // Work around bug in getWindowVisibleDisplayFrame on API < 10, and avoid a distracting height
+        // // change as status bar hides otherwise.
+        // if(!mStatusBarVisible) {
+        //     window.top = 0;
+        // }
+
         // Subtract the size of the keys.
         Term term = ((Term) context);
         int keysHeight = term.getKeysHeight();
         visible.bottom -= keysHeight;
         window.bottom -= keysHeight;
-        //T+} ------------------------------------------------------------
 
-        // Clip visible rectangle's top to the visible portion of the window
-        if (visible.width() == 0 && visible.height() == 0) {
+        // Clip visible rectangle's top to the visible portion of the window.
+        if(visible.width() == 0 && visible.height() == 0) {
             visible.left = window.left;
             visible.top = window.top;
         } else {
-            if (visible.left < window.left) {
+            if(visible.left < window.left) {
                 visible.left = window.left;
             }
-            if (visible.top < window.top) {
+            if(visible.top < window.top) {
                 visible.top = window.top;
             }
         }
-        // Always set the bottom of the rectangle to the window bottom
-        /* XXX This breaks with a split action bar, but if we don't do this,
-           it's possible that the view won't resize correctly on IME hide */
+
+        // Always set the bottom of the rectangle to the window bottom.
+        //
+        // TODO This breaks with a split action bar, but if we don't do this, it's possible that the view
+        // won't resize correctly on IME hide.
         visible.right = window.right;
         visible.bottom = window.bottom;
     }
 
-    private void adjustChildSize() {
+    private void adjustChildSize () {
         updateVisibleRect();
         Rect visible = mVisibleRect;
         int width = visible.width();
         int height = visible.height();
 
-        if (mCurWidth != width || mCurHeight != height) {
+        if(mCurWidth != width || mCurHeight != height) {
             mCurWidth = width;
             mCurHeight = height;
 
             LayoutParams params = mChildParams;
             params.width = width;
             params.height = height;
-            for (View v : this) {
+            for(View v : this) {
                 updateViewLayout(v, params);
             }
             mRedoLayout = true;
 
             EmulatorView currentView = (EmulatorView) getCurrentView();
-            if (currentView != null) {
+            if(currentView != null) {
                 currentView.updateSize(false);
             }
         }
     }
 
-    /**
-     * Called when the view changes size.
-     * (Note: Not always called on Android < 2.2)
-     */
+    /** Called when the view changes size. */
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec) {
         adjustChildSize();
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        if (mRedoLayout) {
+    protected void onDraw (Canvas canvas) {
+        if(mRedoLayout) {
             requestLayout();
             mRedoLayout = false;
         }
