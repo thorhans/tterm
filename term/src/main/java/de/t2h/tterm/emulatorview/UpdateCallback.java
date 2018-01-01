@@ -22,5 +22,5 @@ package de.t2h.tterm.emulatorview;
 //
 public interface UpdateCallback {
     /** Callback function to be invoked when an update happens. */
-    void onUpdate();
+    void onUpdate ();
 }
