@@ -16,12 +16,11 @@
 
 package de.t2h.tterm.emulatorview;
 
-/**
- * Generic callback to be invoked to notify of updates.
+/** Generic callback to be invoked to notify of updates.
  */
+// ThH: Cleaned up.
+//
 public interface UpdateCallback {
-    /**
-     * Callback function to be invoked when an update happens.
-     */
+    /** Callback function to be invoked when an update happens. */
     void onUpdate();
 }

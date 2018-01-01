@@ -29,7 +29,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Build;
-import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -1099,7 +1098,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
 
     /** Set the key code to be sent when the Back key is pressed. */
     public void setBackKeyCharacter (int keyCode) {
-        mKeyListener.setBackKeyCharacter(keyCode);
+        mKeyListener.setBackKeyCode(keyCode);
         mBackKeySendsCharacter = (keyCode != 0);
     }
 

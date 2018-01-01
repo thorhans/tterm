@@ -9,6 +9,6 @@ public class AndroidCompat {
     public final static boolean V11ToV20;
 
     static {
-        V11ToV20 = (SDK >= 11) && (SDK <= 20);
+        V11ToV20 = (11 <= SDK) && (SDK <= 20);
     }
 }
