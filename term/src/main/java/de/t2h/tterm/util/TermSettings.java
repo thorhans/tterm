@@ -21,66 +21,72 @@ package de.t2h.tterm.util;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.annotation.StringRes;
-import android.view.KeyEvent;
 
 import de.t2h.tterm.R;
 
+import static android.view.KeyEvent.*;
+
 /** Terminal emulator settings.
  */
+// ThH: Cleaned up.
+//
 public class TermSettings {
-    private SharedPreferences mPrefs;
+
+   private SharedPreferences mPrefs;
 
     // ------------------------------------------------------------
 
     // Section "Screen"
 
-    private int mStatusBar;             public boolean showStatusBar ()      { return (mStatusBar != 0); }
-    private int mActionBarMode;         public int actionBarMode ()          { return mActionBarMode; }
-    private int mOrientation;           public int getScreenOrientation ()   { return mOrientation; }
-                                                                              
-    // Section "Text"                                                         
-                                                                              
-    private int mFontSize;              public int getFontSize ()            { return mFontSize; }
-    private int mColorId;               public int[] getColorScheme ()       { return COLOR_SCHEMES[mColorId]; }
-    private boolean mUTF8ByDefault;     public boolean defaultToUTF8Mode ()  { return mUTF8ByDefault; }
+    private int mStatusBar;             public boolean showStatusBar ()        { return (mStatusBar != 0); }
+    private int mActionBarMode;         public int actionBarMode ()            { return mActionBarMode; }
+    private int mOrientation;           public int getScreenOrientation ()     { return mOrientation; }
+
+    // Section "Text"
+
+    private int mFontSize;              public int getFontSize ()              { return mFontSize; }
+    private int mColorId;               public int[] getColorScheme ()         { return COLOR_SCHEMES[mColorId]; }
+    private boolean mUTF8ByDefault;     public boolean defaultToUTF8Mode ()    { return mUTF8ByDefault; }
 
     // Section "Extra ekys"
 
-    private String mExtraKeys;          public String getExtraKeys()         { return mExtraKeys; }
-    private int mExtraKeySize;          public int getExtraKeySize ()        { return mExtraKeySize; }
-    private int mExtraKeysShown;        public int getExtraKeysShown ()      { return mExtraKeysShown; }
+    private String mExtraKeys;          public String getExtraKeys()           { return mExtraKeys; }
+    private int mExtraKeySize;          public int getExtraKeySize ()          { return mExtraKeySize; }
+    private int mExtraKeysShown;        public int getExtraKeysShown ()        { return mExtraKeysShown; }
 
     // Section "Keyboard"
 
-    private int mBackKeyAction;         public int getBackKeyAction ()       { return mBackKeyAction; }
-                                        public int getBackKeyCharacter () {
+    private int mBackKeyAction;         public int getBackKeyAction ()         { return mBackKeyAction; }
+                                        public int getBackKeyCharacter ()      {
                                           switch (mBackKeyAction) {
-                                            case BACK_KEY_SENDS_ESC: return 27;
-                                            case BACK_KEY_SENDS_TAB: return 9;
-                                            default:                 return 0;
+                                            case BACK_KEY_SENDS_ESC:             return 27;
+                                            case BACK_KEY_SENDS_TAB:             return 9;
+                                            default:                             return 0;
                                           }
                                         }
-    private int mControlKeyId;          public int getControlKeyId ()        { return mControlKeyId; }
-                                        public int getControlKeyCode ()      { return CONTROL_KEY_SCHEMES[mControlKeyId]; }
-    private int mFnKeyId;               public int getFnKeyId ()             { return mFnKeyId; }
-                                        public int getFnKeyCode ()           { return FN_KEY_SCHEMES[mFnKeyId]; }
-    private int mUseCookedIME;          public boolean useCookedIME ()       { return (mUseCookedIME != 0); }
-    private boolean mAltSendsEsc;       public boolean getAltSendsEscFlag () { return mAltSendsEsc; }
-    private boolean
-        mUseKeyboardShortcuts;          public boolean getUseKeyboardShortcutsFlag () { return mUseKeyboardShortcuts; }
+    private int mControlKeyId;          public int getControlKeyId ()          { return mControlKeyId; }
+                                        public int getControlKeyCode ()        { return CONTROL_KEY_SCHEMES[
+                                                                                            mControlKeyId]; }
+    private int mFnKeyId;               public int getFnKeyId ()               { return mFnKeyId; }
+                                        public int getFnKeyCode ()             { return FN_KEY_SCHEMES[mFnKeyId]; }
+    private int mUseCookedIME;          public boolean useCookedIME ()         { return (mUseCookedIME != 0); }
+    private boolean mAltSendsEsc;       public boolean getAltSendsEsc()        { return mAltSendsEsc; }
+
+    private boolean mUseKeyboardShortcuts;
+    public boolean getUseKeyboardShortcutsFlag () { return mUseKeyboardShortcuts; }
 
     // Section "Shell"
 
-    private String mFailsafeShell;      public String getFailsafeShell ()          { return mFailsafeShell; }
-    private String mShell;              public String getShell ()                  { return mShell; }
-    private String mInitialCommand;     public String getInitialCommand ()         { return mInitialCommand; }
-    private String mTermType;           public String getTermType ()               { return mTermType; }
-    private boolean mMouseTracking;     public boolean getMouseTrackingFlag ()     { return mMouseTracking; }
-    private boolean mCloseOnExit;       public boolean closeWindowOnProcessExit () { return mCloseOnExit; }
-    private boolean mVerifyPath;        public boolean verifyPath ()               { return mVerifyPath; }
-    private boolean mDoPathExtensions;  public boolean doPathExtensions ()         { return mDoPathExtensions; }
-    private boolean mAllowPathPrepend;  public boolean allowPathPrepend ()         { return mAllowPathPrepend; }
-    private String mHomePath;           public String getHomePath ()               { return mHomePath; }
+    private String mFailsafeShell;      public String getFailsafeShell ()      { return mFailsafeShell; }
+    private String mShell;              public String getShell ()              { return mShell; }
+    private String mInitialCommand;     public String getInitialCommand ()     { return mInitialCommand; }
+    private String mTermType;           public String getTermType ()           { return mTermType; }
+    private boolean mMouseTracking;     public boolean getMouseTrackingFlag () { return mMouseTracking; }
+    private boolean mCloseOnExit;       public boolean closeOnProcessExit ()   { return mCloseOnExit; }
+    private boolean mVerifyPath;        public boolean verifyPath ()           { return mVerifyPath; }
+    private boolean mDoPathExtensions;  public boolean doPathExtensions ()     { return mDoPathExtensions; }
+    private boolean mAllowPathPrepend;  public boolean allowPathPrepend ()     { return mAllowPathPrepend; }
+    private String mHomePath;           public String getHomePath ()           { return mHomePath; }
 
     private String mPrependPath = null;
     public String getPrependPath() { return mPrependPath; }
@@ -92,119 +98,125 @@ public class TermSettings {
 
     // ------------------------------------------------------------
 
-    // Section "Screen"
+    private static final String
 
-    private static final String STATUSBAR_KEY          = "statusbar";
-    private static final String ACTIONBAR_KEY          = "actionbar";
-    private static final String ORIENTATION_KEY        = "orientation";
+        // Section "Screen"
 
-    // Section "Text"
+        STATUSBAR_KEY          = "statusbar",
+        ACTIONBAR_KEY          = "actionbar",
+        ORIENTATION_KEY        = "orientation",
 
-    private static final String FONTSIZE_KEY           = "fontsize";
-    private static final String EXTRAKEYS_KEY          = "extrakeysstring"; // We can't use `extrakeys´ here,
-                                                                            // up to 2017-12-28 I used that for
-                                                                            // `extrakeysshow´.
-    private static final String EXTRAKEYSIZE_KEY       = "extrakeysize";
-    private static final String EXTRAKEYSShOWN_KEY     = "extrakeysshow";
-    private static final String COLOR_KEY              = "color";
-    private static final String UTF8_KEY               = "utf8_by_default";
+        // Section "Text"
 
-    // Section "Keyboard"
+        FONTSIZE_KEY           = "fontsize",
+        EXTRAKEYS_STRING_KEY   = "extrakeys_string", // We can't use `extrakeys´ here, up to 2017-12-28 I used
+                                                     // that for `extrakeys_show´.
+        EXTRAKEY_SIZE_KEY      = "extrakeys_size",
+        EXTRAKEYS_SHOWN_KEY    = "extrakeys_show",
+        COLOR_KEY              = "color",
+        UTF8_KEY               = "utf8_by_default",
 
-    private static final String BACKACTION_KEY         = "backaction";
-    private static final String CONTROLKEY_KEY         = "controlkey";
-    private static final String FNKEY_KEY              = "fnkey";
-    private static final String IME_KEY                = "ime";
-    private static final String ALT_SENDS_ESC          = "alt_sends_esc";
-    private static final String USE_KEYBOARD_SHORTCUTS = "use_keyboard_shortcuts";
+        // Section "Keyboard"
 
-    // Section "Shell"
+        BACKACTION_KEY         = "backaction",
+        CONTROLKEY_KEY         = "controlkey",
+        FNKEY_KEY              = "fnkey",
+        IME_KEY                = "ime",
+        ALT_SENDS_ESC          = "alt_sends_esc",
+        USE_KEYBOARD_SHORTCUTS = "use_keyboard_shortcuts",
 
-    private static final String SHELL_KEY              = "shell";
-    private static final String INITIALCOMMAND_KEY     = "initialcommand";
-    private static final String TERMTYPE_KEY           = "termtype";
-    private static final String MOUSE_TRACKING         = "mouse_tracking";
-    private static final String CLOSEONEXIT_KEY        = "close_window_on_process_exit";
-    private static final String VERIFYPATH_KEY         = "verify_path";
-    private static final String PATHEXTENSIONS_KEY     = "do_path_extensions";
-    private static final String PATHPREPEND_KEY        = "allow_prepend_path";
-    private static final String HOMEPATH_KEY           = "home_path";
+        // Section "Shell"
+
+        SHELL_KEY              = "shell",
+        INITIALCOMMAND_KEY     = "initialcommand",
+        TERMTYPE_KEY           = "termtype",
+        MOUSE_TRACKING         = "mouse_tracking",
+        CLOSEONEXIT_KEY        = "close_window_on_process_exit",
+        VERIFYPATH_KEY         = "verify_path",
+        PATHEXTENSIONS_KEY     = "do_path_extensions",
+        PATHPREPEND_KEY        = "allow_prepend_path",
+        HOMEPATH_KEY           = "home_path";
 
     // ------------------------------------------------------------
 
-    public static final int WHITE               = 0xffffffff;
-    public static final int BLACK               = 0xff000000;
-    public static final int BLUE                = 0xff344ebd;
-    public static final int GREEN               = 0xff00ff00;
-    public static final int AMBER               = 0xffffb651;
-    public static final int RED                 = 0xffff0113;
-    public static final int HOLO_BLUE           = 0xff33b5e5;
-    public static final int SOLARIZED_FG        = 0xff657b83;
-    public static final int SOLARIZED_BG        = 0xfffdf6e3;
-    public static final int SOLARIZED_DARK_FG   = 0xff839496;
-    public static final int SOLARIZED_DARK_BG   = 0xff002b36;
-    public static final int LINUX_CONSOLE_WHITE = 0xffaaaaaa;
+    public static final int
+        WHITE               = 0xffffffff,
+        BLACK               = 0xff000000,
+        BLUE                = 0xff344ebd,
+        GREEN               = 0xff00ff00,
+        AMBER               = 0xffffb651,
+        RED                 = 0xffff0113,
+        HOLO_BLUE           = 0xff33b5e5,
+        SOLARIZED_FG        = 0xff657b83,
+        SOLARIZED_BG        = 0xfffdf6e3,
+        SOLARIZED_DARK_FG   = 0xff839496,
+        SOLARIZED_DARK_BG   = 0xff002b36,
+        LINUX_CONSOLE_WHITE = 0xffaaaaaa;
 
     // foreground color, background color
     public static final int[][] COLOR_SCHEMES = {
-        {BLACK,             WHITE},
-        {WHITE,             BLACK},
-        {WHITE,             BLUE},
-        {GREEN,             BLACK},
-        {AMBER,             BLACK},
-        {RED,               BLACK},
-        {HOLO_BLUE,         BLACK},
-        {SOLARIZED_FG,      SOLARIZED_BG},
-        {SOLARIZED_DARK_FG, SOLARIZED_DARK_BG},
-        {LINUX_CONSOLE_WHITE, BLACK}
+        { BLACK,               WHITE             },
+        { WHITE,               BLACK             },
+        { WHITE,               BLUE              },
+        { GREEN,               BLACK             },
+        { AMBER,               BLACK             },
+        { RED,                 BLACK             },
+        { HOLO_BLUE,           BLACK             },
+        { SOLARIZED_FG,        SOLARIZED_BG      },
+        { SOLARIZED_DARK_FG,   SOLARIZED_DARK_BG },
+        { LINUX_CONSOLE_WHITE, BLACK             }
     };
 
     // Section "Screen"
 
-    public  static final int ACTION_BAR_MODE_NONE           = 0;
-    public  static final int ACTION_BAR_MODE_ALWAYS_VISIBLE = 1;
-    public  static final int ACTION_BAR_MODE_HIDES          = 2;
-    private static final int ACTION_BAR_MODE_MAX            = 2;
+    public  static final int
+        ACTION_BAR_MODE_NONE           = 0,
+        ACTION_BAR_MODE_ALWAYS_VISIBLE = 1,
+        ACTION_BAR_MODE_HIDES          = 2,
+        ACTION_BAR_MODE_MAX            = 2,
 
-    public  static final int ORIENTATION_UNSPECIFIED        = 0;
-    public  static final int ORIENTATION_LANDSCAPE          = 1;
-    public  static final int ORIENTATION_PORTRAIT           = 2;
+        ORIENTATION_UNSPECIFIED        = 0,
+        ORIENTATION_LANDSCAPE          = 1,
+        ORIENTATION_PORTRAIT           = 2;
 
     // Section "Text"
 
     /** An integer not in the range of real key codes. */
-    public static final int KEYCODE_NONE = -1;
+    public static final int my_KEYCODE_NONE = -1;
 
     public static final int CONTROL_KEY_ID_NONE = 7;
+
     public static final int[] CONTROL_KEY_SCHEMES = {
-        KeyEvent.KEYCODE_DPAD_CENTER,
-        KeyEvent.KEYCODE_AT,
-        KeyEvent.KEYCODE_ALT_LEFT,
-        KeyEvent.KEYCODE_ALT_RIGHT,
-        KeyEvent.KEYCODE_VOLUME_UP,
-        KeyEvent.KEYCODE_VOLUME_DOWN,
-        KeyEvent.KEYCODE_CAMERA,
-        KEYCODE_NONE
+        KEYCODE_DPAD_CENTER,
+        KEYCODE_AT,
+        KEYCODE_ALT_LEFT,
+        KEYCODE_ALT_RIGHT,
+        KEYCODE_VOLUME_UP,
+        KEYCODE_VOLUME_DOWN,
+        KEYCODE_CAMERA,
+        my_KEYCODE_NONE
     };
 
     public static final int FN_KEY_ID_NONE = 7;
+
     public static final int[] FN_KEY_SCHEMES = {
-        KeyEvent.KEYCODE_DPAD_CENTER,
-        KeyEvent.KEYCODE_AT,
-        KeyEvent.KEYCODE_ALT_LEFT,
-        KeyEvent.KEYCODE_ALT_RIGHT,
-        KeyEvent.KEYCODE_VOLUME_UP,
-        KeyEvent.KEYCODE_VOLUME_DOWN,
-        KeyEvent.KEYCODE_CAMERA,
-        KEYCODE_NONE
+        KEYCODE_DPAD_CENTER,
+        KEYCODE_AT,
+        KEYCODE_ALT_LEFT,
+        KEYCODE_ALT_RIGHT,
+        KEYCODE_VOLUME_UP,
+        KEYCODE_VOLUME_DOWN,
+        KEYCODE_CAMERA,
+        my_KEYCODE_NONE
     };
 
-    public  static final int BACK_KEY_STOPS_SERVICE   = 0;
-    public  static final int BACK_KEY_CLOSES_WINDOW   = 1;
-    public  static final int BACK_KEY_CLOSES_ACTIVITY = 2;
-    public  static final int BACK_KEY_SENDS_ESC       = 3;
-    public  static final int BACK_KEY_SENDS_TAB       = 4;
-    private static final int BACK_KEY_MAX             = 4;
+    public static final int
+        BACK_KEY_STOPS_SERVICE   = 0,
+        BACK_KEY_CLOSES_WINDOW   = 1,
+        BACK_KEY_CLOSES_ACTIVITY = 2,
+        BACK_KEY_SENDS_ESC       = 3,
+        BACK_KEY_SENDS_TAB       = 4,
+        BACK_KEY_MAX             = 4;
 
     // ************************************************************
     // Methods
@@ -281,9 +293,9 @@ public class TermSettings {
 
         // Section "Extra keys"
 
-        mExtraKeys            = aString( EXTRAKEYS_KEY          , mExtraKeys                                       );
-        mExtraKeySize         = anInt(   EXTRAKEYSIZE_KEY       , mExtraKeySize   , 36                             );
-        mExtraKeysShown       = anInt(   EXTRAKEYSShOWN_KEY     , mExtraKeysShown , 2                              );
+        mExtraKeys            = aString(EXTRAKEYS_STRING_KEY, mExtraKeys                                       );
+        mExtraKeySize         = anInt(EXTRAKEY_SIZE_KEY, mExtraKeySize   , 36                             );
+        mExtraKeysShown       = anInt(EXTRAKEYS_SHOWN_KEY, mExtraKeysShown , 2                              );
 
         // Section "Keyboard"
 

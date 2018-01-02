@@ -57,7 +57,7 @@ public class TermView extends EmulatorView {
         setControlKeyCode(settings.getControlKeyCode());
         setFnKeyCode(settings.getFnKeyCode());
         setUseCookedIME(settings.useCookedIME());
-        setAltSendsEsc(settings.getAltSendsEscFlag());
+        setAltSendsEsc(settings.getAltSendsEsc());
 
         // Section "Shell"
 

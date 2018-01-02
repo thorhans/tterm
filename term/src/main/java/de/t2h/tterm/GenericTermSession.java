@@ -17,7 +17,6 @@
 package de.t2h.tterm;
 
 import java.io.*;
-import java.lang.reflect.Field;
 
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
@@ -109,7 +108,7 @@ class GenericTermSession extends TermSession {
 
     @Override
     protected void onProcessExit () {
-        if(mSettings.closeWindowOnProcessExit()) {
+        if(mSettings.closeOnProcessExit()) {
             finish();
         } else if(mProcessExitMessage != null) {
             try {
