@@ -20,20 +20,20 @@ public class PKeyButton extends Button {
   // Attributes
   // ************************************************************
 
-  /** Register `onClick´ handler for `PKey´ with `Kind.send´. */
-  public static void registerSendOnClick(OnClickListener onClick) { mSendOnClick = onClick; }
   private static OnClickListener mSendOnClick;
+  /** Register `onClick´ handler for `PKey´ with `Kind.send´. */
+  public static void registerSendOnClick (OnClickListener onClick) { mSendOnClick = onClick; }
 
-  /** Register `onClick´ handler for `PKey´ with `Kind.write´. */
-  public static void registerWriteOnClick(OnClickListener onClick) { mWriteOnClick = onClick; }
   private static OnClickListener mWriteOnClick;
+  /** Register `onClick´ handler for `PKey´ with `Kind.write´. */
+  public static void registerWriteOnClick (OnClickListener onClick) { mWriteOnClick = onClick; }
 
-  /** Register `onClick´ handler for `PKey´ with `Kind.special´. */
-  public static void registerSpecialOnClick(String name, OnClickListener onClick) {
-    mSpecialOnClick.put(name, onClick); }
   private static HashMap<String, OnClickListener> mSpecialOnClick = new HashMap<>();
+  /** Register `onClick´ handler for `PKey´ with `Kind.special´. */
+  public static void registerSpecialOnClick (String name, OnClickListener onClick) {
+    mSpecialOnClick.put(name, onClick); }
 
-  public void setModel(PKey model) {
+  public void setModel (PKey model) {
     mModel = model;
     setText(mModel.getLabel());
     if(mModel.getKind() == PKey.Kind.send  && mSendOnClick  != null) setOnClickListener(mSendOnClick);
@@ -47,10 +47,10 @@ public class PKeyButton extends Button {
   // Methods
   // ************************************************************
 
-  public PKeyButton(Context context) { super(context); }
-  public PKeyButton(Context context, AttributeSet attrs) { super(context, attrs); }
-  public PKeyButton(Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); }
-  public PKeyButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) { super(context, attrs, defStyleAttr, defStyleRes); }
+  public PKeyButton (Context context) { super(context); }
+  public PKeyButton (Context context, AttributeSet attrs) { super(context, attrs); }
+  public PKeyButton (Context context, AttributeSet attrs, int defStyleAttr) { super(context, attrs, defStyleAttr); }
+  public PKeyButton (Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) { super(context, attrs, defStyleAttr, defStyleRes); }
 
   /** Register a callback to be invoked when this button is clicked <b>or auto-repeats</b>.
    *
@@ -61,7 +61,7 @@ public class PKeyButton extends Button {
    * button. It calls {@link #performClick} for each key-press.</p>
    */
   @Override
-  public void setOnClickListener(OnClickListener onClick) {
+  public void setOnClickListener (OnClickListener onClick) {
     super.setOnClickListener(onClick);
     if(mModel.getRepeat()) {
       setOnTouchListener(new PKeyButton.RepeatingOnTouchListener());
@@ -99,8 +99,8 @@ public class PKeyButton extends Button {
 
     Runnable mAction = new Runnable() {
       @Override
-      public void run() {
-        mButton.performClick();                 // an auto-repeated key-press
+      public void run () {
+        mButton.performClick();          // an auto-repeated key-press
         mHandler.postDelayed(this, 50);
       }
     };
@@ -114,7 +114,7 @@ public class PKeyButton extends Button {
      *
      * @see View.OnTouchListener
      */
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch (View v, MotionEvent event) {
       mButton = (Button) v;
 
       switch(event.getAction()) {
