@@ -33,20 +33,14 @@ class PaintRenderer extends BaseTextRenderer {
     // Attributes
     // ************************************************************
 
-    public int getCharacterHeight() {
-        return mCharHeight;
-    }
     private int mCharHeight;
+    public int getCharacterHeight () { return mCharHeight;}
 
-    public float getCharacterWidth() {
-        return mCharWidth;
-    }
     private float mCharWidth;
+    public float getCharacterWidth () { return mCharWidth; }
 
-    public int getTopMargin() {
-        return mCharDescent;
-    }
     private int mCharDescent;
+    public int getTopMargin () { return mCharDescent; }
 
     private int mCharAscent;
 

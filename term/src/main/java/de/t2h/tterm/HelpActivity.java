@@ -26,6 +26,8 @@ import android.webkit.WebViewClient;
  *
  * @author ThH
  */
+// ThH: Cleaned up.
+//
 public class HelpActivity extends Activity {
 
   WebView mWebView;
@@ -49,7 +51,7 @@ public class HelpActivity extends Activity {
       //
       WebViewClient client = new WebViewClient() {
           @Override
-          public boolean shouldOverrideUrlLoading(WebView view, String url) {
+          public boolean shouldOverrideUrlLoading (WebView view, String url) {
               return false;
           }
       };
@@ -76,7 +78,7 @@ public class HelpActivity extends Activity {
   }
 
   @Override
-  public void onBackPressed() {
+  public void onBackPressed () {
       if(mWebView.canGoBack())
           mWebView.goBack();
       else

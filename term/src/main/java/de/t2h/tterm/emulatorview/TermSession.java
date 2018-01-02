@@ -271,7 +271,7 @@ public class TermSession {
             private byte[] mBuffer = new byte[4096];
 
             @Override
-            public void run() {
+            public void run () {
                 try {
                     while(true) {
                         int read = mTermIn.read(mBuffer);
@@ -301,12 +301,12 @@ public class TermSession {
             private byte[] mBuffer = new byte[4096];
 
             @Override
-            public void run() {
+            public void run () {
                 Looper.prepare();
 
                 mWriterHandler = new Handler() {
                     @Override
-                    public void handleMessage(Message msg) {
+                    public void handleMessage (Message msg) {
                         if(msg.what == NEW_OUTPUT) {
                             writeToOutput();
                         } else if(msg.what == FINISH) {
@@ -347,7 +347,7 @@ public class TermSession {
         mWriterThread.setName("TermSession output writer");
     }
 
-    protected void onProcessExit() {
+    protected void onProcessExit () {
         finish();
     }
 

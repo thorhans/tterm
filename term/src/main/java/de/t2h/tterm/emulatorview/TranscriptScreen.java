@@ -76,18 +76,18 @@ class TranscriptScreen implements Screen {
     }
 
     // TODO This looks wrong.
-    public void setColorScheme(ColorScheme scheme) {
+    public void setColorScheme (ColorScheme scheme) {
         mData.setDefaultStyle(TextStyle.kNormalTextStyle);
     }
 
-    public void finish() {
+    public void finish () {
         // The Android InputMethodService will sometimes hold a reference to us for a while after the activity
         // closes, which is expensive because it means holding on to the now-useless mData array. Explicitly
         // get rid of our references to this data to help keep the amount of memory being leaked down.
         mData = null;
     }
 
-    public void setLineWrap(int row) {
+    public void setLineWrap (int row) {
         mData.setLineWrap(row);
     }
 

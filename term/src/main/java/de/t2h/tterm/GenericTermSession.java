@@ -153,7 +153,7 @@ class GenericTermSession extends TermSession {
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return getClass().getSimpleName() + '(' + createdAt + ',' + mHandle + ')';
     }
 

@@ -300,7 +300,7 @@ class UnicodeTranscript {
      * @param bottomMargin  One line after the last line that is scrolled.
      * @param style         the style for the newly exposed line.
      */
-    public void scroll(int topMargin, int bottomMargin, int style) {
+    public void scroll (int topMargin, int bottomMargin, int style) {
         // Separate out reasons so that stack crawls help us figure out which condition was violated.
         if(topMargin > bottomMargin - 1) throw new IllegalArgumentException();
         if(topMargin < 0) throw new IllegalArgumentException();

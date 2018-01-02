@@ -24,15 +24,16 @@ import android.util.DisplayMetrics;
 import de.t2h.tterm.emulatorview.ColorScheme;
 import de.t2h.tterm.emulatorview.EmulatorView;
 import de.t2h.tterm.emulatorview.TermSession;
-
 import de.t2h.tterm.util.TermSettings;
 
+// ThH: Cleaned up.
+//
 public class TermView extends EmulatorView {
-    public TermView(Context context, TermSession session, DisplayMetrics metrics) {
+    public TermView (Context context, TermSession session, DisplayMetrics metrics) {
         super(context, session, metrics);
     }
 
-    public void updatePrefs(TermSettings settings, ColorScheme scheme) {
+    public void updatePrefs (TermSettings settings, ColorScheme scheme) {
         if (scheme == null) {
             scheme = new ColorScheme(settings.getColorScheme());
         }
@@ -64,12 +65,12 @@ public class TermView extends EmulatorView {
         setMouseTracking(settings.getMouseTrackingFlag());
     }
 
-    public void updatePrefs(TermSettings settings) {
+    public void updatePrefs (TermSettings settings) {
         updatePrefs(settings, null);
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return getClass().toString() + '(' + getTermSession() + ')';
     }
 }

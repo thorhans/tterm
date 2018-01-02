@@ -367,9 +367,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
 
     // TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `mKeyListener´.
     TermKeyListener mKeyListener;
-    public void attachKeyUpdater(KeyUpdater updater) {
-        mKeyListener.attachKeyUpdater(updater);
-    }
+    public void attachKeyUpdater (KeyUpdater updater) { mKeyListener.attachKeyUpdater(updater); }
 
     /// TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `setImeBuffer´.
     void setImeBuffer (String buffer) {

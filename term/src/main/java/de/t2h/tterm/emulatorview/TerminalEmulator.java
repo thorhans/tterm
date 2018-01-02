@@ -57,7 +57,7 @@ class TerminalEmulator {
     private int mCursorCol;
     /** Get the cursor's current column. */
     public final int getCursorCol () { return mCursorCol; }
-    private void setCursorCol(int col) { mCursorCol = col; mAboutToAutoWrap = false; }
+    private void setCursorCol (int col) { mCursorCol = col; mAboutToAutoWrap = false; }
 
     private void setCursorRowCol (int row, int col) {
         mCursorRow = Math.min(row, mRows-1);
