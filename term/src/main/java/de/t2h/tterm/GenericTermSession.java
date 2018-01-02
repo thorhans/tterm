@@ -45,13 +45,11 @@ class GenericTermSession extends TermSession {
 
     /** A cookie which uniquely identifies this session. */
     private String mHandle;
-    public String getHandle() {
+    public String getHandle () {
         return mHandle;
     }
-    public void setHandle(String handle) {
-        if(mHandle != null) {
-            throw new IllegalStateException("Cannot change handle once set.");
-        }
+    public void setHandle (String handle) {
+        if(mHandle != null) throw new IllegalStateException("Cannot change handle once set.");
         mHandle = handle;
     }
 
@@ -61,7 +59,7 @@ class GenericTermSession extends TermSession {
 
     private String mProcessExitMessage;
     // TODO We should really get this ourselves from the resource bundle, but we cannot hold a context.
-    public void setProcessExitMessage(String message) {
+    public void setProcessExitMessage (String message) {
         mProcessExitMessage = message;
     }
 
@@ -203,7 +201,7 @@ class GenericTermSession extends TermSession {
      * @return true, if failing to operate on file descriptor deserves an exception (never the case for ATE
      * own shell).
      */
-    boolean isFailFast() {
+    boolean isFailFast () {
         return false;
     }
 
