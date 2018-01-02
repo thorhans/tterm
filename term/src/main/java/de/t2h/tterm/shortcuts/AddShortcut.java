@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -32,6 +33,9 @@ import de.t2h.tterm.util.ShortcutEncryption;
 import java.io.File;
 import java.security.GeneralSecurityException;
 
+import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
+import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
+
 // ThH: Cleaned up.
 //
 public class AddShortcut extends Activity {
@@ -48,7 +52,7 @@ public class AddShortcut extends Activity {
     // ************************************************************
 
     // LATER Why this?
-    private final Context context = this;
+    private final Context mContext = this;
 
     private SharedPreferences mPrefs;
 
@@ -66,7 +70,7 @@ public class AddShortcut extends Activity {
 
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         String action = getIntent().getAction();
         if(action != null && action.equals("android.intent.action.CREATE_SHORTCUT")) makeShortcut();
         else finish();
@@ -74,52 +78,54 @@ public class AddShortcut extends Activity {
 
     void makeShortcut () {
         if(mPath == null) mPath = "";
-        final AlertDialog.Builder alert = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_DARK);
+        final AlertDialog.Builder alert = new AlertDialog.Builder(mContext, AlertDialog.THEME_HOLO_DARK);
 
-        LinearLayout lv = new LinearLayout(context);
-        lv.setOrientation(LinearLayout.VERTICAL);
-        for(int i = 0, n = mEditTexts.length; i<n; i++) {
-            mEditTexts[i] = new EditText(context);
+        LinearLayout vertical = new LinearLayout(mContext);
+        vertical.setOrientation(LinearLayout.VERTICAL);
+
+        for(int i = 0, n = mEditTexts.length; i < n; i++) {
+            mEditTexts[i] = new EditText(mContext);
             mEditTexts[i].setSingleLine(true);
         }
         if(! mPath.equals("")) mEditTexts[0].setText(mPath);
-        mEditTexts[PATH].setHint(getString(R.string.addshortcut_command_hint)); // `command´
+        mEditTexts[PATH].setHint(getString(R.string.addshortcut_command_hint));
         mEditTexts[NAME].setText(mName);
-        mEditTexts[ARGS].setHint(getString(R.string.addshortcut_example_hint)); //`--example = "a"´
-        mEditTexts[ARGS].setOnFocusChangeListener((View view, boolean focus) -> {
-            if(! focus) {
-                String s;
-                if(mEditTexts[NAME].getText().toString().equals("")
-                    && ! (s = mEditTexts[ARGS].getText().toString()).equals("")
-                ) {
-                    mEditTexts[NAME].setText(s.split("\\s")[0]);
-        } } } );
-
-        Button  btn_path = new Button(context);
-        btn_path.setText(getString(R.string.addshortcut_button_find_command));//"Find command");
-        btn_path.setOnClickListener((View p1) -> {
-            String lastPath = mPrefs.getString("lastPath", null);
-            File get = (lastPath == null)
-                ? Environment.getExternalStorageDirectory()
-                : new File(lastPath).getParentFile();
-            Intent pickerIntent = new Intent();
-            if(mPrefs.getBoolean("useInternalScriptFinder", false)) {
-                pickerIntent.setClass(getApplicationContext(), de.t2h.tterm.shortcuts.FSNavigator.class)
-                    .setData(Uri.fromFile(get))
-                    .putExtra("title", getString(R.string.addshortcut_navigator_title));
-            } else {
-                pickerIntent
-                    .putExtra("CONTENT_TYPE", "*/*")
-                    .setAction(Intent.ACTION_PICK);
-            }
-            startActivityForResult(pickerIntent, OP_MAKE_SHORTCUT);
+        mEditTexts[ARGS].setHint(getString(R.string.addshortcut_example_hint));
+        mEditTexts[ARGS].setOnFocusChangeListener(
+            (View view, boolean focus) -> {
+                if(focus) return;
+                if(! mEditTexts[NAME].getText().toString().equals("")) return;
+                String s = mEditTexts[ARGS].getText().toString();
+                if(s.equals("")) return;
+                mEditTexts[NAME].setText(s.split("\\s")[0]);
         });
-        lv.addView(layoutTextViewH(getString(R.string.addshortcut_command_window_instructions), null, false));
-        lv.addView(layoutViewViewH(btn_path, mEditTexts[PATH]));
-        lv.addView(layoutTextViewH(getString(R.string.addshortcut_arguments_label), mEditTexts[ARGS]));
-        lv.addView(layoutTextViewH(getString(R.string.addshortcut_shortcut_label),  mEditTexts[NAME]));
 
-        final ImageView img = new ImageView(context);
+        Button pathButton = new Button(mContext);
+        pathButton.setText(getString(R.string.addshortcut_button_find_command));
+        pathButton.setOnClickListener(
+            (View p1) -> {
+                String lastPath = mPrefs.getString("lastPath", null);
+                File get = (lastPath == null)
+                    ? Environment.getExternalStorageDirectory()
+                    : new File(lastPath).getParentFile();
+                Intent pickerIntent = new Intent();
+                if(mPrefs.getBoolean("useInternalScriptFinder", false)) {
+                    pickerIntent.setClass(getApplicationContext(), de.t2h.tterm.shortcuts.FSNavigator.class)
+                        .setData(Uri.fromFile(get))
+                        .putExtra("title", getString(R.string.addshortcut_navigator_title));
+                } else {
+                    pickerIntent
+                        .putExtra("CONTENT_TYPE", "*/*")
+                        .setAction(Intent.ACTION_PICK);
+                }
+                startActivityForResult(pickerIntent, OP_MAKE_SHORTCUT);
+        });
+        layoutText(vertical, R.string.addshortcut_command_window_instructions, null, false);
+        layoutView(vertical, pathButton, mEditTexts[PATH]);
+        layoutText(vertical, R.string.addshortcut_arguments_label, mEditTexts[ARGS]);
+        layoutText(vertical, R.string.addshortcut_shortcut_label,  mEditTexts[NAME]);
+
+        final ImageView img = new ImageView(mContext);
         img.setImageResource(R.drawable.ic_launcher);
         img.setMaxHeight(100);
         img.setTag(0xFFFFFFFF);
@@ -127,20 +133,19 @@ public class AddShortcut extends Activity {
         img.setAdjustViewBounds(true);
         img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-        final Button btn_color = new Button(context);
-        btn_color.setText(getString(R.string.addshortcut_button_text_icon));
-        btn_color.setOnClickListener((View p1) -> { new ColorValue(context, img, mIconText); });
+        final Button colorButton = new Button(mContext);
+        colorButton.setText(getString(R.string.addshortcut_button_text_icon));
+        colorButton.setOnClickListener(
+            (View p1) -> { new ColorValue(mContext, img, mIconText); });
 
-        lv.addView(layoutTextViewH(
-            getString(R.string.addshortcut_text_icon_instructions), //"Optionally create a text icon:"
-            null, false));
-        lv.addView(layoutViewViewH(btn_color, img));
+        layoutText(vertical, R.string.addshortcut_text_icon_instructions, null, false);
+        layoutView(vertical, colorButton, img);
 
-        final ScrollView sv = new ScrollView(context);
-        sv.setFillViewport(true);
-        sv.addView(lv);
+        final ScrollView scrollView = new ScrollView(mContext);
+        scrollView.setFillViewport(true);
+        scrollView.addView(vertical);
 
-        alert.setView(sv);
+        alert.setView(scrollView);
         alert.setTitle(getString(R.string.addshortcut_title));
         alert.setPositiveButton(android.R.string.yes,
             (DialogInterface dialog, int which) -> {
@@ -148,55 +153,50 @@ public class AddShortcut extends Activity {
                     mEditTexts[NAME].getText().toString(), mIconText[1], (Integer) img.getTag());
         });
         alert.setNegativeButton(android.R.string.cancel,
-            (DialogInterface dialog, int which) -> { finish(); });
+            (DialogInterface dialog, int which) -> finish());
         alert.show();
     }
 
-    LinearLayout layoutTextViewH(String text, View vw)
-    {
-      return(layoutTextViewH(text, vw, true));
+    void layoutText(LinearLayout vertical, @StringRes int textId, View view) {
+        layoutText(vertical, textId, view, true);
     }
 
-    LinearLayout layoutTextViewH(String text, View vw, boolean attributes) {
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            /*weight*/ 1);
+    void layoutText(LinearLayout vertical, @StringRes int textId, View view, boolean attributes) {
+        LinearLayout.LayoutParams layoutParams =
+            new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT, /*weight*/ 1);
 
-        TextView tv = new TextView(context);
-        tv.setText(text);
+        TextView textView = new TextView(mContext);
+        textView.setText(getString(textId));
         if(attributes) {
-          tv.setTypeface(Typeface.DEFAULT_BOLD);
-          tv.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+            textView.setTypeface(Typeface.DEFAULT_BOLD);
+            textView.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
         }
-        tv.setPadding(10, tv.getPaddingTop(), 10, tv.getPaddingBottom());
+        textView.setPadding(10, textView.getPaddingTop(), 10, textView.getPaddingBottom());
 
-        LinearLayout lh = new LinearLayout(context);
-        lh.setOrientation(LinearLayout.HORIZONTAL);
-        lh.addView(tv, lp);
+        LinearLayout horizontal = new LinearLayout(mContext);
+        horizontal.setOrientation(LinearLayout.HORIZONTAL);
+        horizontal.addView(textView, layoutParams);
 
-        if(vw != null) lh.addView(vw, lp);
-        return lh;
+        if(view != null) horizontal.addView(view, layoutParams);
+        vertical.addView(horizontal);
     }
 
-    LinearLayout layoutViewViewH(View vw1, View vw2) {
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            /*weight*/ 1);
+    void layoutView(LinearLayout vertical, View view_1, View view_2) {
+        LinearLayout.LayoutParams layoutParams =
+            new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT, /*weight*/ 1);
 
-        LinearLayout lh = new LinearLayout(context);
-        lh.setOrientation(LinearLayout.HORIZONTAL);
-        lh.addView(vw1, lp);
+        LinearLayout horizontal = new LinearLayout(mContext);
+        horizontal.setOrientation(LinearLayout.HORIZONTAL);
+        horizontal.addView(view_1, layoutParams);
 
-        if(vw2 != null) lh.addView(vw2, lp);
-        return(lh);
+        if(view_2 != null) horizontal.addView(view_2, layoutParams);
+        vertical.addView(horizontal);
     }
 
-    void buildShortcut(String path, String arguments, String shortcutName, String shortcutText,
+    void buildShortcut (String path, String arguments, String shortcutName, String shortcutText,
         int shortcutColor)
     {
-        ShortcutEncryption.Keys keys = ShortcutEncryption.getKeys(context);
+        ShortcutEncryption.Keys keys = ShortcutEncryption.getKeys(mContext);
         if(keys == null) {
             try {
                 keys = ShortcutEncryption.generateKeys();
@@ -205,10 +205,10 @@ public class AddShortcut extends Activity {
                 Log.e(TermDebug.LOG_TAG, "Generating shortcut encryption keys failed: " + e.toString());
                 throw new RuntimeException(e);
             }
-            ShortcutEncryption.saveKeys(context, keys);
+            ShortcutEncryption.saveKeys(mContext, keys);
         }
         StringBuilder cmd = new StringBuilder();
-        if(path != null && ! path.equals("")) cmd.append(RemoteInterface.quoteForBash(path));
+        if(path      != null && ! path     .equals("")) cmd.append(RemoteInterface.quoteForBash(path));
         if(arguments != null && ! arguments.equals("")) cmd.append(" " + arguments);
         String cmdStr = cmd.toString();
         String cmdEnc = null;
@@ -219,7 +219,7 @@ public class AddShortcut extends Activity {
             throw new RuntimeException(e);
         }
 
-        Intent target = new Intent().setClass(context, RunShortcut.class);
+        Intent target = new Intent().setClass(mContext, RunShortcut.class);
         target.setAction(RunShortcut.ACTION_RUN_SHORTCUT);
         target.putExtra(RunShortcut.EXTRA_SHORTCUT_COMMAND, cmdEnc);
         target.putExtra(RunShortcut.EXTRA_WINDOW_HANDLE, shortcutName);
@@ -228,21 +228,21 @@ public class AddShortcut extends Activity {
         Intent wrapper = new Intent();
         wrapper.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
         wrapper.putExtra(Intent.EXTRA_SHORTCUT_INTENT, target);
-        if(shortcutName != null && !shortcutName.equals("")) {
+        if(shortcutName != null && ! shortcutName.equals("")) {
             wrapper.putExtra(Intent.EXTRA_SHORTCUT_NAME, shortcutName);
         }
-        if(shortcutText != null && !shortcutText.equals("")) {
+        if(shortcutText != null && ! shortcutText.equals("")) {
             wrapper.putExtra(Intent.EXTRA_SHORTCUT_ICON,
                 TextIcon.getTextIcon(shortcutText, shortcutColor, 96, 96));
         } else {
           wrapper.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
-              Intent.ShortcutIconResource.fromContext(context, R.drawable.ic_launcher));
+              Intent.ShortcutIconResource.fromContext(mContext, R.drawable.ic_launcher));
         }
         setResult(RESULT_OK, wrapper);
         finish();
       }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = null;
         mPath = null;
