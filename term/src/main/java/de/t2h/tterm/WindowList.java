@@ -34,8 +34,6 @@ import android.app.ActionBar;
 
 import de.t2h.tterm.util.SessionList;
 
-// ThH: Cleaned up.
-//
 public class WindowList extends ListActivity {
     // ************************************************************
     // Attributes

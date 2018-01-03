@@ -84,8 +84,6 @@ import javax.crypto.spec.SecretKeySpec;
  *   <li>mac is the Base64 encoding of MAC(MAC-key, iv + ":" + cipherText).</li>
  * </ul>
  */
-// ThH: Cleaned up.
-//
 public final class ShortcutEncryption {
     // ************************************************************
     // Constants

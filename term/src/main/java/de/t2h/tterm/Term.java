@@ -91,8 +91,6 @@ public class Term extends Activity
     // ************************************************************
     // Attributes
     // ************************************************************
-    //
-    // ThH: I have cleaned up all attributes.
 
     /** The ViewFlipper which holds the collection of EmulatorView widgets. */
     private TermViewFlipper mViewFlipper;

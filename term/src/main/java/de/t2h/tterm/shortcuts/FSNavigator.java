@@ -32,8 +32,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
-// ThH: Cleaned up.
-//
 public class FSNavigator
     extends android.app.Activity
 {
