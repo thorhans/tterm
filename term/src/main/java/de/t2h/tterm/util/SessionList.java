@@ -23,61 +23,75 @@ import java.util.Collection;
 import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.emulatorview.UpdateCallback;
 
-/**
- * An ArrayList of TermSessions which allows users to register callbacks in
- * order to be notified when the list is changed.
+/** An ArrayList of TermSessions which allows users to register callbacks in order to be notified when the
+ *  list is changed.
  */
+// ThH: Cleaned up.
+//
 @SuppressWarnings("serial")
 public class SessionList extends ArrayList<TermSession>
 {
+    // ************************************************************
+    // Attributes
+    // ************************************************************
+
+    // `callbacks´
+    
     LinkedList<UpdateCallback> callbacks = new LinkedList<UpdateCallback>();
-    LinkedList<UpdateCallback> titleChangedListeners = new LinkedList<UpdateCallback>();
-    UpdateCallback mTitleChangedListener = new UpdateCallback() {
-        public void onUpdate() {
-            notifyTitleChanged();
-        }
-    };
 
-    public SessionList() {
-        super();
-    }
-
-    public SessionList(int capacity) {
-        super(capacity);
-    }
-
-    public void addCallback(UpdateCallback callback) {
+    public void addCallback (UpdateCallback callback) {
         callbacks.add(callback);
         callback.onUpdate();
     }
 
-    public boolean removeCallback(UpdateCallback callback) {
+    public boolean removeCallback (UpdateCallback callback) {
         return callbacks.remove(callback);
     }
 
-    private void notifyChange() {
-        for (UpdateCallback callback : callbacks) {
+    private void notifyChange () {
+        for(UpdateCallback callback : callbacks) {
             callback.onUpdate();
         }
     }
 
-    public void addTitleChangedListener(UpdateCallback listener) {
+    // `titleChangedListeners´
+
+    LinkedList<UpdateCallback> titleChangedListeners = new LinkedList<UpdateCallback>();
+    UpdateCallback mTitleChangedListener = new UpdateCallback() {
+        public void onUpdate () {
+            notifyTitleChanged();
+        }
+    };
+
+    public void addTitleChangedListener (UpdateCallback listener) {
         titleChangedListeners.add(listener);
         listener.onUpdate();
     }
 
-    public boolean removeTitleChangedListener(UpdateCallback listener) {
+    public boolean removeTitleChangedListener (UpdateCallback listener) {
         return titleChangedListeners.remove(listener);
     }
 
-    private void notifyTitleChanged() {
-        for (UpdateCallback listener : titleChangedListeners) {
+    private void notifyTitleChanged () {
+        for(UpdateCallback listener : titleChangedListeners) {
             listener.onUpdate();
         }
     }
 
+    // ************************************************************
+    // Methods
+    // ************************************************************
+
+    public SessionList () {
+        super();
+    }
+
+    public SessionList (int capacity) {
+        super(capacity);
+    }
+
     @Override
-    public boolean add(TermSession object) {
+    public boolean add (TermSession object) {
         boolean result = super.add(object);
         object.setTitleChangedListener(mTitleChangedListener);
         notifyChange();
@@ -85,16 +99,16 @@ public class SessionList extends ArrayList<TermSession>
     }
 
     @Override
-    public void add(int index, TermSession object) {
+    public void add (int index, TermSession object) {
         super.add(index, object);
         object.setTitleChangedListener(mTitleChangedListener);
         notifyChange();
     }
 
     @Override
-    public boolean addAll(Collection <? extends TermSession> collection) {
+    public boolean addAll (Collection <? extends TermSession> collection) {
         boolean result = super.addAll(collection);
-        for (TermSession session : collection) {
+        for(TermSession session : collection) {
             session.setTitleChangedListener(mTitleChangedListener);
         }
         notifyChange();
@@ -102,9 +116,9 @@ public class SessionList extends ArrayList<TermSession>
     }
 
     @Override
-    public boolean addAll(int index, Collection <? extends TermSession> collection) {
+    public boolean addAll (int index, Collection <? extends TermSession> collection) {
         boolean result = super.addAll(index, collection);
-        for (TermSession session : collection) {
+        for(TermSession session : collection) {
             session.setTitleChangedListener(mTitleChangedListener);
         }
         notifyChange();
@@ -112,8 +126,8 @@ public class SessionList extends ArrayList<TermSession>
     }
 
     @Override
-    public void clear() {
-        for (TermSession session : this) {
+    public void clear () {
+        for(TermSession session : this) {
             session.setTitleChangedListener(null);
         }
         super.clear();
@@ -121,9 +135,9 @@ public class SessionList extends ArrayList<TermSession>
     }
 
     @Override
-    public TermSession remove(int index) {
+    public TermSession remove (int index) {
         TermSession object = super.remove(index);
-        if (object != null) {
+        if(object != null) {
             object.setTitleChangedListener(null);
             notifyChange();
         }
@@ -131,9 +145,9 @@ public class SessionList extends ArrayList<TermSession>
     }
 
     @Override
-    public boolean remove(Object object) {
+    public boolean remove (Object object) {
         boolean result = super.remove(object);
-        if (result && object instanceof TermSession) {
+        if(result && object instanceof TermSession) {
             ((TermSession) object).setTitleChangedListener(null);
             notifyChange();
         }
@@ -141,10 +155,10 @@ public class SessionList extends ArrayList<TermSession>
     }
 
     @Override
-    public TermSession set(int index, TermSession object) {
+    public TermSession set (int index, TermSession object) {
         TermSession old = super.set(index, object);
         object.setTitleChangedListener(mTitleChangedListener);
-        if (old != null) {
+        if(old != null) {
             old.setTitleChangedListener(null);
         }
         notifyChange();
