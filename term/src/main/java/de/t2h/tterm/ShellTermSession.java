@@ -22,6 +22,7 @@ import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
 import de.t2h.tterm.util.TermSettings;
+import de.t2h.util.text.Text;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,24 +32,36 @@ import java.util.ArrayList;
  * <p>It keeps track of process PID and destroys it's process group upon stopping.</p>
  */
 public class ShellTermSession extends GenericTermSession {
+    // ************************************************************
+    // Constants
+    // ************************************************************
+
+    private static final int PROCESS_EXITED = 1;
+
+    // ************************************************************
+    // Attributes
+    // ************************************************************
+
     private int mProcId;
+
     private Thread mWatcherThread;
 
     private String mInitialCommand;
 
-    private static final int PROCESS_EXITED = 1;
     private Handler mMsgHandler = new Handler() {
         // The compiler doesn't allow converting this to a lambda, I don't understand why.
         @Override
         public void handleMessage (Message msg) {
-            if(! isRunning()) {
-                return;
-            }
+            if(! isRunning()) return;
             if(msg.what == PROCESS_EXITED) {
                 onProcessExit((Integer) msg.obj);
             }
         }
     };
+
+    // ************************************************************
+    // Methods
+    // ************************************************************
 
     public ShellTermSession (TermSettings settings, String initialCommand)
         throws IOException
@@ -79,13 +92,13 @@ public class ShellTermSession extends GenericTermSession {
         String path = System.getenv("PATH");
         if(settings.doPathExtensions()) {
             String appendPath = settings.getAppendPath();
-            if(appendPath != null && appendPath.length() > 0) {
+            if(Text.isSet(appendPath)) {
                 path = path + ":" + appendPath;
             }
 
             if(settings.allowPathPrepend()) {
                 String prependPath = settings.getPrependPath();
-                if(prependPath != null && prependPath.length() > 0) {
+                if(Text.isSet(prependPath)) {
                     path = prependPath + ":" + path;
                 }
             }
@@ -123,7 +136,7 @@ public class ShellTermSession extends GenericTermSession {
     }
 
     private void sendInitialCommand (String initialCommand) {
-        if(initialCommand.length() > 0) {
+        if(! initialCommand.isEmpty()) {
             write(initialCommand + '\r');
         }
     }
@@ -158,40 +171,34 @@ public class ShellTermSession extends GenericTermSession {
         final int WHITESPACE = 1;
         final int INQUOTE = 2;
         int state = WHITESPACE;
-        ArrayList<String> result =  new ArrayList<String>();
+        ArrayList<String> result =  new ArrayList<>();
         int cmdLen = cmd.length();
         StringBuilder builder = new StringBuilder();
         for(int i = 0; i < cmdLen; i++) {
             char c = cmd.charAt(i);
+
             if(state == PLAIN) {
-                if(Character.isWhitespace(c)) {
-                    result.add(builder.toString());
-                    builder.delete(0,builder.length());
-                    state = WHITESPACE;
-                } else if(c == '"') {
-                    state = INQUOTE;
-                } else {
-                    builder.append(c);
+                if(Character.isWhitespace(c)) { result.add(builder.toString());
+                                                builder.delete(0, builder.length());
+                                                state = WHITESPACE;
+                } else if(c == '"') {           state = INQUOTE;
+                } else {                        builder.append(c);
                 }
+
             } else if(state == WHITESPACE) {
-                if(Character.isWhitespace(c)) {
-                    // do nothing
-                } else if(c == '"') {
-                    state = INQUOTE;
-                } else {
-                    state = PLAIN;
-                    builder.append(c);
+                if(Character.isWhitespace(c)) { // do nothing
+                } else if(c == '"') {           state = INQUOTE;
+                } else {                        state = PLAIN;
+                                                builder.append(c);
                 }
+
             } else if(state == INQUOTE) {
                 if(c == '\\') {
-                    if(i + 1 < cmdLen) {
-                        i += 1;
-                        builder.append(cmd.charAt(i));
+                    if(i + 1 < cmdLen) {        ++i;
+                                                builder.append(cmd.charAt(i));
                     }
-                } else if(c == '"') {
-                    state = PLAIN;
-                } else {
-                    builder.append(c);
+                } else if(c == '"') {           state = PLAIN;
+                } else {                        builder.append(c);
                 }
             }
         }
