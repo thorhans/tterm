@@ -26,6 +26,8 @@ import java.util.Locale;
 
 import android.util.Log;
 
+import de.t2h.util.text.Text;
+
 /** Renders text into a screen.
  *
  * <p>Contains all the terminal-specific knowledge and state. Emulates a subset of the X Window System xterm
@@ -587,7 +589,7 @@ class TerminalEmulator {
                 newCursorRow = mCursorRow;
                 newCursorCol = mCursorCol;
                 newCursorTranscriptPos = screen.getActiveRows();
-                if(charAtCursor != null && charAtCursor.length() > 0) {
+                if(Text.isSet(charAtCursor)) {
                     // Emit the real character that was in this spot
                     int encodedCursorColor = cursorColor.at(0);
                     emit(charAtCursor.toCharArray(), 0, charAtCursor.length(), encodedCursorColor);

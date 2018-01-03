@@ -25,6 +25,7 @@ import de.t2h.tterm.emulatorview.ColorScheme;
 import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.emulatorview.UpdateCallback;
 import de.t2h.tterm.util.TermSettings;
+import de.t2h.util.text.Text;
 
 /** A terminal session.
  *
@@ -142,7 +143,7 @@ class GenericTermSession extends TermSession {
      */
     public String getTitle (String defaultTitle) {
         String title = getTitle();
-        if(title != null && title.length() > 0) {
+        if(Text.isSet(title)) {
             return title;
         } else {
             return defaultTitle;
