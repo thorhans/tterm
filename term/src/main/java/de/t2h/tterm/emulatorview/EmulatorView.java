@@ -53,8 +53,6 @@ import android.widget.Scroller;
  * {@link #setDensity setDensity} before using the view. If creating this view from code, use the {@link
  * #EmulatorView(Context, TermSession, DisplayMetrics)} constructor, which will take care of this for you.</p>
  */
-// ThH: Cleaned up.
-//
 public class EmulatorView extends View implements GestureDetector.OnGestureListener {
     // ************************************************************
     // Constants

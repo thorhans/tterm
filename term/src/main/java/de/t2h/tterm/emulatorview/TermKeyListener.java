@@ -15,8 +15,6 @@ import static android.view.KeyEvent.*;
  * <p>Supports control characters and escape. Keeps track of the current state of the alt, shift, fn, and
  * control keys.</p>
  */
-// ThH: Cleaned up.
-//
 class TermKeyListener {
     // ************************************************************
     // Inner class

@@ -27,8 +27,6 @@ import android.net.Uri;
  *
  * <p>The old procedure of using `Intent.Extra´ is still available but is discouraged.</p>
  */
-// ThH: Cleaned up.
-//
 public final class RunScript extends RemoteInterface {
     // ************************************************************
     // Constants

@@ -25,8 +25,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 
-// ThH: Cleaned up.
-//
 abstract class BaseTextRenderer implements TextRenderer {
     // ************************************************************
     // Constants

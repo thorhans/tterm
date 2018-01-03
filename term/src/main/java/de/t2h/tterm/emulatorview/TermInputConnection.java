@@ -13,8 +13,6 @@ import android.view.inputmethod.ExtractedTextRequest;
 
 import java.io.IOException;
 
-// ThH: Cleaned up.
-//
 class TermInputConnection extends BaseInputConnection {
     // ************************************************************
     // Constants

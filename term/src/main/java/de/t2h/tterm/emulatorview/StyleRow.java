@@ -9,8 +9,6 @@ package de.t2h.tterm.emulatorview;
  *
  * <p>Instead, we use an array of bytes and store the bytes of each int consecutively in big-endian order.</p>
  */
-// ThH: Cleaned up.
-//
 final class StyleRow {
     private int mStyle;
     private int mColumns;

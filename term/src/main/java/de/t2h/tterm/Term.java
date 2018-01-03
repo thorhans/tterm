@@ -85,8 +85,6 @@ import java.util.Locale;
 
 /** A terminal emulator activity.
  */
-// ThH: Cleaned up.
-//
 public class Term extends Activity
     implements UpdateCallback, SharedPreferences.OnSharedPreferenceChangeListener
 {

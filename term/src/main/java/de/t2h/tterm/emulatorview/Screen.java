@@ -21,8 +21,6 @@ package de.t2h.tterm.emulatorview;
  * <p>A terminal screen stores lines of text. (The reason to abstract it is to allow different
  * implementations, and to hide implementation details from clients.)</p>
  */
-// ThH: Cleaned up.
-//
 interface Screen {
     /** Set line wrap flag for a given row.
      *

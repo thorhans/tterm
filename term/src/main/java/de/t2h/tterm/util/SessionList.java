@@ -26,8 +26,6 @@ import de.t2h.tterm.emulatorview.UpdateCallback;
 /** An ArrayList of TermSessions which allows users to register callbacks in order to be notified when the
  *  list is changed.
  */
-// ThH: Cleaned up.
-//
 @SuppressWarnings("serial")
 public class SessionList extends ArrayList<TermSession>
 {

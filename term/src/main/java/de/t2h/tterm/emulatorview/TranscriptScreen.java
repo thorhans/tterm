@@ -26,8 +26,6 @@ import android.graphics.Canvas;
  * <p>The old data is stored in a ring buffer to minimize the amount of copying that needs to be done. The
  * transcript does its own drawing, to avoid having to expose its internal data structures.</p>
  */
-// ThH: Cleaned up.
-//
 class TranscriptScreen implements Screen {
     // ************************************************************
     // Attributes

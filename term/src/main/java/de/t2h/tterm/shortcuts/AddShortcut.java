@@ -36,8 +36,6 @@ import java.security.GeneralSecurityException;
 import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
 import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
 
-// ThH: Cleaned up.
-//
 public class AddShortcut extends Activity {
     // ************************************************************
     // Constants

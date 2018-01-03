@@ -7,8 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 
-// ThH: Cleaned up.
-//
 public class TextIcon
 {
     public static Bitmap getTextIcon(String text, int color, int width, int height) {

@@ -41,8 +41,6 @@ import de.t2h.tterm.emulatorview.UpdateCallback;
 
 import de.t2h.tterm.util.TermSettings;
 
-// ThH: Cleaned up.
-//
 public class TermViewFlipper extends ViewFlipper
     implements Iterable<View>
 {

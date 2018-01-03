@@ -21,8 +21,6 @@ import de.t2h.tterm.R;
 import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
 import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
 
-// ThH: Cleaned up.
-//
 public class ColorValue
     implements CompoundButton.OnCheckedChangeListener
 {

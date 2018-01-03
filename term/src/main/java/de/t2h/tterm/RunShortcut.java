@@ -23,8 +23,6 @@ import de.t2h.tterm.util.ShortcutEncryption;
 
 import java.security.GeneralSecurityException;
 
-// ThH: Cleaned up.
-//
 public final class RunShortcut extends RemoteInterface {
     // ************************************************************
     // Constants

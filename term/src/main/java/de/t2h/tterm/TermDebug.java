@@ -18,8 +18,6 @@ package de.t2h.tterm;
 
 /** Debug settings.
  */
-// ThH: Cleaned up.
-//
 public class TermDebug {
     /** Set to true to add debugging code and logging. */
     public static final boolean DEBUG = false;

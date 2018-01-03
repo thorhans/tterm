@@ -26,8 +26,6 @@ import android.webkit.WebViewClient;
  *
  * @author ThH
  */
-// ThH: Cleaned up.
-//
 public class HelpActivity extends Activity {
 
   WebView mWebView;

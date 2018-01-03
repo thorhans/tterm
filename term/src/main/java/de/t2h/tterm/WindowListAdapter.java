@@ -29,8 +29,6 @@ import de.t2h.tterm.emulatorview.UpdateCallback;
 
 import de.t2h.tterm.util.SessionList;
 
-// ThH: Cleaned up.
-//
 public class WindowListAdapter extends BaseAdapter
     implements UpdateCallback
 {

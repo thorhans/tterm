@@ -20,8 +20,6 @@ import java.io.IOException;
 
 /** Utility methods for managing a PTY file descriptor.
  */
-// ThH: Cleaned up.
-//
 public class Exec
 {
     // Warning: bump the library revision when an incompatible change happens.

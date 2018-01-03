@@ -26,8 +26,6 @@ import de.t2h.tterm.emulatorview.EmulatorView;
 import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.util.TermSettings;
 
-// ThH: Cleaned up.
-//
 public class TermView extends EmulatorView {
     public TermView (Context context, TermSession session, DisplayMetrics metrics) {
         super(context, session, metrics);

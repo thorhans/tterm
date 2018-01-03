@@ -1,7 +1,5 @@
 package de.t2h.tterm.emulatorview;
 
-// ThH: Cleaned up.
-//
 class GrowableIntArray {
     int[] mData;
     int mLength;

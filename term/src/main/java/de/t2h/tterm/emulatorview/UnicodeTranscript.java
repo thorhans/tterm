@@ -40,8 +40,6 @@ import android.text.AndroidCharacter;
  * rows when needed. There is no conversion in the other direction -- a "full" row stays that way even if it
  * contains only regular-width BMP characters.</p>
  */
-// ThH: Cleaned up.
-//
 class UnicodeTranscript {
     // ************************************************************
     // Constants

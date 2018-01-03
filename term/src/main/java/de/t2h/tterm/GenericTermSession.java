@@ -30,8 +30,6 @@ import de.t2h.tterm.util.TermSettings;
  *
  * <p>Consists of a TerminalEmulator, a TranscriptScreen, and the I/O streams used to talk to the process.</p>
  */
-// ThH: Cleaned up.
-//
 class GenericTermSession extends TermSession {
     // ************************************************************
     // Attributes

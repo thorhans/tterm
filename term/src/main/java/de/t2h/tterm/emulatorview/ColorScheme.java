@@ -27,8 +27,6 @@ package de.t2h.tterm.emulatorview;
  *
  * @see EmulatorView#setColorScheme
  */
-// ThH: Cleaned up.
-//
 public class ColorScheme {
     // ************************************************************
     // Constants

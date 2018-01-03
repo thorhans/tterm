@@ -43,8 +43,6 @@ import de.t2h.tterm.util.TermSettings;
 
 import java.util.UUID;
 
-// ThH: Cleaned up.
-//
 public class TermService extends Service
     implements TermSession.FinishCallback
 {

@@ -19,8 +19,6 @@ package de.t2h.tterm.emulatorview;
 import android.graphics.Canvas;
 
 /** Text renderer interface. */
-// ThH: Cleaned up.
-//
 public interface TextRenderer {
     public static final int MODE_OFF = 0;
     public static final int MODE_ON = 1;

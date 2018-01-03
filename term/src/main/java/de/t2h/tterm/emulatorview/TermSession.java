@@ -47,8 +47,6 @@ import android.os.Message;
  * <p>When you're done with the session, you should call {@link #finish} on it. This frees emulator data from
  * memory, stops the reader and writer threads, and closes the attached I/O streams.</p>
  */
-// ThH: Cleaned up.
-//
 public class TermSession {
     // ************************************************************
     // Constants

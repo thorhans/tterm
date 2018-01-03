@@ -26,8 +26,6 @@ package de.t2h.tterm.emulatorview;
  * array, so we use that element of the array to keep track of how much of the char[] array we're using at the
  * moment.</p>
  */
-// ThH: Cleaned up.
-//
 class FullUnicodeLine {
     // ************************************************************
     // Constants

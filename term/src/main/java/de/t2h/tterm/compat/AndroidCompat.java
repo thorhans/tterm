@@ -1,7 +1,5 @@
 package de.t2h.tterm.compat;
 
-// ThH: Cleaned up.
-//
 public class AndroidCompat {
     public final static int SDK = android.os.Build.VERSION.SDK_INT;
 

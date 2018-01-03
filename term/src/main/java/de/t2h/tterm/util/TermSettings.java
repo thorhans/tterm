@@ -28,8 +28,6 @@ import static android.view.KeyEvent.*;
 
 /** Terminal emulator settings.
  */
-// ThH: Cleaned up.
-//
 public class TermSettings {
 
    private SharedPreferences mPrefs;

@@ -35,8 +35,6 @@ import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.util.SessionList;
 import de.t2h.tterm.util.TermSettings;
 
-// ThH: Cleaned up.
-//
 public class RemoteInterface extends Activity {
     // ************************************************************
     // Constants

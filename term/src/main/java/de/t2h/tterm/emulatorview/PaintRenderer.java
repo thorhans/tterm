@@ -20,8 +20,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
-// ThH: Cleaned up.
-//
 class PaintRenderer extends BaseTextRenderer {
     // ************************************************************
     // Constants

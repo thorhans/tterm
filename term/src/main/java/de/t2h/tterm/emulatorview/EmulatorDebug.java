@@ -18,8 +18,6 @@ package de.t2h.tterm.emulatorview;
 
 /** Debug settings.
  */
-// ThH: Cleaned up.
-//
 class EmulatorDebug {
     /** Set to true to add debugging code and logging. */
     public static final boolean DEBUG = false;

@@ -16,8 +16,6 @@ import java.util.*;
  * start in slightly more human-like way. For example, a PTY owner can send `^C´ (aka SIGINT) to attached
  * shell, even if said shell runs under a different user ID.</p>
  */
-// ThH: Cleaned up.
-//
 public class TermExec {
     // ************************************************************
     // Initialization

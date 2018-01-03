@@ -23,8 +23,6 @@ import android.view.MenuItem;
 
 import de.t2h.tterm.compat.AndroidCompat;
 
-// ThH: Cleaned up.
-//
 public class TermPreferences extends PreferenceActivity {
     // ************************************************************
     // Constants

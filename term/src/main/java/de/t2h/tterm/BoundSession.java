@@ -4,8 +4,6 @@ import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import de.t2h.tterm.util.TermSettings;
 
-// ThH: Cleaned up.
-//
 class BoundSession extends GenericTermSession {
     // ************************************************************
     // Attributes

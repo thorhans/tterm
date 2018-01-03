@@ -6,8 +6,6 @@ package de.t2h.tterm.emulatorview;
 // - `TextRenderer.MODE_OFF´
 // - `TextRenderer.MODE_ON´
 // - `TextRenderer.MODE_LOCKED´
-// ThH: Cleaned up.
-//
 public interface KeyUpdater {
     void updateControl(int state);
     void updateFn(int state);

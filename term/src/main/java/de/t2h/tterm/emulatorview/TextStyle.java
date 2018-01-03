@@ -1,7 +1,5 @@
 package de.t2h.tterm.emulatorview;
 
-// ThH: Cleaned up.
-//
 final class TextStyle {
     // Effect bitmasks:
     final static int fxNormal = 0;

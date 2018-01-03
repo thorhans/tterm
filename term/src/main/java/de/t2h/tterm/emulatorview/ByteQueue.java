@@ -20,8 +20,6 @@ package de.t2h.tterm.emulatorview;
  *
  * <p>Only allows one producer and one consumer.</p>
  */
-// ThH: Cleaned up.
-//
 class ByteQueue {
     // ************************************************************
     // Attributes

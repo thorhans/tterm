@@ -30,8 +30,6 @@ import java.util.ArrayList;
  *
  * <p>It keeps track of process PID and destroys it's process group upon stopping.</p>
  */
-// ThH: Cleaned up.
-//
 public class ShellTermSession extends GenericTermSession {
     private int mProcId;
     private Thread mWatcherThread;
