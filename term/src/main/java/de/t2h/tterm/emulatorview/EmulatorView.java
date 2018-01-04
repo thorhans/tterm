@@ -53,7 +53,10 @@ import android.widget.Scroller;
  * {@link #setDensity setDensity} before using the view. If creating this view from code, use the {@link
  * #EmulatorView(Context, TermSession, DisplayMetrics)} constructor, which will take care of this for you.</p>
  */
-public class EmulatorView extends View implements GestureDetector.OnGestureListener {
+public class EmulatorView
+    extends View
+    implements GestureDetector.OnGestureListener
+{
     // ************************************************************
     // Constants
     // ************************************************************
@@ -920,6 +923,8 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
     /** This is called during layout when the size of this view has changed.
      *
      * <p>If you were just added to the view hierarchy, you're called with the old values of 0.</p>
+     *
+     * TODO This is called every time I press a key in the Swype IME.
      */
     @Override
     protected void onSizeChanged (int w, int h, int oldw, int oldh) {
@@ -965,11 +970,11 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
         if(mSizeKnown) {
             int w = getWidth();
             int h = getHeight();
-            // Log.w("Term", "(" + w + ", " + h + ")");
+            //D Log.w("TTerm", "EmulatorView.updateSize with h = " + h + " and mVisibleHeight = " + mVisibleHeight + ".");
             if(force || w != mVisibleWidth || h != mVisibleHeight) {
                 mVisibleWidth = w;
-                // If we need to change the height, the right place is `TermViewFlipper´, not here.
                 mVisibleHeight = h;
+                // If we need to change the height, the right place is `TermViewFlipper´, not here.
                 updateSize(mVisibleWidth, mVisibleHeight);
             }
         }

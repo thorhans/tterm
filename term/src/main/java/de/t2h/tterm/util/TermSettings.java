@@ -95,6 +95,8 @@ public class TermSettings {
     public void setAppendPath(String appendPath) { mAppendPath = appendPath; }
 
     // ------------------------------------------------------------
+    //
+    // TODO These keys must correspond with `res/xml/preferences.xml´. Is there a way to guarantee it?
 
     private static final String
 
@@ -291,9 +293,9 @@ public class TermSettings {
 
         // Section "Extra keys"
 
-        mExtraKeys            = aString(EXTRAKEYS_STRING_KEY, mExtraKeys                                       );
-        mExtraKeySize         = anInt(EXTRAKEY_SIZE_KEY, mExtraKeySize   , 36                             );
-        mExtraKeysShown       = anInt(EXTRAKEYS_SHOWN_KEY, mExtraKeysShown , 2                              );
+        mExtraKeys            = aString( EXTRAKEYS_STRING_KEY   , mExtraKeys                                       );
+        mExtraKeySize         = anInt(   EXTRAKEY_SIZE_KEY      , mExtraKeySize   , 36                             );
+        mExtraKeysShown       = anInt(   EXTRAKEYS_SHOWN_KEY    , mExtraKeysShown , 2                              );
 
         // Section "Keyboard"
 
