@@ -45,7 +45,7 @@
 
     <string  name="pref_extrakeys_default"      translatable="false">
         [
-          \"[Control]\",  \"[Tab]\",  \"[Esc]\",  \"[/]\",  \"[-]\",
+          \"[Control]\",  \"[Tab]\",  \"[Esc]\",  \"/\",  \"-\",
           \"[Up]\",  \"[Down]\",  \"[Left]\",  \"[Right]\",  \"[Fn1]\"
         ]
     </string>
