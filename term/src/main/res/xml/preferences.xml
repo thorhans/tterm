@@ -101,7 +101,7 @@
       android:title="@string/extrakeys_preferences">
 
         <EditTextPreference
-          android:key          = "extrakeysstring"
+          android:key          = "extrakeys_string"
           android:defaultValue = "@string/pref_extrakeys_default"
           android:title        = "@string/title_extrakeys_preference"
           android:summary      = "@string/summary_extrakeys_preference"
