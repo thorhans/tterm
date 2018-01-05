@@ -448,7 +448,7 @@ WindowList</panel_attributes>
       <w>50</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0;30.0;80.0</additional_attributes>
   </element>
   <element>
@@ -459,7 +459,7 @@ WindowList</panel_attributes>
       <w>50</w>
       <h>180</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;160.0;30.0;160.0</additional_attributes>
   </element>
   <element>
