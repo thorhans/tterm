@@ -1,6 +1,7 @@
 package de.t2h.tterm.key;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -9,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.HashMap;
+
+import de.t2h.tterm.Term;
+import de.t2h.tterm.emulatorview.TextRenderer;
 
 /** A programmable key's view.
  *
@@ -33,15 +37,25 @@ public class PKeyButton extends Button {
   public static void registerSpecialOnClick (String name, OnClickListener onClick) {
     mSpecialOnClick.put(name, onClick); }
 
+  private PKey mModel;
+  public PKey getModel () { return mModel; }
   public void setModel (PKey model) {
     mModel = model;
     setText(mModel.getLabel());
     if(mModel.getKind() == PKey.Kind.send  && mSendOnClick  != null) setOnClickListener(mSendOnClick);
     if(mModel.getKind() == PKey.Kind.write && mWriteOnClick != null) setOnClickListener(mWriteOnClick);
     if(mModel.getKind() == PKey.Kind.special) setOnClickListener(mSpecialOnClick.get(mModel.getName()));
+    model.addButton(this);
   }
-  public PKey getModel () { return mModel; }
-  private PKey mModel;
+
+  public void setState (int state) {
+      switch(state) {
+      case TextRenderer.MODE_ON:     setTextColor(Color.GREEN);           break;
+      case TextRenderer.MODE_LOCKED: setTextColor(Color.RED);             break;
+      case TextRenderer.MODE_OFF:
+      default:                       setTextColor(Term.mExtraKeyDefaultColor); break;
+      }
+  }
 
   // ************************************************************
   // Methods

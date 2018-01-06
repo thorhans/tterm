@@ -82,6 +82,18 @@ public class PKey {
     return mText;
   }
 
+  private ArrayList<PKeyButton> mButtons = new ArrayList<>();
+  public void addButton (PKeyButton button) {
+    mButtons.add(button);
+  }
+
+  // TODO Modifiers should store state, not other keys.
+  public void setState (int state) {
+    for(PKeyButton button : mButtons) {
+      button.setState(state);
+    }
+  }
+
   // ************************************************************
   // Methods
   // ************************************************************

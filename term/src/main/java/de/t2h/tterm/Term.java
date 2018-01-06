@@ -67,7 +67,7 @@ import android.widget.LinearLayout;
 
 import de.t2h.tterm.compat.AndroidCompat;
 import de.t2h.tterm.emulatorview.EmulatorView;
-import de.t2h.tterm.emulatorview.KeyUpdater;
+import de.t2h.tterm.key.KeyUpdater;
 import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.emulatorview.TextRenderer;
 import de.t2h.tterm.emulatorview.UpdateCallback;
@@ -110,7 +110,10 @@ public class Term extends Activity
     private PKey[] mExtraKeys;
 
     private int mExtraKeySize;
-    int mExtraKeyDefaultColor;
+
+    // TODO Move to PKeyButton.
+    public static int mExtraKeyDefaultColor;
+
     private int mExtraKeysShown;
     private LinearLayout mExtraKeysRow;
 
@@ -1031,20 +1034,14 @@ public class Term extends Activity
     // { Inner class TermKeyUpdater
     // ************************************************************
 
+    // TODO Refactor this.
+    //
     // TODO ThH: `Term´ can't access `TermKeyListener.mControlKey.getUIMode()´ and
     // `TermKeyListener.mFnKeyg.getUIMode()´, so as a quick hack I pass in a listener. Refactor code so
     // `mControlKey´ et al are part of the MVC model.
     class TermKeyUpdater implements KeyUpdater {
-        public void updateControl (int state) { update(mExtraKeyButtons[0], state); }
-        public void updateFn (int state)      { update(mExtraKeyButtons[9], state); }
-        private void update (Button button, int state) {
-            switch(state) {
-            case TextRenderer.MODE_ON:     button.setTextColor(Color.GREEN);           break;
-            case TextRenderer.MODE_LOCKED: button.setTextColor(Color.RED);             break;
-            case TextRenderer.MODE_OFF:
-            default:                       button.setTextColor(mExtraKeyDefaultColor); break;
-            }
-        }
+        public void updateControl (int state) { PKey.Control.setState(state); }
+        public void updateFn (int state)      { PKey.Fn1.setState(state); }
     }
 
     // } ************************************************************

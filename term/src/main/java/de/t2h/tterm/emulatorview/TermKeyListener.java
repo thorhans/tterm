@@ -8,12 +8,16 @@ import android.util.Log;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
+import de.t2h.tterm.key.KeyUpdater;
+
 import static android.view.KeyEvent.*;
 
 /** An ASCII key listener.
  *
  * <p>Supports control characters and escape. Keeps track of the current state of the alt, shift, fn, and
  * control keys.</p>
+ *
+ * TODO Move it to package `key´.
  */
 class TermKeyListener {
     // ************************************************************
