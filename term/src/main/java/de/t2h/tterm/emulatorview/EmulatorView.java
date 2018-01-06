@@ -44,8 +44,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.Scroller;
 
-import de.t2h.tterm.key.KeyUpdater;
-
 /** A view on a {@link TermSession}.
  * 
  * <p>Displays the terminal emulator's screen, provides access to its scrollback buffer, and passes input 
@@ -370,7 +368,6 @@ public class EmulatorView
 
     // TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `mKeyListener´.
     TermKeyListener mKeyListener;
-    public void attachKeyUpdater (KeyUpdater updater) { mKeyListener.attachKeyUpdater(updater); }
 
     /// TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `setImeBuffer´.
     void setImeBuffer (String buffer) {

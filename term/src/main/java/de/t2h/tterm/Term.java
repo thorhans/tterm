@@ -35,7 +35,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -60,16 +59,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 
 import de.t2h.tterm.compat.AndroidCompat;
 import de.t2h.tterm.emulatorview.EmulatorView;
-import de.t2h.tterm.key.KeyUpdater;
 import de.t2h.tterm.emulatorview.TermSession;
-import de.t2h.tterm.emulatorview.TextRenderer;
 import de.t2h.tterm.emulatorview.UpdateCallback;
 import de.t2h.tterm.key.PKey;
 import de.t2h.tterm.key.PKeyButton;
@@ -596,8 +592,6 @@ public class Term extends Activity
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         TermView emulatorView = new TermView(this, session, metrics);
 
-        emulatorView.attachKeyUpdater(new TermKeyUpdater());
-
         emulatorView.setExtGestureListener(new EmulatorViewGestureListener(emulatorView));
         emulatorView.setOnKeyListener(mKeyListener);
         registerForContextMenu(emulatorView);
@@ -1029,22 +1023,6 @@ public class Term extends Activity
         CharSequence paste = clip.getText();
         getCurrentTermSession().write(paste.toString());
     }
-
-    // ************************************************************
-    // { Inner class TermKeyUpdater
-    // ************************************************************
-
-    // TODO Refactor this.
-    //
-    // TODO ThH: `Term´ can't access `TermKeyListener.mControlKey.getUIMode()´ and
-    // `TermKeyListener.mFnKeyg.getUIMode()´, so as a quick hack I pass in a listener. Refactor code so
-    // `mControlKey´ et al are part of the MVC model.
-    class TermKeyUpdater implements KeyUpdater {
-        public void updateControl (int state) { PKey.Control.setState(state); }
-        public void updateFn (int state)      { PKey.Fn1.setState(state); }
-    }
-
-    // } ************************************************************
 
     private void doSendControlKey () {
         EmulatorView emv = getCurrentEmulatorView();

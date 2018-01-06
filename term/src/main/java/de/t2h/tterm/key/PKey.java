@@ -82,12 +82,21 @@ public class PKey {
     return mText;
   }
 
+  /** `PKeyButton´s that represent this key.
+   *
+   * <p>You can add a key more than once, e.g. have two Control keys, so this must be a collection.</p>
+   */
   private ArrayList<PKeyButton> mButtons = new ArrayList<>();
   public void addButton (PKeyButton button) {
     mButtons.add(button);
   }
 
   // TODO Modifiers should store state, not other keys.
+  //
+  // TODO ThH: Change `int state´ to an `enum´. It's one of
+  // - `TextRenderer.MODE_OFF´
+  // - `TextRenderer.MODE_ON´
+  // - `TextRenderer.MODE_LOCKED´
   public void setState (int state) {
     for(PKeyButton button : mButtons) {
       button.setState(state);

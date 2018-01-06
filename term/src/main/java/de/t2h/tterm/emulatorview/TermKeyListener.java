@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
-import de.t2h.tterm.key.KeyUpdater;
+import de.t2h.tterm.key.PKey;
 
 import static android.view.KeyEvent.*;
 
@@ -137,10 +137,8 @@ class TermKeyListener {
             | getCursorModeHelper(mAltKey,     TextRenderer.MODE_ALT_SHIFT)
             | getCursorModeHelper(mControlKey, TextRenderer.MODE_CTRL_SHIFT)
             | getCursorModeHelper(mFnKey,      TextRenderer.MODE_FN_SHIFT);
-        if(mKeyUpdater != null) {
-            mKeyUpdater.updateControl(mControlKey.getUIMode());
-            mKeyUpdater.updateFn(mFnKey.getUIMode());
-        }
+        PKey.Control.setState(mControlKey.getUIMode());
+        PKey.Fn1.setState(mFnKey.getUIMode());
     }
 
     private boolean mHardwareControlKey;
@@ -157,9 +155,6 @@ class TermKeyListener {
 
     private int mCombiningAccent;
     public int getCombiningAccent () { return mCombiningAccent; }
-
-    KeyUpdater mKeyUpdater;
-    public void attachKeyUpdater (KeyUpdater updater) { mKeyUpdater = updater; }
 
     // ************************************************************
     // Methods
