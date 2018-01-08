@@ -18,7 +18,7 @@ class TermInputConnection extends BaseInputConnection {
     // Constants
     // ************************************************************
 
-    private final static String TAG = "TermInputConnection";
+    private final static String TAG = "TTerm.TermInputConnection";
     private final static boolean LOG_IME = false;
 
     // ************************************************************

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>
+  <title>TTerm – BusyBox</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="../";</script>
+  <script src="../lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – BusyBox</div>
+
+<p><a href="../shells.xhtml">
+  Back to chapter "Shells and distributions".</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>About BusyBox</h1>
+<!-- ************************************************************ -->
+
+<p>Android's Linux layer is very small. BusyBox contains most missing
+Unix commands. It is an open-source collection of many stripped-down
+Unix commands. They are bundled in a single executable binary, which
+makes it easy to install.</p>
+
+<p>For details, consult the 
+  <a href="https://busybox.net/about.html"
+     >home page</a>
+and the 
+  <a href="https://busybox.net/downloads/BusyBox.html"
+     >documentation.</a>.</p>
+
+<p>If the BusyBox commands lack features that you need, take a look at
+  <a href="termux.xhtml">Termux</a>
+or 
+  <a href="debian.xhtml">Debian</a>.</p>
+
+
+<h1>Running BusyBox's shell in TTerm</h1>
+<!-- ************************************************************ -->
+
+<p>BusyBox does not contain a terminal emulator like TTerm. There are
+several approaches to run Busybox in TTerm:</p>
+
+<ul>
+  <li><a href="#run/rooted"> Install BusyBox on a rooted
+  device</a></li>
+
+  <li><a href="#run/unrooted">Install BusyBox on an unrooted device
+  with Android 4.4 to 6</a></li>
+  
+  <li><a href="#run/copy">Copy a BusyBox binary into TTerm's internal
+  storage</a></li>
+
+  <li><a href="#run/connect">Connect to an app that contains BusyBox,
+  e.g. Termux</a></li>
+</ul>
+
+
+<h2 id="run/rooted">Install BusyBox on a rooted device</h2>
+<!-- ************************************************************ -->
+
+<p>If you have a 
+  <a href="../rooting.xhtml">rooted device</a>,
+you can install BusyBox to <code>/system/xbin</code>, where it's
+accessible for all apps.</p>
+
+<p>In fact, you might already have installed BusyBox during rooting.
+If you have a custom ROM like LineageOS or a recovery image like TWRP,
+BusyBox might also already be installed. Look in
+<code>/system/xbin</code> or <code>/su/xbin</code>.</p>
+
+<p>There are many BusyBox apps, choose one you trust.</p>
+
+<p>In January 2018, two popular apps are:</p>
+
+<ul>
+  <li><a href="https://play.google.com/store/apps/details?id=stericson.busybox"
+         >BusyBox by Stephen (Stericson)</a>, 
+  with the current version 1.27.2 (as of 2018-01-08)</li>
+
+  <li><a href="https://play.google.com/store/apps/details?id=com.jrummy.busybox.installer"
+         >BusyBox for Android by JRummy Apps</a>
+  with the older version 1.26.2 (as of 2018-01-08)</li>
+</ul>
+
+<p>TODO Set PATH.</p>
+
+
+<h2 id="run/unrooted">Install BusyBox on an unrooted device with
+Android 4.4 to 6</h2> <!--
+************************************************************ -->
+
+<p>Up to Android 6, you can install a BusyBox app on an
+unrooted device and call it from TTerm. This no longer works in
+Android 7+.</p>
+
+<p>Up to Android 6, you can access world-readable files of other
+apps...</p>
+
+<p>TODO Set PATH.</p>
+
+
+<h2 id="run/copy">Copy a BusyBox binary into TTerm's internal storage</h2>
+<!-- ************************************************************ -->
+
+<p>TODO</p>
+
+<p>TODO Set PATH.</p>
+
+
+<h2 id="run/connect">Connect to an app that contains BusyBox, e.g. Termux</h2>
+<!-- ************************************************************ -->
+
+<p>TODO</p>
+
+</body>
+</html>

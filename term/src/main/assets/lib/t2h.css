@@ -22,25 +22,26 @@
 
 body {
   font-family: "Arial", sans-serif;
-}
-/** Class `code´.
- *
- * Treat it like `<code>´.
- */
-*.code { 
-  font-family: monospace; 
+  line-height: 1.4;
 }
 
-/* My Chrome defaults to 16px for `p´ but `13px´ for `code´, so set
- * them to the same size. 
- */ 
-/* TODO This did not work well, it also sets `code´ to 12pt when the
- * surrounding text is bigger, e.g. in `h1´.
+/** `<code>´ and class `code´.
  *
- * p, code, pre {
- *   font-size: 12pt;
- * }
- */
+ * In Chrome and Firefox the default font size is 16pt for serif fonts
+ * and 13pt for monospace fonts, which is too small. 
+ *
+ * The strange line
+ *
+ *   font-family: monospace, serif;
+ *
+ * sets both to 16pt, which looks right. For details, see
+ *
+ *    http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
+ */ 
+code, *.code { 
+  font-family: "Courier New", monospace, serif;
+  font-size: 100%;
+}
 
 .TODO {
   background-color: lightBlue;

@@ -45,7 +45,7 @@ class UnicodeTranscript {
     // Constants
     // ************************************************************
 
-    private static final String TAG = "UnicodeTranscript";
+    private static final String TAG = "TTerm.UnicodeTranscript";
 
     /** Minimum API version for which we're willing to let Android try rendering conjoining Hangul jamo as
      *  composed syllable blocks.

@@ -34,13 +34,141 @@
 <h1>Settings</h1>
 <!-- ************************************************************ -->
 
+<h2>Section "Text"</h2>
+<!-- ============================================================ -->
+
 <ul>
   <li id="settings/default_to_utf8">
-    <b><span class="setting">Default to UTF-8</span></b>
+    Setting <b><span class="setting">Default to UTF-8</span></b>
   
-    <p>If you use non-ASCII characters like "á ä æ ı š б", you'll
-    want to check the checkbox <em>Default to UTF-8</em>.</p>
+    <p>If you use non-ASCII characters like "á ä æ ı š б", you'll want
+    to check this checkbox.</p>
+    
+    <p>Android's default shell Mksh handles non-ASCII characters
+    correctly. If you use the shell Bash, you'll also have to
+    configure Bash correctly. (LATER Add details.)</p>
   </li>
+</ul>
+
+
+<h2>Section "Shell"</h2>
+<!-- ============================================================ -->
+
+<ul>
+  <li id="settings/command_line">
+    Setting <b><span class="setting">Command line</span></b>
+
+    <p>When TTerm starts, it executes this command line.</p>
+
+    <ul>
+      <li><p>The default command line is:</p>
+    
+        <p class="indent code">
+          /system/bin/sh -
+        </p>
+
+        <p>TODO The single hyphen is a leftover from TEA. As far as I
+        can discern it marks the end of options and start of
+        arguments. Since there are neither options nor arguments it
+        should be unnecessary, so I'll remove it in a future
+        release.</p>
+      </li>
+
+      <li>
+        <p>If you want to execute code each time you open a window in
+        TTerm, for exeample to set environment variables or shell
+        variables, then you can add the switch <code>-l</code> to make
+        <code>sh</code> a <dfn>login shell</dfn>. Then <code>sh</code>
+        will execute the file <code>~/.profile</code>, where
+        <code>~</code> is an abbreviation for <code>$HOME</code>.</p>
+      </li>
+      
+      <li>
+        <p>The command line must begin with a full path to an executable
+        command.</p>
+        
+        <p>TODO If you specify a non-existing or unreadable file,
+        TTerm will silently execute the default
+        <code>/system/bin/sh -</code> instead. I'll change that in a
+        future release.</p>
+      </li>
+
+      <li>
+        <p>The rest of the line is interpreted as arguments. The
+        arguments can be quoted with double quotes. Inside double
+        quotes you can escape a quote with a backslash. No other
+        processing is performed. You can't use variables.</p>
+
+        <p>For example,</p>
+
+        <p class="indent code">
+          /system/bin/echo $PATH "a \" b"
+        </p>
+
+        <p>will print <code>$PATH a " b</code>.</p>
+        
+        <p>But you can let the shell expand variables for you:</p>
+        
+        <p class="indent code">
+          /system/bin/sh -c "echo $PATH"
+        </p>
+        
+        <p>will print the value of <code>$PATH</code> and exit.</p>
+      </li>
+
+      <li>
+        <p>You can set variables and execute commands on
+        <code>$PATH</code> using <code>env</code>, for example:</p>
+              
+        <p class="indent code">
+          /system/bin/env VAR1="value 1" VAR2="value 2" sh
+        </p>
+
+        <p>sets the environment variables <code>VAR1</code> and
+        <code>VAR2</code>, then searches <code>sh</code> in the paths
+        of the environment variable <code>PATH</code>.</p>
+      </li>
+    </ul>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li id="settings/verify_path">
+    Setting <b><span class="setting">Verify PATH entries</span></b>
+
+    <p>Removes unreadable paths from the 
+    <a href="#PATH"
+       >environment variable <code>PATH</code></a>.</p>
+       
+    <p>For example, the default value of <code>PATH</code> is:</p>
+
+    <p class="indent code">
+      /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+    </p>
+
+    <p>If this setting is checked, <code>PATH</code> will be reduced to:</p>
+
+    <p class="indent code">
+      system/bin:/system/xbin
+    </p>
+
+    <p>If you have a 
+    <a href="rooting.xhtml"
+       >rooted device</a>, 
+    you might prefer to leave this unchecked, to keep those path
+    entries for when you use <code>su</code>.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li id="settings/path">
+    Settings <b><span class="setting">Allow PATH extension</span></b>
+    and <b><span class="setting">Allow PATH prepend</span></b>
+    
+    <p>TODO Only work in Android 4.4 to Android 6, not in
+    Android 7+.</p>
+  </li>
+
 </ul>
 
 
@@ -49,9 +177,11 @@
 
 <p>TODO Document.</p>
 
-<p>A key can either be special, like <key>[Control]</key>, send a key code, like <key>[Tab]</key> or
-<key>[Left]</key>, or send an arbitrary string like <key>/</key> or <key>.com</key>. Keys that send a string
-are not affected by modifier keys like <key>[Shift]</key>, <key>[Control]</key> and <key>[Fn1]</key>.</p>
+<p>A key can either be special, like <key>[Control]</key>, send a key
+code, like <key>[Tab]</key> or <key>[Left]</key>, or send an arbitrary
+string like <key>/</key> or <key>.com</key>. Keys that send a string
+are not affected by modifier keys like <key>[Shift]</key>,
+<key>[Control]</key> and <key>[Fn1]</key>.</p>
 
 <p>TODO Send keycodes does not work for all keys yet.</p>
 
@@ -59,14 +189,65 @@ are not affected by modifier keys like <key>[Shift]</key>, <key>[Control]</key> 
 <h1>Environment variables</h1>
 <!-- ************************************************************ -->
 
-<p>Linux uses "environment variables" for configuration. To get a list
-of all environment variables, use <code>env</code> or <code>env | sort
-| more</code>.</p>
+<p>Linux uses <dfn>environment variables</dfn> for configuration.</p>
 
-<p>Note that not all "shell variables" are "environment variables",
-only those shell variables marked for export with <code>export</code>.
-To get a list of all shell variables and environment variables, use
-<code>set</code> or <code>set | more</code>.</p>
+
+<h2>Usage</h2>
+<!-- ============================================================ -->
+
+<p>The set of all environment variables is called
+<dfn>environment</dfn>. To see it, use <code>env</code> or <code>env |
+sort | more</code>.</p>
+
+<p>To set an environment variable in a shell, use:</p>
+
+<p class="indent code">
+  export VAR='value' // (1)<br/>
+  export VAR="value" // (2)<br/>
+  export VAR=value   // (3)
+</p>
+
+<p>In case (1) you must quote a single quote <code>'</code> as
+<code>'\''</code>. In case (2) you must quote the four characters
+<code>$ \ " `</code> as <code>\$ \\ \" \`</code> (and there may be
+additional characters depending on your shell). Strings quoted with
+single or double quotes can contain newlines. If you "get stuck" in a
+continuation string, press `Control-C´ to get out.</p>
+
+<p>Case (3) is only safe if the value does not contain whitespace or
+special characters. You must quote whitespace and many special
+characters with <code>\</code>.</p>
+
+<p>To check that you got the quoting right, print an environment value
+with <code>echo "$VAR"</code> (the quotes are necessary if the value
+contains special characters).</p>
+
+<p>When you start a command or subprocess, it inherits a copy of the
+environment. Changes in the copy are not visible in the original
+environment.</p>
+
+<p>Do not confuse environment variables with <dfn>shell
+variables</dfn>. You set them similarly with <code>VAR='value'</code>
+or <code>VAR="value"</code>, without using <code>export</code>. Shell
+variables are only used by the shell, they are not part of the
+environment and not passed to commands or subprocesses. For example
+<code>PWD</code> holds the local directory and <code>PS1</code> the
+prompt.</p>
+
+<p>To get a list of all shell variables <i>and</i> environment
+variables, use <code>set</code> or <code>set | more</code>.</p>
+
+<p>If you want to set environment variables or shell variables each
+time you open a window in TTerm, place them in the file <code>~/.profile</code>, where
+<code>~</code> is an abbreviation for <code>$HOME</code>. Then add the
+switch <code>-l</code> to the setting
+<a href="#settings/command_line"
+   ><span class="setting">Command line</span></a> to make
+<code>sh</code> start as a login shell.</p>
+
+
+<h2>List of relevant environment variables</h2>
+<!-- ============================================================-->
 
 <p>The following environment variables are relevant for TTerm:</p>
 
@@ -81,6 +262,8 @@ To get a list of all shell variables and environment variables, use
     before it starts the shell.</p>
   </li>
   
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
   <li id="HOME">
     <b><code>$HOME</code></b>
   
@@ -98,18 +281,46 @@ To get a list of all shell variables and environment variables, use
         Android's shell</a>.</p>
   </li>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
   <li>
     <b><code>$LD_LIBRARY_PATH</code></b>
     
-    <p>Paths to search for libraries. For example, Bash needs the
-    library <code>libncurses.so</code>.</p>
+    <p>List of paths to search for libraries, separated by colons.</p>
+    
+    <p>For example, Bash needs the library
+    <code>libncurses.so</code>.</p>
   </li>
 
-  <li>
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li id="PATH">
     <b><code>$PATH</code></b>
     
-    <p>Paths to search for commands.</p>
+    <p>List of paths to search for commands, separated by colons.</p>
+    
+    <p>On my devices, the default value for <code>$PATH</code> is:</p>
+    
+    <p class="indent code">
+      /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+    </p>
+
+    <p>If the 
+    <a href="#settings/verify_path">
+      setting <span class="setting">Verify PATH entries</span></a> 
+    is checked, <code>PATH</code> will be reduced to:</p>
+
+    <p class="indent code">
+      system/bin:/system/xbin
+    </p>
+
+    <p>On my devices the default value of <code>PATH</code> is
+    hardcoded in the binary <code>/init</code>. It can be set by the
+    system initialization files in <code>/init.*</code> and the
+    shell's initialization files. (TODO Explain more.)</p>
   </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="TERM">
     <b><code>$TERM</code></b>
@@ -135,6 +346,8 @@ To get a list of all shell variables and environment variables, use
         
     <p>You have to restart the shell after changing <code>$TERM</code>.</p>
   </li>    
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
     <b><code>$TERMINFO</code></b>
@@ -223,7 +436,6 @@ steps:</p>
     </ol>
   </li>
 </ol>
-
 
 </body>
 </html>

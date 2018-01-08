@@ -39,7 +39,7 @@ class EmulatorDebug {
      *
      * <p>Public because it's used by several classes.</p>
      */
-    public static final String LOG_TAG = "EmulatorView";
+    public static final String LOG_TAG = "TTerm.EmulatorView";
 
     public static String bytesToString (byte[] data, int base, int length) {
         StringBuilder buf = new StringBuilder();

@@ -26,5 +26,5 @@ public class TermDebug {
      *
      * <p>Public because it's used by several classes.</p>
      */
-    public static final String LOG_TAG = "Term";
+    public static final String LOG_TAG = "TTerm.Term";
 }

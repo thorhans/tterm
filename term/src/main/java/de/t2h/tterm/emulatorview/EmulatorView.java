@@ -61,7 +61,7 @@ public class EmulatorView
     // Constants
     // ************************************************************
     
-    private final static String TAG = "EmulatorView";
+    private final static String TAG = "TTerm.EmulatorView";
     private final static boolean LOG_KEY_EVENTS = false;
 
     /** Trap Alt and Meta.

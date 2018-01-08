@@ -63,7 +63,7 @@ public class TermService extends Service
 
     public class TermServiceBinder extends Binder {
         TermService getService () {
-            Log.i("TermService", "Activity binding to service");
+            Log.i("TTerm.TermService", "Activity binding to service");
             return TermService.this;
         }
     }
@@ -82,11 +82,11 @@ public class TermService extends Service
     @Override
     public IBinder onBind (Intent intent) {
         if(TermExec.SERVICE_ACTION_V1.equals(intent.getAction())) {
-            Log.i("TermService", "Outside process called onBind()");
+            Log.i("TTerm.TermService", "Outside process called onBind()");
 
             return new RBinder();
         } else {
-            Log.i("TermService", "Activity called onBind()");
+            Log.i("TTerm.TermService", "Activity called onBind()");
 
             return mTSBinder;
         }
@@ -201,7 +201,7 @@ public class TermService extends Service
 
                                 session.initializeEmulator(80, 24);
                             } catch(Exception whatWentWrong) {
-                                Log.e("TermService", "Failed to bootstrap AIDL session: "
+                                Log.e("TTerm.TermService", "Failed to bootstrap AIDL session: "
                                         + whatWentWrong.getMessage());
 
                                 if(session != null) session.finish();

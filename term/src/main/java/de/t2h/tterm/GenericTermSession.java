@@ -167,7 +167,7 @@ class GenericTermSession extends TermSession {
         try {
             Exec.setPtyWindowSizeInternal(getIntFd(mTermFd), row, col, xpixel, ypixel);
         } catch(IOException e) {
-            Log.e("exec", "Failed to set window size: " + e.getMessage());
+            Log.e("TTerm.exec", "Failed to set window size: " + e.getMessage());
 
             if(isFailFast())
                 throw new IllegalStateException(e);
@@ -186,7 +186,7 @@ class GenericTermSession extends TermSession {
         try {
             Exec.setPtyUTF8ModeInternal(getIntFd(mTermFd), utf8Mode);
         } catch(IOException e) {
-            Log.e("exec", "Failed to set UTF mode: " + e.getMessage());
+            Log.e("TTerm.exec", "Failed to set UTF mode: " + e.getMessage());
 
             if(isFailFast())
                 throw new IllegalStateException(e);
