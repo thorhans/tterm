@@ -1,7 +1,7 @@
 /** de.t2h/css/t2h.css - Default style sheet. */
 
 /*
- * Copyright (C) 2014 Thorbjørn Hansen.
+ * Copyright (C) 2014-2018 Thorbjørn Hansen.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,28 +23,6 @@
 body {
   font-family: "Arial", sans-serif;
   line-height: 1.4;
-}
-
-/** `<code>´ and class `code´.
- *
- * In Chrome and Firefox the default font size is 16pt for serif fonts
- * and 13pt for monospace fonts, which is too small. 
- *
- * The strange line
- *
- *   font-family: monospace, serif;
- *
- * sets both to 16pt, which looks right. For details, see
- *
- *    http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
- */ 
-code, *.code { 
-  font-family: "Courier New", monospace, serif;
-  font-size: 100%;
-}
-
-.TODO {
-  background-color: lightBlue;
 }
 
 /* ============================================================
@@ -272,6 +250,7 @@ ul > li, ol > li {
 ul > li::before {
   /* • bullet
      ● black circle
+     ○ white circle
      – en dash
    */
   content: "●";  
@@ -285,6 +264,11 @@ ul > li::before {
   padding-left:  0.2em; /* Distance between container's left margin and
                          * left margin of bullet. */
 }
+
+ul ul > li::before { content: "○"; }
+ul ul ul > li::before { content: "●"; }
+ul ul ul ul > li::before { content: "○"; }
+
 
 /** Narrow list items.
  *
@@ -322,6 +306,43 @@ dd {
 }
 
 /* ============================================================
+ * Semantic markup
+ * ============================================================ */
+
+/** `<code>´ and class `code´.
+ *
+ * In Chrome and Firefox the default font size is 16pt for serif fonts
+ * and 13pt for monospace fonts, which is too small. 
+ *
+ * The strange line
+ *
+ *   font-family: monospace, serif;
+ *
+ * sets both to 16pt, which looks right. For details, see
+ *
+ *    http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
+ */ 
+code, *.code { 
+  font-family: "Courier New", monospace, serif;
+  font-size: 100%;
+}
+
+/** Definition. 
+ *
+ * `dfn´ marks a defined term. The surrounding `p´, `dt´/`dd´ or
+ * `section´ is the definition. Do not use it on a link to a
+ * definition.
+ */
+dfn { 
+  color:      #008000;
+  font-style: normal;  /* not italic */
+}
+
+.TODO {
+  background-color: lightBlue;
+}
+
+/* ============================================================
  * Tables
  * ============================================================ */
 
@@ -329,3 +350,6 @@ th {
   text-align: left;
 }
 
+td {
+  vertical-align: baseline;
+}

@@ -35,9 +35,9 @@
 <!-- ************************************************************ -->
 
 <p>Android runs on top of a (small) Linux layer. To call Linux
-commands interactively, you need a "shell" that runs in a "terminal
-emulator". The shell calls the Linux commands, the terminal emulator
-displays your input and the commands' output.</p>
+commands interactively, you need a "shell" and a "terminal emulator".
+The terminal emulator displays your input and the commands' output,
+but the shell actually calls the Linux commands.</p>
 
 <p>Android comes with a shell, but not with a terminal emulator,
 that's what you need TTerm for.</p>
@@ -68,16 +68,16 @@ install it and have TTerm start it, see
 not behave as you expect, look at the following settings:</p>
 
 <ul>
-  <li><span class="setting">UTF-8</span></li>
+  <li><setting>UTF-8</setting></li>
   
-  <li><span class="setting">Input method</span>: character based or
+  <li><setting>Input method</setting>: character based or
   word-based</li>
 
-  <li><span class="setting">Alt key sends ESC</span></li>
+  <li><setting>Alt key sends ESC</setting></li>
 
-  <li><span class="setting">Terminal type</span></li>
+  <li><setting>Terminal type</setting></li>
 
-  <li><span class="setting">Send mouse events</span></li>
+  <li><setting>Send mouse events</setting></li>
 </ul>
 
 <p>I'll add more details in the future.</p>
@@ -86,21 +86,23 @@ not behave as you expect, look at the following settings:</p>
 <h1>Starting a different shell</h1>
 <!-- ************************************************************ -->
 
-<p>You can change the shell that is started with the setting <span
-class="setting">Command line</span>. See
+<p>You can change the shell that is started with the setting
+<setting>Command line</setting>. See
   <a href="shells.xhtml" >Shells and distributions</a> 
 for examples.</p>
 
-<p>You can specify an <span class="setting">Initial command</span>
-that is sent to the shel as user input, i.e. as if you had typed
+<p>You can specify an 
+  <a href="config.xhtml#setting/initial_command"
+     ><setting>Initial command</setting></a>
+that is sent to the shell as user input, i.e. as if you had typed
 it.</p>
 
 
 <h1>Running a command from the home screen</h1>
 <!-- ************************************************************ -->
 
-<p>You can use the TTerm widget to run a command from an icon on the
-home screen.</p>
+<p>You can use the <dfn>TTerm widget</dfn> to run a command from an
+icon on the home screen.</p>
 
 </body>
 </html>

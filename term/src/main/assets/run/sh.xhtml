@@ -21,6 +21,12 @@
   <!-- Also injects CSS style sheets. -->
   <script>prefix="../";</script>
   <script src="../lib/doc.js"/>
+
+  <style>
+    table.indent td+td {
+      padding-left: 1em;
+    }
+  </style>
 </head>
 <body>
 
@@ -32,12 +38,12 @@
 <p id="thh-toc-toc"></p>
 
 
-<h1>Running Android's shell in TTerm</h1>
+<h1>About Android's shell Mksh</h1>
 <!-- ************************************************************ -->
 
 <p>Android's default shell is <code>/system/bin/sh</code>. Since
-Android 4.0, it is the MirBSD Korn shell, also called Mksh. It has the
-home page
+Android 4.0 up to at least Android 7, it is the <dfn>MirBSD Korn
+shell</dfn>, also called <dfn>Mksh</dfn>. It has the home page
   <a href="http://mirbsd.de/mksh"
     >http://mirbsd.de/mksh</a>,
 you can also find it at
@@ -48,14 +54,65 @@ you can also find it at
 
 <p class="indent code">/system/bin/sh -</p>
 
-<p>The option <code>-</code> tells <code>sh</code> to start as a
-<em>login shell</em>, which means that it will read certain
-initialization files. On my devices, a login shell reads:</p>
+<p class="TODO">TODO The single hyphen is a leftover from TEA. As far
+as I can discern it marks the end of options and start of arguments.
+Since there are neither options nor arguments it should be
+unnecessary, so I'll remove it in a future release.</p>
+
+
+<h1>Startup</h1>
+<!-- ************************************************************ -->
+
+<h2>Interactive shell</h2>
+<!-- ============================================================ -->
+
+<p>When started with <code>/system/bin/sh</code> in TTerm (with or
+without the hyphen), Mksh starts as an <dfn>interactive shell</dfn>
+and executes initialization files. On my devices with Android 4.4 to 7
+it's:</p>
+
+<table class="indent">
+  <tr>
+    <td>
+      <code>$ENV</code>
+    </td>
+    <td>
+      If <code>$ENV</code> is set, Mksh interprets it as a file name
+      and executes the file.You can set <code>$ENV</code> with the
+        <a href="../config.xhtml#setting/command_line"
+           >setting <setting>Command line</setting></a>.<br/>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <code>/system/etc/mkshrc</code>
+    </td>
+    <td>
+      If <code>$ENV</code> is unset, Mksh executes
+      <code>/system/etc/mkshrc</code>, which you can only change on
+      a <a href="../rooting.xhtml">rooted device</a>.
+    </td>
+  </tr>
+</table>
+
+
+<h2>Login shell</h2>
+<!-- ============================================================ -->
+
+<p>When started with <code>/system/bin/sh -l</code>, Mksh starts as a
+<dfn>login shell</dfn>, which means that it will read other
+initialization files. On my devices with Android 4.4 to 7, a login
+shell reads:</p>
 
 <table class="indent">
   <tr>
     <td>
       <code>/system/etc/profile</code><br/>
+    </td>
+    <td>
+      You can only change this file on a 
+        <a href="../rooting.xhtml">rooted device</a>.
     </td>
   </tr>
 
@@ -64,10 +121,11 @@ initialization files. On my devices, a login shell reads:</p>
       <code>$HOME/.profile</code> 
     </td>
 
-    <td style="padding-left: 1em">
-      You can configure 
+    <td style="padding-left: 1em"
+    >
+      You can set <code>$HOME</code> with the
         <a href="../config.xhtml#HOME">
-          TTerm's setting for <code>$HOME</code></a>.</td>
+          setting <setting>HOME folder</setting></a>.</td>
   </tr>
 
   <tr>
@@ -75,26 +133,8 @@ initialization files. On my devices, a login shell reads:</p>
       <code>$ENV</code> or <code>/system/etc/mkshrc</code>
     </td>
 
-    <td style="padding-left: 1em">
-      TTerm doesn't currently provide a way to set <code>$ENV</code>
-      before it starts the shell.
-    </td>
-  </tr>
-</table>
-
-<p>If you remove the option <code>-</code>, Mksh starts as an
-<em>interactive shell</em> and executes different initialization
-files. On my devices it's:</p>
-
-<table class="indent">
-  <tr>
     <td>
-      <code>$ENV</code> or <code>/system/etc/mkshrc</code>
-    </td>
-
-    <td style="padding-left: 1em">
-      TTerm doesn't currently provide a way to set <code>$ENV</code>
-      before it starts the shell.
+      As described above for an interactive shell.
     </td>
   </tr>
 </table>

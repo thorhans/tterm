@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 -->
-<head>
+<head>%
   <title>TTerm – Configuration</title>
   <!-- Also injects CSS style sheets. -->
   <script>prefix="";</script>
@@ -38,15 +38,16 @@
 <!-- ============================================================ -->
 
 <ul>
-  <li id="settings/default_to_utf8">
-    Setting <b><span class="setting">Default to UTF-8</span></b>
+  <li id="setting/default_to_utf8">
+    Setting <b><setting>Default to UTF-8</setting></b>
   
     <p>If you use non-ASCII characters like "á ä æ ı š б", you'll want
     to check this checkbox.</p>
     
     <p>Android's default shell Mksh handles non-ASCII characters
     correctly. If you use the shell Bash, you'll also have to
-    configure Bash correctly. (LATER Add details.)</p>
+    configure Bash correctly. (<span class="TODO">LATER Add
+    details.</span>)</p>
   </li>
 </ul>
 
@@ -55,8 +56,8 @@
 <!-- ============================================================ -->
 
 <ul>
-  <li id="settings/command_line">
-    Setting <b><span class="setting">Command line</span></b>
+  <li id="setting/command_line">
+    Setting <b><setting>Command line</setting></b>
 
     <p>When TTerm starts, it executes this command line.</p>
 
@@ -67,9 +68,9 @@
           /system/bin/sh -
         </p>
 
-        <p>TODO The single hyphen is a leftover from TEA. As far as I
-        can discern it marks the end of options and start of
-        arguments. Since there are neither options nor arguments it
+        <p class="TODO">TODO The single hyphen is a leftover from TEA.
+        As far as I can discern it marks the end of options and start
+        of arguments. Since there are neither options nor arguments it
         should be unnecessary, so I'll remove it in a future
         release.</p>
       </li>
@@ -77,18 +78,38 @@
       <li>
         <p>If you want to execute code each time you open a window in
         TTerm, for exeample to set environment variables or shell
-        variables, then you can add the switch <code>-l</code> to make
-        <code>sh</code> a <dfn>login shell</dfn>. Then <code>sh</code>
-        will execute the file <code>~/.profile</code>, where
-        <code>~</code> is an abbreviation for <code>$HOME</code>.</p>
+        variables, you have two options:</p>
+
+        <ul>
+          <li>
+            <p>You can add the switch <code>-l</code> to make
+            <code>sh</code> a <dfn>login shell</dfn>. Then <code>sh</code>
+            will execute the file <code>~/.profile</code>, where
+            <code>~</code> is an abbreviation for <code>$HOME</code>.</p>
+          </li>
+        
+          <li>
+            <p>You can set the environment variable <code>ENV</code>.
+            In this example, I'll execute the traditional file
+            <code>$HOME/.mkshrc</code>. On my device it's below
+            <code>/data/user/0/de.t2h.tterm</code>. This works:</p>
+
+            <p class="indent code">
+              /system/bin/env
+                ENV="/data/user/0/de.t2h.tterm/app_HOME/.mkshrc" sh
+            </p>
+
+            <p>Yes, it's ridiculously complex.</p>
+          </li>
+        </ul>
       </li>
       
       <li>
         <p>The command line must begin with a full path to an executable
         command.</p>
         
-        <p>TODO If you specify a non-existing or unreadable file,
-        TTerm will silently execute the default
+        <p class="TODO">TODO If you specify a non-existing or
+        unreadable file, TTerm will silently execute the default
         <code>/system/bin/sh -</code> instead. I'll change that in a
         future release.</p>
       </li>
@@ -117,7 +138,7 @@
       </li>
 
       <li>
-        <p>You can set variables and execute commands on
+        <p>You can set variables and execute commands in
         <code>$PATH</code> using <code>env</code>, for example:</p>
               
         <p class="indent code">
@@ -133,12 +154,21 @@
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <li id="settings/verify_path">
-    Setting <b><span class="setting">Verify PATH entries</span></b>
+  <li id="setting/initial_command">
+    Setting <b><setting>Initial command</setting></b>
 
-    <p>Removes unreadable paths from the 
-    <a href="#PATH"
-       >environment variable <code>PATH</code></a>.</p>
+    <p>The <setting>initial command</setting> is sent to the shell as
+    user input, i.e. as if you had typed it.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li id="setting/verify_path">
+    Setting <b><setting>Verify PATH entries</setting></b>
+
+    <p>Removes unreadable paths from the environment variable
+    <a href="#env/PATH"
+       ><code>PATH</code></a>.</p>
        
     <p>For example, the default value of <code>PATH</code> is:</p>
 
@@ -161,21 +191,28 @@
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <li id="settings/path">
-    Settings <b><span class="setting">Allow PATH extension</span></b>
-    and <b><span class="setting">Allow PATH prepend</span></b>
+  <li id="setting/path">
+    Settings <b><setting>Allow PATH extension</setting></b> and
+    <b><setting>Allow PATH prepend</setting></b>
     
-    <p>TODO Only work in Android 4.4 to Android 6, not in
+    <p class="TODO">TODO Only work in Android 4.4 to Android 6, not in
     Android 7+.</p>
   </li>
 
+  <li id="setting/HOME_folder">
+    Setting <b><setting>HOME folder</setting></b>
+
+    <p>Set your home directory 
+      <a href="#env/HOME"><code>$HOME</code></a>.</p>
+  </li>
+  
 </ul>
 
 
 <h1 id="configure_extra_keys">Configure the extra keys</h1>
 <!-- ************************************************************ -->
 
-<p>TODO Document.</p>
+<p class="TODO">TODO Document.</p>
 
 <p>A key can either be special, like <key>[Control]</key>, send a key
 code, like <key>[Tab]</key> or <key>[Left]</key>, or send an arbitrary
@@ -183,7 +220,7 @@ string like <key>/</key> or <key>.com</key>. Keys that send a string
 are not affected by modifier keys like <key>[Shift]</key>,
 <key>[Control]</key> and <key>[Fn1]</key>.</p>
 
-<p>TODO Send keycodes does not work for all keys yet.</p>
+<p class="TODO">TODO Send keycodes does not work for all keys yet.</p>
 
 
 <h1>Environment variables</h1>
@@ -192,7 +229,7 @@ are not affected by modifier keys like <key>[Shift]</key>,
 <p>Linux uses <dfn>environment variables</dfn> for configuration.</p>
 
 
-<h2>Usage</h2>
+<h2>Using environments variables</h2>
 <!-- ============================================================ -->
 
 <p>The set of all environment variables is called
@@ -241,9 +278,9 @@ variables, use <code>set</code> or <code>set | more</code>.</p>
 time you open a window in TTerm, place them in the file <code>~/.profile</code>, where
 <code>~</code> is an abbreviation for <code>$HOME</code>. Then add the
 switch <code>-l</code> to the setting
-<a href="#settings/command_line"
-   ><span class="setting">Command line</span></a> to make
-<code>sh</code> start as a login shell.</p>
+  <a href="#setting/command_line"
+     ><setting>Command line</setting></a>
+to make <code>sh</code> start as a login shell.</p>
 
 
 <h2>List of relevant environment variables</h2>
@@ -257,14 +294,12 @@ switch <code>-l</code> to the setting
   
     <p>Shell initialzation file, see 
       <a href="run/sh.xhtml">
-        Android's shell</a>.
-    TTerm doesn't currently provide a way to set <code>$ENV</code>
-    before it starts the shell.</p>
+        Android's shell</a>.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <li id="HOME">
+  <li id="env/HOME">
     <b><code>$HOME</code></b>
   
     <p>Your home directory. By default, TTerm sets it to</p>
@@ -274,7 +309,8 @@ switch <code>-l</code> to the setting
     </p>
     
     <p>You can configure it in the setting 
-      <span class="setting">HOME folder</span>. 
+      <a href="#setting/HOME_folder"
+         ><setting>HOME folder</setting></a>. 
     Or you can set it in one of your shell's initialization files. For
     an example, see
       <a href="run/sh.xhtml">
@@ -294,20 +330,20 @@ switch <code>-l</code> to the setting
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <li id="PATH">
+  <li id="env/PATH">
     <b><code>$PATH</code></b>
     
     <p>List of paths to search for commands, separated by colons.</p>
     
-    <p>On my devices, the default value for <code>$PATH</code> is:</p>
+    <p>On my devices, the default value for <code>PATH</code> is:</p>
     
     <p class="indent code">
       /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     </p>
 
     <p>If the 
-    <a href="#settings/verify_path">
-      setting <span class="setting">Verify PATH entries</span></a> 
+      <a href="#setting/verify_path">
+        setting <setting>Verify PATH entries</setting></a> 
     is checked, <code>PATH</code> will be reduced to:</p>
 
     <p class="indent code">
@@ -317,21 +353,21 @@ switch <code>-l</code> to the setting
     <p>On my devices the default value of <code>PATH</code> is
     hardcoded in the binary <code>/init</code>. It can be set by the
     system initialization files in <code>/init.*</code> and the
-    shell's initialization files. (TODO Explain more.)</p>
+    shell's initialization files. (<span class="TODO">TODO Explain
+    more</span>.)</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <li id="TERM">
+  <li id="env/TERM">
     <b><code>$TERM</code></b>
     
-    <p>Terminal type. Configure it in the setting 
-      <span class="setting">Terminal type</span>, 
-    or in one of your shell's initialization files.</p>
+    <p>Terminal type. Configure it in the setting <setting>Terminal
+    type</setting>, or in one of your shell's initialization
+    files.</p>
     
-    <p>The setting 
-      <span class="setting">Terminal type</span> 
-    offers the values:</p>
+    <p>The setting <setting>Terminal type</setting> offers the
+    values:</p>
     
     <ul class="narrow">
       <li><code>linux</code></li>
@@ -344,7 +380,7 @@ switch <code>-l</code> to the setting
     <p>Changing this setting also changes the codes that TTerm sends
     for some `Fn´ key combinations.</p>
         
-    <p>You have to restart the shell after changing <code>$TERM</code>.</p>
+    <p>You have to restart the shell after changing <code>TERM</code>.</p>
   </li>    
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -371,7 +407,7 @@ steps:</p>
   ı š б א" is in TTerm's Settings, where you have to check the
   checkbox
     <a href="#setting-utf8_by_default">
-      <span class="setting">Default to UTF-8</span></a>.
+      <setting>Default to UTF-8</setting></a>.
   </li>
 
   <li>

@@ -46,19 +46,19 @@ intents and broadcasts.</p>
 
 <ul>
   <li>
-    <span class="code">jackpal.androidterm.OPEN_NEW_WINDOW</span>
+    <code>jackpal.androidterm.OPEN_NEW_WINDOW</code>
   
     <p>Opens a new window.</p>
   </li>
 
   <li>
-    <span class="code">jackpal.androidterm.RUN_SCRIPT</span>
+    <code>jackpal.androidterm.RUN_SCRIPT</code>
 
     <p>Executes the shell code in 
-      <span class="code">jackpal.androidterm.iInitialCommand</span>.</p>
+      <code>jackpal.androidterm.iInitialCommand</code>.</p>
 
     <p>Optionally, you can reuse a window with 
-      <span class="code">jackpal.androidterm.window_handle</span>.</p>
+      <code>jackpal.androidterm.window_handle</code>.</p>
   </li>
  </ul>
 
@@ -72,23 +72,24 @@ intents and broadcasts.</p>
 <h2>Broadcasts</h2>
 <!-- ============================================================ -->
 
+<p class="TODO">TODO Only work in Android 4.4 to Android 6, not in
+Android 7+.</p>
+
 <p>The broadcasts are:</p>
 
 <ul>
-  <li><span class="code"
-            >jackpal.androidterm.broadcast.APPEND_TO_PATH</span></li>
+  <li><code>jackpal.androidterm.broadcast.APPEND_TO_PATH</code></li>
   
-  <li><span class="code"
-            >jackpal.androidterm.broadcast.PREPEND_TO_PATH</span></li>
+  <li><code>jackpal.androidterm.broadcast.PREPEND_TO_PATH</code></li>
 </ul>
 
 <p>When TTerm starts, it broadcasts
-  <span class="code">...APPEND_TO_PATH</span>
+  <code>...APPEND_TO_PATH</code>
 and
-  <span class="code">...PREPEND_TO_PATH</span>
+  <code>...PREPEND_TO_PATH</code>
 as TEA does. Other applications can respond and tell TTerm to add
 paths to its
-  <span class="code">$PATH</span>.</p>
+  <code>$PATH</code>.</p>
 
 </body>
 </html>
