@@ -23,8 +23,19 @@ h1, h2, h3{
   vertical-align: middle;
 }
 
-setting {
-  font-style: italic;
+/* ============================================================ 
+ * Semantic markup
+ * ============================================================ */
+
+/* Simulate cursor. */
+code.cursor {
+  background-color:  #d0d0d0;
+}
+
+*.disclaimer {
+  color:        #800000;
+  margin-left:  2em;
+  margin-right: 2em;
 }
 
 /* A key or key code. */
@@ -32,15 +43,16 @@ key {
   font-family: monospace;
 }
 
+setting {
+  font-style: italic;
+}
+
 /* Simulate selected text. */
 selected {
   background-color:  #d0d0d0;
 }
 
-/* Simulate cursor. */
-code.cursor {
-  background-color:  #d0d0d0;
-}
+/* ============================================================ */
 
 table.border {
   border-collapse:  collapse;
@@ -52,3 +64,4 @@ table.border td, table.border th {
   padding:          4pt;
   vertical-align:   top;
 }
+

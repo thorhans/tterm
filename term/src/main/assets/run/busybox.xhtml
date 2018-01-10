@@ -57,7 +57,7 @@ or
 <!-- ************************************************************ -->
 
 <p>BusyBox does not contain a terminal emulator like TTerm. There are
-several approaches to run Busybox in TTerm:</p>
+several approaches to run BusyBox in TTerm:</p>
 
 <ul>
   <li><a href="#run/rooted"> Install BusyBox on a rooted
@@ -87,9 +87,12 @@ If you have a custom ROM like LineageOS or a recovery image like TWRP,
 BusyBox might also already be installed. Look in
 <code>/system/xbin</code> or <code>/su/xbin</code>.</p>
 
-<p>There are many BusyBox apps, choose one you trust.</p>
+<p>There are several BusyBox apps. In January 2018, the following two
+were popular.</p>
 
-<p>In January 2018, two popular apps are:</p>
+<p class="disclaimer">Usual disclaimer: I've researched all
+tools I mention to my best ability, but use your own judgement and
+only install programs that <b>you</b> trust.</p>
 
 <ul>
   <li><a href="https://play.google.com/store/apps/details?id=stericson.busybox"
@@ -101,35 +104,105 @@ BusyBox might also already be installed. Look in
   with the older version 1.26.2 (as of 2018-01-08)</li>
 </ul>
 
-<p class="TODO">TODO Set PATH.</p>
+<p>If you install BusyBox to <code>/system/bin/xbin</code>, then the
+default value of
+  <a href="../config.xhtml#env/PATH"
+     ><code>$PATH</code></a>
+will first look for the preinstalled Android commands in
+<code>/system/bin/</code>, then for additional BusyBox commands in
+<code>/system/bin/xbin</code>.</p>
+
+<p>If you want to call a BusyBox command <code>cmd</code> with the
+same name as a preinstalled Android command, you can call it with
+<code>busybox cmd</code>.</p>
+
+<p>If you always prefer the BusyBox commands, change
+  <a href="config.xthml#env/PATH"
+    ><code>$PATH</code></a>
+so that <code>/system/bin/xbin</code> comes before
+<code>/system/bin/bin</code>.</p>
 
 
-<h2 id="run/unrooted">Install BusyBox on an unrooted device with
-Android 4.4 to 6</h2> <!--
-************************************************************ -->
+<h2 id="run/unrooted">Install BusyBox on an unrooted device</h2> 
+<!-- ************************************************************ -->
 
-<p>Up to Android 6, you can install a BusyBox app on an
-unrooted device and call it from TTerm. This no longer works in
-Android 7+.</p>
+<p>In the past, there was at least one app that allowed Busybox to run
+on an unrooted device with Android 4.4 to 6 (not Android 7 or later)
+and call it from TTerm. It was the app
+<a href="https://play.google.com/store/apps/details?id=com.jrummy.busybox.installer"
+     >BusyBox for Android by JRummy Apps</a>.
+In it, you could start TTerm via the menu icon (the icon with the
+three dots at the top right), then select "Terminal". That set
+<code>$PATH</code> to:</p>
 
-<p>Up to Android 6, you can access world-readable files of other
-apps...</p>
+<p class="indent code">
+  PATH=/data/user/0/com.jrummy.busybox.installer/files/bin:$PATH
+</p>
 
-<p class="TODO">TODO Set PATH.</p>
+<p>and started TTerm. But on 2018-01-10 that location is no longer
+readable on my Android 4.4 device where it used to work.</p>
+
+<p>You can still use the app to run scripts that use BusyBox on an
+unrooted device, but they don't accept input from a terminal.</p>
 
 
 <h2 id="run/copy">Copy a BusyBox binary into TTerm's internal storage</h2>
 <!-- ************************************************************ -->
 
-<p class="TODO">TODO</p>
+<p>What still works is to copy a BusyBox binary into TTerms internal
+storage. You'll need a binary for your architecture.</p>
 
-<p class="TODO">TODO Set PATH.</p>
+<p>TODO ThH: Move to a section on architectures. Until now, I've
+encountered the following architectures:</p>
+
+<ul class="narrow">
+  <li>arm
+  
+    <p class="TODO">TODO Find out how architectures like arm, armeabi,
+    armeabi-v7a relate.</p></li>
+
+  <li>arm64, aka aarch64</li>
+
+  <li>x86-64, aka x64, x86_64, amd64</li>
+
+  <li>mips</li>
+  
+  <li>x86, aka i686</li>
+</ul>
+
+<p>There are several BusyBox binaries. In January 2018, I found
+these:</p>
+
+<p class="disclaimer">Usual disclaimer: I've researched all
+tools I mention to my best ability, but use your own judgement and
+only install programs that <b>you</b> trust.</p>
+
+<ul>
+  <li><a href="https://github.com/jrummyapps/BusyBox/tree/master/busybox-compiler"
+         >The repository for BusyBox for Android by JRummy Apps</a>
+  with the older version 1.26.2 (as of 2018-01-08)</li>
+
+  <li><a href="http://termux.net/dists/stable/main"
+         >The repository for Termux</a> 
+  works, but has less included commands (as of 2018-01-08)</li> 
+
+  <li><a href="https://github.com/yashdsaraf/bb-bot/releases/tag/v1.28.0-YDS-201801031253
+"
+         >Yash D. Saraf</a> provides BusyBox for OpenGApps</li>
+</ul>
+
+<p>The binary of BusyBox is a single file. Copy it to a directory in
+TTerm's internal storage, create the soft links and add the directory
+to your <code>$PATH</code>.</p>
+                 
+<p class="TODO">TODO I'll add a detailed description in a future
+release.</p>
 
 
 <h2 id="run/connect">Connect to an app that contains BusyBox, e.g. Termux</h2>
 <!-- ************************************************************ -->
 
-<p class="TODO">TODO</p>
+<p class="TODO">TODO ThH: Write section on connecting to BusyBox.</p>
 
 </body>
 </html>

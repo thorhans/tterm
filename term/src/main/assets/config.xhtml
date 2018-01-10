@@ -46,8 +46,8 @@
     
     <p>Android's default shell Mksh handles non-ASCII characters
     correctly. If you use the shell Bash, you'll also have to
-    configure Bash correctly. (<span class="TODO">LATER Add
-    details.</span>)</p>
+    configure Bash correctly. (<span class="TODO">LATER I'll add
+    more details when I figure out how to add Bash to TTerm.</span>)</p>
   </li>
 </ul>
 
@@ -89,9 +89,11 @@
           </li>
         
           <li>
-            <p>You can set the environment variable <code>ENV</code>.
-            In this example, I'll execute the traditional file
-            <code>$HOME/.mkshrc</code>. On my device it's below
+            <p>Or you can set the environment variable
+            <code>ENV</code>. The usual name of the configuration file
+            is <code>$HOME/.mkshrc</code>. Since <code>$HOME</code>
+            and <code>~</code> do not work here, you have to look up
+            the full path first. On my device it's below
             <code>/data/user/0/de.t2h.tterm</code>. This works:</p>
 
             <p class="indent code">
@@ -195,8 +197,8 @@
     Settings <b><setting>Allow PATH extension</setting></b> and
     <b><setting>Allow PATH prepend</setting></b>
     
-    <p class="TODO">TODO Only work in Android 4.4 to Android 6, not in
-    Android 7+.</p>
+    <p class="TODO">TODO In the past, this worked in Android 4.4 to
+    Android 6, not in Android 7+, but it no longer seems to work.</p>
   </li>
 
   <li id="setting/HOME_folder">
@@ -212,7 +214,10 @@
 <h1 id="configure_extra_keys">Configure the extra keys</h1>
 <!-- ************************************************************ -->
 
-<p class="TODO">TODO Document.</p>
+<p>
+  <span class="TODO">TODO ThH: Write the section before the next
+  release.</span>
+</p>
 
 <p>A key can either be special, like <key>[Control]</key>, send a key
 code, like <key>[Tab]</key> or <key>[Left]</key>, or send an arbitrary
@@ -220,7 +225,8 @@ string like <key>/</key> or <key>.com</key>. Keys that send a string
 are not affected by modifier keys like <key>[Shift]</key>,
 <key>[Control]</key> and <key>[Fn1]</key>.</p>
 
-<p class="TODO">TODO Send keycodes does not work for all keys yet.</p>
+<p class="TODO">TODO ThH: Send keycodes does not work for all keys
+yet.</p>
 
 
 <h1>Environment variables</h1>
@@ -353,8 +359,15 @@ to make <code>sh</code> start as a login shell.</p>
     <p>On my devices the default value of <code>PATH</code> is
     hardcoded in the binary <code>/init</code>. It can be set by the
     system initialization files in <code>/init.*</code> and the
-    shell's initialization files. (<span class="TODO">TODO Explain
-    more</span>.)</p>
+    shell's initialization files. (<span class="TODO">TODO I'll
+    explain more in a future release.</span>)</p>
+    
+    <p>You can set it via the shell's initialization files or with
+    <code>env</code> as described under the 
+      <a href="#setting/command_line"
+        >setting <setting>Command line</setting></a>.
+    (<span class="TODO">TODO I'll explain more in a future
+    release.</span>)</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
