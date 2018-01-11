@@ -2,19 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--  
- * Copyright (C) 2014 Thorbjørn Hansen.
+ * Copyright (C) 2014-2018 Thorbjørn Hansen.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * The help content is *not* under an Apache License. I have not
+ * decided on its license yet. Contact me at thorbj.hansen@gmail.com
+ * if you want to copy, publish or use it outside of TTerm.
 -->
 <head>
   <title>TTerm – Android's shell</title>
@@ -60,6 +52,19 @@ Since there are neither options nor arguments it should be
 unnecessary, so I'll remove it in a future release.</p>
 
 
+<h1>Editing</h1>
+<!-- ************************************************************ -->
+
+<p>There is no way to get multiline editing in Mksh, it only uses one
+line, which is scrolls horizontally.</p>
+
+<p>Use the shell
+  <a href="busybox.xhtml">Ash in BusyBox</a>
+or
+  <a href="bash.xhtml">Bash</a>
+instead.</p>
+
+
 <h1>Startup</h1>
 <!-- ************************************************************ -->
 
@@ -71,30 +76,24 @@ without the hyphen), Mksh starts as an <dfn>interactive shell</dfn>
 and executes initialization files. On my devices with Android 4.4 to 7
 it's:</p>
 
-<table class="indent">
-  <tr>
-    <td>
-      <code>$ENV</code>
-    </td>
-    <td>
-      If <code>$ENV</code> is set, Mksh interprets it as a file name
-      and executes the file.You can set <code>$ENV</code> with the
-        <a href="../config.xhtml#setting/command_line"
-           >setting <setting>Command line</setting></a>.<br/>
-    </td>
-  </tr>
+<dl class="code-commented">
+  <dt>$ENV</dt>
+  <dd>
+    If <code>$ENV</code> is set, Mksh interprets it as a file name
+    and executes the file.You can set <code>$ENV</code> with the
+    <a href="../config.xhtml#setting/command_line"
+       >setting <setting>Command line</setting></a>.<br/>
+  </dd>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-  <tr>
-    <td>
-      <code>/system/etc/mkshrc</code>
-    </td>
-    <td>
-      If <code>$ENV</code> is unset, Mksh executes
-      <code>/system/etc/mkshrc</code>, which you can only change on
-      a <a href="../rooting.xhtml">rooted device</a>.
-    </td>
-  </tr>
-</table>
+  <dt>/system/etc/mkshrc</dt>
+
+  <dd>If <code>$ENV</code> is unset, Mksh executes
+  <code>/system/etc/mkshrc</code>, which you can only change on a 
+    <a href="../rooting.xhtml"
+       >rooted device</a>.</dd>
+</dl>
 
 
 <h2>Login shell</h2>
@@ -105,39 +104,34 @@ it's:</p>
 initialization files. On my devices with Android 4.4 to 7, a login
 shell reads:</p>
 
-<table class="indent">
-  <tr>
-    <td>
-      <code>/system/etc/profile</code><br/>
-    </td>
-    <td>
-      You can only change this file on a 
-        <a href="../rooting.xhtml">rooted device</a>.
-    </td>
-  </tr>
+<dl class="code-commented">
+  <dt>/system/etc/profile</dt>
+  
+  <dd>You can only change this file on a 
+    <a href="../rooting.xhtml">rooted device</a>.</dd>
 
-  <tr>
-    <td>
-      <code>$HOME/.profile</code> 
-    </td>
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-    <td style="padding-left: 1em"
-    >
-      You can set <code>$HOME</code> with the
-        <a href="../config.xhtml#HOME">
-          setting <setting>HOME folder</setting></a>.</td>
-  </tr>
+  <dt>$HOME/.profile</dt>
 
-  <tr>
-    <td>
-      <code>$ENV</code> or <code>/system/etc/mkshrc</code>
-    </td>
+  <dd>You can set <code>$HOME</code> with the
+    <a href="../config.xhtml#HOME">
+      setting <setting>HOME folder</setting></a>.</dd>
 
-    <td>
-      As described above for an interactive shell.
-    </td>
-  </tr>
-</table>
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+  <dt>$ENV or /system/etc/mkshrc</dt>
+
+  <dd>As described above for an interactive shell.</dd>
+</dl>
+
+<!-- ************************************************************ -->
+
+<footer>
+  <hr/>
+  <p>Copyright (C) 2014-2018 
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >Thorbjørn Hansen</a></p>
+</footer>
 </body>
 </html>

@@ -2,19 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--  
- * Copyright (C) 2014 Thorbjørn Hansen.
+ * Copyright (C) 2014-2018 Thorbjørn Hansen.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * The help content is *not* under an Apache License. I have not
+ * decided on its license yet. Contact me at thorbj.hansen@gmail.com
+ * if you want to copy, publish or use it outside of TTerm.
 -->
 <head>%
   <title>TTerm – Commands</title>
@@ -49,7 +41,7 @@ them.</p>
 
 <ul>
   <li>
-    <p><code>cd</code> &mdash; change directory</p>
+    <p><b><code>cd</code></b> &mdash; change directory</p>
 
     <p>A shell built-in in all shells.</p>
   </li>
@@ -57,7 +49,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>echo</code> &mdash; display a line of text</p>
+    <p><b><code>echo</code></b> &mdash; display a line of text</p>
   
     <p>A shell built-in in all shells, also available as a Unix
     command in <code>/system/bin</code>.</p>
@@ -66,36 +58,39 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>emacs</code> &mdash; see 
+    <p><b><code>emacs</code></b> &mdash; see 
       <a href="prg/emacs.xhtml">Emacs</a></p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>env</code> &mdash; print environment or set environment
+    <p><b><code>env</code></b> &mdash; print environment or set environment
     variables for a single command</p>
   
     <p>A Unix command available in <code>/system/bin</code>.</p>
 
     <ul>
       <li>
-        <p>Use 1:</p>
+        <p>Use 1: <code>env</code></p>
 
-        <p>`env´ without arguments prints the current environment.</p>
+        <p><code>env</code> without arguments prints the current
+        environment.</p>
       </li>
 
 
       <li>
-        <p>Use 2:</p>
+        <p>Use 2: <code>env «vars» «command» «arguments»</code></p>
 
-        <p class="indent code">
-          env «var_1»="«value 1»" ... «var_n»="«value n»" 
-            «command» «arguments»
-        </p>
+        <p>Where <code>«vars»</code> is <code>«var_1»="«value 1»" ...
+        «var_n»="«value n»"</code>. The values must be quoted or
+        escaped as explained in 
+          <a href="concepts.xhtml#env_vars">
+            Environments variables</a>.</p>
         
-        <p>Executes <code>«command»</code> with environment variables
-        <code>«var_1»</code> to <code>«var_n»</code>.</p>
+        <p>Executes <code>«command» «arguments»</code> with
+        environment variables <code>«var_1»</code> to
+        <code>«var_n»</code> set to the specified values.</p>
         
         <p>It is equivalent to the shell syntax</p>
         
@@ -115,7 +110,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>exec</code> &mdash; replace the shell with a command</p>
+    <p><b><code>exec</code></b> &mdash; replace the shell with a command</p>
 
     <p>A shell built-in in all shells.</p>
   </li>
@@ -123,20 +118,20 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>export</code> &mdash; set an environment variable</p>
+    <p><b><code>export</code></b> &mdash; set an environment variable</p>
   
     <p>A shell built-in in all <code>sh</code>-compatible
     shells.</p>
 
     <p>See section 
-      <a href="config.xhtml#env/using_env_vars"
-           >Using environment variables</a>.</p>
+      <a href="concepts.xhtml#env_vars"
+         >Environments variables</a>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>fgrep</code> &mdash; search for a string</p>
+    <p><b><code>fgrep</code></b> &mdash; search for a string</p>
     
     <p>A Unix command available in <code>/system/bin</code>.</p>
   </li>
@@ -144,7 +139,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="getprop">
-    <p><code>getprop</code> &mdash; get 
+    <p><b><code>getprop</code></b> &mdash; get 
       <a href="concepts.xhtml#android_os_system_properties"
          >Android OS system properties</a></p>
 
@@ -174,7 +169,23 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>more</code> &mdash; a simple pager</p>
+    <p><b><code>mkfifo</code></b> &mdash; create a named pipe (a FIFO)</p>
+  
+    <p>A Unix command available in <code>/system/bin</code>.</p>
+    
+    <p>A "named pipe", also called a "FIFO" ("First In, First
+    Out"), is a file that connects two processes with a
+    bidirectional pipe.</p>
+    
+    <p>For an example, see 
+      <a href="run/termux.xhtml#run/connect/netcat"
+         >Connect to Termux with Netcat</a>.</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><b><code>more</code></b> &mdash; a simple pager</p>
   
     <p>A Unix command available in <code>/system/bin</code>.</p>
   </li>
@@ -182,15 +193,32 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>nc</code>, <code>netcat</code> &mdash; Netcat</p>
+    <p><b><code>netcat</code></b> or <code>nc</code> &mdash; Netcat</p>
 
-    <p class="TODO">TODO</p>
+    <p>A Unix command <b>not</b> available in
+    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
+
+    <p>For an example, see 
+      <a href="run/termux.xhtml#run/connect/netcat"
+         >Connect to Termux with Netcat</a>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>set</code> &mdash; set shell options and arguments, or
+    <p><b><code>script</code></b> &mdash; record a terminal session</p>
+  
+    <p>A Unix command <b>not</b> available in
+    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
+
+    <p><code>script</code> records a terminal session, i.e. logs the
+    input and output.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><b><code>set</code></b> &mdash; set shell options and arguments, or
     print shell and environment variables</p>
   
     <p>A shell built-in in all shells.</p>
@@ -210,7 +238,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="setprop">
-    <p><code>setprop</code> &mdash; set 
+    <p><b><code>setprop</code></b> &mdash; set 
       <a href="concepts.xhtml#android_os_system_properties"
          >Android OS system properties</a></p>
 
@@ -224,7 +252,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>sh</code> &mdash; default shell</p>
+    <p><b><code>sh</code></b> &mdash; default shell</p>
 
     <p>A Unix command available in <code>/system/bin</code>.</p>
 
@@ -236,7 +264,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>sort</code> &mdash; sort lines</p>
+    <p><b><code>sort</code></b> &mdash; sort lines</p>
   
     <p>A Unix command available in <code>/system/bin</code>.</p>
   </li>
@@ -244,23 +272,49 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>ssh</code> &mdash; SSH</p>
+    <p><b><code>ssh</code></b> &mdash; SSH</p>
 
-    <p class="TODO">TODO</p>
+    <p class="TODO">LATER I will write about this when I've found a SSH
+    client that runs in TTerm.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>su</code> &mdash; super-user</p>
+    <p><b><code>su</code></b> &mdash; super-user</p>
   
-    <p class="TODO">TODO</p>
+    <p>A Unix command only available in a
+      <a href="../rooting.xhtml"
+       >rooted device</a>.</p>
+
+    <ul>
+      <li>
+        <p>Use 1: <code>su</code></p>
+        
+        <p><code>su</code> without arguments runs a shell as root.</p>
+      </li>
+
+      <li>
+        <p>Use 2: <code>su «user»</code></p>
+
+        <p>Runs a shell as Linux user «user». In Android, each app has
+        its own Linux user, with a name like <code>u«android user
+        number»_a«Linux user number»</code>.</p>
+      </li>
+
+      <li>
+        <p>Use 3: <code>su [«user»] -c "«command» «args»"</code></p>
+
+        <p>Runs a command as root or Linux user «user». Note that the
+        command and its arguments should be quoted.</p>
+      </li>
+    </ul>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>stty</code> &mdash; change and print terminal (TTY)
+    <p><b><code>stty</code></b> &mdash; change and print terminal (TTY)
     settings</p>
 
     <p>A Unix command <b>not</b> available in
@@ -270,22 +324,35 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>telnet</code>, <code>telnetd</code> &mdash; Telnet and
+    <p><b><code>telnet</code></b>, <code>telnetd</code> &mdash; Telnet and
     its daemon</p>
 
-    <p class="TODO">TODO</p>
+    <p>A Unix command <b>not</b> available in
+    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
+
+    <p>For an example, see 
+      <a href="run/termux.xhtml#run/connect/telnet"
+         >Connect to Termux with Telnet</a>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><code>whoami</code> &mdash; print the Linux user name</p>
+    <p><b><code>whoami</code></b> &mdash; print the Linux user name</p>
 
     <p>A Unix command available in <code>/system/bin</code>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
 </ul>
+
+<!-- ************************************************************ -->
+
+<footer>
+  <hr/>
+  <p>Copyright (C) 2014-2018 
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >Thorbjørn Hansen</a></p>
+</footer>
 </body>
 </html>

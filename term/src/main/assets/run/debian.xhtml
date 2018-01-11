@@ -2,19 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--  
- * Copyright (C) 2014 Thorbjørn Hansen.
+ * Copyright (C) 2014-2018 Thorbjørn Hansen.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * The help content is *not* under an Apache License. I have not
+ * decided on its license yet. Contact me at thorbj.hansen@gmail.com
+ * if you want to copy, publish or use it outside of TTerm.
 -->
 <head>
   <title>TTerm – GNURoot Debian</title>
@@ -59,23 +51,88 @@ you might want to use TTerm instead.</p>
 <h1>Running GNURoot Debian in TTerm</h1>
 <!-- ************************************************************ -->
 
-<h2 id="run/connect">Connect to Debian</h2>
-<!-- ============================================================ -->
+<h2 id="run/connect">Connect to GNURoot Debian</h2> <!--
+============================================================ -->
 
-<p>In these three approaches, you start Debian and start a program
-that you connect to from TTerm.</p>
+<p>In these three approaches, you start GNURoot Debian and start a
+program that you connect to from TTerm.</p>
 
 
-<h3>With Netcat</h3>
+<h3 id="run/connect/netcat">With Netcat</h3>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<p class="TODO">TODO</p>
+<p>In GNURoot Debian, install Netcat:</p>
+
+<p class="indent code">
+  apt install netcat
+</p>
+
+<p>Then 
+  <a href="termux.xhtml#run/connect/netcat"
+    >continue as in Termux</a>, 
+except that you must call Netcat as <code>netcat</code>, and stop it
+with <key>Ctrl+c</key> after you log out in TTerm.</p>
 
 
-<h3>With Telnet</h3>
+<h3 id="run/connect/telnet">With Telnet</h3>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<p class="TODO">TODO</p>
+<p>You can connect to GNURoot Debian via Telnet. Below is a <b>proof
+of concept</b>. It will let <b>anybody</b> connect to port 2323 <b>as
+root</b> and <b>without</b> asking for a password. That's <b>not</b>
+something you want to do regularly.</p>
+
+<p>In GNURoot Debian, install and setup as follows:</p>
+
+<dl class="code-commented">
+  <dt>apt install telnetd</dt>
+  <dd>Install the Telnet daemon.</dd>
+
+  <dt>cd /usr/local/bin</dt>
+  <dd>Go to a directory that can contain executable files. For some
+  strange reason, <code>$HOME</code> can't.</dd>
+
+  <dt>( echo \#\!/bin/sh ; echo /bin/bash ) > s</dt>
+  <dd>Create a script that starts Bash, ignoring its arguments.</dd>
+
+  <dt>chmod a+rx s</dt>
+  <dd>Make the script executable.</dd>
+</dl>
+
+<p>In GNURoot Debian, start the Telnet daemon with:</p>
+
+<dl class="code-commented">
+  <dt>/usr/sbin/in.telnetd -debug 2323 -L /usr/local/bin/s</dt>
+  <dd>
+    <p>Start a debugging Telnet daemon that listens on port 1111. The
+    port must be over 1024.</p>
+
+    <p> Because of the switch <code>-debug</code>,
+    the Telnet daemon stays in the foreground and accepts exactly one
+    connection.</p>
+    
+    <p>Instead of <code>login</code>, which is broken in GNURoot
+    Debian, start the script <code>/usr/local/bin/s</code>. You must
+    specify the full path. You can't use Bash here, since the Telnet
+    daemon calls it with a switch that makes Bash exit with an error
+    message.</p>
+  </dd>
+</dl>
+
+<p>In TTerm with an installed 
+  <a href="busybox.xhtml">BusyBox</a>, 
+do the following:</p>
+  
+<dl class="code-commented">
+  <dt>telnet localhost 2323</dt>
+  <dd>Connect to port 2323 on the same device. If
+  <code>localhost</code> does not work, try <code>127.0.0.1</code>
+  instead.</dd>
+</dl>
+
+<p>When you've finished testing, stop the Telnet daemon in GNURoot
+Debian with <key>Ctrl+d</key>.</p>
+
 
 
 <h3>With SSH</h3>
@@ -88,8 +145,8 @@ client that runs in TTerm.</p>
 <h2>As root</h2>
 <!-- ============================================================ -->
 
-<p>In this approach, you do not start the Debian app. Instead you
-start the Linux layer of Debian from inside TTerm. It requires a
+<p>In this approach, you do not start the GNURoot Debian app. Instead
+you start the Linux layer of Debian from inside TTerm. It requires a
   <a href="../rooting.xhtml"
      >rooted device</a>.</p>
 
@@ -117,5 +174,13 @@ start the Linux layer of Debian from inside TTerm. It requires a
 <code>bash</code> or <code>emacs</code> (after installing it with
 <code>apt install emacs</code>).</p>
 
+<!-- ************************************************************ -->
+
+<footer>
+  <hr/>
+  <p>Copyright (C) 2014-2018 
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >Thorbjørn Hansen</a></p>
+</footer>
 </body>
 </html>

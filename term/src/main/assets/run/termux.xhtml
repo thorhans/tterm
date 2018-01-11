@@ -2,19 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--  
- * Copyright (C) 2014 Thorbjørn Hansen.
+ * Copyright (C) 2014-2018 Thorbjørn Hansen.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * The help content is *not* under an Apache License. I have not
+ * decided on its license yet. Contact me at thorbj.hansen@gmail.com
+ * if you want to copy, publish or use it outside of TTerm.
 -->
 <head>
   <title>TTerm – Termux</title>
@@ -39,7 +31,7 @@
   <a href="https://termux.com"
      >Termux</a>
 is a Linux distribution that extends Android's Linux with lots of
-packages. It run on Android's Linux and file system, not using
+packages. It runs on Android's Linux and file system, not using
 <code>chroot</code> or <code>proot</code> like
   <a href="debian.xhtml" >GNURoot Debian</a>
 does. It doesn't require <a href="rooting">rooting</a>. And it has
@@ -50,10 +42,10 @@ hooray!</p>
 <h1>Running Termux in TTerm</h1>
 <!-- ************************************************************ -->
 
-<p>Termux has its own terminal emulator, but on a rooted device you
-can use TTerm instead. (Currently the terminal emulator of Termux
-handles resizing better than TTerm, but provides less settings, so try
-both before you choose one, or wait until TTerm improves. :-)</p>
+<p>Termux has its own terminal emulator, but you can use TTerm
+instead. (Currently the terminal emulator of Termux handles resizing
+better than TTerm, but provides less settings, so try both before you
+choose one, or wait until TTerm improves. :-)</p>
 
 
 <h2 id="run/connect">Connect to Termux</h2>
@@ -63,16 +55,129 @@ both before you choose one, or wait until TTerm improves. :-)</p>
 that you connect to from TTerm.</p>
 
 
-<h3>With Netcat</h3>
+<h3 id="run/connect/netcat">With Netcat</h3>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<p class="TODO">TODO</p>
+<p>You can connect to Termux via Netcat. Below is a <b>proof of
+concept</b>. It will let <b>anybody</b> connect to port 1111
+<b>without</b> asking for a password. That's <b>not</b> something you
+want to do regularly.</p>
+
+<p>I found the solution on 
+  <a href="https://stackoverflow.com/questions/29317933"
+    >Stack Overflow</a>.</p>
+
+<p>In Termux, install Busybox:</p>
+
+<p class="indent code">
+  apt install busybox
+</p>
+
+<p>In Termux, start Netcat and a shell, connected with a "named
+pipe".</p>
+
+<dl class="code-commented">
+  <dt>cd ~</dt>
+  <dd>Change to a writable directory, e.g. <code>$HOME</code>.</dd>
+
+  <dt>rm -f pipe</dt>
+  <dd>If necessary, remove the named pipe from a previous run.</dd>
+
+  <dt>mkfifo pipe</dt>
+  <dd>Make a "named pipe", also called a "FIFO" ("First In, First
+    Out"). That is a file that connects two processes with a
+    bidirectional pipe.</dd>
+
+  <dt>script -q &lt; pipe | nc -l -p 1111 &gt; pipe</dt>
+  <dd>
+    <p><code>nc</code> is the BusyBox version of Netcat. It will read
+    input from port 1111 and write it to <code>pipe</code>. In GNURoot
+    Debian you must use <code>netcat</code> instead.</p>
+    
+    <p><code>script -q</code> starts a shell that reads input from
+    <code>pipe</code> and writes input and output to
+    <code>netcat</code>, which writes it to port 1111.</p>
+    
+    <p>In Termux the command stops when you log out in TTerm, in
+    GNURoot Debian you have to stop it with <key>Ctrl+c.</key></p>
+  </dd>
+</dl>
+
+<p>Now change to TTerm with an installed 
+  <a href="busybox.xhtml">BusyBox</a> 
+and enter this in a single line:
+</p>
+  
+<dl class="code-commented">
+  <dt>stty -icanon -echo; netcat localhost 1111; stty sane</dt>
+  <dd>
+    <p>If you do not enter all three commands in one line, you can't see
+    what you type for the second and third commands.</p>
+
+    <p>The first command <code>stty -icanon -echo</code> sets the
+    terminal settings.</p>
+    
+    <p><code>-icanon</code> turns off canonical mode (also called
+    line-based or cooked mode) so that characters are sent immediately
+    without waiting for a newline charate.</p>
+
+    <p><code>-echo</code> turns off echoing, so that the shell on
+    Termux decides when to echo user input.</p>
+
+    <p>The second command <code>netcat localhost 111</code> connects
+    to the Netcat running on port 1111 of the same device. If
+    <code>localhost</code> does not work, try <code>127.0.0.1</code>
+    instead.</p>
+
+    <p>After you quit the shell that runs remotely in Termux, the
+    third command <code>stty sane</code> sets the terminal settings
+    back to their default.</p>
+  </dd>
+</dl>
 
 
-<h3>With Telnet</h3>
+<h3 id="run/connect/telnet">With Telnet</h3>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<p class="TODO">TODO</p>
+<p>You can connect to Termux via Telnet. Below is a <b>proof of
+concept</b>. It will let <b>anybody</b> connect to port 2323
+<b>without</b> asking for a password. That's <b>not</b> something you
+want to do regularly.</p>
+
+<p>In Termux, install Busybox:</p>
+
+<p class="indent code">
+  apt install busybox
+</p>
+
+<p>Start a Telnet daemon in Termux:</p>
+
+<dl class="code-commented">
+  <dt>telnetd -p 2323 -l bash -F</dt>
+  <dd>
+    <p><code>-p 2323</code> makes the Telnet daemon listen to port
+    2323. The port must be over 1024.</p>
+  
+    <p><code>-l bash</code> makes it run the shell <code>bash</code>
+    instead of <code>login</code>.</p>
+
+    <p><code>-F</code> makes it run in the foreground.</p>
+  </dd>
+</dl>
+
+<p>In TTerm with an installed 
+  <a href="busybox.xhtml">BusyBox</a>, 
+do the following:</p>
+
+<dl class="code-commented">
+  <dt>telnet localhost 2323</dt>
+  <dd>Telnet connects to port 2323 on the same device. If
+  <code>localhost</code> does not work, try <code>127.0.0.1</code>
+  instead.</dd>
+</dl>
+
+<p>When you've finished testing, stop the Telnet daemon in Termux with
+<key>Ctrl+c</key>.</p>
 
 
 <h3>With SSH</h3>
@@ -118,5 +223,13 @@ the screen.</p>
 <code>bash</code> or <code>emacs</code> (after installing it with
 <code>apt install emacs</code>).</p>
 
+<!-- ************************************************************ -->
+
+<footer>
+  <hr/>
+  <p>Copyright (C) 2014-2018 
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >Thorbjørn Hansen</a></p>
+</footer>
 </body>
 </html>

@@ -2,19 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--  
- * Copyright (C) 2014 Thorbjørn Hansen.
+ * Copyright (C) 2014-2018 Thorbjørn Hansen.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * The help content is *not* under an Apache License. I have not
+ * decided on its license yet. Contact me at thorbj.hansen@gmail.com
+ * if you want to copy, publish or use it outside of TTerm.
 -->
 <head>%
   <title>TTerm – Concepts</title>
@@ -38,8 +30,21 @@
 help pages of TTerm.</p>
 
 
-<h2 id="cpu_architecture">CPU architecture</h2>
-<!-- ============================================================ -->
+<h1 id="android_os_system_properties">Android OS system properties</h1>
+<!-- ************************************************************ -->
+
+<p>Android's Linux layer has <dfn>system properties</dfn>, I'll call them
+<dfn>Android OS system properties</dfn>, that are different from the Java
+System Properties. You can get them with
+  <a href="commands.xhtml#getprop"
+     ><code>getprop</code></a>
+and set them with 
+  <a href="commands.xhtml#setprop"
+     ><code>setprop</code></a>.</p>
+
+
+<h1 id="cpu_architecture">CPU architecture</h1>
+<!-- ************************************************************ -->
 
 <p>When I use <dfn>CPU architecture</dfn>, I mean the <dfn>instruction set
 architecture</dfn>.</p>
@@ -108,7 +113,7 @@ devices:</p>
 </ul>
 
 
-<h5>FInd out the CPU architecture</h5>
+<h5>Find out the CPU architecture</h5>
 <!-- ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙ -->
 
 <p class="TODO">TODO How do you find out your device's CPU
@@ -127,17 +132,81 @@ architecture? This looks promising:</p>
 armeabi-v7a are related.</p>
 
 
-<h2 id="android_os_system_properties">Android OS system properties</h2>
-<!-- ============================================================ -->
+<h1 id="shell">Distribution</h1>
+<!-- ************************************************************ -->
 
-<p>Android's Linux layer has <dfn>system properties</dfn>, I'll call them
-<dfn>Android OS system properties</dfn>, that are different from the Java
-System Properties. You can get them with
-  <a href="commands.xhtml#getprop"
-     ><code>getprop</code></a>
-and set them with 
-  <a href="commands.xhtml#setprop"
-     ><code>setprop</code></a>.</p>
+<p>See
+  <a href="shells.xhtml">Shells and distributions</a>.</p>
 
+
+<h1 id="env_var">Environment variables</h1>
+<!-- ************************************************************ -->
+
+<p>Linux uses <dfn>environment variables</dfn> for configuration.</p>
+
+<p>The set of all environment variables is called
+<dfn>environment</dfn>. To see it, use <code>env</code> or <code>env |
+sort | more</code>.</p>
+
+<p>To set an environment variable in a shell, use:</p>
+
+<p class="indent code">
+  export VAR='value' # (1)<br/>
+  export VAR="value" # (2)<br/>
+  export VAR=value   # (3)
+</p>
+
+<p>In case (1) you must quote a single quote <code>'</code> as
+<code>'\''</code>. In case (2) you must quote the four characters
+<code>$ \ " `</code> as <code>\$ \\ \" \`</code> (and there may be
+additional characters depending on your shell). Strings quoted with
+single or double quotes can contain newlines. If you "get stuck" in a
+continuation string, press `Control-C´ to get out.</p>
+
+<p>Case (3) is only safe if the value does not contain whitespace or
+special characters. You must quote whitespace and many special
+characters with <code>\</code>.</p>
+
+<p>To check that you got the quoting right, print an environment value
+with <code>echo "$VAR"</code> (the quotes are necessary if the value
+contains special characters).</p>
+
+<p>When you start a command or subprocess, it inherits a copy of the
+environment. Changes in the copy are not visible in the original
+environment.</p>
+
+<p>Do not confuse environment variables with <dfn>shell
+variables</dfn>. You set them similarly with <code>VAR='value'</code>
+or <code>VAR="value"</code>, without using <code>export</code>. Shell
+variables are only used by the shell, they are not part of the
+environment and not passed to commands or subprocesses. For example
+<code>PWD</code> holds the local directory and <code>PS1</code> the
+prompt.</p>
+
+<p>To get a list of all shell variables <i>and</i> environment
+variables, use <code>set</code> or <code>set | more</code>.</p>
+
+
+<h1 id="shell">Shell</h1>
+<!-- ************************************************************ -->
+
+<p>See
+  <a href="shells.xhtml">Shells and distributions</a>.</p>
+
+
+<h1 id="shell">Terminal, terminal emulator</h1>
+<!-- ************************************************************ -->
+
+<p>See
+  <a href="shells.xhtml">Shells and distributions</a>.</p>
+
+<!-- ************************************************************ -->
+
+<footer>
+  <hr/>
+  <p>Copyright (C) 2014-2018 
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >Thorbjørn Hansen</a></p>
+</footer>
 </body>
 </html>

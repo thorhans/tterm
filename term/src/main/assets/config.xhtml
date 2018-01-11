@@ -2,19 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!--  
- * Copyright (C) 2014 Thorbjørn Hansen.
+ * Copyright (C) 2014-2018 Thorbjørn Hansen.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * The help content is *not* under an Apache License. I have not
+ * decided on its license yet. Contact me at thorbj.hansen@gmail.com
+ * if you want to copy, publish or use it outside of TTerm.
 -->
 <head>%
   <title>TTerm – Configuration</title>
@@ -45,11 +37,26 @@
     to check this checkbox.</p>
     
     <p>Android's default shell Mksh handles non-ASCII characters
-    correctly. If you use the shell Bash, you'll also have to
-    configure Bash correctly. (<span class="TODO">LATER I'll add
-    more details when I figure out how to add Bash to TTerm.</span>)</p>
+    correctly.</p>
+    
+    <p class="TODO">LATER If you use the shell Bash, you'll also have to
+    configure Bash correctly. I'll add more details when I figure out
+    how to add Bash to TTerm.</p>
   </li>
 </ul>
+
+
+<!-- h2>Section "Extra keys"</h2 -->
+<!-- ============================================================ -->
+
+<!-- ul>
+  <li id="setting/extra_keys">
+    Setting <b><setting>Extra keys</setting></b>
+
+    <p class="TODO">TODO ThH: Write the section before the next
+    release.</p>
+  </li>
+</ul -->
 
 
 <h2>Section "Shell"</h2>
@@ -165,6 +172,15 @@
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+  <li id="setting/close_window_on_exit">
+    Setting <b><setting>Close window on exit</setting></b>
+    
+    <p>This setting is now off by default. When the command in the
+    window exits, simply press Enter to close the window.</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
   <li id="setting/verify_path">
     Setting <b><setting>Verify PATH entries</setting></b>
 
@@ -211,13 +227,11 @@
 </ul>
 
 
-<h1 id="configure_extra_keys">Configure the extra keys</h1>
+<!-- h1 id="configure_extra_keys">Configure the extra keys</h1 -->
 <!-- ************************************************************ -->
 
-<p>
-  <span class="TODO">TODO ThH: Write the section before the next
-  release.</span>
-</p>
+<!-- p class="TODO">TODO ThH: Write the section before the next
+release.</p>
 
 <p>A key can either be special, like <key>[Control]</key>, send a key
 code, like <key>[Tab]</key> or <key>[Left]</key>, or send an arbitrary
@@ -226,67 +240,24 @@ are not affected by modifier keys like <key>[Shift]</key>,
 <key>[Control]</key> and <key>[Fn1]</key>.</p>
 
 <p class="TODO">TODO ThH: Send keycodes does not work for all keys
-yet.</p>
+yet.</p -->
 
 
 <h1>Environment variables</h1>
 <!-- ************************************************************ -->
 
-<p>Linux uses <dfn>environment variables</dfn> for configuration.</p>
-
-
-<h2 id="env/using_env_vars">Using environments variables</h2>
-<!-- ============================================================ -->
-
-<p>The set of all environment variables is called
-<dfn>environment</dfn>. To see it, use <code>env</code> or <code>env |
-sort | more</code>.</p>
-
-<p>To set an environment variable in a shell, use:</p>
-
-<p class="indent code">
-  export VAR='value' // (1)<br/>
-  export VAR="value" // (2)<br/>
-  export VAR=value   // (3)
-</p>
-
-<p>In case (1) you must quote a single quote <code>'</code> as
-<code>'\''</code>. In case (2) you must quote the four characters
-<code>$ \ " `</code> as <code>\$ \\ \" \`</code> (and there may be
-additional characters depending on your shell). Strings quoted with
-single or double quotes can contain newlines. If you "get stuck" in a
-continuation string, press `Control-C´ to get out.</p>
-
-<p>Case (3) is only safe if the value does not contain whitespace or
-special characters. You must quote whitespace and many special
-characters with <code>\</code>.</p>
-
-<p>To check that you got the quoting right, print an environment value
-with <code>echo "$VAR"</code> (the quotes are necessary if the value
-contains special characters).</p>
-
-<p>When you start a command or subprocess, it inherits a copy of the
-environment. Changes in the copy are not visible in the original
-environment.</p>
-
-<p>Do not confuse environment variables with <dfn>shell
-variables</dfn>. You set them similarly with <code>VAR='value'</code>
-or <code>VAR="value"</code>, without using <code>export</code>. Shell
-variables are only used by the shell, they are not part of the
-environment and not passed to commands or subprocesses. For example
-<code>PWD</code> holds the local directory and <code>PS1</code> the
-prompt.</p>
-
-<p>To get a list of all shell variables <i>and</i> environment
-variables, use <code>set</code> or <code>set | more</code>.</p>
+<p>See the explanation of 
+  <a href="concepts.xhtml#env_var">environment variables in
+  Linux</a>.</p>
 
 <p>If you want to set environment variables or shell variables each
-time you open a window in TTerm, place them in the file <code>~/.profile</code>, where
-<code>~</code> is an abbreviation for <code>$HOME</code>. Then add the
-switch <code>-l</code> to the setting
+time you open a window in TTerm, place them in the file
+<code>~/.profile</code>, where <code>~</code> is an abbreviation for
+<code>$HOME</code>. Then add the switch <code>-l</code> to the setting
   <a href="#setting/command_line"
      ><setting>Command line</setting></a>
 to make <code>sh</code> start as a login shell.</p>
+
 
 
 <h2>List of relevant environment variables</h2>
@@ -296,9 +267,9 @@ to make <code>sh</code> start as a login shell.</p>
 
 <ul>
   <li>
-    <b><code>$ENV</code></b>
-  
-    <p>Shell initialzation file, see 
+    <b><code>$ENV</code></b> &mdash; shell initialzation file
+    
+    <p>see
       <a href="run/sh.xhtml">
         Android's shell</a>.</p>
   </li>
@@ -306,9 +277,9 @@ to make <code>sh</code> start as a login shell.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="env/HOME">
-    <b><code>$HOME</code></b>
-  
-    <p>Your home directory. By default, TTerm sets it to</p>
+    <b><code>$HOME</code></b> &mdash; your home directory
+    
+    <p>By default, TTerm sets it to</p>
     
     <p class="indent code">
       /data/user/0/de.t2h.tterm/app_HOME
@@ -326,9 +297,8 @@ to make <code>sh</code> start as a login shell.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <b><code>$LD_LIBRARY_PATH</code></b>
-    
-    <p>List of paths to search for libraries, separated by colons.</p>
+    <b><code>$LD_LIBRARY_PATH</code></b> &mdash; list of paths to
+    search for libraries, separated by colons
     
     <p>For example, Bash needs the library
     <code>libncurses.so</code>.</p>
@@ -337,9 +307,8 @@ to make <code>sh</code> start as a login shell.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="env/PATH">
-    <b><code>$PATH</code></b>
-    
-    <p>List of paths to search for commands, separated by colons.</p>
+    <b><code>$PATH</code></b> &mdash; list of paths to search for
+    commands, separated by colons
     
     <p>On my devices, the default value for <code>PATH</code> is:</p>
     
@@ -359,25 +328,25 @@ to make <code>sh</code> start as a login shell.</p>
     <p>On my devices the default value of <code>PATH</code> is
     hardcoded in the binary <code>/init</code>. It can be set by the
     system initialization files in <code>/init.*</code> and the
-    shell's initialization files. (<span class="TODO">TODO I'll
-    explain more in a future release.</span>)</p>
+    shell's initialization files.</p>
     
-    <p>You can set it via the shell's initialization files or with
-    <code>env</code> as described under the 
+    <p>You can set <code>PATH</code> in the shell's initialization
+    files or with <code>env</code> as described under the
       <a href="#setting/command_line"
-        >setting <setting>Command line</setting></a>.
-    (<span class="TODO">TODO I'll explain more in a future
-    release.</span>)</p>
+        >setting <setting>Command line</setting></a>.</p>
+
+    <p class="TODO">TODO I'll explain more about the
+    system initialization files and the shell's initialization files
+    in a future release.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="env/TERM">
-    <b><code>$TERM</code></b>
+    <b><code>$TERM</code></b> &mdash; terminal type
     
-    <p>Terminal type. Configure it in the setting <setting>Terminal
-    type</setting>, or in one of your shell's initialization
-    files.</p>
+    <p>Configure it in the setting <setting>Terminal type</setting>,
+    or in one of your shell's initialization files.</p>
     
     <p>The setting <setting>Terminal type</setting> offers the
     values:</p>
@@ -399,9 +368,7 @@ to make <code>sh</code> start as a login shell.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <b><code>$TERMINFO</code></b>
-    
-    <p>Path to the Terminfo database.</p>
+    <b><code>$TERMINFO</code></b> &mdash; path to the Terminfo database
   </li>
 </ul>
 
@@ -486,5 +453,13 @@ steps:</p>
   </li>
 </ol>
 
+<!-- ************************************************************ -->
+
+<footer>
+  <hr/>
+  <p>Copyright (C) 2014-2018 
+  <a href="mailto:thorbj.hansen@gmail.com?subject=TTerm"
+     >Thorbjørn Hansen</a></p>
+</footer>
 </body>
 </html>

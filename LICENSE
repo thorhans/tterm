@@ -1,4 +1,7 @@
 
+License for the code
+************************************************************
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -200,3 +203,16 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+
+
+License for the help content
+************************************************************
+
+- The help content in `term/src/main/assets/´ and subdirectories is
+
+    Copyright (C) 2014-2018 Thorbjørn Hansen
+
+- TODO The help content is *not* under an Apache License. I have not
+  decided on its license yet. Contact me at thorbj.hansen@gmail.com if
+  you want to copy, publish or use it outside of TTerm.
+

@@ -40,7 +40,8 @@ code.cursor {
 
 /* A key or key code. */
 key {
-  font-family: monospace;
+  /* See `code´ in `t2h.css´. */
+  font-family: "Courier New", monospace, serif;
 }
 
 setting {
@@ -65,3 +66,16 @@ table.border td, table.border th {
   vertical-align:   top;
 }
 
+dl.code-commented > dt {
+  /* See `code´ in `t2h.css´. */
+  font-family: "Courier New", monospace, serif;
+  margin-top:    8pt;
+  margin-bottom: 4pt;
+}
+
+dl.code-commented > dd,
+dl.code-commented > dd > p
+{
+  margin-top:    4pt;
+  margin-bottom: 4pt;
+}
