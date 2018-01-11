@@ -39,11 +39,19 @@ pages of TTerm. It's not a full list of Linux commands, and it does
 not cover all uses of the commands, only those that are used in the
 help pages of Termux.</p>
 
+<p>Commands marked with "Unix", "Linux" or "shell built-in" also exist
+in Unix and Linux, so you can be look them up in any book or web site
+on Unix, BSD or Linux.</p>
+
+<p>Commands marked with "Android" only exist on Android. You can
+google them, but there does not seem to be much information on
+them.</p>
+
 <ul>
   <li>
     <p><code>cd</code> &mdash; change directory</p>
 
-    <p>A built-in command of your shell.</p>
+    <p>A shell built-in in all shells.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -51,8 +59,8 @@ help pages of Termux.</p>
   <li>
     <p><code>echo</code> &mdash; display a line of text</p>
   
-    <p>Available as a built-in command of your shell and in
-    <code>/system/bin</code>.</p>
+    <p>A shell built-in in all shells, also available as a Unix
+    command in <code>/system/bin</code>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -68,8 +76,7 @@ help pages of Termux.</p>
     <p><code>env</code> &mdash; print environment or set environment
     variables for a single command</p>
   
-    <p>Available in <code>/system/bin</code>.</p>
-
+    <p>A Unix command available in <code>/system/bin</code>.</p>
 
     <ul>
       <li>
@@ -110,7 +117,7 @@ help pages of Termux.</p>
   <li>
     <p><code>exec</code> &mdash; replace the shell with a command</p>
 
-    <p>A built-in command of your shell.</p>
+    <p>A shell built-in in all shells.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -118,7 +125,8 @@ help pages of Termux.</p>
   <li>
     <p><code>export</code> &mdash; set an environment variable</p>
   
-    <p>A built-in command of your shell.</p>
+    <p>A shell built-in in all <code>sh</code>-compatible
+    shells.</p>
 
     <p>See section 
       <a href="config.xhtml#env/using_env_vars"
@@ -128,9 +136,47 @@ help pages of Termux.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
+    <p><code>fgrep</code> &mdash; search for a string</p>
+    
+    <p>A Unix command available in <code>/system/bin</code>.</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li id="getprop">
+    <p><code>getprop</code> &mdash; get 
+      <a href="concepts.xhtml#android_os_system_properties"
+         >Android OS system properties</a></p>
+
+    <p>An Android command available in <code>/system/bin</code>.</p>
+
+    <p>Use:</p>
+
+    <p class="indent code">getprop [«name» [«default»]]</p>
+
+    <p>Example 1: Get several properties</p>
+    
+    <p class="indent code">
+      getprop | fgrep ro.product.m         <br/> 
+      [ro.product.manufacturer]: [samsung] <br/> 
+      [ro.product.model]: [SM-T800]        <br/> 
+      [ro.product.name]: [chagallwifi]
+    </p>
+    
+    <p>Example 2: Get one property</p>
+
+    <p class="indent code">
+      getprop ro.product.name <br/>
+      chagallwifi
+    </p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
     <p><code>more</code> &mdash; a simple pager</p>
   
-    <p>Available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <code>/system/bin</code>.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -147,7 +193,7 @@ help pages of Termux.</p>
     <p><code>set</code> &mdash; set shell options and arguments, or
     print shell and environment variables</p>
   
-    <p>A built-in command of your shell.</p>
+    <p>A shell built-in in all shells.</p>
 
     <p>Use:</p>
 
@@ -155,15 +201,32 @@ help pages of Termux.</p>
       <li><code>set</code> without arguments prints all shell variables and
       environment variables. In some shells it also prints all functions.</li>
 
-      <li>With arguments, it sets shell options or the shell's
-      arguments <code>$1</code>, <code>$2</code>...</li>
+      <li>For other uses, consult your shell's documentation. In
+      <code>sh</code>-compatible shell, it sets shell options or the
+      shell's arguments <code>$1</code>, <code>$2</code>...</li>
     </ul>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li id="setprop">
+    <p><code>setprop</code> &mdash; set 
+      <a href="concepts.xhtml#android_os_system_properties"
+         >Android OS system properties</a></p>
+
+    <p>An Android command available in <code>/system/bin</code>.</p>
+
+    <p>Use:</p>
+
+    <p class="indent code">setprop name value</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
     <p><code>sh</code> &mdash; default shell</p>
+
+    <p>A Unix command available in <code>/system/bin</code>.</p>
 
     <p>See 
       <a href="run/sh.xhtml"
@@ -175,7 +238,7 @@ help pages of Termux.</p>
   <li>
     <p><code>sort</code> &mdash; sort lines</p>
   
-    <p>Available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <code>/system/bin</code>.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -200,8 +263,8 @@ help pages of Termux.</p>
     <p><code>stty</code> &mdash; change and print terminal (TTY)
     settings</p>
 
-    <p><b>Not</b> available in <code>/system/bin</code>, only in
-    BusyBox, Termux or Debian.</p>
+    <p>A Unix command <b>not</b> available in
+    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -218,7 +281,7 @@ help pages of Termux.</p>
   <li>
     <p><code>whoami</code> &mdash; print the Linux user name</p>
 
-    <p>Available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <code>/system/bin</code>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->

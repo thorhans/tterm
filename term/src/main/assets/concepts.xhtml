@@ -46,6 +46,10 @@ architecture</dfn>.</p>
 
 <p>Most Android devices have an ARM CPU architecture.</p>
 
+
+<h5>List of CPU architectures</h5>
+<!-- ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙ -->
+
 <p>Until now I've encountered these CPU architectures for Android
 devices:</p>
 
@@ -61,9 +65,6 @@ devices:</p>
 
     <p>For example, the ARM family ARM11 uses the ARM architecture
     ARMv6.</p>
-
-    <p class="TODO">TODO Find out how terms like arm, armeabi,
-    armeabi-v7a relate.</p>
   </li>
 
   <li>
@@ -105,6 +106,38 @@ devices:</p>
        >Wikipedia's "List of instruction sets"</a></li>
 
 </ul>
+
+
+<h5>FInd out the CPU architecture</h5>
+<!-- ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙ -->
+
+<p class="TODO">TODO How do you find out your device's CPU
+architecture? This looks promising:</p>
+
+<p class="indent code">
+  getprop | sort | fgrep ro.product.cpu            <br/>
+  ro.product.cpu.abi]: [armeabi-v7a]               <br/>
+  ro.product.cpu.abi2]: [armeabi]                  <br/>
+  ro.product.cpu.abilist]: [armeabi-v7a,armeabi]   <br/>
+  ro.product.cpu.abilist32]: [armeabi-v7a,armeabi] <br/>
+  ro.product.cpu.abilist64]: []
+</p>
+
+<p class="TODO">TODO Find out how terms like arm, armeabi and
+armeabi-v7a are related.</p>
+
+
+<h2 id="android_os_system_properties">Android OS system properties</h2>
+<!-- ============================================================ -->
+
+<p>Android's Linux layer has <dfn>system properties</dfn>, I'll call them
+<dfn>Android OS system properties</dfn>, that are different from the Java
+System Properties. You can get them with
+  <a href="commands.xhtml#getprop"
+     ><code>getprop</code></a>
+and set them with 
+  <a href="commands.xhtml#setprop"
+     ><code>setprop</code></a>.</p>
 
 </body>
 </html>
