@@ -55,11 +55,51 @@ can use TTerm instead. (Currently the terminal emulator of Termux
 handles resizing better than TTerm, but provides less settings, so try
 both before you choose one, or wait until TTerm improves. :-)</p>
 
-<p>This seems to work:</p>
+
+<h2>Connect to Termux</h2>
+<!-- ============================================================ -->
+
+<p>In these three approaches, you start Termux and start a program
+that you connect to from TTerm.</p>
+
+
+<h2>With Netcat</h2>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p class="TODO">TODO</p>
+
+
+<h2>With Telnet</h2>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p class="TODO">TODO</p>
+
+
+<h2>With SSH</h2>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p class="TODO">I will write about this when I've found a SSH
+client that runs in TTerm.</p>
+
+<p>Here is some information how to
+  <a href="https://termux.com/ssh.html"
+    >start a SSH server in Termux</a>.</p>
+
+
+<h2>As root</h2>
+<!-- ============================================================ -->
+
+<p>In this approach, you do not start the Termux app. Instead you
+start the Linux layer of Termux from inside TTerm. It requires a
+  <a href="../rooting.xhtml"
+     >rooted device</a>.</p>
+
+<p>This seems to work, except that Emacs has problems when you resize
+the screen.</p>
 
 <ul>
   <li>Start TTerm and change to root with <code>su</code>, or to the
-  Termux user. To find out the Termux user, start it and enter
+  Termux user. To find out the Termux user, start Termux and enter
   <code>whoami</code>, then return to TTerm. On my device it runs as
   user <code>u0_a146</code>, so I change to it with <code>su
   u0_a146</code>.</li>
@@ -77,12 +117,6 @@ both before you choose one, or wait until TTerm improves. :-)</p>
 <p>That's it, now you can start a Termux command, e.g.
 <code>bash</code> or <code>emacs</code> (after installing it with
 <code>apt install emacs</code>).</p>
-
-<p>If you don't want to root your device, you could try to find a SSH
-client that runs in TTerm and
-  <a href="https://termux.com/ssh.html"
-    >start a SSH server in Termux</a>.
-I have not tried that yet.</p>
 
 </body>
 </html>

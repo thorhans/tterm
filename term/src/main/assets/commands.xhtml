@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--  
+ * Copyright (C) 2014 Thorbjørn Hansen.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<head>%
+  <title>TTerm – Commands</title>
+  <!-- Also injects CSS style sheets. -->
+  <script>prefix="";</script>
+  <script src="lib/doc.js"/>
+</head>
+<body>
+
+<div class="header">TTerm – Commands</div>
+
+<p><a href="1-index.xhtml">Back to index.</a></p>
+
+<p id="thh-toc-toc"></p>
+
+
+<h1>Commands</h1>
+<!-- ************************************************************ -->
+
+<p>This list is a short documentation of the commands used in the help
+pages of TTerm. It's not a full list of Linux commands, and it does
+not cover all uses of the commands, only those that are used in the
+help pages of Termux.</p>
+
+<ul>
+  <li>
+    <p><code>cd</code> &mdash; change directory</p>
+
+    <p>A built-in command of your shell.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>echo</code> &mdash; display a line of text</p>
+  
+    <p>Available as a built-in command of your shell and in
+    <code>/system/bin</code>.</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>env</code> &mdash; print environment or set environment
+    variables for a single command</p>
+  
+    <p>Available in <code>/system/bin</code>.</p>
+
+
+    <ul>
+      <li>
+        <p>Use 1:</p>
+
+        <p>`env´ without arguments prints the current environment.</p>
+      </li>
+
+
+      <li>
+        <p>Use 2:</p>
+
+        <p class="indent code">
+          env «var_1»="«value 1»" ... «var_n»="«value n»" 
+            «command» «arguments»
+        </p>
+        
+        <p>Executes <code>«command»</code> with environment variables
+        <code>«var_1»</code> to <code>«var_n»</code>.</p>
+        
+        <p>It is equivalent to the shell syntax</p>
+        
+        <p class="indent code">
+          «var_1»="«value 1»" ... «var_n»="«value n»" «command» «arguments»
+        </p>
+        
+        <p>so you only need it when you need to set environment variables
+        but are not inside a shell. For example for the
+        <a href="config.xhtml#setting/command_line"
+           >setting <setting>Command line</setting></a>.
+        </p>
+      </li>
+    </ul>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>exec</code> &mdash; replace the shell with a command</p>
+
+    <p>A built-in command of your shell.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>export</code> &mdash; set an environment variable</p>
+  
+    <p>A built-in command of your shell.</p>
+
+    <p>See section 
+      <a href="config.xhtml#env/using_env_vars"
+           >Using environment variables</a>.</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>more</code> &mdash; a simple pager</p>
+  
+    <p>Available in <code>/system/bin</code>.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>nc</code>, <code>netcat</code> &mdash; Netcat</p>
+
+    <p class="TODO">TODO</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>set</code> &mdash; set shell options and arguments, or
+    print shell and environment variables</p>
+  
+    <p>A built-in command of your shell.</p>
+
+    <p>Use:</p>
+
+    <ul>
+      <li><code>set</code> without arguments prints all shell variables and
+      environment variables. In some shells it also prints all functions.</li>
+
+      <li>With arguments, it sets shell options or the shell's
+      arguments <code>$1</code>, <code>$2</code>...</li>
+    </ul>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>sh</code> &mdash; default shell</p>
+
+    <p>See 
+      <a href="run/sh.xhtml"
+         >Android's shell</a>.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>sort</code> &mdash; sort lines</p>
+  
+    <p>Available in <code>/system/bin</code>.</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>ssh</code> &mdash; SSH</p>
+
+    <p class="TODO">TODO</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>su</code> &mdash; super-user</p>
+  
+    <p class="TODO">TODO</p>
+  </li>
+  
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>stty</code> &mdash; change and print terminal (TTY)
+    settings</p>
+
+    <p><b>Not</b> available in <code>/system/bin</code>, only in
+    BusyBox, Termux or Debian.</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>telnet</code>, <code>telnetd</code> &mdash; Telnet and
+    its daemon</p>
+
+    <p class="TODO">TODO</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+  <li>
+    <p><code>whoami</code> &mdash; print the Linux user name</p>
+
+    <p>Available in <code>/system/bin</code>.</p>
+  </li>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+</ul>
+</body>
+</html>

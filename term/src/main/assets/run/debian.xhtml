@@ -39,10 +39,6 @@
 Debian GNU/Linux distributions that run with <code>proot</code> or
 <code>chroot</code>.</p>
 
-
-<h1>Running GNURoot Debian in TTerm</h1>
-<!-- ************************************************************ -->
-
 <p>The excellent app
   <a href="https://play.google.com/store/apps/details/apps/details?id=com.gnuroot.debian"
      >GNURoot Debian</a>
@@ -56,18 +52,55 @@ require <a href="rooting">rooting</a>. And it has
   <a href="emacs.xhtml" > Emacs</a>, 
 hooray!</p>
 
-<p>GNURoot Debian has its own terminal emulator, but on a rooted
-device you can use TTerm instead. (Currently the terminal emulator of
-GNURoot Debian handles resizing better than TTerm, you might want to
-wait until TTerm improves.)</p>
+<p>GNURoot Debian has its own terminal emulator, but no extra keys. So
+you might want to use TTerm instead.</p>
+
+
+<h1>Running GNURoot Debian in TTerm</h1>
+<!-- ************************************************************ -->
+
+<h2>Connect to Debian</h2>
+<!-- ============================================================ -->
+
+<p>In these three approaches, you start Debian and start a program
+that you connect to from TTerm.</p>
+
+
+<h3>With Netcat</h3>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p class="TODO">TODO</p>
+
+
+<h3>With Telnet</h3>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p class="TODO">TODO</p>
+
+
+<h3>With SSH</h3>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p class="TODO">I will write about this when I've found a SSH
+client that runs in TTerm.</p>
+
+
+<h2>As root</h2>
+<!-- ============================================================ -->
+
+<p>In this approach, you do not start the Debian app. Instead you
+start the Linux layer of Debian from inside TTerm. It requires a
+  <a href="../rooting.xhtml"
+     >rooted device</a>.</p>
 
 <p>This seems to work:</p>
 
 <ul>
-  <li>Start TTerm and change to root with <code>su</code>, or to the GNURoot Debian user.
-  To find out the GNURoot Debian user, start it and enter <code>whoami</code>, then
-  return to TTerm. On my device it runs as user <code>u0_a81</code>, so I
-  change to it with <code>su u0_a81</code>.</li>
+  <li>Start TTerm and change to root with <code>su</code>, or to the
+  GNURoot Debian user. To find out the GNURoot Debian user, start it
+  and enter <code>whoami</code>, then return to TTerm. On my device it
+  runs as user <code>u0_a81</code>, so I change to it with <code>su
+  u0_a81</code>.</li>
 
   <li>
     <p>Start Debian:</p>
@@ -83,10 +116,6 @@ wait until TTerm improves.)</p>
 <p>That's it, now you can start a Debian command, e.g.
 <code>bash</code> or <code>emacs</code> (after installing it with
 <code>apt install emacs</code>).</p>
-
-<p>If you don't want to root your device, you could try to find a SSH
-client that runs in TTerm and start a SSH server in Debian. I have not
-tried that yet.</p>
 
 </body>
 </html>
