@@ -109,12 +109,15 @@ public class TermSettings {
         // Section "Text"
 
         FONTSIZE_KEY           = "fontsize",
+        COLOR_KEY              = "color",
+        UTF8_KEY               = "utf8_by_default",
+
+        // Section "Extra keys"
+
         EXTRAKEYS_STRING_KEY   = "extrakeys_string", // We can't use `extrakeys´ here, up to 2017-12-28 I used
                                                      // that for `extrakeys_show´.
         EXTRAKEY_SIZE_KEY      = "extrakeys_size",
-        EXTRAKEYS_SHOWN_KEY    = "extrakeys_show",
-        COLOR_KEY              = "color",
-        UTF8_KEY               = "utf8_by_default",
+        EXTRAKEYS_SHOWN_KEY    = "extrakeys_shown",
 
         // Section "Keyboard"
 
@@ -244,9 +247,9 @@ public class TermSettings {
 
         // Section "Extra keys"
 
-        mExtraKeys            = res.getString(  R.string.pref_extrakeys_default                  );
-        mExtraKeySize         = str2int(res,    R.string.pref_extrakeysize_default               );
-        mExtraKeysShown       = str2int(res,    R.string.pref_extrakeysshown_default             );
+        mExtraKeys            = res.getString(  R.string.pref_extrakeys_string_default           );
+        mExtraKeySize         = str2int(res,    R.string.pref_extrakeys_size_default             );
+        mExtraKeysShown       = str2int(res,    R.string.pref_extrakeys_shown_default            );
 
         // Section "Keyboard"
 

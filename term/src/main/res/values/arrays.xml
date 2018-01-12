@@ -72,7 +72,25 @@
         <item>288 pt</item>
     </string-array>
 
-    <string-array name="entries_extrakeysize_preference">
+    <string-array name="entries_color_preference">
+        <item>Black text on white</item>
+        <item>White text on black</item>
+        <item>White text on blue</item>
+        <item>Green text on black</item>
+        <item>Amber text on black</item>
+        <item>Red text on black</item>
+        <item>Holo blue text on black</item>
+        <item>Solarized Light</item>
+        <item>Solarized Dark</item>
+        <item>Linux Console</item>
+    </string-array>
+
+    <!-- ==========================================================
+     ! Section "Text"
+     ! ============================================================
+    -->
+
+    <string-array name="entries_extrakeys_size_preference">
         <item>6 pt</item>
         <item>7 pt</item>
         <item>8 pt</item>
@@ -88,23 +106,10 @@
         <item>36 pt</item>
     </string-array>
 
-    <string-array name="entries_extrakeysshown_preference">
+    <string-array name="entries_extrakeys_shown_preference">
         <item>never</item>
         <item>always</item>
         <item>with soft keyboard</item>
-    </string-array>
-
-    <string-array name="entries_color_preference">
-        <item>Black text on white</item>
-        <item>White text on black</item>
-        <item>White text on blue</item>
-        <item>Green text on black</item>
-        <item>Amber text on black</item>
-        <item>Red text on black</item>
-        <item>Holo blue text on black</item>
-        <item>Solarized Light</item>
-        <item>Solarized Dark</item>
-        <item>Linux Console</item>
     </string-array>
 
     <!-- ==========================================================
