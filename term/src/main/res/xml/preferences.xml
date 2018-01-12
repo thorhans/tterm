@@ -100,12 +100,12 @@
     <PreferenceCategory
       android:title="@string/extrakeys_preferences">
 
-        <EditTextPreference
+        <!-- EditTextPreference
           android:key          = "extrakeys_string"
           android:defaultValue = "@string/pref_extrakeys_string_default"
           android:title        = "@string/title_extrakeys_string_preference"
           android:summary      = "@string/summary_extrakeys_string_preference"
-          android:dialogTitle  = "@string/dialog_title_extrakeys_string_preference" />
+          android:dialogTitle  = "@string/dialog_title_extrakeys_string_preference" /-->
 
         <ListPreference
           android:key          = "extrakeys_size"
