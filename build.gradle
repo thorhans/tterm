@@ -2,6 +2,16 @@
 /// 
 /// Sync'ed 2017-12-19 with
 ///   (info "(android) `top.gradle´")
+///
+/// See `1-BUILD.txt´ for build instruction. 
+///
+/// Building:
+///
+/// - gradle installDevDebug
+///
+/// - gradle assembleProdRelease
+///
+/// See `1-BUILD.txt´ for build instruction. 
 
 task wrapper (type: Wrapper) {
   //
