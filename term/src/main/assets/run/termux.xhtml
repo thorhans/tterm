@@ -58,10 +58,12 @@ that you connect to from TTerm.</p>
 <h3 id="run/connect/netcat">With Netcat</h3>
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<p>You can connect to Termux via Netcat. Below is a <b>proof of
-concept</b>. It will let <b>anybody</b> connect to port 1111
-<b>without</b> asking for a password. That's <b>not</b> something you
-want to do regularly.</p>
+<p>You can connect to Termux via
+  <a href="../commands.xhtml#netcat"
+    >Netcat <c>nc</c></a>. 
+Below is a <b>proof of concept</b>. It will let <b>anybody</b> connect
+to port 1111 <b>without</b> asking for a password. That's <b>not</b>
+something you want to do regularly.</p>
 
 <p>I found the solution on 
   <a href="https://stackoverflow.com/questions/29317933"
@@ -73,12 +75,14 @@ want to do regularly.</p>
   apt install busybox
 </p>
 
-<p>In Termux, start Netcat and a shell, connected with a "named
-pipe":</p>
+
+
+<p>In Termux, start Netcat and a shell, connected with a "named pipe".
+This will accept one connection, then quit.</p>
 
 <p class="indent code">
   cd ~<br/>
-  rm -f pipe<br/>
+  rm -f pipe typescript<br/>
   mkfifo pipe<br/>
   script -q &lt; pipe | nc -l -p 1111 &gt; pipe<br/>
 </p>
@@ -89,38 +93,44 @@ pipe":</p>
   <dt>cd ~</dt>
   <dd>Change to a writable directory, e.g. <c>$HOME</c>.</dd>
 
-  <dt>rm -f pipe</dt>
-  <dd>If necessary, remove the named pipe from a previous run.</dd>
+  <dt>rm -f pipe typescript</dt>
+  <dd>
+    If necessary, remove the named pipe and log from a previous run.
+  </dd>
 
   <dt>mkfifo pipe</dt>
-  <dd>Make a "named pipe", also called a "FIFO" ("First In, First
+  <dd>
+    Make a "named pipe", also called a "FIFO" ("First In, First
     Out"). That is a file that connects two processes with a
-    bidirectional pipe.</dd>
-
+    bidirectional pipe.
+  </dd>
+  
   <dt>script -q &lt; pipe | nc -l -p 1111 &gt; pipe</dt>
   <dd>
-    <p><c>nc</c> is the BusyBox version of Netcat. It will read
-    input from port 1111 and write it to <c>pipe</c>. In GNURoot
-    Debian you must use <c>netcat</c> instead.</p>
+    <p><c>nc</c> is the BusyBox version of Netcat. It will read input
+    from port 1111 and write it to <c>pipe</c>. In GNURoot Debian you
+    must use <c>netcat</c> instead.</p>
 
     <!-- On Cygwin, use ‘nc -l 1111’. -->
     
     <p><c>script -q</c> starts a shell that reads input from
-    <c>pipe</c> and writes input and output to
-    <c>netcat</c>, which writes it to port 1111.</p>
+    <c>pipe</c> and writes input and output to <c>netcat</c>, which
+    writes it to port 1111.</p>
     
-    <p>In Termux the command stops when you log out in TTerm, in
+    <p class="TODO"><c>script</c> writes a log file <c>typescript</c>
+    that we do not need. How do we avoid that?</p>
+
+    <p>In Termux the command stops when you log out in TTerm. In
     GNURoot Debian you have to stop it with <key>Ctrl+c.</key></p>
   </dd>
 </dl>
 
 <p>Now change to TTerm with an installed 
   <a href="busybox.xhtml">BusyBox</a> 
-and enter this in a single line:
-</p>
+and enter this in a single line:</p>
   
 <dl class="code-commented">
-  <dt>stty raw -echo; netcat localhost 1111; stty sane</dt>
+  <dt>stty raw -echo; nc localhost 1111; stty sane</dt>
   <dd>
     <!-- On Cygwin, use ‘nc localhost 1111’ in a ‘mintty’ console, it
          does not work in "ConEmu".-->
@@ -134,23 +144,28 @@ and enter this in a single line:
     <ul>
       <li><c>raw</c> sets the terminal to <i>raw mode</i>, so that all
       chars are sent immediately to the remote shell, and all chars
-      output by the remote shell are shown.</li>
+      output by the remote shell are shown. That is necessary so a
+      ‘Ctrl+C’ arrives at the <i>remote</i> shell, otherwise it stops
+      the <i>local</i> Netcat.</li>
 
       <li><c>-echo</c> turns off <i>local</i> echoing, so that the
       <i>remote</i> shell on Termux decides when to echo user
       input.</li>
     </ul>
 
-    <p>The second command <c>netcat localhost 111</c> connects
-    to the Netcat running on port 1111 of the same device. If
-    <c>localhost</c> does not work, try <c>127.0.0.1</c>
-    instead.</p>
+    <p>The second command <c>nc localhost 111</c> connects to the
+    Netcat running on port 1111 of the same device. If
+    <c>localhost</c> does not work, try <c>127.0.0.1</c> instead.</p>
 
     <p>After you quit the shell that runs remotely in Termux, the
     third command <c>stty sane</c> sets the terminal settings
     back to their default.</p>
   </dd>
 </dl>
+
+<p>When you exit the remote shell, Netcat on the remote Termux also
+exits. To accept another connection, restart it in the remote
+Termux.</p>
 
 
 <h3 id="run/connect/telnet">With Telnet</h3>
