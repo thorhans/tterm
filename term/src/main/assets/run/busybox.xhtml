@@ -62,15 +62,15 @@ appears to be very similar to Ash.</p>
 <h2>Interactive shell</h2>
 <!-- ============================================================ -->
 
-<p>When started with <code>/system/xbin/ash</code>, Ash starts as an
+<p>When started with <c>/system/xbin/ash</c>, Ash starts as an
 <dfn>interactive shell</dfn> and executes these initialization
 files:</p>
 
 <dl class="code-commented">
   <dt>$ENV</dt>
   <dd>
-    If <code>$ENV</code> is set, Ash interprets it as a file name and
-    executes the file.You can set <code>$ENV</code> with the
+    If <c>$ENV</c> is set, Ash interprets it as a file name and
+    executes the file.You can set <c>$ENV</c> with the
     <a href="../config.xhtml#setting/command_line"
        >setting <setting>Command line</setting></a>.<br/>
   </dd>
@@ -80,7 +80,7 @@ files:</p>
 <h2>Login shell</h2>
 <!-- ============================================================ -->
 
-<p>When started with <code>/system/xbin/ash -l</code>, Ash starts as a
+<p>When started with <c>/system/xbin/ash -l</c>, Ash starts as a
 <dfn>login shell</dfn>, which means that it will read other
 initialization files:</p>
 
@@ -93,7 +93,7 @@ initialization files:</p>
 
   <dt>$HOME/.profile</dt>
 
-  <dd>You can set <code>$HOME</code> with the
+  <dd>You can set <c>$HOME</c> with the
     <a href="../config.xhtml#HOME">
       setting <setting>HOME folder</setting></a>.</dd>
 
@@ -131,13 +131,13 @@ several approaches to run BusyBox in TTerm:</p>
 
 <p>If you have a 
   <a href="../rooting.xhtml">rooted device</a>,
-you can install BusyBox to <code>/system/xbin</code>, where it's
+you can install BusyBox to <c>/system/xbin</c>, where it's
 accessible for all apps.</p>
 
 <p>In fact, you might already have installed BusyBox during rooting.
 If you have a custom ROM like LineageOS or a recovery image like TWRP,
 BusyBox might also already be installed. Look in
-<code>/system/xbin</code> or <code>/su/xbin</code>.</p>
+<c>/system/xbin</c> or <c>/su/xbin</c>.</p>
 
 <p>There are several BusyBox apps. In January 2018, the following two
 were popular.</p>
@@ -162,23 +162,23 @@ sources that <b>you</b> trust.</p>
   includes BusyBox, and a lot more, and does not require rooting.</li>
 </ul>
 
-<p>If you install BusyBox to <code>/system/bin/xbin</code>, then the
+<p>If you install BusyBox to <c>/system/bin/xbin</c>, then the
 default value of
   <a href="../config.xhtml#env/PATH"
-     ><code>$PATH</code></a>
+     ><c>$PATH</c></a>
 will first look for the preinstalled Android commands in
-<code>/system/bin/</code>, then for additional BusyBox commands in
-<code>/system/bin/xbin</code>.</p>
+<c>/system/bin/</c>, then for additional BusyBox commands in
+<c>/system/bin/xbin</c>.</p>
 
-<p>If you want to call a BusyBox command <code>cmd</code> with the
+<p>If you want to call a BusyBox command <c>cmd</c> with the
 same name as a preinstalled Android command, you can call it with
-<code>busybox cmd</code>.</p>
+<c>busybox cmd</c>.</p>
 
 <p>If you always prefer the BusyBox commands, change
   <a href="config.xthml#env/PATH"
-    ><code>$PATH</code></a>
-so that <code>/system/bin/xbin</code> comes before
-<code>/system/bin/bin</code>.</p>
+    ><c>$PATH</c></a>
+so that <c>/system/bin/xbin</c> comes before
+<c>/system/bin/bin</c>.</p>
 
 
 <h2 id="run/unrooted">Install BusyBox on an unrooted device</h2> 
@@ -198,7 +198,7 @@ and call it from TTerm. It was the app
      >BusyBox for Android by JRummy Apps</a>.
 In it, you could start TTerm via the menu icon (the icon with the
 three dots at the top right), then select "Terminal". That set
-<code>$PATH</code> to:</p>
+<c>$PATH</c> to:</p>
 
 <p class="indent code">
   PATH=/data/user/0/com.jrummy.busybox.installer/files/bin:$PATH
@@ -244,7 +244,7 @@ sources that <b>you</b> trust.</p>
 
 <p>The binary of BusyBox is a single file. Copy it to a directory in
 TTerm's internal storage, create the soft links and add the directory
-to your <code>$PATH</code>.</p>
+to your <c>$PATH</c>.</p>
                  
 <p class="TODO">TODO I'll add a detailed description in a future
 release.</p>
@@ -255,8 +255,8 @@ release.</p>
 
 <p>In this approach, you start an app that contains BusyBox, and start
 a program that you connect to from TTerm. Alternatives are Netcat
-(<code>nc</code> or <code>netcat</code>) and the Telnet daemon
-(<code>telnetd</code>).</p>
+(<c>nc</c> or <c>netcat</c>) and the Telnet daemon
+(<c>telnetd</c>).</p>
 
 <p>See the description in 
   <a href="termux.xhtml#run/connect">Connect to Termux</a>

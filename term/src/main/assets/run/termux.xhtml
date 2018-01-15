@@ -32,7 +32,7 @@
      >Termux</a>
 is a Linux distribution that extends Android's Linux with lots of
 packages. It runs on Android's Linux and file system, not using
-<code>chroot</code> or <code>proot</code> like
+<c>chroot</c> or <c>proot</c> like
   <a href="debian.xhtml" >GNURoot Debian</a>
 does. It doesn't require <a href="rooting">rooting</a>. And it has
   <a href="emacs.xhtml" > Emacs</a>, 
@@ -74,11 +74,20 @@ want to do regularly.</p>
 </p>
 
 <p>In Termux, start Netcat and a shell, connected with a "named
-pipe".</p>
+pipe":</p>
+
+<p class="indent code">
+  cd ~<br/>
+  rm -f pipe<br/>
+  mkfifo pipe<br/>
+  script -q &lt; pipe | nc -l -p 1111 &gt; pipe<br/>
+</p>
+
+<p>Details:</p>
 
 <dl class="code-commented">
   <dt>cd ~</dt>
-  <dd>Change to a writable directory, e.g. <code>$HOME</code>.</dd>
+  <dd>Change to a writable directory, e.g. <c>$HOME</c>.</dd>
 
   <dt>rm -f pipe</dt>
   <dd>If necessary, remove the named pipe from a previous run.</dd>
@@ -90,13 +99,15 @@ pipe".</p>
 
   <dt>script -q &lt; pipe | nc -l -p 1111 &gt; pipe</dt>
   <dd>
-    <p><code>nc</code> is the BusyBox version of Netcat. It will read
-    input from port 1111 and write it to <code>pipe</code>. In GNURoot
-    Debian you must use <code>netcat</code> instead.</p>
+    <p><c>nc</c> is the BusyBox version of Netcat. It will read
+    input from port 1111 and write it to <c>pipe</c>. In GNURoot
+    Debian you must use <c>netcat</c> instead.</p>
+
+    <!-- On Cygwin, use ‘nc -l 1111’. -->
     
-    <p><code>script -q</code> starts a shell that reads input from
-    <code>pipe</code> and writes input and output to
-    <code>netcat</code>, which writes it to port 1111.</p>
+    <p><c>script -q</c> starts a shell that reads input from
+    <c>pipe</c> and writes input and output to
+    <c>netcat</c>, which writes it to port 1111.</p>
     
     <p>In Termux the command stops when you log out in TTerm, in
     GNURoot Debian you have to stop it with <key>Ctrl+c.</key></p>
@@ -109,28 +120,34 @@ and enter this in a single line:
 </p>
   
 <dl class="code-commented">
-  <dt>stty -icanon -echo; netcat localhost 1111; stty sane</dt>
+  <dt>stty raw -echo; netcat localhost 1111; stty sane</dt>
   <dd>
+    <!-- On Cygwin, use ‘nc localhost 1111’ in a ‘mintty’ console, it
+         does not work in "ConEmu".-->
+
     <p>If you do not enter all three commands in one line, you can't see
     what you type for the second and third commands.</p>
 
-    <p>The first command <code>stty -icanon -echo</code> sets the
-    terminal settings.</p>
-    
-    <p><code>-icanon</code> turns off canonical mode (also called
-    line-based or cooked mode) so that characters are sent immediately
-    without waiting for a newline charate.</p>
+    <p>The first command <c>stty raw -echo</c> sets the
+    terminal settings:</p>
 
-    <p><code>-echo</code> turns off echoing, so that the shell on
-    Termux decides when to echo user input.</p>
+    <ul>
+      <li><c>raw</c> sets the terminal to <i>raw mode</i>, so that all
+      chars are sent immediately to the remote shell, and all chars
+      output by the remote shell are shown.</li>
 
-    <p>The second command <code>netcat localhost 111</code> connects
+      <li><c>-echo</c> turns off <i>local</i> echoing, so that the
+      <i>remote</i> shell on Termux decides when to echo user
+      input.</li>
+    </ul>
+
+    <p>The second command <c>netcat localhost 111</c> connects
     to the Netcat running on port 1111 of the same device. If
-    <code>localhost</code> does not work, try <code>127.0.0.1</code>
+    <c>localhost</c> does not work, try <c>127.0.0.1</c>
     instead.</p>
 
     <p>After you quit the shell that runs remotely in Termux, the
-    third command <code>stty sane</code> sets the terminal settings
+    third command <c>stty sane</c> sets the terminal settings
     back to their default.</p>
   </dd>
 </dl>
@@ -155,13 +172,13 @@ want to do regularly.</p>
 <dl class="code-commented">
   <dt>telnetd -p 2323 -l bash -F</dt>
   <dd>
-    <p><code>-p 2323</code> makes the Telnet daemon listen to port
+    <p><c>-p 2323</c> makes the Telnet daemon listen to port
     2323. The port must be over 1024.</p>
   
-    <p><code>-l bash</code> makes it run the shell <code>bash</code>
-    instead of <code>login</code>.</p>
+    <p><c>-l bash</c> makes it run the shell <c>bash</c>
+    instead of <c>login</c>.</p>
 
-    <p><code>-F</code> makes it run in the foreground.</p>
+    <p><c>-F</c> makes it run in the foreground.</p>
   </dd>
 </dl>
 
@@ -172,7 +189,7 @@ do the following:</p>
 <dl class="code-commented">
   <dt>telnet localhost 2323</dt>
   <dd>Telnet connects to port 2323 on the same device. If
-  <code>localhost</code> does not work, try <code>127.0.0.1</code>
+  <c>localhost</c> does not work, try <c>127.0.0.1</c>
   instead.</dd>
 </dl>
 
@@ -203,14 +220,14 @@ start the Linux layer of Termux from inside TTerm. It requires a
 the screen.</p>
 
 <ul>
-  <li>Start TTerm and change to root with <code>su</code>, or to the
+  <li>Start TTerm and change to root with <c>su</c>, or to the
   Termux user. To find out the Termux user, start Termux and enter
-  <code>whoami</code>, then return to TTerm. On my device it runs as
-  user <code>u0_a146</code>, so I change to it with <code>su
-  u0_a146</code>.</li>
+  <c>whoami</c>, then return to TTerm. On my device it runs as
+  user <c>u0_a146</c>, so I change to it with <c>su
+  u0_a146</c>.</li>
 
-  <li>Set the environment variables <code>$PREFIX</code>,
-  <code>$LD_LIBRARY_PATH</code> and <code>$PATH</code>:
+  <li>Set the environment variables <c>$PREFIX</c>,
+  <c>$LD_LIBRARY_PATH</c> and <c>$PATH</c>:
   
     <p class="indent code">
     export PREFIX=/data/data/com.termux/files/usr<br/>
@@ -220,8 +237,8 @@ the screen.</p>
 </ul>
 
 <p>That's it, now you can start a Termux command, e.g.
-<code>bash</code> or <code>emacs</code> (after installing it with
-<code>apt install emacs</code>).</p>
+<c>bash</c> or <c>emacs</c> (after installing it with
+<c>apt install emacs</c>).</p>
 
 <!-- ************************************************************ -->
 

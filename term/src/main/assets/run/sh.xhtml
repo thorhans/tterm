@@ -33,7 +33,7 @@
 <h1>About Android's shell Mksh</h1>
 <!-- ************************************************************ -->
 
-<p>Android's default shell is <code>/system/bin/sh</code>. Since
+<p>Android's default shell is <c>/system/bin/sh</c>. Since
 Android 4.0 up to at least Android 7, it is the <dfn>MirBSD Korn
 shell</dfn>, also called <dfn>Mksh</dfn>. It has the home page
   <a href="http://mirbsd.de/mksh"
@@ -71,7 +71,7 @@ instead.</p>
 <h2>Interactive shell</h2>
 <!-- ============================================================ -->
 
-<p>When started with <code>/system/bin/sh</code> in TTerm (with or
+<p>When started with <c>/system/bin/sh</c> in TTerm (with or
 without the hyphen), Mksh starts as an <dfn>interactive shell</dfn>
 and executes initialization files. On my devices with Android 4.4 to 7
 it's:</p>
@@ -79,8 +79,8 @@ it's:</p>
 <dl class="code-commented">
   <dt>$ENV</dt>
   <dd>
-    If <code>$ENV</code> is set, Mksh interprets it as a file name
-    and executes the file.You can set <code>$ENV</code> with the
+    If <c>$ENV</c> is set, Mksh interprets it as a file name
+    and executes the file.You can set <c>$ENV</c> with the
     <a href="../config.xhtml#setting/command_line"
        >setting <setting>Command line</setting></a>.<br/>
   </dd>
@@ -89,8 +89,8 @@ it's:</p>
 
   <dt>/system/etc/mkshrc</dt>
 
-  <dd>If <code>$ENV</code> is unset, Mksh executes
-  <code>/system/etc/mkshrc</code>, which you can only change on a 
+  <dd>If <c>$ENV</c> is unset, Mksh executes
+  <c>/system/etc/mkshrc</c>, which you can only change on a 
     <a href="../rooting.xhtml"
        >rooted device</a>.</dd>
 </dl>
@@ -99,7 +99,7 @@ it's:</p>
 <h2>Login shell</h2>
 <!-- ============================================================ -->
 
-<p>When started with <code>/system/bin/sh -l</code>, Mksh starts as a
+<p>When started with <c>/system/bin/sh -l</c>, Mksh starts as a
 <dfn>login shell</dfn>, which means that it will read other
 initialization files. On my devices with Android 4.4 to 7, a login
 shell reads:</p>
@@ -114,7 +114,7 @@ shell reads:</p>
 
   <dt>$HOME/.profile</dt>
 
-  <dd>You can set <code>$HOME</code> with the
+  <dd>You can set <c>$HOME</c> with the
     <a href="../config.xhtml#HOME">
       setting <setting>HOME folder</setting></a>.</dd>
 

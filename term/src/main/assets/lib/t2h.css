@@ -287,6 +287,17 @@ ul.narrow li {
   margin-bottom:  0.2em;
 }
 
+
+/** Wide list items. */
+ul.wide li { 
+  /* Vertical spacing 
+   * ------------------------------ */
+
+  margin-top:     2em;
+  margin-bottom:  2em;
+}
+
+
 /* ------------------------------------------------------------
  * Definition lists
  * ------------------------------------------------------------ */
@@ -322,7 +333,7 @@ dd {
  *
  *    http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
  */ 
-code, *.code { 
+c, code, *.code { 
   font-family: "Courier New", monospace, serif;
   font-size: 100%;
 }

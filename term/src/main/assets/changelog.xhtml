@@ -229,14 +229,14 @@
     the right thing to do, but in most cases it is more intuitive than
     TEA's approach.)</p>
     
-    <p>Example: Select the Google keyboard. Enter <code>one
-    two</code>. Put the cursor on <code>t</code>. Enter
-    <code>hello</code> without pressing space. Now TEA shows
-      <code>one <selected>hello</selected></code>,
+    <p>Example: Select the Google keyboard. Enter <c>one
+    two</c>. Put the cursor on <c>t</c>. Enter
+    <c>hello</c> without pressing space. Now TEA shows
+      <c>one <selected>hello</selected></c>,
     and TTerm shows 
-      <code>one <selected>hello</selected>two</code>.
-    When you press space, TEA inserts <code>hello</code> and shows
-    <code>two</code> again. So no text is lost, but I find TEA's
+      <c>one <selected>hello</selected>two</c>.
+    When you press space, TEA inserts <c>hello</c> and shows
+    <c>two</c> again. So no text is lost, but I find TEA's
     behavior very confusing.</p>
   </li>
 
@@ -296,8 +296,8 @@
   <li>Removed lots of code and resources for Android versions older
   than 4.4.</li>
 
-  <li>Extracted class <code>TermInputConnection</code> from
-  <code>EmulatorView.onCreateInputConnection</code>.</li>
+  <li>Extracted class <c>TermInputConnection</c> from
+  <c>EmulatorView.onCreateInputConnection</c>.</li>
 </ol>
 
 
@@ -306,9 +306,9 @@
 
 <ol>
   <li>Updated to the current TEA, version 1.0.70. For details see
-  the sources, file <code>/docs/tea/build-tea.txt</code>.</li>
+  the sources, file <c>/docs/tea/build-tea.txt</c>.</li>
 
-  <li>Increased <code>android:minSdkVersion</code> to 19 (Android
+  <li>Increased <c>android:minSdkVersion</c> to 19 (Android
   4.4).</li>
 
   <li>TTerm now responds to <a href="integration.xhtml"
@@ -322,12 +322,12 @@
 <!-- ============================================================ -->
 
 <ol>
-  <li>Renamed package <code>jackpal.androidterm</code> to
-  <code>de.t2h.tterm</code> so that both TEA and TTerm can be
+  <li>Renamed package <c>jackpal.androidterm</c> to
+  <c>de.t2h.tterm</c> so that both TEA and TTerm can be
   installed on a device. (That makes it harder to compare TEA and
   TTerm sources. Is there a better way?)</li>
 
-  <li>Increased <code>android:minSdkVersion</code> from 3 to 11.</li>
+  <li>Increased <c>android:minSdkVersion</c> from 3 to 11.</li>
 
   <li>All code changes are marked with `T+ for additions´, `T-´ for
   deletions and `T!´ for modifications.</li>

@@ -38,19 +38,19 @@ intents and broadcasts.</p>
 
 <ul>
   <li>
-    <code>jackpal.androidterm.OPEN_NEW_WINDOW</code>
+    <c>jackpal.androidterm.OPEN_NEW_WINDOW</c>
   
     <p>Opens a new window.</p>
   </li>
 
   <li>
-    <code>jackpal.androidterm.RUN_SCRIPT</code>
+    <c>jackpal.androidterm.RUN_SCRIPT</c>
 
     <p>Executes the shell code in 
-      <code>jackpal.androidterm.iInitialCommand</code>.</p>
+      <c>jackpal.androidterm.iInitialCommand</c>.</p>
 
     <p>Optionally, you can reuse a window with 
-      <code>jackpal.androidterm.window_handle</code>.</p>
+      <c>jackpal.androidterm.window_handle</c>.</p>
   </li>
  </ul>
 
@@ -58,7 +58,7 @@ intents and broadcasts.</p>
   <a href="https://github.com/jackpal/Android-Terminal-Emulator/wiki/Launching-Terminal-Emulator-for-Android-from-another-App"
     >Launching TEA from another app</a>.</p>
 
-<p>See also source code <code>/docs/intents.txt</code>.</p>
+<p>See also source code <c>/docs/intents.txt</c>.</p>
 
 
 <h2>Broadcasts</h2>
@@ -70,18 +70,18 @@ Android 6, not in Android 7+, but it no longer seems to work.</p>
 <p>The broadcasts are:</p>
 
 <ul>
-  <li><code>jackpal.androidterm.broadcast.APPEND_TO_PATH</code></li>
+  <li><c>jackpal.androidterm.broadcast.APPEND_TO_PATH</c></li>
   
-  <li><code>jackpal.androidterm.broadcast.PREPEND_TO_PATH</code></li>
+  <li><c>jackpal.androidterm.broadcast.PREPEND_TO_PATH</c></li>
 </ul>
 
 <p>When TTerm starts, it broadcasts
-  <code>...APPEND_TO_PATH</code>
+  <c>...APPEND_TO_PATH</c>
 and
-  <code>...PREPEND_TO_PATH</code>
+  <c>...PREPEND_TO_PATH</c>
 as TEA does. Other applications can respond and tell TTerm to add
 paths to its
-  <code>$PATH</code>.</p>
+  <c>$PATH</c>.</p>
 
 <!-- ************************************************************ -->
 

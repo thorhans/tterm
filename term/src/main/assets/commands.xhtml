@@ -39,58 +39,66 @@ on Unix, BSD or Linux.</p>
 google them, but there does not seem to be much information on
 them.</p>
 
-<ul>
+
+<h1>C</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>cd</code></b> &mdash; change directory</p>
+    <p><b><c>cd</c></b> &mdash; change directory</p>
 
     <p>A shell built-in in all shells.</p>
   </li>
-  
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+</ul>
 
+
+<h1>E</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>echo</code></b> &mdash; display a line of text</p>
+    <p><b><c>echo</c></b> &mdash; display a line of text</p>
   
     <p>A shell built-in in all shells, also available as a Unix
-    command in <code>/system/bin</code>.</p>
+    command in <c>/system/bin</c>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>emacs</code></b> &mdash; see 
+    <p><b><c>emacs</c></b> &mdash; see 
       <a href="prg/emacs.xhtml">Emacs</a></p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>env</code></b> &mdash; print environment or set environment
+    <p><b><c>env</c></b> &mdash; print environment or set environment
     variables for a single command</p>
   
-    <p>A Unix command available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <c>/system/bin</c>.</p>
 
     <ul>
       <li>
-        <p>Use 1: <code>env</code></p>
+        <p>Use 1: <c>env</c></p>
 
-        <p><code>env</code> without arguments prints the current
+        <p><c>env</c> without arguments prints the current
         environment.</p>
       </li>
 
 
       <li>
-        <p>Use 2: <code>env «vars» «command» «arguments»</code></p>
+        <p>Use 2: <c>env «vars» «command» «arguments»</c></p>
 
-        <p>Where <code>«vars»</code> is <code>«var_1»="«value 1»" ...
-        «var_n»="«value n»"</code>. The values must be quoted or
+        <p>Where <c>«vars»</c> is <c>«var_1»="«value 1»" ...
+        «var_n»="«value n»"</c>. The values must be quoted or
         escaped as explained in 
           <a href="concepts.xhtml#env_vars">
             Environments variables</a>.</p>
         
-        <p>Executes <code>«command» «arguments»</code> with
-        environment variables <code>«var_1»</code> to
-        <code>«var_n»</code> set to the specified values.</p>
+        <p>Executes <c>«command» «arguments»</c> with
+        environment variables <c>«var_1»</c> to
+        <c>«var_n»</c> set to the specified values.</p>
         
         <p>It is equivalent to the shell syntax</p>
         
@@ -110,7 +118,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>exec</code></b> &mdash; replace the shell with a command</p>
+    <p><b><c>exec</c></b> &mdash; replace the shell with a command</p>
 
     <p>A shell built-in in all shells.</p>
   </li>
@@ -118,32 +126,40 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>export</code></b> &mdash; set an environment variable</p>
+    <p><b><c>export</c></b> &mdash; set an environment variable</p>
   
-    <p>A shell built-in in all <code>sh</code>-compatible
+    <p>A shell built-in in all <c>sh</c>-compatible
     shells.</p>
 
     <p>See section 
       <a href="concepts.xhtml#env_vars"
          >Environments variables</a>.</p>
   </li>
+</ul>
 
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+<h1>F</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>fgrep</code></b> &mdash; search for a string</p>
+    <p><b><c>fgrep</c></b> &mdash; search for a string</p>
     
-    <p>A Unix command available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <c>/system/bin</c>.</p>
   </li>
+</ul>
 
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+<h1>G</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li id="getprop">
-    <p><b><code>getprop</code></b> &mdash; get 
+    <p><b><c>getprop</c></b> &mdash; get 
       <a href="concepts.xhtml#android_os_system_properties"
          >Android OS system properties</a></p>
 
-    <p>An Android command available in <code>/system/bin</code>.</p>
+    <p>An Android command available in <c>/system/bin</c>.</p>
 
     <p>Use:</p>
 
@@ -165,13 +181,17 @@ them.</p>
       chagallwifi
     </p>
   </li>
+</ul>
 
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+<h1>M</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>mkfifo</code></b> &mdash; create a named pipe (a FIFO)</p>
+    <p><b><c>mkfifo</c></b> &mdash; create a named pipe (a FIFO)</p>
   
-    <p>A Unix command available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <c>/system/bin</c>.</p>
     
     <p>A "named pipe", also called a "FIFO" ("First In, First
     Out"), is a file that connects two processes with a
@@ -185,40 +205,48 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>more</code></b> &mdash; a simple pager</p>
+    <p><b><c>more</c></b> &mdash; a simple pager</p>
   
-    <p>A Unix command available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <c>/system/bin</c>.</p>
   </li>
-  
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+</ul>
 
+
+<h1>N</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>netcat</code></b> or <code>nc</code> &mdash; Netcat</p>
+    <p><b><c>netcat</c></b> or <b><c>nc</c></b> &mdash; Netcat</p>
 
     <p>A Unix command <b>not</b> available in
-    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
+    <c>/system/bin</c>, only in BusyBox, Termux or Debian.</p>
 
     <p>For an example, see 
       <a href="run/termux.xhtml#run/connect/netcat"
          >Connect to Termux with Netcat</a>.</p>
   </li>
+</ul>
 
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+<h1>S</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>script</code></b> &mdash; record a terminal session</p>
+    <p><b><c>script</c></b> &mdash; record a terminal session</p>
   
     <p>A Unix command <b>not</b> available in
-    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
+    <c>/system/bin</c>, only in BusyBox, Termux or Debian.</p>
 
-    <p><code>script</code> records a terminal session, i.e. logs the
+    <p><c>script</c> records a terminal session, i.e. logs the
     input and output.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>set</code></b> &mdash; set shell options and arguments, or
+    <p><b><c>set</c></b> &mdash; set shell options and arguments, or
     print shell and environment variables</p>
   
     <p>A shell built-in in all shells.</p>
@@ -226,23 +254,23 @@ them.</p>
     <p>Use:</p>
 
     <ul>
-      <li><code>set</code> without arguments prints all shell variables and
+      <li><c>set</c> without arguments prints all shell variables and
       environment variables. In some shells it also prints all functions.</li>
 
       <li>For other uses, consult your shell's documentation. In
-      <code>sh</code>-compatible shell, it sets shell options or the
-      shell's arguments <code>$1</code>, <code>$2</code>...</li>
+      <c>sh</c>-compatible shell, it sets shell options or the
+      shell's arguments <c>$1</c>, <c>$2</c>...</li>
     </ul>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="setprop">
-    <p><b><code>setprop</code></b> &mdash; set 
+    <p><b><c>setprop</c></b> &mdash; set 
       <a href="concepts.xhtml#android_os_system_properties"
          >Android OS system properties</a></p>
 
-    <p>An Android command available in <code>/system/bin</code>.</p>
+    <p>An Android command available in <c>/system/bin</c>.</p>
 
     <p>Use:</p>
 
@@ -252,9 +280,9 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>sh</code></b> &mdash; default shell</p>
+    <p><b><c>sh</c></b> &mdash; default shell</p>
 
-    <p>A Unix command available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <c>/system/bin</c>.</p>
 
     <p>See 
       <a href="run/sh.xhtml"
@@ -264,15 +292,15 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>sort</code></b> &mdash; sort lines</p>
+    <p><b><c>sort</c></b> &mdash; sort lines</p>
   
-    <p>A Unix command available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <c>/system/bin</c>.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>ssh</code></b> &mdash; SSH</p>
+    <p><b><c>ssh</c></b> &mdash; SSH</p>
 
     <p class="TODO">LATER I will write about this when I've found a SSH
     client that runs in TTerm.</p>
@@ -281,7 +309,7 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>su</code></b> &mdash; super-user</p>
+    <p><b><c>su</c></b> &mdash; super-user</p>
   
     <p>A Unix command only available in a
       <a href="../rooting.xhtml"
@@ -289,21 +317,21 @@ them.</p>
 
     <ul>
       <li>
-        <p>Use 1: <code>su</code></p>
+        <p>Use 1: <c>su</c></p>
         
-        <p><code>su</code> without arguments runs a shell as root.</p>
+        <p><c>su</c> without arguments runs a shell as root.</p>
       </li>
 
       <li>
-        <p>Use 2: <code>su «user»</code></p>
+        <p>Use 2: <c>su «user»</c></p>
 
         <p>Runs a shell as Linux user «user». In Android, each app has
-        its own Linux user, with a name like <code>u«android user
-        number»_a«Linux user number»</code>.</p>
+        its own Linux user, with a name like <c>u«android user
+        number»_a«Linux user number»</c>.</p>
       </li>
 
       <li>
-        <p>Use 3: <code>su [«user»] -c "«command» «args»"</code></p>
+        <p>Use 3: <c>su [«user»] -c "«command» «args»"</c></p>
 
         <p>Runs a command as root or Linux user «user». Note that the
         command and its arguments should be quoted.</p>
@@ -314,37 +342,46 @@ them.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <p><b><code>stty</code></b> &mdash; change and print terminal (TTY)
+    <p><b><c>stty</c></b> &mdash; change and print terminal (TTY)
     settings</p>
 
     <p>A Unix command <b>not</b> available in
-    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
+    <c>/system/bin</c>, only in BusyBox, Termux or Debian.</p>
   </li>
+</ul>
 
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+<h1>T</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>telnet</code></b>, <code>telnetd</code> &mdash; Telnet and
+    <p><b><c>telnet</c></b>, <c>telnetd</c> &mdash; Telnet and
     its daemon</p>
 
     <p>A Unix command <b>not</b> available in
-    <code>/system/bin</code>, only in BusyBox, Termux or Debian.</p>
+    <c>/system/bin</c>, only in BusyBox, Termux or Debian.</p>
 
     <p>For an example, see 
       <a href="run/termux.xhtml#run/connect/telnet"
          >Connect to Termux with Telnet</a>.</p>
   </li>
+</ul>
 
-  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+<h1>W</h1>
+<!-- ************************************************************ -->
+
+<ul class="wide">
   <li>
-    <p><b><code>whoami</code></b> &mdash; print the Linux user name</p>
+    <p><b><c>whoami</c></b> &mdash; print the Linux user name</p>
 
-    <p>A Unix command available in <code>/system/bin</code>.</p>
+    <p>A Unix command available in <c>/system/bin</c>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 </ul>
+
 
 <!-- ************************************************************ -->
 

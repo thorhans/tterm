@@ -47,7 +47,7 @@
           <li>Should auto-capitalize</li>
         
           <li>Should not add spaces after symbols (e.g. after
-          <code>$</code> in <code>$TERM</code>).</li>
+          <c>$</c> in <c>$TERM</c>).</li>
         </ul>
         -->
       </li>
@@ -80,7 +80,7 @@
     terminal. For example take the Emacs keyboard shortcut `Ctrl-x f´.
     Can we tell the IME that `f´ is part of the shortcut, not the
     start of a new word? There are analogous problems with keys like
-    `a´ and `i´ in <code>vi</code>.</p>
+    `a´ and `i´ in <c>vi</c>.</p>
 
     <p>Maybe we could provide a button to toggle between character-
     and word-based input next to the `Ctrl´ button?</p>
@@ -131,24 +131,24 @@
     <p>Make "alternate screen" support optional</p>
     
     <p>Console programs (i.e. programs that write to any part of the
-    screen, like Emacs, <code>less</code> and <code>vi</code>, as
+    screen, like Emacs, <c>less</c> and <c>vi</c>, as
     opposed to CLI commands that only write to the end of the screen
-    buffer) must use Termcap's <code>ti</code> or Terminfo's
-    <code>smcup</code> capability when they start, and Termcap's
-    <code>te</code> or Terminfo's <code>rmcup</code> capability when
+    buffer) must use Termcap's <c>ti</c> or Terminfo's
+    <c>smcup</c> capability when they start, and Termcap's
+    <c>te</c> or Terminfo's <c>rmcup</c> capability when
     they end.</p>
     
     <p>On terminals that support an "alternate screen",
-    <code>ti</code>/<code>smcup</code> also switch to the alternate
-    screen, and <code>te</code>/<code>rmcup</code> switch back. The
-    result is that quitting a program like <code>less</code> or
-    <code>vi</code> removes its output, which is extremely annoying
+    <c>ti</c>/<c>smcup</c> also switch to the alternate
+    screen, and <c>te</c>/<c>rmcup</c> switch back. The
+    result is that quitting a program like <c>less</c> or
+    <c>vi</c> removes its output, which is extremely annoying
     when you use them to look up something that you want to use
     afterwards. So we'll provide a way to switch it off.</p>
     
     <p>You should actually be able to configure that with
-    <code>$TERM</code> (the setting <setting>Report terminal
-    type</setting> and <code>$TERMINFO</code>, but that does not seem
+    <c>$TERM</c> (the setting <setting>Report terminal
+    type</setting> and <c>$TERMINFO</c>, but that does not seem
     to work for several programs out in the wild.</p>
   </li>
 </ul>
@@ -175,7 +175,7 @@
   <li id="B001">Bug 001, low prio: Key combinations with `Ctrl´, `Esc´
   and `Fn´ currently only work when the setting <setting>Input
   mode</setting> is set to <i>character-based</i>. There are analogous
-  problems with keys like `a´ and `i´ in <code>vi</code>.</li>
+  problems with keys like `a´ and `i´ in <c>vi</c>.</li>
 
   <li id="B003">
     <p>Bug 003, low prio: The keyboard disappears after a long

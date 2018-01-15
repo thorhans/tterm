@@ -37,10 +37,10 @@ help pages of TTerm.</p>
 <dfn>Android OS system properties</dfn>, that are different from the Java
 System Properties. You can get them with
   <a href="commands.xhtml#getprop"
-     ><code>getprop</code></a>
+     ><c>getprop</c></a>
 and set them with 
   <a href="commands.xhtml#setprop"
-     ><code>setprop</code></a>.</p>
+     ><c>setprop</c></a>.</p>
 
 
 <h1 id="cpu_architecture">CPU architecture</h1>
@@ -145,8 +145,8 @@ armeabi-v7a are related.</p>
 <p>Linux uses <dfn>environment variables</dfn> for configuration.</p>
 
 <p>The set of all environment variables is called
-<dfn>environment</dfn>. To see it, use <code>env</code> or <code>env |
-sort | more</code>.</p>
+<dfn>environment</dfn>. To see it, use <c>env</c> or <c>env |
+sort | more</c>.</p>
 
 <p>To set an environment variable in a shell, use:</p>
 
@@ -156,19 +156,19 @@ sort | more</code>.</p>
   export VAR=value   # (3)
 </p>
 
-<p>In case (1) you must quote a single quote <code>'</code> as
-<code>'\''</code>. In case (2) you must quote the four characters
-<code>$ \ " `</code> as <code>\$ \\ \" \`</code> (and there may be
+<p>In case (1) you must quote a single quote <c>'</c> as
+<c>'\''</c>. In case (2) you must quote the four characters
+<c>$ \ " `</c> as <c>\$ \\ \" \`</c> (and there may be
 additional characters depending on your shell). Strings quoted with
 single or double quotes can contain newlines. If you "get stuck" in a
 continuation string, press `Control-C´ to get out.</p>
 
 <p>Case (3) is only safe if the value does not contain whitespace or
 special characters. You must quote whitespace and many special
-characters with <code>\</code>.</p>
+characters with <c>\</c>.</p>
 
 <p>To check that you got the quoting right, print an environment value
-with <code>echo "$VAR"</code> (the quotes are necessary if the value
+with <c>echo "$VAR"</c> (the quotes are necessary if the value
 contains special characters).</p>
 
 <p>When you start a command or subprocess, it inherits a copy of the
@@ -176,15 +176,15 @@ environment. Changes in the copy are not visible in the original
 environment.</p>
 
 <p>Do not confuse environment variables with <dfn>shell
-variables</dfn>. You set them similarly with <code>VAR='value'</code>
-or <code>VAR="value"</code>, without using <code>export</code>. Shell
+variables</dfn>. You set them similarly with <c>VAR='value'</c>
+or <c>VAR="value"</c>, without using <c>export</c>. Shell
 variables are only used by the shell, they are not part of the
 environment and not passed to commands or subprocesses. For example
-<code>PWD</code> holds the local directory and <code>PS1</code> the
+<c>PWD</c> holds the local directory and <c>PS1</c> the
 prompt.</p>
 
 <p>To get a list of all shell variables <i>and</i> environment
-variables, use <code>set</code> or <code>set | more</code>.</p>
+variables, use <c>set</c> or <c>set | more</c>.</p>
 
 
 <h1 id="shell">Shell</h1>

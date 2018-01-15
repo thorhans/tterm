@@ -28,15 +28,15 @@
 <!-- ************************************************************ -->
 
 <p>Android's Linux layer is very small, but there are several full
-Debian GNU/Linux distributions that run with <code>proot</code> or
-<code>chroot</code>.</p>
+Debian GNU/Linux distributions that run with <c>proot</c> or
+<c>chroot</c>.</p>
 
 <p>The excellent app
   <a href="https://play.google.com/store/apps/details/apps/details?id=com.gnuroot.debian"
      >GNURoot Debian</a>
 is a <b>full Debian Linux distribution</b> that runs as an app using 
   <a href="https://proot-me.github.io" 
-    ><code>proot</code></a>.
+    ><c>proot</c></a>.
 That means that it doesn't run on Android's Linux and file system like
   <a href="termux.xhtml" >Termux</a>
 does, it has its own file system and starts Debian in it. It doesn't
@@ -70,7 +70,7 @@ program that you connect to from TTerm.</p>
 <p>Then 
   <a href="termux.xhtml#run/connect/netcat"
     >continue as in Termux</a>, 
-except that you must call Netcat as <code>netcat</code>, and stop it
+except that you must call Netcat as <c>netcat</c>, and stop it
 with <key>Ctrl+c</key> after you log out in TTerm.</p>
 
 
@@ -90,7 +90,7 @@ something you want to do regularly.</p>
 
   <dt>cd /usr/local/bin</dt>
   <dd>Go to a directory that can contain executable files. For some
-  strange reason, <code>$HOME</code> can't.</dd>
+  strange reason, <c>$HOME</c> can't.</dd>
 
   <dt>( echo \#\!/bin/sh ; echo /bin/bash ) > s</dt>
   <dd>Create a script that starts Bash, ignoring its arguments.</dd>
@@ -107,12 +107,12 @@ something you want to do regularly.</p>
     <p>Start a debugging Telnet daemon that listens on port 1111. The
     port must be over 1024.</p>
 
-    <p> Because of the switch <code>-debug</code>,
+    <p> Because of the switch <c>-debug</c>,
     the Telnet daemon stays in the foreground and accepts exactly one
     connection.</p>
     
-    <p>Instead of <code>login</code>, which is broken in GNURoot
-    Debian, start the script <code>/usr/local/bin/s</code>. You must
+    <p>Instead of <c>login</c>, which is broken in GNURoot
+    Debian, start the script <c>/usr/local/bin/s</c>. You must
     specify the full path. You can't use Bash here, since the Telnet
     daemon calls it with a switch that makes Bash exit with an error
     message.</p>
@@ -126,7 +126,7 @@ do the following:</p>
 <dl class="code-commented">
   <dt>telnet localhost 2323</dt>
   <dd>Connect to port 2323 on the same device. If
-  <code>localhost</code> does not work, try <code>127.0.0.1</code>
+  <c>localhost</c> does not work, try <c>127.0.0.1</c>
   instead.</dd>
 </dl>
 
@@ -153,11 +153,11 @@ you start the Linux layer of Debian from inside TTerm. It requires a
 <p>This seems to work:</p>
 
 <ul>
-  <li>Start TTerm and change to root with <code>su</code>, or to the
+  <li>Start TTerm and change to root with <c>su</c>, or to the
   GNURoot Debian user. To find out the GNURoot Debian user, start it
-  and enter <code>whoami</code>, then return to TTerm. On my device it
-  runs as user <code>u0_a81</code>, so I change to it with <code>su
-  u0_a81</code>.</li>
+  and enter <c>whoami</c>, then return to TTerm. On my device it
+  runs as user <c>u0_a81</c>, so I change to it with <c>su
+  u0_a81</c>.</li>
 
   <li>
     <p>Start Debian:</p>
@@ -171,8 +171,8 @@ you start the Linux layer of Debian from inside TTerm. It requires a
 </ul>
 
 <p>That's it, now you can start a Debian command, e.g.
-<code>bash</code> or <code>emacs</code> (after installing it with
-<code>apt install emacs</code>).</p>
+<c>bash</c> or <c>emacs</c> (after installing it with
+<c>apt install emacs</c>).</p>
 
 <!-- ************************************************************ -->
 

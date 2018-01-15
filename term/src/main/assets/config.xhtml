@@ -89,19 +89,19 @@
 
         <ul>
           <li>
-            <p>You can add the switch <code>-l</code> to make
-            <code>sh</code> a <dfn>login shell</dfn>. Then <code>sh</code>
-            will execute the file <code>~/.profile</code>, where
-            <code>~</code> is an abbreviation for <code>$HOME</code>.</p>
+            <p>You can add the switch <c>-l</c> to make
+            <c>sh</c> a <dfn>login shell</dfn>. Then <c>sh</c>
+            will execute the file <c>~/.profile</c>, where
+            <c>~</c> is an abbreviation for <c>$HOME</c>.</p>
           </li>
         
           <li>
             <p>Or you can set the environment variable
-            <code>ENV</code>. The usual name of the configuration file
-            is <code>$HOME/.mkshrc</code>. Since <code>$HOME</code>
-            and <code>~</code> do not work here, you have to look up
+            <c>ENV</c>. The usual name of the configuration file
+            is <c>$HOME/.mkshrc</c>. Since <c>$HOME</c>
+            and <c>~</c> do not work here, you have to look up
             the full path first. On my device it's below
-            <code>/data/user/0/de.t2h.tterm</code>. This works:</p>
+            <c>/data/user/0/de.t2h.tterm</c>. This works:</p>
 
             <p class="indent code">
               /system/bin/env
@@ -119,7 +119,7 @@
         
         <p class="TODO">TODO If you specify a non-existing or
         unreadable file, TTerm will silently execute the default
-        <code>/system/bin/sh -</code> instead. I'll change that in a
+        <c>/system/bin/sh -</c> instead. I'll change that in a
         future release.</p>
       </li>
 
@@ -135,7 +135,7 @@
           /system/bin/echo $PATH "a \" b"
         </p>
 
-        <p>will print <code>$PATH a " b</code>.</p>
+        <p>will print <c>$PATH a " b</c>.</p>
         
         <p>But you can let the shell expand variables for you:</p>
         
@@ -143,20 +143,20 @@
           /system/bin/sh -c "echo $PATH"
         </p>
         
-        <p>will print the value of <code>$PATH</code> and exit.</p>
+        <p>will print the value of <c>$PATH</c> and exit.</p>
       </li>
 
       <li>
         <p>You can set environment variables and execute commands in
-        <code>$PATH</code> using <code>env</code>, for example:</p>
+        <c>$PATH</c> using <c>env</c>, for example:</p>
               
         <p class="indent code">
           /system/bin/env VAR1="value 1" VAR2="value 2" sh
         </p>
 
-        <p>sets the environment variables <code>VAR1</code> and
-        <code>VAR2</code>, then searches <code>sh</code> in the paths
-        of the environment variable <code>PATH</code>.</p>
+        <p>sets the environment variables <c>VAR1</c> and
+        <c>VAR2</c>, then searches <c>sh</c> in the paths
+        of the environment variable <c>PATH</c>.</p>
       </li>
     </ul>
   </li>
@@ -186,15 +186,15 @@
 
     <p>Removes unreadable paths from the environment variable
     <a href="#env/PATH"
-       ><code>PATH</code></a>.</p>
+       ><c>PATH</c></a>.</p>
        
-    <p>For example, the default value of <code>PATH</code> is:</p>
+    <p>For example, the default value of <c>PATH</c> is:</p>
 
     <p class="indent code">
       /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
     </p>
 
-    <p>If this setting is checked, <code>PATH</code> will be reduced to:</p>
+    <p>If this setting is checked, <c>PATH</c> will be reduced to:</p>
 
     <p class="indent code">
       system/bin:/system/xbin
@@ -204,7 +204,7 @@
       <a href="rooting.xhtml"
          >rooted device</a>, 
     you might prefer to leave this unchecked, to keep those path
-    entries for when you use <code>su</code>.</p>
+    entries for when you use <c>su</c>.</p>
   </li>
   
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -221,7 +221,7 @@
     Setting <b><setting>HOME folder</setting></b>
 
     <p>Set your home directory 
-      <a href="#env/HOME"><code>$HOME</code></a>.</p>
+      <a href="#env/HOME"><c>$HOME</c></a>.</p>
   </li>
   
 </ul>
@@ -252,11 +252,11 @@ yet.</p -->
 
 <p>If you want to set environment variables or shell variables each
 time you open a window in TTerm, place them in the file
-<code>~/.profile</code>, where <code>~</code> is an abbreviation for
-<code>$HOME</code>. Then add the switch <code>-l</code> to the setting
+<c>~/.profile</c>, where <c>~</c> is an abbreviation for
+<c>$HOME</c>. Then add the switch <c>-l</c> to the setting
   <a href="#setting/command_line"
      ><setting>Command line</setting></a>
-to make <code>sh</code> start as a login shell.</p>
+to make <c>sh</c> start as a login shell.</p>
 
 
 
@@ -267,7 +267,7 @@ to make <code>sh</code> start as a login shell.</p>
 
 <ul>
   <li>
-    <b><code>$ENV</code></b> &mdash; shell initialzation file
+    <b><c>$ENV</c></b> &mdash; shell initialzation file
     
     <p>see
       <a href="run/sh.xhtml">
@@ -277,7 +277,7 @@ to make <code>sh</code> start as a login shell.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="env/HOME">
-    <b><code>$HOME</code></b> &mdash; your home directory
+    <b><c>$HOME</c></b> &mdash; your home directory
     
     <p>By default, TTerm sets it to</p>
     
@@ -297,20 +297,20 @@ to make <code>sh</code> start as a login shell.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <b><code>$LD_LIBRARY_PATH</code></b> &mdash; list of paths to
+    <b><c>$LD_LIBRARY_PATH</c></b> &mdash; list of paths to
     search for libraries, separated by colons
     
     <p>For example, Bash needs the library
-    <code>libncurses.so</code>.</p>
+    <c>libncurses.so</c>.</p>
   </li>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="env/PATH">
-    <b><code>$PATH</code></b> &mdash; list of paths to search for
+    <b><c>$PATH</c></b> &mdash; list of paths to search for
     commands, separated by colons
     
-    <p>On my devices, the default value for <code>PATH</code> is:</p>
+    <p>On my devices, the default value for <c>PATH</c> is:</p>
     
     <p class="indent code">
       /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
@@ -319,19 +319,19 @@ to make <code>sh</code> start as a login shell.</p>
     <p>If the 
       <a href="#setting/verify_path">
         setting <setting>Verify PATH entries</setting></a> 
-    is checked, <code>PATH</code> will be reduced to:</p>
+    is checked, <c>PATH</c> will be reduced to:</p>
 
     <p class="indent code">
       system/bin:/system/xbin
     </p>
 
-    <p>On my devices the default value of <code>PATH</code> is
-    hardcoded in the binary <code>/init</code>. It can be set by the
-    system initialization files in <code>/init.*</code> and the
+    <p>On my devices the default value of <c>PATH</c> is
+    hardcoded in the binary <c>/init</c>. It can be set by the
+    system initialization files in <c>/init.*</c> and the
     shell's initialization files.</p>
     
-    <p>You can set <code>PATH</code> in the shell's initialization
-    files or with <code>env</code> as described under the
+    <p>You can set <c>PATH</c> in the shell's initialization
+    files or with <c>env</c> as described under the
       <a href="#setting/command_line"
         >setting <setting>Command line</setting></a>.</p>
 
@@ -343,7 +343,7 @@ to make <code>sh</code> start as a login shell.</p>
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li id="env/TERM">
-    <b><code>$TERM</code></b> &mdash; terminal type
+    <b><c>$TERM</c></b> &mdash; terminal type
     
     <p>Configure it in the setting <setting>Terminal type</setting>,
     or in one of your shell's initialization files.</p>
@@ -352,27 +352,27 @@ to make <code>sh</code> start as a login shell.</p>
     values:</p>
     
     <ul class="narrow">
-      <li><code>linux</code></li>
-      <li><code>screen</code> (default)</li>
-      <li><code>screen-256color</code></li>
-      <li><code>vt100</code></li>
-      <li><code>xterm</code></li>
+      <li><c>linux</c></li>
+      <li><c>screen</c> (default)</li>
+      <li><c>screen-256color</c></li>
+      <li><c>vt100</c></li>
+      <li><c>xterm</c></li>
     </ul>
     
     <p>Changing this setting also changes the codes that TTerm sends
     for some `Fn´ key combinations.</p>
         
-    <p>You have to restart the shell after changing <code>TERM</code>.</p>
+    <p>You have to restart the shell after changing <c>TERM</c>.</p>
   </li>    
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
   <li>
-    <b><code>$TERMINFO</code></b> &mdash; path to the Terminfo database
+    <b><c>$TERMINFO</c></b> &mdash; path to the Terminfo database
   </li>
 </ul>
 
-<p>I'll write more on <code>$TERM</code> and <code>$TERMINFO</code>
+<p>I'll write more on <c>$TERM</c> and <c>$TERMINFO</c>
 when time allows.</p>
 
 
@@ -397,7 +397,7 @@ steps:</p>
     is particularly picky.</p>
       
     <p>To test without the shell getting in the way, start a program
-    like <code>cat</code> or <code>vi</code>.</p>
+    like <c>cat</c> or <c>vi</c>.</p>
   </li>
   
   <li>
