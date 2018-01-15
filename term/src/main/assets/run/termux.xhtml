@@ -76,7 +76,6 @@ something you want to do regularly.</p>
 </p>
 
 
-
 <p>In Termux, start Netcat and a shell, connected with a "named pipe".
 This will accept one connection, then quit.</p>
 
@@ -126,42 +125,62 @@ This will accept one connection, then quit.</p>
 </dl>
 
 <p>Now change to TTerm with an installed 
-  <a href="busybox.xhtml">BusyBox</a> 
-and enter this in a single line:</p>
-  
-<dl class="code-commented">
-  <dt>stty raw -echo; nc localhost 1111; stty sane</dt>
-  <dd>
-    <!-- On Cygwin, use ‘nc localhost 1111’ in a ‘mintty’ console, it
-         does not work in "ConEmu".-->
+  <a href="busybox.xhtml">BusyBox</a>.</p>
 
-    <p>If you do not enter all three commands in one line, you can't see
-    what you type for the second and third commands.</p>
+<p>Netcat does not tell the remote shell the terminal size, so look
+it up with <c>stty size</c>. For example, this:</p>
 
-    <p>The first command <c>stty raw -echo</c> sets the
-    terminal settings:</p>
+<p class="indent code">
+  stty size<br/>
+  38 84
+</p>
+
+<p>means 38 rows and 84 columns.</p>
+
+<p>Now enter this in a single line:</p>
+
+<p class="indent code">
+  stty raw -echo; nc localhost 1111; stty sane
+</p>
+
+<!-- On Cygwin, use ‘nc localhost 1111’ in a ‘mintty’ console, it
+     does not work in "ConEmu".-->
+
+<p>If you do not enter all three commands in one line, you can't see
+what you type for the second and third commands.</p>
+
+<ul>
+  <li>
+    <p>The first command <c>stty raw -echo</c> sets the terminal
+    settings:</p>
 
     <ul>
       <li><c>raw</c> sets the terminal to <i>raw mode</i>, so that all
       chars are sent immediately to the remote shell, and all chars
       output by the remote shell are shown. That is necessary so a
-      ‘Ctrl+C’ arrives at the <i>remote</i> shell, otherwise it stops
-      the <i>local</i> Netcat.</li>
-
+      <key>Ctrl+C</key> arrives at the <i>remote</i> shell, otherwise
+      it stops the <i>local</i> Netcat.</li>
+      
       <li><c>-echo</c> turns off <i>local</i> echoing, so that the
-      <i>remote</i> shell on Termux decides when to echo user
-      input.</li>
+      <i>remote</i> shell on Termux decides when to echo user input.</li>
     </ul>
+  </li>
+  
+  <li>The second command <c>nc localhost 111</c> connects to the
+  Netcat running on port 1111 of the same device. If <c>localhost</c>
+  does not work, try <c>127.0.0.1</c> instead.</li>
+  
+  <li>After you quit the shell that runs remotely in Termux, the third
+  command <c>stty sane</c> sets the terminal settings back to their
+  default.</li>
+</ul>
 
-    <p>The second command <c>nc localhost 111</c> connects to the
-    Netcat running on port 1111 of the same device. If
-    <c>localhost</c> does not work, try <c>127.0.0.1</c> instead.</p>
+<p>Now we are in a shell on the remote Termux. Set the terminal size
+so the shell on Termux knows it, for example with:</p>
 
-    <p>After you quit the shell that runs remotely in Termux, the
-    third command <c>stty sane</c> sets the terminal settings
-    back to their default.</p>
-  </dd>
-</dl>
+<p class="indent code">
+  stty rows 38 cols 84
+</p>
 
 <p>When you exit the remote shell, Netcat on the remote Termux also
 exits. To accept another connection, restart it in the remote
