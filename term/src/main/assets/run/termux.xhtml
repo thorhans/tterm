@@ -84,6 +84,7 @@ This will accept one connection, then quit.</p>
   rm -f pipe typescript<br/>
   mkfifo pipe<br/>
   script -q &lt; pipe | nc -l -p 1111 &gt; pipe<br/>
+  rm -f pipe typescript<br/>
 </p>
 
 <p>Details:</p>
@@ -107,8 +108,12 @@ This will accept one connection, then quit.</p>
   <dt>script -q &lt; pipe | nc -l -p 1111 &gt; pipe</dt>
   <dd>
     <p><c>nc</c> is the BusyBox version of Netcat. It will read input
-    from port 1111 and write it to <c>pipe</c>. In GNURoot Debian you
-    must use <c>netcat</c> instead.</p>
+    from port 1111 and write it to <c>pipe</c>.</p>
+    
+    <p>In GNURoot Debian you must use <c>netcat</c> instead.</p>
+
+    <p>In some version of Netcat, for example Cygwin's, you have to
+    remove the switch <c>-p</c>.</p>
 
     <!-- On Cygwin, use ‘nc -l 1111’. -->
     
@@ -121,6 +126,11 @@ This will accept one connection, then quit.</p>
 
     <p>In Termux the command stops when you log out in TTerm. In
     GNURoot Debian you have to stop it with <key>Ctrl+c.</key></p>
+  </dd>
+
+  <dt>rm -f pipe typescript</dt>
+  <dd>
+    Remove the named pipe and log from a previous run.
   </dd>
 </dl>
 
