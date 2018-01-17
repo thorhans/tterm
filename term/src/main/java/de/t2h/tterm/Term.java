@@ -436,6 +436,7 @@ public class Term extends Activity
         });
         PKeyButton.registerSpecialOnClick("Control", view -> doSendControlKey());
         PKeyButton.registerSpecialOnClick("Fn1", view -> doSendFnKey());
+        PKeyButton.registerSpecialOnClick("CMenu", view -> doSendCMenuKey());
 
         setExtraKeys(mSettings.getExtraKeys());
 
@@ -1022,6 +1023,11 @@ public class Term extends Activity
         ClipboardManager clip = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         CharSequence paste = clip.getText();
         getCurrentTermSession().write(paste.toString());
+    }
+
+    private void doSendCMenuKey () {
+        EmulatorView emv = getCurrentEmulatorView();
+        if(emv != null) { emv.showContextMenu(); }
     }
 
     private void doSendControlKey () {

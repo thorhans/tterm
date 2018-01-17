@@ -179,7 +179,42 @@ public class PKey {
 
   public static final PKey
     Control = special("Control").label("Ctrl"),
-    Fn1     = special("Fn1"    ).label("Fn");
+    Fn1     = special("Fn1"    ).label("Fn"),
+    
+    // Context menu key
+    // ------------------------------------------------------------
+    //
+    // What a mess! I'll define my own, since I don't known which of these I should use.
+    //
+    // - Android
+    //
+    //   From
+    //
+    //     https://developer.android.com/reference/android/view/KeyEvent.html
+    //
+    //     /** Key code constant: Menu key. */
+    //     public static final int KEYCODE_MENU            = 82;
+    //
+    // - USB
+    //
+    //   From "USB HUT" = "USB HID Usage Tables", the spec for USB key codes.
+    //
+    //   Table "USB HUT Keyboard/keypad Page (0x07)"
+    //    
+    //     118  76     Keyboard Menu
+    //    
+    // - Windows has key called `Menu´ or `Apps´ that opens the context menu. In the Windows API, it is
+    //   called ‘ VK_APPS’ and defined as 0x5D = 93.
+    //    
+    //     https://en.wikipedia.org/wiki/Menu_key
+    //
+    // - X11 has:
+    //
+    //   X11/keysymdef.h
+    //
+    //     #define XK_Menu  0xff67
+    //
+    CMenu = special("CMenu"  ).label("CMenu");
 
   private static final String
     note001 = "Usually situated below the display on phones and used as a multi-function feature key for "
@@ -228,7 +263,8 @@ public class PKey {
     note264 = "Main power/reset button on watch.";
 
   static {
-
+    // From `https://developer.android.com/reference/android/view/KeyEvent.html´
+      
     section("General I");
     // ------------------------------------------------------------
 
