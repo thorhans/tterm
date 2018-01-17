@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 /* ============================================================
  * Basic settings
  * ============================================================ */
@@ -242,18 +242,45 @@ ul > li, ol > li {
   margin-bottom: 1em;  /* `1em´ is Firefox's spacing of `p´. */
 }
 
-/** Bullet for default list item. 
+
+/** A version of "Noto Sans Symbols" that contains the Unicode chars
  *
- * If this layout does not work on a mobile device, look for "font
- * boosting". {TODO Add details.}
+ *   U+25CF ‘●’ ‘black circle’
+ *   U+25CB ‘○’ ‘white circle’
+ *
+ * used in the rule for
+ * 
+ *   ul > li::before 
+ *
+ * below.
+ *
+ * I found it at
+ *
+ *   https://wakufactory.jp/densho/font/Noto/noto.html
+ */
+@font-face {
+  font-family: "My Noto Sans Symbols";
+  src: url("MyNotoSansSymbols-Regular.ttf");
+}
+
+/** Bullet for default list item. 
  */
 ul > li::before {
-  /* • bullet
-     ● black circle
-     ○ white circle
-     – en dash
+  /* Candidates:
+   *
+   *   U+25CF ‘●’ ‘black circle’
+   *   U+25CB ‘○’ ‘white circle’
+   *   U+2022 ‘•’ ‘bullet’
+   *   U+2013 ‘–’ ‘en dash’
    */
-  content: "●";  
+  content: "●";
+  color:      #000080;
+
+  /* The font "Noto Sans Symbols" appears to be broken on my device
+   * Arn, a Samsung Galaxy Tab S2 8.0 WiFi (2016), SM-T713, with
+   * Android 7. So I'm providing a correct font above.
+   */
+  font-family: "My Noto Sans Symbols";
 
   /* Horizontal spacing
    * ------------------------------ */

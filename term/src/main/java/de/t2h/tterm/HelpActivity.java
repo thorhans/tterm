@@ -37,6 +37,11 @@ public class HelpActivity extends Activity {
       
       mWebView = new WebView(this);
 
+      // If yo need to debug the ‘WebView’, see
+      //   https://developers.google.com/web/tools/chrome-devtools/remote-debugging/webviews
+      // and uncomment
+      //   WebView.setWebContentsDebuggingEnabled(true);
+      
       WebSettings settings = mWebView.getSettings();
       settings.setJavaScriptEnabled(true);  // Enable JavaScript.
       settings.setBuiltInZoomControls(true);
