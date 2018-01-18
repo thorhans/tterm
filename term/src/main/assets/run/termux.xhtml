@@ -81,10 +81,10 @@ This will accept one connection, then quit.</p>
 
 <p class="indent code">
   cd ~<br/>
-  rm -f pipe typescript<br/>
+  rm -f pipe<br/>
   mkfifo pipe<br/>
-  script -q &lt; pipe | nc -l -p 1111 &gt; pipe<br/>
-  rm -f pipe typescript<br/>
+  script -q /dev/null &lt; pipe | nc -l -p 1111 &gt; pipe<br/>
+  rm -f pipe<br/>
 </p>
 
 <p>Details:</p>
@@ -93,9 +93,9 @@ This will accept one connection, then quit.</p>
   <dt>cd ~</dt>
   <dd>Change to a writable directory, e.g. <c>$HOME</c>.</dd>
 
-  <dt>rm -f pipe typescript</dt>
+  <dt>rm -f pipe</dt>
   <dd>
-    If necessary, remove the named pipe and log from a previous run.
+    If necessary, remove the named pipe from a previous run.
   </dd>
 
   <dt>mkfifo pipe</dt>
@@ -105,7 +105,7 @@ This will accept one connection, then quit.</p>
     bidirectional pipe.
   </dd>
   
-  <dt>script -q &lt; pipe | nc -l -p 1111 &gt; pipe</dt>
+  <dt>script /dev/null -q &lt; pipe | nc -l -p 1111 &gt; pipe</dt>
   <dd>
     <p><c>nc</c> is the BusyBox version of Netcat. It will read input
     from port 1111 and write it to <c>pipe</c>.</p>
@@ -117,20 +117,18 @@ This will accept one connection, then quit.</p>
 
     <!-- On Cygwin, use ‘nc -l 1111’. -->
     
-    <p><c>script -q</c> starts a shell that reads input from
+    <p><c>script -q /dev/null</c> starts a shell that reads input from
     <c>pipe</c> and writes input and output to <c>netcat</c>, which
-    writes it to port 1111.</p>
+    writes it to port 1111. We do not need the log that <c>script</c>
+    writes, so we write it to <c>/dev/null</c>.</p>
     
-    <p class="TODO"><c>script</c> writes a log file <c>typescript</c>
-    that we do not need. How do we avoid that?</p>
-
     <p>In Termux the command stops when you log out in TTerm. In
     GNURoot Debian you have to stop it with <k>Ctrl+c.</k></p>
   </dd>
 
-  <dt>rm -f pipe typescript</dt>
+  <dt>rm -f pipe</dt>
   <dd>
-    Remove the named pipe and log from a previous run.
+    Remove the named pipe from a previous run.
   </dd>
 </dl>
 
