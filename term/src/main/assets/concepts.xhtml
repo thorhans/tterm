@@ -132,14 +132,14 @@ architecture? This looks promising:</p>
 armeabi-v7a are related.</p>
 
 
-<h1 id="shell">Distribution</h1>
+<h1>Distribution</h1>
 <!-- ************************************************************ -->
 
 <p>See
   <a href="shells.xhtml">Shells and distributions</a>.</p>
 
 
-<h1 id="env_var">Environment variables</h1>
+<h1 id="env-var">Environment variables</h1>
 <!-- ************************************************************ -->
 
 <p>Linux uses <dfn>environment variables</dfn> for configuration.</p>
@@ -190,15 +190,111 @@ variables, use <c>set</c> or <c>set | more</c>.</p>
 <h1 id="shell">Shell</h1>
 <!-- ************************************************************ -->
 
-<p>See
+<p>Android runs on top of a (small) Linux layer. To call Linux
+commands interactively, you need a <i>shell</i> and a
+  <a href="#terminal"
+     >terminal emulator</a>.</p>
+
+<p>The <dfn>shell</dfn> executes the Linux commands that you type. The
+corresponding thing in Windows are the two "command shells" <c>cmd</c>
+and <c>powershell</c>.</p>
+
+<p>Linux offers many different shells. All of them will let you type
+commands and arguments, and set 
+  <a href="#env-vars"
+     >environment variables</a>, 
+as long as you quote special characters. They also contain a
+programming language to write shell scripts, but I sincerely hope that
+we won't need that for TTerm, since it lies somewhere between a
+surreal dream and a nightmare.</p>
+
+<p>For more details, see
   <a href="shells.xhtml">Shells and distributions</a>.</p>
 
 
-<h1 id="shell">Terminal, terminal emulator</h1>
+<h5>Further reading</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<ul>
+  <li>A shell is a "command line interpreter", abbreviated CLI, read
+  more about 
+    <a href="https://en.wikipedia.org/wiki/Shell_(computing)#Text_(CLI)_shells"
+       >CLI shells</a> and 
+    <a href="https://en.wikipedia.org/wiki/Command-line_interface"
+       >command-line interfaces</a>.</li>
+</ul>
+
+
+<h1>Terminal, terminal emulator</h1>
 <!-- ************************************************************ -->
 
-<p>See
+<p>Android runs on top of a (small) Linux layer. To call Linux
+commands interactively, you need a <i>shell</i> and a <i>terminal
+emulator</i>.</p>
+
+<p>TTerm is the <dfn>terminal emulator</dfn>. It displays your input
+(what you type) and the commands' output, but it doesn't actually
+execute any Linux commands. That's the job of the
+  <a href="#shell"
+    >shell</a>.</p>
+
+<p>For more details, see
   <a href="shells.xhtml">Shells and distributions</a>.</p>
+
+
+<h5>Further reading</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<ul>
+  <li>Read more about <a href="https://en.wikipedia.org/wiki/Terminal_emulator"
+         >terminal emulators</a>.</li>
+</ul>
+
+
+<h2 id="terminal/settings">Terminal settings</h2>
+<!-- ============================================================ -->
+
+<p>See
+  <a href="commands.xhtml#stty"
+     ><c>stty</c></a>, particularly
+  <a href="commands.xhtml#stty/sane"
+     ><c>stty sane</c></a>.</p>
+
+<p>If you have trouble with the terminal settings in Emacs, see
+  <a href="prg/emacs.xhtml#terminal"
+     >Emacs terminal size and settings</a>.</p>
+
+
+<h2 id="terminal/size">Terminal size</h2>
+<!-- ============================================================ -->
+
+<p>It's surprisingly difficult to ensure that the currently running
+command always knows the current terminal size.</p>
+
+<p>If all goes well, you can query the terminal size with
+  <a href="../commands.xhtml#stty/size"
+     ><c>stty size</c></a>.</p>
+
+<p>If something gets messed up and Linux doesn't know the current
+terminal size, use
+  <a href="commands.xhtml#stty/rows+cols"
+     ><c><b>stty rows</b></c> and <c><b>stty cols</b></c></a>
+to set it.</p>
+
+<p>If you have trouble with the terminal size in Emacs, see
+  <a href="prg/emacs.xhtml#terminal"
+     >Emacs terminal size and settings</a>.</p>
+
+
+<h5>Further reading</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<ul>
+  <li>The excellent article
+    <a href="http://www.linusakesson.net/programming/tty/index.php"
+       >The TTY demystified</a>.
+  </li>
+</ul>
 
 <!-- ************************************************************ -->
 

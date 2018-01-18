@@ -43,428 +43,408 @@ them.</p>
 <h1>C</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li>
-    <p><b><c>cd</c></b> &mdash; change directory</p>
+<h2><c>cd</c> &mdash; change directory</h2>
+<!-- ============================================================ -->
 
-    <p>(A shell built-in in all shells.)</p>
-  </li>
-</ul>
+<p>(A shell built-in in all shells.)</p>
 
 
 <h1>E</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li>
-    <p><b><c>echo</c></b> &mdash; display a line of text</p>
+<h2><c>echo</c> &mdash; display a line of text</h2>
+<!-- ============================================================ -->
   
-    <p>(A shell built-in in all shells, also available as a Unix
-    command in <c>/system/bin</c>.)</p>
+<p>(A shell built-in in all shells, also available as a Unix
+command in <c>/system/bin</c>.)</p>
+
+
+<h2><c>emacs</c> - editor</h2>
+<!-- ============================================================ -->
+
+<p>See 
+  <a href="prg/emacs.xhtml">Emacs</a>.</p>
+  
+
+<h2><c>env</c> &mdash; print environment or set environment variables
+for a single command</h2>
+<!-- ============================================================ -->
+  
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+<ul>
+  <li>
+    <p>Use 1: <c>env</c></p>
+    
+    <p><c>env</c> without arguments prints the current
+    environment.</p>
   </li>
 
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
   <li>
-    <p><b><c>emacs</c></b> &mdash; see 
-      <a href="prg/emacs.xhtml">Emacs</a></p>
-  </li>
-  
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>env</c></b> &mdash; print environment or set environment
-    variables for a single command</p>
-  
-    <p>(A Unix command available in <c>/system/bin</c>.)</p>
-
-    <ul>
-      <li>
-        <p>Use 1: <c>env</c></p>
-
-        <p><c>env</c> without arguments prints the current
-        environment.</p>
-      </li>
-
-
-      <li>
-        <p>Use 2: <c>env «vars» «command» «arguments»</c></p>
-
-        <p>Where <c>«vars»</c> is <c>«var_1»="«value 1»" ...
-        «var_n»="«value n»"</c>. The values must be quoted or
-        escaped as explained in 
-          <a href="concepts.xhtml#env_vars">
-            Environments variables</a>.</p>
+    <p>Use 2: <c>env «vars» «command» «arguments»</c></p>
+    
+    <p>Where <c>«vars»</c> is <c>«var_1»="«value 1»" ...
+    «var_n»="«value n»"</c>. The values must be quoted or escaped as
+    explained in
+      <a href="concepts.xhtml#env-vars">
+    Environments variables</a>.</p>
         
-        <p>Executes <c>«command» «arguments»</c> with
-        environment variables <c>«var_1»</c> to
-        <c>«var_n»</c> set to the specified values.</p>
+    <p>Executes <c>«command» «arguments»</c> with environment
+    variables <c>«var_1»</c> to <c>«var_n»</c> set to the specified
+    values.</p>
         
-        <p>It is equivalent to the shell syntax</p>
+    <p>It is equivalent to the shell syntax</p>
         
-        <p class="indent code">
-          «var_1»="«value 1»" ... «var_n»="«value n»" «command» «arguments»
-        </p>
+    <p class="indent code">
+      «var_1»="«value 1»" ... «var_n»="«value n»" «command» «arguments»
+    </p>
         
-        <p>so you only need it when you need to set environment variables
-        but are not inside a shell. For example for the
-        <a href="config.xhtml#setting/command_line"
-           >setting <setting>Command line</setting></a>.
-        </p>
-      </li>
-    </ul>
-  </li>
-  
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>exec</c></b> &mdash; replace the shell with a command</p>
-
-    <p>(A shell built-in in all shells.)</p>
-  </li>
-  
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>export</c></b> &mdash; set an environment variable</p>
-  
-    <p>(A shell built-in in all <c>sh</c>-compatible shells.)</p>
-
-    <p>See section 
-      <a href="concepts.xhtml#env_vars"
-         >Environments variables</a>.</p>
+    <p>so you only need it when you need to set environment variables
+    but are not inside a shell. For example for the
+      <a href="config.xhtml#setting/command_line"
+         >setting <setting>Command line</setting></a>.
+    </p>
   </li>
 </ul>
+
+
+<h2><c>exec</c> &mdash; replace the shell with a command</h2>
+<!-- ============================================================ -->
+
+<p>(A shell built-in in all shells.)</p>
+  
+
+<h2><c>export</c> &mdash; set an environment variable</h2>
+<!-- ============================================================ -->
+  
+<p>(A shell built-in in all <c>sh</c>-compatible shells.)</p>
+
+<p>See section 
+  <a href="concepts.xhtml#env-vars"
+     >Environments variables</a>.</p>
 
 
 <h1>F</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li>
-    <p><b><c>fgrep</c></b> &mdash; search for a string</p>
+<h2><c>fgrep</c> &mdash; search for a string</h2>
+<!-- ============================================================ -->
     
-    <p>(A Unix command available in <c>/system/bin</c>.)</p>
-  </li>
-</ul>
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
 
 
 <h1>G</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li id="getprop">
-    <p><b><c>getprop</c></b> &mdash; get 
-      <a href="concepts.xhtml#android_os_system_properties"
-         >Android OS system properties</a></p>
+<h2 id="getprop"><c>getprop</c> &mdash; get Android OS system
+properties</h2>
+<!-- ============================================================ -->
 
-    <p>(An Android command available in <c>/system/bin</c>.)</p>
+<p>(An Android command available in <c>/system/bin</c>.)</p>
 
-    <p>Use:</p>
-
-    <p class="indent code">getprop [«name» [«default»]]</p>
-
-    <p>Example 1: Get several properties</p>
+<p>To access the
+  <a href="concepts.xhtml#android_os_system_properties"
+     >Android OS system properties</a>, use:</p>
+  
+<p class="indent code">getprop [«name» [«default»]]</p>
+  
+<p>Example 1: Get several properties</p>
     
-    <p class="indent code">
-      getprop | fgrep ro.product.m         <br/> 
-      [ro.product.manufacturer]: [samsung] <br/> 
-      [ro.product.model]: [SM-T800]        <br/> 
-      [ro.product.name]: [chagallwifi]
-    </p>
-    
-    <p>Example 2: Get one property</p>
+<p class="indent code">
+  getprop | fgrep ro.product.m         <br/> 
+  [ro.product.manufacturer]: [samsung] <br/> 
+  [ro.product.model]: [SM-T800]        <br/> 
+  [ro.product.name]: [chagallwifi]
+</p>
 
-    <p class="indent code">
-      getprop ro.product.name <br/>
-      chagallwifi
-    </p>
-  </li>
-</ul>
+<p>Example 2: Get one property</p>
+
+<p class="indent code">
+  getprop ro.product.name <br/>
+  chagallwifi
+</p>
 
 
 <h1>M</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li>
-    <p><b><c>mkfifo</c></b> &mdash; create a named pipe (a FIFO)</p>
+<h2><c>mkfifo</c> &mdash; create a named pipe (a FIFO)</h2>
+<!-- ============================================================ -->
   
-    <p>(A Unix command available in <c>/system/bin</c>.)</p>
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
     
-    <p>A "named pipe", also called a "FIFO" ("First In, First
-    Out"), is a file that connects two processes with a
-    bidirectional pipe.</p>
+<p>A "named pipe", also called a "FIFO" ("First In, First Out"), is a
+file that connects two processes with a bidirectional pipe.</p>
     
-    <p>For an example, see 
-      <a href="run/termux.xhtml#run/connect/netcat"
-         >Connect to Termux with Netcat</a>.</p>
-  </li>
+<p>For an example, see 
+  <a href="run/termux.xhtml#run/connect/netcat"
+     >Connect to Termux with Netcat</a>.</p>
 
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-  <li>
-    <p><b><c>more</c></b> &mdash; a simple pager</p>
+<h2><c>more</c> &mdash; a simple pager</h2>
+<!-- ============================================================ -->
   
-    <p>(A Unix command available in <c>/system/bin</c>.)</p>
-  </li>
-</ul>
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
 
 
 <h1>N</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li id="netcat">
-    <p><b><c>netcat</c></b> or <b><c>nc</c></b> &mdash; Netcat</p>
+<h2 id="netcat"><c>netcat</c> or <c>nc</c> &mdash; Netcat</h2>
+<!-- ============================================================ -->
 
-    <p>(A Unix command <b>not</b> available in <c>/system/bin</c>,
-    only in BusyBox, Termux or Debian.)</p>
+<p>(A Unix command <b>not</b> available in <c>/system/bin</c>, only in
+BusyBox, Termux or Debian.)</p>
 
-    <p>Netcat can be installed as <c>netcat</c>, <c>nc</c> or
-    both.</p>
+<p>Netcat can be installed as <c>netcat</c>, <c>nc</c> or both.</p>
 
-    <p>For an example, see 
-      <a href="run/termux.xhtml#run/connect/netcat"
-         >Connect to Termux with Netcat</a>.</p>
-  </li>
-</ul>
+<p>For an example, see 
+  <a href="run/termux.xhtml#run/connect/netcat"
+     >Connect to Termux with Netcat</a>.</p>
 
 
 <h1>S</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
+<h2><c>script</c> &mdash; record a terminal session</h2>
+<!-- ============================================================ -->
+  
+<p>(A Unix command <b>not</b> available in <c>/system/bin</c>, only in
+BusyBox, Termux or Debian.)</p>
+
+<p><c>script</c> records a terminal session, i.e. logs the input and
+output in a file <c>typescript</c> in the current directory.</p>
+  
+
+<h2><c>set</c> &mdash; set shell options and arguments, or print shell
+and environment variables</h2>
+<!-- ============================================================ -->
+  
+<p>(A shell built-in in all shells.)</p>
+
+<p>Use:</p>
+
+<ul>
+  <li><c>set</c> without arguments prints all shell variables and
+  environment variables. In some shells it also prints all
+  functions.</li>
+
+  <li>For other uses, consult your shell's documentation. In
+  <c>sh</c>-compatible shell, it sets shell options or the shell's
+  arguments <c>$1</c>, <c>$2</c>...</li>
+</ul>
+
+
+<h2 id="setprop"><c>setprop</c> &mdash; set Android OS system
+properties</h2>
+<!-- ============================================================ -->
+
+<p>(An Android command available in <c>/system/bin</c>.)</p>
+
+<p>To set an
+  <a href="concepts.xhtml#android_os_system_properties"
+     >Android OS system properties</a>, use:</p>
+
+<p class="indent code">setprop name value</p>
+
+
+<h2><c>sh</c> &mdash; default shell</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+<p>See 
+  <a href="run/sh.xhtml"
+     >Android's shell</a>.</p>
+  
+
+<h2><c>sort</c> &mdash; sort lines</h2>
+<!-- ============================================================ -->
+  
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+  
+<h2><c>ssh</c> &mdash; SSH</h2>
+<!-- ============================================================ -->
+
+<p class="TODO">LATER I will write about this when I've found a SSH
+client that runs in TTerm.</p>
+
+
+<h2><c>su</c> &mdash; super-user</h2>
+<!-- ============================================================ -->
+  
+<p>(A Unix command only available in a
+  <a href="../rooting.xhtml"
+     >rooted device</a>.)</p>
+  
+<ul>
   <li>
-    <p><b><c>script</c></b> &mdash; record a terminal session</p>
-  
-    <p>(A Unix command <b>not</b> available in <c>/system/bin</c>,
-    only in BusyBox, Termux or Debian.)</p>
-
-    <p><c>script</c> records a terminal session, i.e. logs the
-    input and output.</p>
-  </li>
-  
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>set</c></b> &mdash; set shell options and arguments, or
-    print shell and environment variables</p>
-  
-    <p>(A shell built-in in all shells.)</p>
-
-    <p>Use:</p>
-
-    <ul>
-      <li><c>set</c> without arguments prints all shell variables and
-      environment variables. In some shells it also prints all functions.</li>
-
-      <li>For other uses, consult your shell's documentation. In
-      <c>sh</c>-compatible shell, it sets shell options or the
-      shell's arguments <c>$1</c>, <c>$2</c>...</li>
-    </ul>
-  </li>
-
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li id="setprop">
-    <p><b><c>setprop</c></b> &mdash; set 
-      <a href="concepts.xhtml#android_os_system_properties"
-         >Android OS system properties</a></p>
-
-    <p>(An Android command available in <c>/system/bin</c>.)</p>
-
-    <p>Use:</p>
-
-    <p class="indent code">setprop name value</p>
-  </li>
-
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>sh</c></b> &mdash; default shell</p>
-
-    <p>(A Unix command available in <c>/system/bin</c>.)</p>
-
-    <p>See 
-      <a href="run/sh.xhtml"
-         >Android's shell</a>.</p>
-  </li>
-  
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>sort</c></b> &mdash; sort lines</p>
-  
-    <p>(A Unix command available in <c>/system/bin</c>.)</p>
-  </li>
-  
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>ssh</c></b> &mdash; SSH</p>
-
-    <p class="TODO">LATER I will write about this when I've found a SSH
-    client that runs in TTerm.</p>
-  </li>
-
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li>
-    <p><b><c>su</c></b> &mdash; super-user</p>
-  
-    <p>(A Unix command only available in a
-      <a href="../rooting.xhtml"
-       >rooted device</a>.)</p>
-
-    <ul>
-      <li>
-        <p>Use 1: <c>su</c></p>
-        
-        <p><c>su</c> without arguments runs a shell as root.</p>
-      </li>
-
-      <li>
-        <p>Use 2: <c>su «user»</c></p>
-
-        <p>Runs a shell as Linux user «user». In Android, each app has
-        its own Linux user, with a name like <c>u«android user
-        number»_a«Linux user number»</c>.</p>
-      </li>
-
-      <li>
-        <p>Use 3: <c>su [«user»] -c "«command» «args»"</c></p>
-
-        <p>Runs a command as root or Linux user «user». Note that the
-        command and its arguments should be quoted.</p>
-      </li>
-    </ul>
-  </li>
-  
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <li id="stty">
-    <p><b><c>stty</c></b> &mdash; "set TTY", sets and prints terminal
-    (TTY) settings</p>
-
-    <p>(A Unix command <b>not</b> available in <c>/system/bin</c>,
-    only in BusyBox, Termux or Debian.)</p>
-
-    <p><c>stty</c> has several functions:</p>
-
-    <ul>
-      <li>
-        <p><c>stty</c> can look up and set the terminal size. For
-        example,</p>
-
-        <p class="indent code">
-          stty size<br/>
-          38 84
-        </p>
-
-        <p>means that the terminal has 38 rows and 84 columns.</p>
-
-        <p>Set the terminal size with:</p>
-
-        <p class="indent code">
-          stty rows 38 cols 84
-        </p>
-      </li>
+    <p>Use 1: <c>su</c></p>
     
-      <li>
-        <p><c>stty</c> can control the keyboard.</p>
-        
-        <p>For example, it can enable or disable echoing of
-        characters, and it can enable or disable the handling special
-        characters like <key>^C</key>.</p>
+    <p><c>su</c> without arguments runs a shell as root.</p>
+  </li>
 
-        <p>The keyboard has "modes":</p>
-        
-        <ul>
-          <li>
-            <p>The default is line-based input with "cooked mode", aka
-            "canonical mode", where the OS handles basic line editing,
-            e.g. <key>^H</key> or <key>^?</key> for backspace, or
-            <key>^C</key> to interrupt.</p>
-
-            <p>This is a very old mode. It doesn't support cursor
-            keys, so most shells don't use it.</p>
-
-            <p>For an example, start <c>cat</c>. You can delete a char
-            whith <key>Backspace</key>, or a word with <key>^W</key>,
-            but you can't use the cursor keys.</p>
-          </li>
-
-          <li>
-            <p><c>stty raw</c> sets the terminal to <i>raw mode</i>.
-            The OS does not handle any characters, and all chars that
-            the users types are sent immediately to the running
-            command, and all chars output by the command are shown
-            immediately.</p>
-
-            <p>This is what most shells use to offer command line
-            editing.</p>
-        
-            <p>For another example, see
-              <a href="run/termux.xhtml#run/connect/netcat"
-                 >Running Termux in TTerm with Netcat</a>,
-            where it ensures that the <i>remote</i> shell handles all
-            command line editing. It also ensures that <key>^C</key>
-            arrives at the <i>remote</i> shell, insted of stopping the
-            <i>local</i> Netcat.</p>
-          </li>
-
-          <p>Further examples:</p>
-
-          <li>
-            <p><c>stty -echo</c> turns off <i>local</i> echoing of the
-            chars that you type, <c>stty echo</c> turns it on
-            again.</p>
-          </li>
-        </ul>
-      </li>
-
-      <p>It is possible to mess up your terminal settings so that you
-      can't even see what you are typing. In that case:</p>
-
-      <li><c>stty sane</c> sets the terminal settings back to a
-      "sane" default.</li>
-    </ul>
+  <li>
+    <p>Use 2: <c>su «user»</c></p>
+    
+    <p>Runs a shell as Linux user «user». In Android, each app has its
+    own Linux user, with a name like <c>u«android user number»_a«Linux
+    user number»</c>.</p>
   </li>
   
+  <li>
+    <p>Use 3: <c>su [«user»] -c "«command» «args»"</c></p>
+    
+    <p>Runs a command as root or Linux user «user». Note that the
+    command and its arguments should be quoted.</p>
+  </li>
+</ul>
+  
+
+<h2 id="stty"><c>stty</c> &mdash; "set TTY", sets and prints terminal
+(TTY) settings</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command <b>not</b> available in <c>/system/bin</c>, only in
+BusyBox, Termux or Debian.)</p>
+
+<p><c>stty</c> has several functions:</p>
+
+<ul>
+  <li id="stty/size">
+    <p><b><c>stty size</c></b> returns the 
+      <a href="concepts.xhtml#terminal/size"
+         >terminal size</a>.
+    For example</p>
+
+    <p class="indent code">
+      $ stty size<br/>
+      38 84
+    </p>
+
+    <p>means that the terminal has 38 rows and 84 columns.</p>
+
+    <p>If you only need the number of rows or the number of columns,
+    you have to be a Shell Wizard to figure out how to access just one
+    of the two numbers. For us ordinary mortals, BusyBox has
+      <a href="#ttysize"
+         ><c>ttysize</c></a>.</p>
+  </li>
+
+  <li id="stty/rows+cols">
+    <p>It's surprisingly difficult to ensure that the currently
+    running command always knows the current
+      <a hreft="concepts.xhtml#terminal/size"
+         >terminal size</a>.</p>
+
+    <p>If something gets messed up and Linux doesn't know the current
+    terminal size, use <c><b>stty rows</b></c> and <c><b>stty
+    cols</b></c> to set it, for example:</p>
+
+    <p class="indent code">
+      stty rows 38 cols 84
+    </p>
+  </li>
+
+  <li id="stty/keyboard">
+    <p><c>stty</c> can control 
+      <a href="concepts.xhtml#terminal/settings"
+         >terminal settings</a>.</p>
+    
+    <p>For example, it can enable or disable echoing of characters,
+    and it can enable or disable the handling special characters like
+    <k>^C</k>.</p>
+
+    <p>The keyboard has "modes":</p>
+    
+    <ul>
+      <li>
+        <p>The default is line-based input with "cooked mode", aka
+        "canonical mode", where the OS handles basic line editing,
+        e.g. <k>^H</k> or <k>^?</k> for backspace, or <k>^C</k> to
+        interrupt.</p>
+
+        <p>This is a very old mode. It doesn't support cursor keys, so
+        most shells don't use it.</p>
+
+        <p>For an example, start <c>cat</c>. You can delete a char
+        whith <k>Backspace</k>, or a word with <k>^W</k>, but you
+        can't use the cursor keys.</p>
+      </li>
+
+      <li id="stty/raw">
+        <p><c><b>stty raw</b></c> sets the terminal to <dfn>raw
+        mode</dfn>. The OS does not handle any characters, and all
+        chars that the users types are sent immediately to the running
+        command, and all chars output by the command are shown
+        immediately.</p>
+
+        <p>This is what most shells use to offer command line
+        editing.</p>
+    
+        <p>For another example, see
+          <a href="run/termux.xhtml#run/connect/netcat"
+             >Running Termux in TTerm with Netcat</a>,
+        where it ensures that the <i>remote</i> shell handles all
+        command line editing. It also ensures that <k>^C</k> arrives
+        at the <i>remote</i> shell, insted of stopping the
+        <i>local</i> Netcat.</p>
+      </li>
+
+      <p>Further examples:</p>
+
+      <li id="stty/echo">
+        <p><c><b>stty -echo</b></c> turns off echoing of the chars
+        that you type, <c><b>stty echo</b></c> turns it on again.</p>
+      </li>
+    </ul>
+  </li>
+
+  <p>It is possible to mess up your terminal settings so that you
+  can't even see what you are typing. In that case:</p>
+
+  <li id="stty/sane">
+    <p><c><b>stty sane</b></c> sets the terminal settings back to a
+    "sane" default.</p>
+  </li>
 </ul>
 
 
 <h1>T</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li>
-    <p><b><c>telnet</c></b>, <c>telnetd</c> &mdash; Telnet and
-    its daemon</p>
+<h2><c>telnet</c>, <c>telnetd</c> &mdash; Telnet and its daemon</h2>
+<!-- ============================================================ -->
 
-    <p>(A Unix command <b>not</b> available in <c>/system/bin</c>,
-    only in BusyBox, Termux or Debian.)</p>
+<p>(A Unix command <b>not</b> available in <c>/system/bin</c>,
+only in BusyBox, Termux or Debian.)</p>
 
-    <p>For an example, see 
-      <a href="run/termux.xhtml#run/connect/telnet"
-         >Connect to Termux with Telnet</a>.</p>
-  </li>
-</ul>
+<p>For an example, see 
+  <a href="run/termux.xhtml#run/connect/telnet"
+     >Connect to Termux with Telnet</a>.</p>
+
+
+<h2 id="ttysize"><c>ttysize</c> &mdash; print the terminal size</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command <b>not</b> available in <c>/system/bin</c>, only in
+BusyBox, Termux or Debian.)</p>
+    
+<p><c>stty size</c> returns the terminal size. But if you only need
+the number of rows or the number of columns, you have to be a Shell
+Wizard to figure out how to access just one of the two numbers. For us
+ordinary mortals, BusyBox has <c><b>ttysize h</b></c> and
+<c><b>ttysize w</b></c>.</p>
 
 
 <h1>W</h1>
 <!-- ************************************************************ -->
 
-<ul class="wide">
-  <li>
-    <p><b><c>whoami</c></b> &mdash; print the Linux user name</p>
+<h2><c>whoami</c> &mdash; print the Linux user name</h2>
+<!-- ============================================================ -->
 
-    <p>(A Unix command available in <c>/system/bin</c>.)</p>
-  </li>
-
-  <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
-</ul>
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
 
 
 <!-- ************************************************************ -->

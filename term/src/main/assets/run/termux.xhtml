@@ -125,7 +125,7 @@ This will accept one connection, then quit.</p>
     that we do not need. How do we avoid that?</p>
 
     <p>In Termux the command stops when you log out in TTerm. In
-    GNURoot Debian you have to stop it with <key>Ctrl+c.</key></p>
+    GNURoot Debian you have to stop it with <k>Ctrl+c.</k></p>
   </dd>
 
   <dt>rm -f pipe typescript</dt>
@@ -139,9 +139,9 @@ This will accept one connection, then quit.</p>
 
 <p>Netcat does not tell the remote shell the terminal size, so look
 it up with 
-  <c><a href="../commands.xhtml#stty"
-        >stty</a> size</c>
-For example, this:</p>
+  <a href="../commands.xhtml#stty/size"
+     ><c>stty size</c></a> 
+For example</p>
 
 <p class="indent code">
   stty size<br/>
@@ -164,40 +164,49 @@ what you type for the second and third commands.</p>
 
 <ul>
   <li>
-    <p>The first command 
-      <c><a href="../commands.xhtml#stty"
-            >stty</a> raw -echo</c>
-    sets the terminal settings:</p>
+    <p>The first command <c>stty raw -echo</c> sets the terminal
+    settings:</p>
 
     <ul>
-      <li><c>stty raw</c> sets the terminal to <i>raw mode</i>, so
-      that all chars are sent immediately to the remote shell, and all
-      chars output by the remote shell are shown. That is necessary so
-      a <key>Ctrl+C</key> arrives at the <i>remote</i> shell,
-      otherwise it stops the <i>local</i> Netcat.</li>
+      <li>
+        <p><a href="../commands.xhtml#stty/raw"
+              ><c>stty raw</c></a>
+        sets the terminal to <i>raw mode</i>, so that all chars are
+        sent immediately to the remote shell, and all chars output by
+        the remote shell are shown. That is necessary so a
+        <k>Ctrl+C</k> arrives at the <i>remote</i> shell, otherwise it
+        stops the <i>local</i> Netcat.</p>
+      </li>
       
-      <li><c>stty -echo</c> turns off <i>local</i> echoing, so that
-      the <i>remote</i> shell on Termux decides when to echo user
-      input.</li>
+      <li>
+        <p><a href="../commands.xhtml#stty/echo"
+              ><c>stty -echo</c></a>
+        turns off <i>local</i> echoing, so that the <i>remote</i>
+        shell on Termux decides when to echo user input.</p>
+      </li>
     </ul>
   </li>
   
-  <li>The second command <c>nc localhost 111</c> connects to the
-  Netcat running on port 1111 of the same device. If <c>localhost</c>
-  does not work, try <c>127.0.0.1</c> instead.</li>
+  <li>
+    <p>The second command <c>nc localhost 111</c> connects to the
+    Netcat running on port 1111 of the same device. If <c>localhost</c>
+    does not work, try <c>127.0.0.1</c> instead.</p>
+  </li>
   
-  <li>After you quit the shell that runs remotely in Termux, the third
-  command 
-    <c><a href="../commands.xhtml#stty"
-          >stty</a> raw</c>
-  sets the terminal settings back to their default.</li>
+  <li>
+    <p>After you quit the shell that runs remotely in Termux, the
+    third command
+      <a href="../commands.xhtml#stty/sane"
+         ><c>stty sane</c></a>
+      sets the terminal settings back to their default.</p>
+  </li>
 </ul>
 
 <p>Now we are in a shell on the remote Termux. Set the terminal size
 so the shell on Termux knows it, for example with:</p>
 
 <p class="indent code">
-  <a href="../commands.xhtml#stty">stty</a> rows 38 cols 84 
+  <a href="../commands.xhtml#stty/rows+cols">stty rows 38 cols 84</a>
 </p>
 
 <p>When you exit the remote shell, Netcat on the remote Termux also
@@ -246,7 +255,7 @@ do the following:</p>
 </dl>
 
 <p>When you've finished testing, stop the Telnet daemon in Termux with
-<key>Ctrl+c</key>.</p>
+<k>Ctrl+c</k>.</p>
 
 
 <h3>With SSH</h3>

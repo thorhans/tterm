@@ -40,12 +40,12 @@ there are tons of extension packages for it.</p>
 
 <ul>
   <li>In <a href="../run/termux.xhtml" >Termux</a> you can Install
-  Emacs 25.1 with <c>apt install emacs</c>. On my device, it
-  crashes now and then.</li>
+  Emacs 25.1 with <c>apt install emacs</c>. On my devices, it crashes
+  now and then.</li>
   
   <li>In <a href="../run/debian.xhtml" >GNURoot Debian</a> you can
-  Install Emacs 24.4.1 with <c>apt install emacs</c>. I have not
-  used it much yet, so I don't know how stable it is.</li>
+  Install Emacs 24.4.1 with <c>apt install emacs</c>. I have not used
+  it much yet, so I don't know how stable it is.</li>
 </ul>
 
 
@@ -59,6 +59,28 @@ there are tons of extension packages for it.</p>
   (global-set-key [mouse-4] 'scroll-down-line)<br/>
   (global-set-key [mouse-5] 'scroll-up-line)
 </p>
+
+
+<h1 id="terminal">Terminal size and settings</h1>
+<!-- ************************************************************ -->
+
+<p>Sometimes Emacs gets confused about the 
+  <a href="../concepts.xhtml#terminal/size"
+     >terminal size</a>,
+sometimes even about other 
+  <a href="../concepts.xhtml#terminal/settings"
+     >terminal settings</a>.
+This function seems to help:</p>
+
+<p class="indent code">
+(defun x ()<br/>
+  (interactive)<br/>
+  (redraw-frame (selected-frame))<br/>
+)
+</p>
+
+<p>I've called it <c>x</c> so youx can type it without visual feedback
+when nothing works correctly: <k>Esc x x Enter</k>.</p>
 
 <!-- ************************************************************ -->
 

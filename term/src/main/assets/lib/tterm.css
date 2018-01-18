@@ -39,7 +39,7 @@ code.cursor {
 }
 
 /* A key or key code. */
-key {
+k {
   /* See `code´ in `t2h.css´. */
   font-family: "Courier New", monospace, serif;
 }
