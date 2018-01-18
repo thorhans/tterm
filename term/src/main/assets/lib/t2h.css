@@ -247,19 +247,30 @@ ul > li, ol > li {
 ul > li::before {
   /* Candidates:
    *
-   *   U+2013 ‘–’ ‘en dash’            - not really
-   *   U+2022 ‘•’ ‘bullet’             - too small
-   *   U+25CF ‘●’ ‘black circle’       - *huge* on Arn, see below
-   *   U+25CB ‘○’ ‘white circle’       - *huge* on Arn, see below
-   *   U+25AA ‘▪’ ‘black small square’ - a tolerable compromise, see below
-   *   U+25AB ‘▫’ ‘white small square’ - ugly on Arn
+   *                                   | In font Noto Sans
+   *   ------------------------------------------------------------
+   *   U+2013 ‘–’ ‘en dash’            | not really
+   *   U+2022 ‘•’ ‘bullet’             | too small
+   *   U+25CF ‘●’ ‘black circle’       | *huge* on Arn, see below
+   *   U+25CB ‘○’ ‘white circle’       | *huge* on Arn, see below
+   *   U+25AA ‘▪’ ‘black small square’ | a tolerable compromise, see below
+   *   U+25AB ‘▫’ ‘white small square’ | ugly on Arn
    *
    * ‘▪’ is a bit too small on Windows and Ten, but an acceptable
    * compromise. On Arn it is also too big, but the effect is only
    * that it moves to the right, which is also an acceptable
    * compromise.
    */
-  content: "▪";
+  content: "●";
+
+  /* This was the solution: Just use a monospace font, with the same
+   * hack as for ‘code’ above. 
+   *
+   * Works in Chrome on Win8.1, Arn and Ten. Works in Firefox. (Even
+   * works in IE on Win 8.1.)
+   */
+  font-family: "Courier New", monospace, serif;
+  
   /* THIS DID NOT WORK. 
    * 
    * The font "Noto Sans Symbols" on my device Arn, a Samsung Galaxy
@@ -305,15 +316,14 @@ ul > li::before {
   margin-left:  -1em; 
 
   /* Distance between container's left margin and left margin of
-   * bullet.
-   */ 
+   * bullet. */ 
   padding-left: 0em;
                          
 }
 
-ul ul > li::before       { color: #808080; }
-ul ul ul > li::before    { color: #000000; }
-ul ul ul ul > li::before { color: #808080; }
+ul ul > li::before       { content: "○"; }
+ul ul ul > li::before    { content: "●"; }
+ul ul ul ul > li::before { content: "○"; }
 
 
 /** Narrow list items.
