@@ -242,59 +242,78 @@ ul > li, ol > li {
   margin-bottom: 1em;  /* `1em´ is Firefox's spacing of `p´. */
 }
 
-
-/** A version of "Noto Sans Symbols" that contains the Unicode chars
- *
- *   U+25CF ‘●’ ‘black circle’
- *   U+25CB ‘○’ ‘white circle’
- *
- * used in the rule for
- * 
- *   ul > li::before 
- *
- * below.
- *
- * I found it at
- *
- *   https://wakufactory.jp/densho/font/Noto/noto.html
- */
-@font-face {
-  font-family: "My Noto Sans Symbols";
-  src: url("MyNotoSansSymbols-Regular.ttf");
-}
-
 /** Bullet for default list item. 
  */
 ul > li::before {
   /* Candidates:
    *
+   *   U+2013 ‘–’ ‘en dash’            - not really
+   *   U+2022 ‘•’ ‘bullet’             - too small
+   *   U+25CF ‘●’ ‘black circle’       - *huge* on Arn, see below
+   *   U+25CB ‘○’ ‘white circle’       - *huge* on Arn, see below
+   *   U+25AA ‘▪’ ‘black small square’ - a tolerable compromise, see below
+   *   U+25AB ‘▫’ ‘white small square’ - ugly on Arn
+   *
+   * ‘▪’ is a bit too small on Windows and Ten, but an acceptable
+   * compromise. On Arn it is also too big, but the effect is only
+   * that it moves to the right, which is also an acceptable
+   * compromise.
+   */
+  content: "▪";
+  /* THIS DID NOT WORK. 
+   * 
+   * The font "Noto Sans Symbols" on my device Arn, a Samsung Galaxy
+   * Tab S2 8.0 WiFi (2016), SM-T713, with Android 7, does not
+   * contain:
+   *
    *   U+25CF ‘●’ ‘black circle’
    *   U+25CB ‘○’ ‘white circle’
-   *   U+2022 ‘•’ ‘bullet’
-   *   U+2013 ‘–’ ‘en dash’
+   *
+   * So they get rendered in "SEC CJK SC Regular", in which they are
+   * too big.
+   *
+   * So I tried providing a correct font with:
+   * 
+   *   font-family: "My Noto Sans Symbols2";
+   * 
+   * together with:
+   * 
+   *   @font-face {
+   *     font-family: "My Noto Sans Symbols2";
+   *     src: url("NotoSansSymbols2-Regular.ttf");
+   *   } 
+   *
+   * Note the ‘2’ in the font name. But the symbols are also too big
+   * in "Noto Sans Symbols2"
+   *
+   * There is no way to resize the bullets *and* reliable align them
+   * to the baseline. There are problems if the height of the first
+   * line varies. That doesn't happen often, but it happens, so I
+   * don't like that. I tried for several *days* until I gave up.
    */
-  content: "●";
-  color:      #000080;
-
-  /* The font "Noto Sans Symbols" appears to be broken on my device
-   * Arn, a Samsung Galaxy Tab S2 8.0 WiFi (2016), SM-T713, with
-   * Android 7. So I'm providing a correct font above.
-   */
-  font-family: "My Noto Sans Symbols";
 
   /* Horizontal spacing
    * ------------------------------ */
 
   float: left;
 
-  margin-left:  -1.2em; /* assert: marginLeft == -li.paddingLeft  */
-  padding-left:  0.2em; /* Distance between container's left margin and
-                         * left margin of bullet. */
+  /* If you want the bullet to align with the left border, then you
+   * should have:
+   *
+   *   this.marginLeft == -li.paddingLeft 
+   */
+  margin-left:  -1em; 
+
+  /* Distance between container's left margin and left margin of
+   * bullet.
+   */ 
+  padding-left: 0em;
+                         
 }
 
-ul ul > li::before { content: "○"; }
-ul ul ul > li::before { content: "●"; }
-ul ul ul ul > li::before { content: "○"; }
+ul ul > li::before       { color: #808080; }
+ul ul ul > li::before    { color: #000000; }
+ul ul ul ul > li::before { color: #808080; }
 
 
 /** Narrow list items.
