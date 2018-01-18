@@ -138,7 +138,10 @@ This will accept one connection, then quit.</p>
   <a href="busybox.xhtml">BusyBox</a>.</p>
 
 <p>Netcat does not tell the remote shell the terminal size, so look
-it up with <c>stty size</c>. For example, this:</p>
+it up with 
+  <c><a href="../commands.xhtml#stty"
+        >stty</a> size</c>
+For example, this:</p>
 
 <p class="indent code">
   stty size<br/>
@@ -161,18 +164,21 @@ what you type for the second and third commands.</p>
 
 <ul>
   <li>
-    <p>The first command <c>stty raw -echo</c> sets the terminal
-    settings:</p>
+    <p>The first command 
+      <c><a href="../commands.xhtml#stty"
+            >stty</a> raw -echo</c>
+    sets the terminal settings:</p>
 
     <ul>
-      <li><c>raw</c> sets the terminal to <i>raw mode</i>, so that all
-      chars are sent immediately to the remote shell, and all chars
-      output by the remote shell are shown. That is necessary so a
-      <key>Ctrl+C</key> arrives at the <i>remote</i> shell, otherwise
-      it stops the <i>local</i> Netcat.</li>
+      <li><c>stty raw</c> sets the terminal to <i>raw mode</i>, so
+      that all chars are sent immediately to the remote shell, and all
+      chars output by the remote shell are shown. That is necessary so
+      a <key>Ctrl+C</key> arrives at the <i>remote</i> shell,
+      otherwise it stops the <i>local</i> Netcat.</li>
       
-      <li><c>-echo</c> turns off <i>local</i> echoing, so that the
-      <i>remote</i> shell on Termux decides when to echo user input.</li>
+      <li><c>stty -echo</c> turns off <i>local</i> echoing, so that
+      the <i>remote</i> shell on Termux decides when to echo user
+      input.</li>
     </ul>
   </li>
   
@@ -181,15 +187,17 @@ what you type for the second and third commands.</p>
   does not work, try <c>127.0.0.1</c> instead.</li>
   
   <li>After you quit the shell that runs remotely in Termux, the third
-  command <c>stty sane</c> sets the terminal settings back to their
-  default.</li>
+  command 
+    <c><a href="../commands.xhtml#stty"
+          >stty</a> raw</c>
+  sets the terminal settings back to their default.</li>
 </ul>
 
 <p>Now we are in a shell on the remote Termux. Set the terminal size
 so the shell on Termux knows it, for example with:</p>
 
 <p class="indent code">
-  stty rows 38 cols 84
+  <a href="../commands.xhtml#stty">stty</a> rows 38 cols 84 
 </p>
 
 <p>When you exit the remote shell, Netcat on the remote Termux also

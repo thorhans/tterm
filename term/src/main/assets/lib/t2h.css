@@ -345,7 +345,7 @@ ul.narrow li {
 
 
 /** Wide list items. */
-ul.wide li { 
+ul.wide > li { 
   /* Vertical spacing 
    * ------------------------------ */
 

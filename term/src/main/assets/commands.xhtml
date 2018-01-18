@@ -343,13 +343,95 @@ them.</p>
   
   <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-  <li>
-    <p><b><c>stty</c></b> &mdash; change and print terminal (TTY)
-    settings</p>
+  <li id="stty">
+    <p><b><c>stty</c></b> &mdash; "set TTY", sets and prints terminal
+    (TTY) settings</p>
 
     <p>(A Unix command <b>not</b> available in <c>/system/bin</c>,
     only in BusyBox, Termux or Debian.)</p>
+
+    <p><c>stty</c> has several functions:</p>
+
+    <ul>
+      <li>
+        <p><c>stty</c> can look up and set the terminal size. For
+        example,</p>
+
+        <p class="indent code">
+          stty size<br/>
+          38 84
+        </p>
+
+        <p>means that the terminal has 38 rows and 84 columns.</p>
+
+        <p>Set the terminal size with:</p>
+
+        <p class="indent code">
+          stty rows 38 cols 84
+        </p>
+      </li>
+    
+      <li>
+        <p><c>stty</c> can control the keyboard.</p>
+        
+        <p>For example, it can enable or disable echoing of
+        characters, and it can enable or disable the handling special
+        characters like <key>^C</key>.</p>
+
+        <p>The keyboard has "modes":</p>
+        
+        <ul>
+          <li>
+            <p>The default is line-based input with "cooked mode", aka
+            "canonical mode", where the OS handles basic line editing,
+            e.g. <key>^H</key> or <key>^?</key> for backspace, or
+            <key>^C</key> to interrupt.</p>
+
+            <p>This is a very old mode. It doesn't support cursor
+            keys, so most shells don't use it.</p>
+
+            <p>For an example, start <c>cat</c>. You can delete a char
+            whith <key>Backspace</key>, or a word with <key>^W</key>,
+            but you can't use the cursor keys.</p>
+          </li>
+
+          <li>
+            <p><c>stty raw</c> sets the terminal to <i>raw mode</i>.
+            The OS does not handle any characters, and all chars that
+            the users types are sent immediately to the running
+            command, and all chars output by the command are shown
+            immediately.</p>
+
+            <p>This is what most shells use to offer command line
+            editing.</p>
+        
+            <p>For another example, see
+              <a href="run/termux.xhtml#run/connect/netcat"
+                 >Running Termux in TTerm with Netcat</a>,
+            where it ensures that the <i>remote</i> shell handles all
+            command line editing. It also ensures that <key>^C</key>
+            arrives at the <i>remote</i> shell, insted of stopping the
+            <i>local</i> Netcat.</p>
+          </li>
+
+          <p>Further examples:</p>
+
+          <li>
+            <p><c>stty -echo</c> turns off <i>local</i> echoing of the
+            chars that you type, <c>stty echo</c> turns it on
+            again.</p>
+          </li>
+        </ul>
+      </li>
+
+      <p>It is possible to mess up your terminal settings so that you
+      can't even see what you are typing. In that case:</p>
+
+      <li><c>stty sane</c> sets the terminal settings back to a
+      "sane" default.</li>
+    </ul>
   </li>
+  
 </ul>
 
 
