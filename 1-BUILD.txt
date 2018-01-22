@@ -23,6 +23,9 @@ TTerm
   
     term/prod/release/term-prod-release.apk
 
+  - TODO That only works from Android Studio, not from a shell. What's
+    wrong?
+
   Then install the APK with:
   
     cd $and/tterm
