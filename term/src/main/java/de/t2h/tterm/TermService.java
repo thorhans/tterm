@@ -102,11 +102,9 @@ public class TermService
                 PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = prefs.edit();
 
-            // Calculate the default value each time, since it can change if the app is moved to Adopted
-            // Storage.
-            //
-            // String defaultValue = getDir("HOME", MODE_PRIVATE).getAbsolutePath();
-            File home = new File(getFilesDir(), "home");
+            // Calculate the default value of the home directory each time, since it can change if the app is
+            // moved to Adopted Storage.
+            File home = new File(getFilesDir(), "home"); // ‘/data/user/0/de.t2h.tterm/files/home’
             if(! home.exists()) {
                 home.mkdir();
             }
