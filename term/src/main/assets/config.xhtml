@@ -220,10 +220,28 @@
   <li id="setting/HOME_folder">
     Setting <b><setting>HOME folder</setting></b>
 
-    <p>Set your home directory 
-      <a href="#env/HOME"><c>$HOME</c></a>.</p>
+    <p>Sets the environment variable 
+      <a href="#env/HOME"><c>$HOME</c></a>
+    which points to your home directory.</p>
+
+    <p>Since version 0.2.1 (2018-01-30), the default for the setting 
+        <setting>HOME folder</setting>
+    and the environment variable
+      <a href="config.xhtml#env/HOME">
+        <c>$HOME</c></a>
+    has changed from</p>
+    
+    <p class="indent code">
+      /data/user/0/de.t2h.tterm/app_HOME
+    </p>
+
+    <p>to</p>
+
+    <p class="indent code">
+      <a href="files.xhtml#/data/user/0/de.t2h.tterm/files/home"
+         >/data/user/0/de.t2h.tterm/files/home</a>
+    </p>
   </li>
-  
 </ul>
 
 
@@ -284,7 +302,8 @@ to make <c>sh</c> start as a login shell.</p>
     <p>By default, TTerm sets it to</p>
     
     <p class="indent code">
-      /data/user/0/de.t2h.tterm/app_HOME
+      <a href="files.xhtml#/data/user/0/de.t2h.tterm/files/home"
+         >/data/user/0/de.t2h.tterm/files/home</a>
     </p>
     
     <p>You can configure it in the setting 
@@ -294,7 +313,25 @@ to make <c>sh</c> start as a login shell.</p>
     an example, see
       <a href="run/sh.xhtml">
         Android's shell</a>.</p>
-  </li>
+
+    <p>Since version 0.2.1 (2018-01-30), the default for the setting 
+      <a href="config.xhtml#setting/HOME_folder">
+        <setting>HOME folder</setting></a>
+    and the environment variable
+        <c>$HOME</c>
+    has changed from</p>
+    
+    <p class="indent code">
+      /data/user/0/de.t2h.tterm/app_HOME
+    </p>
+
+    <p>to</p>
+
+    <p class="indent code">
+      <a href="files.xhtml#/data/user/0/de.t2h.tterm/files/home"
+         >/data/user/0/de.t2h.tterm/files/home</a>
+    </p>
+</li>
 
   <!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 

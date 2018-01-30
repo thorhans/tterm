@@ -29,13 +29,45 @@
 <p>This list is a short documentation of concepts mentioned in the
 help pages of TTerm.</p>
 
+<p>All Android concepts are capitalized, e.g. "Android User", other
+concepts are not, e.g. "Linux user". Why? Because Google likes to
+change the names of Android concepts. And when some Google employee
+decides “Let's not call it
+  <i><a href="https://developer.android.com/reference/android/preference/PreferenceActivity.html"
+        >preferences</a></i> 
+anymore, let's call it 
+  <i><a href="https://material.io/guidelines/patterns/settings.html"
+        >settings</a></i>.”, then it's nice to be able to find the
+terms with
+  <a href="commands.xhtml#grep"
+     ><c>grep</c></a>
+to change them.</p>
 
-<h1 id="android_os_system_properties">Android OS system properties</h1>
+<p>My personal favorite is when some Google employee decided “Let's
+let the path <c>/sdcard</c> point to
+  <i><a href="https://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
+        >internal (non-removable) storage</a></i>.”
+and some other employee must have thought “Well, then we'll need to
+call the real SD card something else, let's call it
+  <i><a href="https://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
+        >removable storage media</a></i>.” 
+and some other employee must have decided “Nah, I'll call it
+  <i><a href="https://source.android.com/devices/storage/traditional"
+        >semi-permanent external storage</a></i> 
+or 
+  <i><a href="https://source.android.com/devices/storage/traditional"
+        >portable external storage</a></i>
+instead.”. Most people gave up, everybody outside Google calls it
+<i>internal SD card</i> and <i>external SD card</i>, which Google
+stubbornly refuses to acknowledge.</p>
+
+
+<h1 id="android_os_system_properties">Android OS System Properties</h1>
 <!-- ************************************************************ -->
 
 <p>Android's Linux layer has <dfn>system properties</dfn>, I'll call them
-<dfn>Android OS system properties</dfn>, that are different from the Java
-System Properties. You can get them with
+<dfn>Android OS System Properties</dfn>, that are different from the Java
+system properties. You can get them with
   <a href="commands.xhtml#getprop"
      ><c>getprop</c></a>
 and set them with 
@@ -187,6 +219,41 @@ prompt.</p>
 variables, use <c>set</c> or <c>set | more</c>.</p>
 
 
+<h1 id="storage">Storage</h1>
+<!-- ************************************************************ -->
+
+<h2 id="storage/internal">Internal Storage</h2>
+<!-- ============================================================ -->
+
+<p>Every app gets its own private <dfn>Internal Storage</dfn>. By
+default, it is in</p>
+
+<p class="indent code">
+  /data/user/‹user id›/‹package name›/ 
+</p>
+
+<p>The Internal Storage is deleted when you uninstall the app.</p>
+
+
+<h5>TTerm's Internal Storage</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p>TTerm's Internal Storage for the default Android User with the User
+ID 0 is in</p>
+
+<p class="indent code">
+  <a href="files.xhtml#/data/user/0/de.t2h.tterm/"
+     >/data/user/0/de.t2h.tterm/</a>
+</p>
+
+<p>For the User ID 0, that path is a soft link to</p>
+
+<p class="indent code">
+  <a href="files.xhtml#/data/data/de.t2h.tterm/"
+     >/data/data/de.t2h.tterm/</a>
+</p>
+
+
 <h1 id="shell">Shell</h1>
 <!-- ************************************************************ -->
 
@@ -295,6 +362,44 @@ to set it.</p>
        >The TTY demystified</a>.
   </li>
 </ul>
+
+
+<h1 id="user">User</h1>
+
+<h2 id="user/android">Android User</h2>
+<!-- ************************************************************ -->
+
+<p>Since Android 4.2, some Android devices support more than one
+<dfn>Android User</dfn>.</p>
+
+<p>The default Android User has the <dfn>Android User ID</dfn> 0.</p>
+
+<p>An Android User is not a 
+  <a href="#user/linux"
+     >Linux user</a>.</p>
+
+
+<h2 id="user/linux">Linux user</h2>
+<!-- ************************************************************ -->
+
+<p>A <dfn>Linux user</dfn> is not the same as an
+  <a href="#user/android"
+     >Android User</a>. 
+It's a user in the Linux layer that Android runs on, for example
+<c>system</c> or <c>root</c>.</p>
+
+<p>Each app runs as a separate Linux user. For example, TTerm might
+run as the Linux user <c>a0_u123</c>, where <c>a0</c> is the Android
+User ID of the default
+  <a href="#user/android"
+     >Android User</a>,
+The number after <c>u</c> will be different on every device.</p>
+
+<p>The command
+  <a href="commands.xhtml#whoami"
+     ><c>whoami</c></a>
+prints the Linux user's name.</p>
+
 
 <!-- ************************************************************ -->
 

@@ -132,19 +132,21 @@ for a single command</h2>
     
 <p>(A Unix command available in <c>/system/bin</c>.)</p>
 
+<p><c>fgrep</c> searches files for a string.</p>
+
 
 <h1>G</h1>
 <!-- ************************************************************ -->
 
-<h2 id="getprop"><c>getprop</c> &mdash; get Android OS system
-properties</h2>
+<h2 id="getprop"><c>getprop</c> &mdash; get Android OS System
+Properties</h2>
 <!-- ============================================================ -->
 
 <p>(An Android command available in <c>/system/bin</c>.)</p>
 
 <p>To access the
   <a href="concepts.xhtml#android_os_system_properties"
-     >Android OS system properties</a>, use:</p>
+     >Android OS System Properties</a>, use:</p>
   
 <p class="indent code">getprop [«name» [«default»]]</p>
   
@@ -163,6 +165,14 @@ properties</h2>
   getprop ro.product.name <br/>
   chagallwifi
 </p>
+
+
+<h2 id="grep"><c>grep</c> &mdash; search for a regular expression</h2>
+<!-- ============================================================ -->
+    
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+<p><c>grep</c> searches files for a regular expression in.</p>
 
 
 <h1>M</h1>
@@ -235,15 +245,15 @@ and environment variables</h2>
 </ul>
 
 
-<h2 id="setprop"><c>setprop</c> &mdash; set Android OS system
-properties</h2>
+<h2 id="setprop"><c>setprop</c> &mdash; set Android OS System
+Properties</h2>
 <!-- ============================================================ -->
 
 <p>(An Android command available in <c>/system/bin</c>.)</p>
 
 <p>To set an
   <a href="concepts.xhtml#android_os_system_properties"
-     >Android OS system properties</a>, use:</p>
+     >Android OS System Properties</a>, use:</p>
 
 <p class="indent code">setprop name value</p>
 
@@ -441,10 +451,14 @@ ordinary mortals, BusyBox has <c><b>ttysize h</b></c> and
 <h1>W</h1>
 <!-- ************************************************************ -->
 
-<h2><c>whoami</c> &mdash; print the Linux user name</h2>
+<h2 id="whoami"><c>whoami</c> &mdash; print the Linux user's name</h2>
 <!-- ============================================================ -->
 
 <p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+<p>Prints the current
+  <a href="concepts.xhtml#user/linux"
+    >Linux user</a>'s name, for example <c>a0_u123</c>.</p>
 
 
 <!-- ************************************************************ -->

@@ -40,6 +40,7 @@ import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.libtermexec.v1.*;
 import de.t2h.tterm.util.SessionList;
 
+import java.io.File;
 import java.util.UUID;
 
 public class TermService
@@ -104,12 +105,12 @@ public class TermService
             // Calculate the default value each time, since it can change if the app is moved to Adopted
             // Storage.
             //
-            // - TODO The default is ‘app_HOME’, change it to ‘files/home’
-            //
-            //   Use
-            //     getFilesDir().getAbsolutePath() + "/home"
-            //
-            String defaultValue = getDir("HOME", MODE_PRIVATE).getAbsolutePath();
+            // String defaultValue = getDir("HOME", MODE_PRIVATE).getAbsolutePath();
+            File home = new File(getFilesDir(), "home");
+            if(! home.exists()) {
+                home.mkdir();
+            }
+            String defaultValue = home.getAbsolutePath();
 
             String homePath = prefs.getString("home_path", defaultValue);
             editor.putString("home_path", homePath);
