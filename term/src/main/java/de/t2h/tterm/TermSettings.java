@@ -28,8 +28,8 @@ import static android.view.KeyEvent.*;
 
 /** Terminal emulator settings.
  */
-public class TermSettings {
-
+public class TermSettings
+{
    private SharedPreferences mPrefs;
 
     // ------------------------------------------------------------
@@ -48,7 +48,7 @@ public class TermSettings {
 
     // Section "Extra ekys"
 
-    private String mExtraKeys;          public String getExtraKeys()           { return mExtraKeys; }
+    private String mExtraKeys;          public String getExtraKeys ()          { return mExtraKeys; }
     private int mExtraKeySize;          public int getExtraKeySize ()          { return mExtraKeySize; }
     private int mExtraKeysShown;        public int getExtraKeysShown ()        { return mExtraKeysShown; }
 
@@ -68,7 +68,7 @@ public class TermSettings {
     private int mFnKeyId;               public int getFnKeyId ()               { return mFnKeyId; }
                                         public int getFnKeyCode ()             { return FN_KEY_SCHEMES[mFnKeyId]; }
     private int mUseCookedIME;          public boolean useCookedIME ()         { return (mUseCookedIME != 0); }
-    private boolean mAltSendsEsc;       public boolean getAltSendsEsc()        { return mAltSendsEsc; }
+    private boolean mAltSendsEsc;       public boolean getAltSendsEsc ()       { return mAltSendsEsc; }
 
     private boolean mUseKeyboardShortcuts;
     public boolean getUseKeyboardShortcutsFlag () { return mUseKeyboardShortcuts; }
@@ -87,12 +87,12 @@ public class TermSettings {
     private String mHomePath;           public String getHomePath ()           { return mHomePath; }
 
     private String mPrependPath = null;
-    public String getPrependPath() { return mPrependPath; }
-    public void setPrependPath(String prependPath) { mPrependPath = prependPath; }
+    public String getPrependPath () { return mPrependPath; }
+    public void setPrependPath (String prependPath) { mPrependPath = prependPath; }
 
     private String mAppendPath = null;
-    public String getAppendPath() { return mAppendPath; }
-    public void setAppendPath(String appendPath) { mAppendPath = appendPath; }
+    public String getAppendPath () { return mAppendPath; }
+    public void setAppendPath (String appendPath) { mAppendPath = appendPath; }
 
     // ------------------------------------------------------------
     //
@@ -225,14 +225,14 @@ public class TermSettings {
     // Methods
     // ************************************************************
 
-    public TermSettings(Resources res, SharedPreferences prefs) {
+    public TermSettings (Resources res, SharedPreferences prefs) {
         readDefaultPrefs(res);
         readPrefs(prefs);
     }
 
     // ------------------------------------------------------------
 
-    private void readDefaultPrefs(Resources res) {
+    private void readDefaultPrefs (Resources res) {
         // Section "Screen"
 
         mStatusBar            = str2int(res,    R.string.pref_statusbar_default                  );
@@ -275,11 +275,11 @@ public class TermSettings {
         // The mHomePath default is set dynamically in `readPrefs´.
     }
 
-    private int str2int(Resources res, @StringRes int id) { return Integer.parseInt(res.getString(id)); }
+    private int str2int (Resources res, @StringRes int id) { return Integer.parseInt(res.getString(id)); }
 
     // ------------------------------------------------------------
 
-    public void readPrefs(SharedPreferences prefs) {
+    public void readPrefs (SharedPreferences prefs) {
         mPrefs = prefs;
 
         // Section "Screen"
@@ -324,7 +324,7 @@ public class TermSettings {
 
     private boolean aBool (String key, boolean defaultValue) { return mPrefs.getBoolean(key, defaultValue); }
 
-    private int anInt(String key, int defaultValue, int maxValue) {
+    private int anInt (String key, int defaultValue, int maxValue) {
         int val;
         try {
             val = Integer.parseInt(
