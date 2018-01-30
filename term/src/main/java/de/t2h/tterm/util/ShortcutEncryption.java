@@ -48,6 +48,7 @@ import javax.crypto.spec.SecretKeySpec;
  *   way;</li>
  *
  *   <li>(3) An unauthorized actor must not be able to discover the contents of an existing text.</li>
+ * </ul>
  *
  * <p>Conditions (1) and (2) ensure that an attacker cannot send commands of his choosing to TEA via the
  * shortcut mechanism, while condition (3) ensures that an attacker cannot learn what commands are being sent
@@ -56,16 +57,16 @@ import javax.crypto.spec.SecretKeySpec;
  * <p>We ensure these conditions using two cryptographic building blocks:</p>
  *
  * <ul>
- *   <li>a symmetric cipher (currently AES in CBC mode using PKCS#5 padding), which prevents someone
- *   without the encryption key from reading the contents of the shortcut; and</li>
+ *   <li>a symmetric cipher (currently AES in CBC mode using PKCS#5 padding), which prevents someone without
+ *   the encryption key from reading the contents of the shortcut; and</li>
  *
  *   <li>a message authentication code (currently HMAC-SHA256), which proves that the shortcut was created by
  *   someone with the MAC key.</li>
  * </ul>
  *
- * <p>The security of these depends on the security of the keys, which must be
- * kept secret.  In this application, the keys are randomly generated and stored
- * in the application's private shared preferences.</p>
+ * <p>The security of these depends on the security of the keys, which must be kept secret. In this
+ * application, the keys are randomly generated and stored in the application's private shared
+ * preferences.</p>
  *
  * <p>The encrypted string output by this scheme is of the form:
  *
