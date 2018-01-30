@@ -39,7 +39,6 @@ import de.t2h.tterm.emulatorview.UpdateCallback;
 //T- import de.t2h.tterm.compat.AndroidCompat;
 //T-} ------------------------------------------------------------
 
-import de.t2h.tterm.util.TermSettings;
 
 public class TermViewFlipper extends ViewFlipper
     implements Iterable<View>

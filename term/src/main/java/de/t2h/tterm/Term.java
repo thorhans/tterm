@@ -71,7 +71,6 @@ import de.t2h.tterm.key.PKey;
 import de.t2h.tterm.key.PKeyButton;
 import de.t2h.tterm.key.PKeyRow;
 import de.t2h.tterm.util.SessionList;
-import de.t2h.tterm.util.TermSettings;
 
 import java.io.IOException;
 import java.text.Collator;
@@ -974,7 +973,7 @@ public class Term extends Activity
     }
 
     private void doPreferences () {
-        startActivity(new Intent(this, TermPreferences.class));
+        startActivity(new Intent(this, TermSettingsActivity.class));
     }
 
     private void doResetTerminal () {

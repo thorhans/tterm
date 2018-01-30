@@ -33,7 +33,6 @@ import android.util.Log;
 
 import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.util.SessionList;
-import de.t2h.tterm.util.TermSettings;
 
 public class RemoteInterface extends Activity {
     // ************************************************************

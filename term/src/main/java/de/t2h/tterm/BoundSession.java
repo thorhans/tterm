@@ -2,7 +2,6 @@ package de.t2h.tterm;
 
 import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
-import de.t2h.tterm.util.TermSettings;
 
 class BoundSession extends GenericTermSession {
     // ************************************************************

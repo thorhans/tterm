@@ -24,7 +24,6 @@ import android.util.Log;
 import de.t2h.tterm.emulatorview.ColorScheme;
 import de.t2h.tterm.emulatorview.TermSession;
 import de.t2h.tterm.emulatorview.UpdateCallback;
-import de.t2h.tterm.util.TermSettings;
 import de.t2h.util.text.Text;
 
 /** A terminal session.

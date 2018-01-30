@@ -21,7 +21,6 @@ import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
-import de.t2h.tterm.util.TermSettings;
 import de.t2h.util.text.Text;
 
 import java.io.*;

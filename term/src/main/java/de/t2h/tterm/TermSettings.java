@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package de.t2h.tterm.util;
+package de.t2h.tterm;
 
 import android.content.SharedPreferences;
 import android.content.res.Resources;

@@ -23,7 +23,9 @@ import android.view.MenuItem;
 
 import de.t2h.tterm.compat.AndroidCompat;
 
-public class TermPreferences extends PreferenceActivity {
+public class TermSettingsActivity
+    extends PreferenceActivity
+{
     // ************************************************************
     // Constants
     // ************************************************************
