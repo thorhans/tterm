@@ -42,7 +42,8 @@ import de.t2h.tterm.util.SessionList;
 
 import java.util.UUID;
 
-public class TermService extends Service
+public class TermService
+    extends Service
     implements TermSession.FinishCallback
 {
     // ************************************************************
@@ -93,14 +94,28 @@ public class TermService extends Service
 
     @Override
     public void onCreate () {
-        // Should really belong to the Application class, but we don't use one...
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        // The default is `app_HOME´, I don't yet know where `app_´ comes from.
-        String defaultValue = getDir("HOME", MODE_PRIVATE).getAbsolutePath();
-        String homePath = prefs.getString("home_path", defaultValue);
-        editor.putString("home_path", homePath);
-        editor.commit();
+        // Set the setting ‘HOME folder’.
+        {
+            // Should really belong to the Application class, but we don't use one...
+            final SharedPreferences prefs =
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = prefs.edit();
+
+            // Calculate the default value each time, since it can change if the app is moved to Adopted
+            // Storage.
+            //
+            // - TODO The default is ‘app_HOME’, change it to ‘files/home’
+            //
+            //   Use
+            //     getFilesDir().getAbsolutePath() + "/home"
+            //
+            String defaultValue = getDir("HOME", MODE_PRIVATE).getAbsolutePath();
+
+            String homePath = prefs.getString("home_path", defaultValue);
+            editor.putString("home_path", homePath);
+
+            editor.commit();
+        }
 
         mTermSessions = new SessionList();
 

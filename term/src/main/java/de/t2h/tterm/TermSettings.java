@@ -27,6 +27,11 @@ import de.t2h.tterm.R;
 import static android.view.KeyEvent.*;
 
 /** Terminal emulator settings.
+ *
+ * <p>LATER ‘Term’, ‘RemoteInterface’ and ‘TermService.RBinder’ create a ‘TermSettings’ object each. Does that
+ * mean that several ‘TermSettings’ objects can exist at the same time, or does that never happen?</p>
+ *
+ * <p>‘TermService.onCreate’ sets the setting ‘home_path’ <b>outside</b> ‘TermSettings’.</p>
  */
 public class TermSettings
 {
@@ -272,7 +277,8 @@ public class TermSettings
         mDoPathExtensions     = res.getBoolean( R.bool.pref_do_path_extensions_default           );
         mAllowPathPrepend     = res.getBoolean( R.bool.pref_allow_prepend_path_default           );
 
-        // The mHomePath default is set dynamically in `readPrefs´.
+        // The default ‘mHomePath’ is calculated by ‘TermService.onCreate’, which sets the setting ‘home_path’
+        // *outside* ‘TermSettings’.
     }
 
     private int str2int (Resources res, @StringRes int id) { return Integer.parseInt(res.getString(id)); }
@@ -317,6 +323,8 @@ public class TermSettings
         mVerifyPath           = aBool(   VERIFYPATH_KEY         , mVerifyPath                                      );
         mDoPathExtensions     = aBool(   PATHEXTENSIONS_KEY     , mDoPathExtensions                                );
         mAllowPathPrepend     = aBool(   PATHPREPEND_KEY        , mAllowPathPrepend                                );
+
+        // ‘TermService.onCreate’ sets the setting ‘home_path’ *outside* ‘TermSettings’.
         mHomePath             = aString( HOMEPATH_KEY           , mHomePath                                        );
 
         mPrefs                = null;  // we leak a Context if we hold on to this
