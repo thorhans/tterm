@@ -40,13 +40,101 @@ google them, but there does not seem to be much information on
 them.</p>
 
 
-<h1>C</h1>
+<h1>A</h1>
 <!-- ************************************************************ -->
+
+<h2><c>apt</c> &mdash; advanced package tool</h2>
+<!-- ============================================================ -->
+
+<p>(A Linux command available in Termux and GNURoot Debian.)</p>
+
+<p>See 
+  <a href="https://en.wikipedia.org/wiki/APT_(Debian)"
+     >Wikipedia</a>.</p>
+
 
 <h2><c>cd</c> &mdash; change directory</h2>
 <!-- ============================================================ -->
 
 <p>(A shell built-in in all shells.)</p>
+
+<p>Note that <c>cd</c> without arguments and <c>cd ~</c> both change
+to the directory 
+  <a href="config.xhtml#env/HOME"><c>$HOME</c></a>.</p>
+
+
+<h2 id="chmod"><c>chmod</c> &mdash; change </h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+<p>Unix uses the term "file mode" for 
+  <a href="concepts.xhtml#file_access_rights"
+     >file access rights</a>. 
+You change them with <c>chmod</c>, which in Unix supports
+<dfn>symbolic modes</dfn> and <dfn>numeric modes</dfn>. If you have an
+older Android version where <c>/system/bin/chmod</c> only supports
+numeric modes, the BusyBox version also supports symbolic modes.</p>
+
+<p>A short overview:</p>
+
+<pre>Symbolic modes:
+
+  chmod ([ugoa]*[+-=][rwxXst]*)+ «files»
+
+For example:
+
+  chmod u+rwx     # "User" may "read, write, execute".
+  chomd ug+r o-r  # "User and group" may "read", "other" may not "read".
+  chomd a+r       # "All" may "read".
+
+Where
+
+  u = user
+  g = group
+  o = other
+  a = all
+
+and
+
+  + = set
+  - = clear
+  = = set this mode, clear the other modes
+
+and
+
+  r = read
+  w = write
+  x = for dirs:  search
+      otherwise: execute
+  X = for dirs:  search
+      otherwise: execute if file already has execute permission for
+                 some user
+  s = set user or group ID on execution
+  t = for dirs:  restricted deletion flag
+      otherwise: sticky bit, saves file on the swap devie so it will
+                 load more quickly when run
+
+Numeric modes:
+
+               owner  group  other
+  r = read       100     10      1
+  w = write      200     20      2
+  x = execute    400     40      4
+
+  t = 1000
+  s             4000   2000
+
+For example:
+
+  chmod 777 FILE  # a+rwx
+</pre>
+
+
+<h2><c>cp</c> &mdash; copy files</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
 
 
 <h1>E</h1>
@@ -135,6 +223,29 @@ for a single command</h2>
 <p><c>fgrep</c> searches files for a string.</p>
 
 
+<h2><c>for</c> &mdash; execute commands for each member in a list</h2>
+<!-- ============================================================ -->
+
+<p>(A shell built-in in all <c>sh</c>-compatible shells.)</p>
+
+<p class="indent code">
+  for «var» in «words» ; do <br/> 
+    «commands»              <br/> 
+  done
+</p>
+
+<p><c>«words»</c> often contains wildcards like <code>*</code> or a
+command in <c>$(...)</c>, for example:</p>
+
+<p class="indent code">
+for i in $(echo hi ho hum) ; do <br/> 
+  echo "$i"                     <br/> 
+done                            <br/> 
+hi                              <br/> 
+ho                              <br/> 
+hum                            
+</p>
+
 <h1>G</h1>
 <!-- ************************************************************ -->
 
@@ -175,8 +286,23 @@ Properties</h2>
 <p><c>grep</c> searches files for a regular expression in.</p>
 
 
+<h1>L</h1>
+<!-- ************************************************************ -->
+
+<h2><c>ln</c> &mdash; create a link</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+
 <h1>M</h1>
 <!-- ************************************************************ -->
+
+<h2><c>mkdir</c> &mdash; make a directory</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
 
 <h2><c>mkfifo</c> &mdash; create a named pipe (a FIFO)</h2>
 <!-- ============================================================ -->
@@ -211,6 +337,15 @@ BusyBox, Termux or Debian.)</p>
 <p>For an example, see 
   <a href="run/termux.xhtml#run/connect/netcat"
      >Connect to Termux with Netcat</a>.</p>
+
+
+<h1>R</h1>
+<!-- ************************************************************ -->
+
+<h2><c>rm</c> &mdash; remove files</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
 
 
 <h1>S</h1>

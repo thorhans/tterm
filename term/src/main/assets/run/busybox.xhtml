@@ -42,10 +42,11 @@ and the
 <p>If the BusyBox commands lack features that you need, take a look at
   <a href="termux.xhtml">Termux</a>
 or 
-  <a href="debian.xhtml">Debian</a>.</p>
+  <a href="debian.xhtml">Debian</a>
+instead.</p>
 
 
-<h1>About Ash</h1>
+<h1>About BusyBox's shell Ash</h1>
 <!-- ************************************************************ -->
 
 <p>BusyBox comes with the Almquist shell Ash.</p>
@@ -54,6 +55,302 @@ or
   <a href="http://linux.die.net/man/1/dash"
      >manual for the Debian Almquist shell Dash</a>
 appears to be very similar to Ash.</p>
+
+
+<h1>Running BusyBox in TTerm</h1>
+<!-- ************************************************************ -->
+
+<p>BusyBox does not contain a terminal emulator like TTerm. There are
+several approaches to run BusyBox in TTerm:</p>
+
+<ul>
+  <li><a href="#run/rooted">Install BusyBox on a rooted
+  device</a></li>
+
+  <li><a href="#run/binary">Install a BusyBox binary into TTerm's
+  internal storage</a></li>
+
+  <li><a href="#run/unrooted">Install a BusyBox app on an unrooted
+  device</a> &mdash; this no longer works with TTerm</li>
+</ul>
+
+<p>A future version of TTerm will offer a simple way to install
+BusyBox, for now you have to use one of the above methods.</p>
+
+
+<h2 id="run/rooted">Install BusyBox on a rooted device</h2>
+<!-- ************************************************************ -->
+
+<p>If you have a 
+  <a href="../rooting.xhtml">rooted device</a>,
+you can install BusyBox to <c>/system/xbin</c>, where it's
+accessible for all apps.</p>
+
+<p>If your device is not rooted, you'll probably <i>not</i> want to
+  <a href="../rooting.xhtml">root it</a>
+just to install BuxyBox, it's too complicated and risky.</p>
+
+<p>If you have a rooted device, you might already have installed
+BusyBox during rooting. If you have a 
+  <a href="../concepts.xhtml#custom_rom"
+     >custom ROM</a>
+like 
+  <a href="../concepts.xhtml#custom_rom/lineageos"
+     >LineageOS</a>
+or a recovery image like TWRP, BusyBox might also already be
+installed. Look in <c>/system/xbin</c> or <c>/su/xbin</c>.</p>
+
+<p>There are several BusyBox apps. In January 2018, the following two
+were popular.</p>
+
+<p class="disclaimer">Disclaimer: I've come across obviously suspicios
+and not so obviously suspicious software while researching for TTerm.
+I've researched all tools I mention to my best ability, but be aware
+that you must use your own judgement and only install programs from
+sources that <b>you</b> trust. And my instructions may be wrong, so
+don't do anything you don't understand.</p>
+
+<ul>
+  <li><a href="https://play.google.com/store/apps/details?id=stericson.busybox"
+         >BusyBox by Stephen (Stericson)</a>, 
+  with the current version 1.27.2 (as of 2018-01-08)</li>
+
+  <li><a href="https://play.google.com/store/apps/details?id=com.jrummy.busybox.installer"
+         >BusyBox for Android by JRummy Apps</a>
+  with the older version 1.26.2 (as of 2018-01-08)</li>
+</ul>
+
+<p>If you install BusyBox to <c>/system/xbin</c>, then the
+default value of
+  <a href="../config.xhtml#env/PATH"
+     ><c>$PATH</c></a>
+will first look for the preinstalled Android commands in
+<c>/system/bin</c>, then for additional BusyBox commands in
+<c>/system/xbin</c>.</p>
+
+<p>If you want to call a BusyBox command <c>cmd</c> with the same name
+as a preinstalled Android command, you can call it with its full path,
+e.b. <c>/system/xbin/cmd</c>, or with <c>busybox cmd</c>.</p>
+
+<p>If you always prefer the BusyBox commands, change
+  <a href="config.xthml#env/PATH"
+    ><c>$PATH</c></a>
+so that <c>/system/xbin</c> comes before <c>/system/bin</c>.</p>
+
+
+<h2 id="run/binary">Install a BusyBox binary into TTerm's internal storage</h2>
+<!-- ************************************************************ -->
+
+<p>On an unrooted device, you can install a BusyBox binary into
+TTerm's
+  <a href="../concepts.xhtml#storage/internal"
+     >Internal Storage</a>,
+It's a little bit complicated, but on the positive side, I think that
+the worst that can happen it that you mess up your TTerm
+installation.</p>
+
+<p>You'll need a binary for your
+  <a href="../concepts.xhtml#cpu_architecture">CPU architecture</a>, e.g.
+ARM or x86.</p>
+
+<p>There are several BusyBox binaries. In January 2018, I found
+these:</p>
+
+<p class="disclaimer">Disclaimer: I've come across obviously suspicios
+and not so obviously suspicious software while researching for TTerm.
+I've researched all tools I mention to my best ability, but be aware
+that you must use your own judgement and only install programs from
+sources that <b>you</b> trust. And my instructions may be wrong, so
+don't do anything you don't understand.</p>
+
+<ul>
+  <li><a href="https://github.com/jrummyapps/BusyBox/tree/master/busybox-compiler"
+         >The repository for BusyBox for Android by JRummy Apps</a>
+  with the older version 1.26.2 (as of 2018-01-08)</li>
+
+  <li><a href="http://termux.net/dists/stable/main"
+         >The repository for Termux</a> 
+  has a BusyBox binary that also works in TTerm, but has less included
+  commands (as of 2018-01-08)</li>
+
+  <li><a href="https://github.com/yashdsaraf/bb-bot/releases/"
+         >Yash D. Saraf</a>
+  provides BusyBox for OpenGApps (as of 2018-02-11)</li>
+</ul>
+
+
+<h5>Install a BusyBox binary</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p>The binary of BusyBox is a single file. You need to copy it to a
+directory in TTerm's 
+  <a href="../concepts.xhtml#storage/internal"
+     >internal storage</a>, 
+create the soft links and add the directory to your <c>$PATH</c>.</p>
+                 
+<p>As an example, we'll walk through the installation of the BusyBox
+binary provided by Yash D. Saraf:</p>
+
+<ul>
+  <li>
+    <p>In a browser, open
+      <a href="https://github.com/yashdsaraf/bb-bot/releases/"
+         ><c>https://github.com/yashdsaraf/bb-bot/releases/</c></a>.</p>
+
+    <p>In February 2018, the current release was version 1.28.0 from
+    2018-01-03 1253.</p>
+
+    <p>Download the version for your device's
+      <a href="../concepts.xhtml#cpu_architecture"
+         >CPU architecture</a>.
+    For example, for ARM download
+    <c>Busybox-1.28.0-YDS-ARM.zip</c>.</p>
+  </li> 
+
+  <li>
+    <p>Open the TGZ or ZIP archive to extract the binary. The ARM
+    archive contains</p>
+    
+    <ul>
+      <li><c>busybox.xz</c>       for 32-bit without SELinux</li>
+                                   
+      <li><c>busybox-sel.xz</c>   for 32-bit with SELinux</li>
+                                   
+      <li><c>busybox64.xz</c>     for 64-bit without SELinux</li>
+
+      <li><c>busybox64-sel.xz</c> for 64-bit with SELinux</li>
+    </ul>
+    
+    <p>Extract the correct one. If you don't know which, I think you
+    can extract all 4 and try them all, but see the disclaimer
+    above.</p>
+  </li>
+
+  <li>The file is compressed. On Linux, use <c>unxz</c> to uncompress
+  it. On Windows, you can use 7-Zip.</li>
+
+  <li>Copy the extracted file to the device's 
+    <a href="../concepts.xhtml#sd_card/internal"
+       >internal SD card</a>
+  <c>/sdcard</c>.</li>
+
+  <li>
+    <p>Start TTerm and execute this, replacing <c>busybox-sel</c> by
+    the correct binary's name:</p>
+
+    <p class="indent code">
+      cd ~/..                            <br/>
+      mkdir bin                          <br/>
+      cp /sdcard/busybox-sel bin/busybox <br/> 
+      chmod u+x bin/busybox 
+    </p>
+
+    <p>Now you can try out BusyBox commands without installing it:</p>
+    
+    <p class="indent code">
+      bin/busybox cmd arguments
+    </p>
+  </li>
+
+  <li>
+    <p>This BusyBox binary has been compiled with support for
+    <c>--install</c>, so you can install it to the directory
+    <c>bin</c> with:</p>
+
+    <p class="indent code">
+      bin/busybox --install -s bin
+    </p>
+  </li>
+
+  <li class="TODO">TODO Change $PATH.</li>
+</ul>
+
+
+<h5>Alternative installation</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p class="indent">If you don't understand this section, just follow
+the instructions from the previous section.</p>
+
+<p>If you want to separate root and non-root commands, check if your
+BusyBox binary supports <c>--list-full</c>. Then you can use</p>
+
+<p class="indent code">
+  busybox --list-full
+</p>
+
+<p>which prefixes the commands with a directory. Check which directory
+your binary uses, e.g.</p>
+  
+<p class="indent code">
+  bin/[      <br/> 
+  bin/[[     <br/> 
+  sbin/acpid <br/> 
+  ...
+</p>
+
+<p>You can use that output to install <c>./busybox</c> in <c>./bin</c>
+and <c>./sbin</c> with:</p>
+
+<p class="indent code">
+  mkdir bin sbin                                       <br/> 
+  cp /sdcard/busybox-sel bin                           <br/> 
+  ln -s ../bin/busybox sbin/busybox                    <br/> 
+  for i in $(busybox --list-full | grep '^bin/' ); do  <br/> 
+    ln -s busybox $i                                   <br/> 
+  done                                                 <br/> 
+  for i in $(busybox --list-full | grep '^sbin/' ); do <br/> 
+    ln -s busybox $i                                   <br/> 
+  done
+</p>
+
+
+<h2 id="run/unrooted">Install a BusyBox app on an unrooted device</h2> 
+<!-- ************************************************************ -->
+
+<p>This no longer works with TTerm since Google introduced a change
+with Android 7. Apps compiled for Android 7+ can only run BusyBox if
+they contain both the BusyBox executable <i>and</i> their own terminal
+emulator. This does not depend on the version of Android
+<i>running</i> on your device, only on the version the app is
+<i>compiled for</i>.</p>
+
+
+<h5>Termux</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p>I'm only aware of one app that includes both the BusyBox executable
+and a terminal emulator:
+  <a href="termux.xhtml">Termux</a>, 
+which includes a lot more than just BusyBox, and does not require
+rooting. But then you no longer use TTerm, instead you use the
+terminal emulator of Termux.</p>
+
+
+<h5>Other apps</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p>All other BusyBox apps I've checked only work for 
+  <a href="../rooting.xhtml">rooted devices</a>, 
+but I have not checked all.</p>
+ 
+<p>In the past, there was at least one app that allowed Busybox to run
+on an unrooted device and call it from TTerm. It was the app
+<a href="https://play.google.com/store/apps/details?id=com.jrummy.busybox.installer"
+     >BusyBox for Android by JRummy Apps</a>.
+In it, you could start TTerm via the menu icon (the icon with the
+three dots at the top right), then select "Terminal". That set
+<c>$PATH</c> to:</p>
+
+<p class="indent code">
+  PATH=/data/user/0/com.jrummy.busybox.installer/files/bin:$PATH
+</p>
+
+<p>and started TTerm. But on 2018-01-10 that location is no longer
+readable, the app has probably been compiled for Android 7+.</p>
+
+<p>You can still use the app to run scripts that use BusyBox on an
+unrooted device, but they don't accept input from a terminal.</p>
 
 
 <h1>Ash startup</h1>
@@ -103,166 +400,6 @@ initialization files:</p>
 
   <dd>As described above for an interactive shell.</dd>
 </dl>
-
-
-<h1>Running BusyBox's shell in TTerm</h1>
-<!-- ************************************************************ -->
-
-<p>BusyBox does not contain a terminal emulator like TTerm. There are
-several approaches to run BusyBox in TTerm:</p>
-
-<ul>
-  <li><a href="#run/rooted">Install BusyBox on a rooted
-  device</a></li>
-
-  <li><a href="#run/unrooted">Install BusyBox on an unrooted
-  device</a></li>
-  
-  <li><a href="#run/copy">Copy a BusyBox binary into TTerm's internal
-  storage</a></li>
-
-  <li><a href="#run/connect">Connect to an app that contains BusyBox,
-  e.g. Termux</a></li>
-</ul>
-
-
-<h2 id="run/rooted">Install BusyBox on a rooted device</h2>
-<!-- ************************************************************ -->
-
-<p>If you have a 
-  <a href="../rooting.xhtml">rooted device</a>,
-you can install BusyBox to <c>/system/xbin</c>, where it's
-accessible for all apps.</p>
-
-<p>In fact, you might already have installed BusyBox during rooting.
-If you have a custom ROM like LineageOS or a recovery image like TWRP,
-BusyBox might also already be installed. Look in
-<c>/system/xbin</c> or <c>/su/xbin</c>.</p>
-
-<p>There are several BusyBox apps. In January 2018, the following two
-were popular.</p>
-
-<p class="disclaimer">Disclaimer: I've come across obviously suspicios
-and not so obviously suspicious software while researching for TTerm.
-I've researched all tools I mention to my best ability, but be aware
-that you must use your own judgement and only install programs from
-sources that <b>you</b> trust.</p>
-
-<ul>
-  <li><a href="https://play.google.com/store/apps/details?id=stericson.busybox"
-         >BusyBox by Stephen (Stericson)</a>, 
-  with the current version 1.27.2 (as of 2018-01-08)</li>
-
-  <li><a href="https://play.google.com/store/apps/details?id=com.jrummy.busybox.installer"
-         >BusyBox for Android by JRummy Apps</a>
-  with the older version 1.26.2 (as of 2018-01-08)</li>
-
-  <li><a href="termux.xhtml"
-         >Termux</a> 
-  includes BusyBox, and a lot more, and does not require rooting.</li>
-</ul>
-
-<p>If you install BusyBox to <c>/system/bin/xbin</c>, then the
-default value of
-  <a href="../config.xhtml#env/PATH"
-     ><c>$PATH</c></a>
-will first look for the preinstalled Android commands in
-<c>/system/bin/</c>, then for additional BusyBox commands in
-<c>/system/bin/xbin</c>.</p>
-
-<p>If you want to call a BusyBox command <c>cmd</c> with the
-same name as a preinstalled Android command, you can call it with
-<c>busybox cmd</c>.</p>
-
-<p>If you always prefer the BusyBox commands, change
-  <a href="config.xthml#env/PATH"
-    ><c>$PATH</c></a>
-so that <c>/system/bin/xbin</c> comes before
-<c>/system/bin/bin</c>.</p>
-
-
-<h2 id="run/unrooted">Install BusyBox on an unrooted device</h2> 
-<!-- ************************************************************ -->
-
-<p>In January 2018 it appears that only apps containing their own
-terminal emulator can run BusyBox, for example
-  <a href="termux.xhtml">Termux</a>,
-which includes BusyBox, and a lot more, and does not require
-rooting.</p>
-
-
-<p>In the past, there was at least one app that allowed Busybox to run
-on an unrooted device with Android 4.4 to 6 (not Android 7 or later)
-and call it from TTerm. It was the app
-<a href="https://play.google.com/store/apps/details?id=com.jrummy.busybox.installer"
-     >BusyBox for Android by JRummy Apps</a>.
-In it, you could start TTerm via the menu icon (the icon with the
-three dots at the top right), then select "Terminal". That set
-<c>$PATH</c> to:</p>
-
-<p class="indent code">
-  PATH=/data/user/0/com.jrummy.busybox.installer/files/bin:$PATH
-</p>
-
-<p>and started TTerm. But on 2018-01-10 that location is no longer
-readable on my Android 4.4 device where it used to work.</p>
-
-<p>You can still use the app to run scripts that use BusyBox on an
-unrooted device, but they don't accept input from a terminal.</p>
-
-
-<h2 id="run/copy">Copy a BusyBox binary into TTerm's internal storage</h2>
-<!-- ************************************************************ -->
-
-<p>What still works is to copy a BusyBox binary into TTerms internal
-storage. You'll need a binary for your 
-  <a href="../concepts.xhtml#cpu_architecture">CPU architecture</a>, e.g.
-ARM or x86.</p>
-
-<p>There are several BusyBox binaries. In January 2018, I found
-these:</p>
-
-<p class="disclaimer">Disclaimer: I've come across obviously suspicios
-and not so obviously suspicious software while researching for TTerm.
-I've researched all tools I mention to my best ability, but be aware
-that you must use your own judgement and only install programs from
-sources that <b>you</b> trust.</p>
-
-<ul>
-  <li><a href="https://github.com/jrummyapps/BusyBox/tree/master/busybox-compiler"
-         >The repository for BusyBox for Android by JRummy Apps</a>
-  with the older version 1.26.2 (as of 2018-01-08)</li>
-
-  <li><a href="http://termux.net/dists/stable/main"
-         >The repository for Termux</a> 
-  works, but has less included commands (as of 2018-01-08)</li> 
-
-  <li><a href="https://github.com/yashdsaraf/bb-bot/releases/tag/v1.28.0-YDS-201801031253
-"
-         >Yash D. Saraf</a> provides BusyBox for OpenGApps</li>
-</ul>
-
-<p>The binary of BusyBox is a single file. Copy it to a directory in
-TTerm's internal storage, create the soft links and add the directory
-to your <c>$PATH</c>.</p>
-                 
-<p class="TODO">TODO I'll add a detailed description in a future
-release.</p>
-
-
-<h2 id="run/connect">Connect to an app that contains BusyBox, e.g. Termux</h2>
-<!-- ************************************************************ -->
-
-<p>In this approach, you start an app that contains BusyBox, and start
-a program that you connect to from TTerm. Alternatives are Netcat
-(<c>nc</c> or <c>netcat</c>) and the Telnet daemon
-(<c>telnetd</c>).</p>
-
-<p>See the description in 
-  <a href="termux.xhtml#run/connect">Connect to Termux</a>
-or
-  <a href="debian.xhtml#run/connect">Connect to Debian</a>.
-</p>
 
 <!-- ************************************************************ -->
 

@@ -26,8 +26,16 @@
 <h1>Concepts</h1>
 <!-- ************************************************************ -->
 
-<p>This list is a short documentation of concepts mentioned in the
-help pages of TTerm.</p>
+<p>Trying to run Unix commands on Android means you will come in
+contact with the Unix / Linux community. They are wonderful &mdash;
+hey, they give their work away for free, and often it's even unpaid
+work. But they often seem to assume that you know more than you
+actually do. Or maybe it's just me.</p>
+
+<p>Since I remember how it feels to read through documentation and
+only understand half of it (like, yesterday and the day before), I'll
+try to document all concepts mentioned in the help pages of TTerm
+here.</p>
 
 <p>All Android concepts are capitalized, e.g. "Android User", other
 concepts are not, e.g. "Linux user". Why? Because Google likes to
@@ -43,8 +51,11 @@ terms with
      ><c>grep</c></a>
 to change them.</p>
 
-<p>My personal favorite is when some Google employee decided “Let's
-let the path <c>/sdcard</c> point to
+<p>My personal favorite is the terminology of the 
+  <a href="#sd_card"
+     >SD cards</a>. 
+Some Google employee must have decided “Let's let the path
+<c>/sdcard</c> point to
   <i><a href="https://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
         >internal (non-removable) storage</a></i>.”
 and some other employee must have thought “Well, then we'll need to
@@ -85,7 +96,7 @@ architecture</dfn>.</p>
 
 
 <h5>List of CPU architectures</h5>
-<!-- ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙ -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 <p>Until now I've encountered these CPU architectures for Android
 devices:</p>
@@ -146,7 +157,7 @@ devices:</p>
 
 
 <h5>Find out the CPU architecture</h5>
-<!-- ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙ -->
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 <p class="TODO">TODO How do you find out your device's CPU
 architecture? This looks promising:</p>
@@ -162,6 +173,42 @@ architecture? This looks promising:</p>
 
 <p class="TODO">TODO Find out how terms like arm, armeabi and
 armeabi-v7a are related.</p>
+
+
+<h1 id="custom_rom">Custom ROM</h1>
+<!-- ************************************************************ -->
+
+<p>When you buy an Android device, the device's preinstalled version
+of Android is called the <dfn>stock ROM</dfn>.</p>
+
+<p>For some devices, people have built <dfn>custom ROMs</dfn> to
+replace the stock ROM, for example
+  <a href="#custom_rom/lineageos"
+     >LineageOS</a>.
+Custom ROMs are usually alternative versions of Android, but could
+even be a different operating system.</p>
+
+<p>Installing a Custom ROM usually involves "unlocking the boot
+loader", which is outside the scope of this documentation, or
+  <a href="rooting.xhtml"
+     >rooting</a>.</p>
+
+
+<h2 id="custom_rom/lineageos">LineageOS</h2>
+<!-- ************************************************************ -->
+
+<p><dfn>LineageOS</dfn> is a popular 
+  <a href="#custom_rom"
+     >Custom ROM</a>
+that supports many Android devices.</p>
+
+<p>It's very similar to ordinary Android, its main benefits is that it
+doesn't include all the additional junk that most manufacturers add to
+Android, and that you can often get newer versions of LineageOS when
+your manufacturer stops updating your device's Android. It's the
+successor of the popular CyagenMod.</p>
+
+<p>I regularly test TTerm on LineageOS.</p>
 
 
 <h1>Distribution</h1>
@@ -219,39 +266,69 @@ prompt.</p>
 variables, use <c>set</c> or <c>set | more</c>.</p>
 
 
-<h1 id="storage">Storage</h1>
+<h1 id="file_access_rights">File access rights</h1>
 <!-- ************************************************************ -->
 
-<h2 id="storage/internal">Internal Storage</h2>
+<p>Unix uses the term <dfn>file mode</dfn> for <dfn>file access
+rights</dfn> or <dfn>file permissions</dfn>, you change them with
+  <a href="commands.xhtml#chmod"
+     ><c>chmod</c></a>.
+</p>
+
+
+<h1 id="sd_card">SD card</h1>
+<!-- ************************************************************ -->
+
+<p>The SD cards are my personal favorite of confusing Android
+terminology. Some Google employee must have decided “Let's let the
+path <c>/sdcard</c> point to
+  <i><a href="https://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
+        >internal (non-removable) storage</a></i>.”
+and some other employee must have thought “Well, then we'll need to
+call the real SD card something else, let's call it
+  <i><a href="https://developer.android.com/guide/topics/data/data-storage.html#filesExternal"
+        >removable storage media</a></i>.” 
+and some other employee must have decided “Nah, I'll call it
+  <i><a href="https://source.android.com/devices/storage/traditional"
+        >semi-permanent external storage</a></i> 
+or 
+  <i><a href="https://source.android.com/devices/storage/traditional"
+        >portable external storage</a></i>
+instead.”. Most people gave up, everybody outside Google calls it
+<i>internal SD card</i> and <i>external SD card</i>, which Google
+stubbornly refuses to acknowledge.</p>
+
+
+<h2 id="sd_card/external">External SD card</h2>
 <!-- ============================================================ -->
 
-<p>Every app gets its own private <dfn>Internal Storage</dfn>. By
-default, it is in</p>
-
-<p class="indent code">
-  /data/user/‹user id›/‹package name›/ 
-</p>
-
-<p>The Internal Storage is deleted when you uninstall the app.</p>
+<p>Some Android devices support a real SD card. Android has made such
+a mess of it that I won't even try to document it until a later
+release.</p>
 
 
-<h5>TTerm's Internal Storage</h5>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<h2 id="sd_card/internal">Internal SD card</h2>
+<!-- ============================================================ -->
 
-<p>TTerm's Internal Storage for the default Android User with the User
-ID 0 is in</p>
+<p>Most current Android devices have a simulated SD card. It's usually
+called <dfn>Internal SD Card</dfn>, sometimes "emulated SD card" or
+"virtual SD card".</p>
 
-<p class="indent code">
-  <a href="files.xhtml#/data/user/0/de.t2h.tterm/"
-     >/data/user/0/de.t2h.tterm/</a>
-</p>
+<p>Since Android 4.2, the Internal SD Card of the current user must
+be reachable with 
+  <a href="files.xhtml#/sdcard/"
+     ><c>/sdcard/</c></a>.</p>
 
-<p>For the User ID 0, that path is a soft link to</p>
+<p class="TODO">TODO Document this: To access <c>/sdcard</c>, you must
+give TTerm the Permission Storage.</p>
 
-<p class="indent code">
-  <a href="files.xhtml#/data/data/de.t2h.tterm/"
-     >/data/data/de.t2h.tterm/</a>
-</p>
+
+<h1 id="selinux">SELinux</h1>
+<!-- ************************************************************ -->
+
+<p>Android includes <dfn>SELinux</dfn>, which stands for <dfn>Security
+Enhanced Linux</dfn>, which is about all I know about it. If I find
+out a use for SELinux TTerm, I'll document it here.</p>
 
 
 <h1 id="shell">Shell</h1>
@@ -290,6 +367,55 @@ surreal dream and a nightmare.</p>
     <a href="https://en.wikipedia.org/wiki/Command-line_interface"
        >command-line interfaces</a>.</li>
 </ul>
+
+
+<h1 id="storage">Storage</h1>
+<!-- ************************************************************ -->
+
+<h2 id="storage/external">External Storage</h2>
+<!-- ============================================================ -->
+
+<p>An Android device must support <dfn>External Storage</dfn>.</p>
+
+<p>Currently, it's usually an
+  <a href="#sd_card/internal"
+     >Internal SD Card</a>
+sometimes also an
+  <a href="#sd_card/external"
+     >External SD Card</a>, 
+rarely only an External SD Card.</p>
+
+
+<h2 id="storage/internal">Internal Storage</h2>
+<!-- ============================================================ -->
+
+<p>Every app gets its own private <dfn>Internal Storage</dfn>. By
+default, it is in</p>
+
+<p class="indent code">
+  /data/user/‹user id›/‹package name›/ 
+</p>
+
+<p>The Internal Storage is deleted when you uninstall the app.</p>
+
+
+<h5>TTerm's Internal Storage</h5>
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<p>TTerm's Internal Storage for the default Android User with the User
+ID 0 is in</p>
+
+<p class="indent code">
+  <a href="files.xhtml#/data/user/0/de.t2h.tterm/"
+     >/data/user/0/de.t2h.tterm/</a>
+</p>
+
+<p>For the User ID 0, that path is a soft link to</p>
+
+<p class="indent code">
+  <a href="files.xhtml#/data/data/de.t2h.tterm/"
+     >/data/data/de.t2h.tterm/</a>
+</p>
 
 
 <h1>Terminal, terminal emulator</h1>
@@ -339,7 +465,7 @@ execute any Linux commands. That's the job of the
 command always knows the current terminal size.</p>
 
 <p>If all goes well, you can query the terminal size with
-  <a href="../commands.xhtml#stty/size"
+  <a href="commands.xhtml#stty/size"
      ><c>stty size</c></a>.</p>
 
 <p>If something gets messed up and Linux doesn't know the current
