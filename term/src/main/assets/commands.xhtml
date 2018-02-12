@@ -69,7 +69,7 @@ to the directory
 <p>(A Unix command available in <c>/system/bin</c>.)</p>
 
 <p>Unix uses the term "file mode" for 
-  <a href="concepts.xhtml#file_access_rights"
+  <a href="concepts.xhtml#file/access_rights"
      >file access rights</a>. 
 You change them with <c>chmod</c>, which in Unix supports
 <dfn>symbolic modes</dfn> and <dfn>numeric modes</dfn>. If you have an
@@ -129,6 +129,10 @@ For example:
 
   chmod 777 FILE  # a+rwx
 </pre>
+
+<p>If a directory has the rights <c>--x</c>, then you cand list the
+contents of the directory, but you <i>can</i> access the contents of
+the directory if you know their file names.</p>
 
 
 <h2><c>cp</c> &mdash; copy files</h2>
@@ -289,10 +293,39 @@ Properties</h2>
 <h1>L</h1>
 <!-- ************************************************************ -->
 
-<h2><c>ln</c> &mdash; create a link</h2>
+<h2 id="ln"><c>ln</c> &mdash; create a link</h2>
 <!-- ============================================================ -->
 
 <p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+<p><c>ln</c> creates a
+  <a href="concepts.xhtml#file/link"
+     >link</a>.</p>
+
+
+<h2><c>ls</c> &mdash; list files</h2>
+<!-- ============================================================ -->
+
+<p>(A Unix command available in <c>/system/bin</c>.)</p>
+
+<p><c>ls </c> lists all files of the current directory.</p>
+
+<p>The "long" format <c>ls -l</c> lists the 
+  <a href="concepts.xhtml#file/access_rights"
+     >file access rights</a>,
+size,
+  <a href="cocecpts.xthml#user/linux"
+     >Linux user</a>,
+Linux group, modification date and time, and file name.</p>
+
+<p>With <c>ls -go</c>, lists the 
+  <a href="concepts.xhtml#file/access_rights"
+     >file access rights</a>,
+size,
+modification date and time, and file name.</p>
+     
+<p>The command <c>ls -d «dir»</c> lists a directory instead of its
+contents.</p>
 
 
 <h1>M</h1>
@@ -420,7 +453,7 @@ client that runs in TTerm.</p>
 <!-- ============================================================ -->
   
 <p>(A Unix command only available in a
-  <a href="../rooting.xhtml"
+  <a href="rooting.xhtml"
      >rooted device</a>.)</p>
   
 <ul>
@@ -434,15 +467,18 @@ client that runs in TTerm.</p>
     <p>Use 2: <c>su «user»</c></p>
     
     <p>Runs a shell as Linux user «user». In Android, each app has its
-    own Linux user, with a name like <c>u«android user number»_a«Linux
-    user number»</c>.</p>
+    own Linux user, with a name like:</p>
+    
+    <p class="indent code">
+      <c>u«android user number»_a«Linux user number»</c>
+    </p>
   </li>
   
   <li>
     <p>Use 3: <c>su [«user»] -c "«command» «args»"</c></p>
     
-    <p>Runs a command as root or Linux user «user». Note that the
-    command and its arguments should be quoted.</p>
+    <p>Runs a command as root or Linux user «user». Note that a
+    command with arguments <i>must</i> be quoted.</p>
   </li>
 </ul>
   

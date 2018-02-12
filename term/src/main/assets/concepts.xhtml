@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -105,11 +106,11 @@ devices:</p>
   <li>
     <dfn>arm</dfn>
   
-    <p>An <dfn>ARM architecture</dfn> has a name like `ARMv«n»´ (with
-    `v´).</p>
+    <p>An <dfn>ARM architecture</dfn> has a name like ‘ARMv«n»’ (with
+    ‘v’).</p>
     
-    <p>An <dfn>ARM family</dfn> has a name like `ARM«n»´ or `ARM
-    Cortex-A‹n›´ (without `v´).</p>
+    <p>An <dfn>ARM family</dfn> has a name like ‘ARM«n»’ or ‘ARM
+    Cortex-A‹n›’ (without ‘v’).</p>
 
     <p>For example, the ARM family ARM11 uses the ARM architecture
     ARMv6.</p>
@@ -240,7 +241,7 @@ sort | more</c>.</p>
 <c>$ \ " `</c> as <c>\$ \\ \" \`</c> (and there may be
 additional characters depending on your shell). Strings quoted with
 single or double quotes can contain newlines. If you "get stuck" in a
-continuation string, press `Control-C´ to get out.</p>
+continuation string, press <k>Control-C</k> to get out.</p>
 
 <p>Case (3) is only safe if the value does not contain whitespace or
 special characters. You must quote whitespace and many special
@@ -266,7 +267,9 @@ prompt.</p>
 variables, use <c>set</c> or <c>set | more</c>.</p>
 
 
-<h1 id="file_access_rights">File access rights</h1>
+<h2 id="file">Files</h2>
+
+<h2 id="file/access_rights">File access rights</h2>
 <!-- ************************************************************ -->
 
 <p>Unix uses the term <dfn>file mode</dfn> for <dfn>file access
@@ -274,6 +277,20 @@ rights</dfn> or <dfn>file permissions</dfn>, you change them with
   <a href="commands.xhtml#chmod"
      ><c>chmod</c></a>.
 </p>
+
+
+<h2 id="file/link">Links</h2>
+<!-- ************************************************************ -->
+
+<p>Unix supports 
+  <a href="https://en.wikipedia.org/wiki/Symbolic_link"
+     ><dfn>soft links</dfn></a>, 
+also called "symbolic links", and 
+  <a href="https://en.wikipedia.org/wiki/Hard_link"
+     ><dfn>hard links</dfn></a>, 
+which you can create with
+  <a href="commands.xhtml#ln"
+     >ln</a>.</p>
 
 
 <h1 id="sd_card">SD card</h1>
@@ -399,8 +416,8 @@ default, it is in</p>
 <p>The Internal Storage is deleted when you uninstall the app.</p>
 
 
-<h5>TTerm's Internal Storage</h5>
-<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<h3>TTerm's Internal Storage</h3>
+<!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 <p>TTerm's Internal Storage for the default Android User with the User
 ID 0 is in</p>
@@ -416,6 +433,52 @@ ID 0 is in</p>
   <a href="files.xhtml#/data/data/de.t2h.tterm/"
      >/data/data/de.t2h.tterm/</a>
 </p>
+
+
+<h3 id="storage/internal/share">Sharing Internal Storage</h3>
+<!-- –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<p>Up to Android 6, it was possible to share the Internal Storage of
+an app with other apps by making it <dfn>world readable</dfn> or
+<dfn>world writable</dfn>. This is no longer possible in Android 7+.</p>
+
+<p>This does not depend on the version of Android <i>running</i> on
+your device, only on the version the app is <i>compiled for</i>.</p>
+
+<p>Up to Android 6, this was possible because the
+  <a href="#file/access_rights"
+     >file access rights</a>
+of an Internal Storage like <c>/data/data/de.t2h.tterm/</c> were as
+follows (you need a
+  <a href="rooting.xhtml"
+     >rooted device</a>
+to do this on your own device):</p>
+
+<p class="indent code">
+  $ su -c "ls -god /data"                          <br/>       
+  drwxrwx--x  38 4096 2018-02-01 17:56 /data       <br/> 
+                                                   <br/> 
+  $ su -c "ls -god /data/data"                     <br/> 
+  drwxrwx--x 153 8192 2018-02-11 00:09 /data/data  <br/> 
+                                                   <br/> 
+  $ su -c "ls -god /data/data/de.t2h.tterm"        <br/> 
+  drwx-----x   6 4096 2018-02-08 00:13 /data/data/de.t2h.tterm
+</p>
+
+<p>Note that all directories have the rights <c>--x</c> for "other",
+which means that other apps can't list the contents of the directory,
+but <i>can</i> access contents of the directory if they know their
+files name.</p>
+
+<p>Apps <i>compiled for</i> Android 7 have these file access
+rights:</p>
+
+<p class="indent code">
+  $ su -c "ls -god /data/data/de.t2h.tterm"        <br/> 
+  drwx------   6 4096 2018-02-08 00:13 /data/data/de.t2h.tterm
+</p>
+
+<p>That's why you can't share Internal Storage anymore.</p>
 
 
 <h1>Terminal, terminal emulator</h1>

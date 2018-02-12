@@ -30,7 +30,7 @@
 <!-- ============================================================ -->
 
 <ul>
-  <li>Add an `Alt´/`Meta´ key .</li>
+  <li>Add an <k>Alt</k>/<k>Meta</k> key.</li>
 
   <li>Make the additional keys user-configurable.</li>
   
@@ -74,16 +74,17 @@
     <p>Can we support word-based input?</p>
     
     <p>As described in <a href="#B001">bug 001</a>, word-based input
-    (with a suggestion row) does not work with `Ctrl´ and `Esc´.</p>
+    (with a suggestion row) does not work with <k>Ctrl</k> and
+    <k>Esc</k>.</p>
       
     <p>I'm not sure if this can be fixed when you type directly to the
-    terminal. For example take the Emacs keyboard shortcut `Ctrl-x f´.
-    Can we tell the IME that `f´ is part of the shortcut, not the
-    start of a new word? There are analogous problems with keys like
-    `a´ and `i´ in <c>vi</c>.</p>
+    terminal. For example take the Emacs keyboard shortcut
+    <k>Ctrl-x f</k>. Can we tell the IME that <k>f</k> is part of the
+    shortcut, not the start of a new word? There are analogous
+    problems with keys like <k>a</k> and <k>i</k> in <c>vi</c>.</p>
 
     <p>Maybe we could provide a button to toggle between character-
-    and word-based input next to the `Ctrl´ button?</p>
+    and word-based input next to the <k>Ctrl</k> button?</p>
     
     <p>Or we could use an idea from VX ConnectBot and provide a
     separate input field where you swipe a whole line at a time, and
@@ -96,10 +97,10 @@
     <p>Flow control</p>
   
     <p>If TTerm does not respond to key presses, you might have
-    switched "flow control" on with `Ctrl+S´. When you switch flow
-    control off with `Ctrl+Q´, the terminal will process all pending
-    input. This is so confusing that I'll add a setting to switch it
-    off in a future version of TTerm.</p>
+    switched "flow control" on with <k>Ctrl+S</k>. When you switch
+    flow control off with <k>Ctrl+Q</k>, the terminal will process all
+    pending input. This is so confusing that I'll add a setting to
+    switch it off in a future version of TTerm.</p>
   </li>
 </ul>
 
@@ -120,9 +121,9 @@
 
 <ul>
   <li>
-    <!-- See `TODO.txt´, section "Terminal" -->
+    <!-- See ‘TODO.txt’, section "Terminal" -->
 
-    <p>Find out how to make `C-l´ clear the screen in Android's
+    <p>Find out how to make <k>C-l</k> clear the screen in Android's
     default shell Mksh and in the Bash that comes with BusyBox by
     Burrows, or provide an alternative.</p>
   </li>
@@ -172,10 +173,11 @@
 <!-- ============================================================ -->
 
 <ul>
-  <li id="B001">Bug 001, low prio: Key combinations with `Ctrl´, `Esc´
-  and `Fn´ currently only work when the setting <setting>Input
-  mode</setting> is set to <i>character-based</i>. There are analogous
-  problems with keys like `a´ and `i´ in <c>vi</c>.</li>
+  <li id="B001">Bug 001, low prio: Key combinations with <k>Ctrl</k>,
+  <k>Esc</k> and <k>Fn</k> currently only work when the setting
+  <setting>Input mode</setting> is set to <i>character-based</i>.
+  There are analogous problems with keys like <k>a</k> and <k>i</k> in
+  <c>vi</c>.</li>
 
   <li id="B003">
     <p>Bug 003, low prio: The keyboard disappears after a long

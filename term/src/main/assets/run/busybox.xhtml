@@ -67,8 +67,8 @@ several approaches to run BusyBox in TTerm:</p>
   <li><a href="#run/rooted">Install BusyBox on a rooted
   device</a></li>
 
-  <li><a href="#run/binary">Install a BusyBox binary into TTerm's
-  internal storage</a></li>
+  <li><a href="#run/binary">Install a BusyBox binary on an unrooted
+  device</a></li>
 
   <li><a href="#run/unrooted">Install a BusyBox app on an unrooted
   device</a> &mdash; this no longer works with TTerm</li>
@@ -138,7 +138,7 @@ e.b. <c>/system/xbin/cmd</c>, or with <c>busybox cmd</c>.</p>
 so that <c>/system/xbin</c> comes before <c>/system/bin</c>.</p>
 
 
-<h2 id="run/binary">Install a BusyBox binary into TTerm's internal storage</h2>
+<h2 id="run/binary">Install a BusyBox binary on an unrooted device</h2>
 <!-- ************************************************************ -->
 
 <p>On an unrooted device, you can install a BusyBox binary into
@@ -147,7 +147,7 @@ TTerm's
      >Internal Storage</a>,
 It's a little bit complicated, but on the positive side, I think that
 the worst that can happen it that you mess up your TTerm
-installation.</p>
+installation, which is easy to fix.</p>
 
 <p>You'll need a binary for your
   <a href="../concepts.xhtml#cpu_architecture">CPU architecture</a>, e.g.
@@ -262,7 +262,32 @@ binary provided by Yash D. Saraf:</p>
     </p>
   </li>
 
-  <li class="TODO">TODO Change $PATH.</li>
+  <li>
+    <p>Now we only have to change 
+      <a href="../config.xhtml#env/PATH"
+         ><c>$PATH</c></a>.</p>
+         
+    <p>Set the
+      <a href="../config.xhtml#setting/command_line"
+         ><setting>Command line</setting></a>
+    to:</p>
+
+    <p class="indent code">
+      /system/bin/sh -l
+    </p>
+
+    <p>to start the shell as a login shell, then execute:</p>
+    
+    <p class="indent code">
+      cd ~                                      <br/>
+      echo 'PATH="$PATH:$HOME/../bin"' > .profile
+    </p>
+  </li>
+
+  <li>
+    <p>That's it. Start a new terminal window and enter
+    <c>busybox</c> to check that BusyBox is found.</p>
+  </li>
 </ul>
 
 
@@ -309,8 +334,11 @@ and <c>./sbin</c> with:</p>
 <!-- ************************************************************ -->
 
 <p>This no longer works with TTerm since Google introduced a change
-with Android 7. Apps compiled for Android 7+ can only run BusyBox if
-they contain both the BusyBox executable <i>and</i> their own terminal
+with Android 7, see 
+  <a href="concepts.xhtml#storage/internal/share"
+     >Sharing Internal Storage</a>.
+Apps <i>compiled</i> for Android 7+ can only run BusyBox if they
+contain both the BusyBox executable <i>and</i> their own terminal
 emulator. This does not depend on the version of Android
 <i>running</i> on your device, only on the version the app is
 <i>compiled for</i>.</p>
