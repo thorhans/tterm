@@ -2,5 +2,9 @@
 TTerm README
 ============================================================
 
-See `/term/src/main/assets/1-index.xhtml´ and `docs´.
+See:
+
+- ‘1-BUILD.txt’
+- ‘term/src/main/assets/1-index.xhtml’
+- ‘docs’
 
