@@ -71,8 +71,10 @@ android {
       // e.g.
       //   ‘c:\Users\«user»\.gradle\gradle.properties’.
          storeFile     file(ANDROID_STORE_FILE)
+      // TODO Doesn't work any longer.
       // storePassword              // Set above.
          keyAlias      'tterm'
+      // TODO Doesn't work any longer.
       // keyPassword                // Set above.
     }
   }
@@ -82,12 +84,12 @@ android {
 android {
   compileSdkVersion 25
 
-  buildToolsVersion "27.0.1"  // currently newest
+  buildToolsVersion "29.0.3"  // currently newest
 
   defaultConfig {
-    applicationId "de.t2h.tterm"
-    minSdkVersion 19    // Android 4.4
-    targetSdkVersion 25 // Android 7.1
+    applicationId    "de.t2h.tterm"
+    minSdkVersion    19  // Android 4.4
+    targetSdkVersion 25  // Android 7.1
 
     //T-{ ------------------------------------------------------------
     //T- ndk {
@@ -148,7 +150,7 @@ android {
       // deinstalling ‘dev’ first, which deletes all TTerm Shortcuts
       // on your Home Screens.
       applicationIdSuffix ".dev"
-      versionNameSuffix '-dev'
+      versionNameSuffix   '-dev'
 
       resValue "string", "application_terminal", "TTerm debug"
       resValue "string", "activity_shortcut_create", "TTerm debug shortcut"

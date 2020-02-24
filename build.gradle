@@ -13,14 +13,14 @@
 ///
 /// See ‘1-BUILD.txt’ for build instruction. 
 
-task wrapper (type: Wrapper) {
+wrapper {
   //
   // After updating ‘gradleVersion’ below, call ‘gradle wrapper’ or
   // ‘./gradlew wrapper’ to update the wrapper.
   //
-  gradleVersion = '4.4'
+  gradleVersion = '6.2'
   distributionUrl =
-    'https://services.gradle.org/distributions/gradle-4.4-all.zip'
+    'https://services.gradle.org/distributions/gradle-6.2-all.zip'
 }
 
 buildscript {
@@ -29,7 +29,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.0.1'
+    classpath 'com.android.tools.build:gradle:3.5.3'
   }
 }
 

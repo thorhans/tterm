@@ -93,6 +93,30 @@ As of 2017-12-05, I use the following tools to build TTerm:
     - Google Repository           57
 
 
+- Using NDK 15c
+
+  - You can download 
+  
+      NDK 15c
+
+    from
+  
+      https://developer.android.com/ndk/downloads/older_releases
+
+  - I unzip it to
+  
+      C:\prg\android\sdk\ndk\15c
+
+  - Add ‘local.properties’ with:
+  
+     sdk.dir=C\:\\prg\\android\\sdk
+     ndk.dir=C\:\\prg\\android\\sdk\\ndk\\15c
+
+  - Set ‘ANDROID_NDK’, e.g. in Cygwin:
+  
+      export ANDROID_NDK='d:\prg\android\sdk\ndk\15c'
+
+
 - Testing devices
 
   My primary testing tablet with 10,5" is:
