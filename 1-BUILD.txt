@@ -50,7 +50,7 @@ As of 2017-12-05, I use the following tools to build TTerm:
 
 - IDE
 
-  Android Studio 3.0.1 (171.4443003, built 2017-11-09)
+  Android Studio 3.5.3
 
   From
 
@@ -58,13 +58,13 @@ As of 2017-12-05, I use the following tools to build TTerm:
 
   I downloaded
 
-    android-studio-ide-171.4443003-windows.exe
+    android-studio-ide-191.6010548-windows.exe
 
-  - Comes with Android Gradle Plugin 3.0.1.
+  - Comes with Android Gradle Plugin 3.5.3.
 
-  - Comes with Android SDK Build Tools 26.0.2.
+  - Comes with Android SDK Build Tools 29.0.3.
 
-  - Comes with Gradle 4.1, but I use Gradle 4.3.1 via Gradle Wrapper.
+  - Comes with Gradle 5.4.1, but I use Gradle 6.2 via Gradle Wrapper.
 
 
 - Android SDK
@@ -107,7 +107,7 @@ As of 2017-12-05, I use the following tools to build TTerm:
   
       C:\prg\android\sdk\ndk\15c
 
-  - Add ‘local.properties’ with:
+  - Add ‘local.properties’, e.g.:
   
      sdk.dir=C\:\\prg\\android\\sdk
      ndk.dir=C\:\\prg\\android\\sdk\\ndk\\15c

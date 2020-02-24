@@ -5,7 +5,8 @@
         android:versionCode="11"
         android:installLocation="auto">
 
-    <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
+    <!-- T- uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" /-->
+    <uses-sdk android:targetSdkVersion="25"/>
 
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
