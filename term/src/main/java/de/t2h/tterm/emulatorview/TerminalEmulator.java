@@ -343,7 +343,7 @@ class TerminalEmulator {
         mSpecialGraphicsCharMap['i'] = 0x240B;	// Vertical tab/"lantern"
         mSpecialGraphicsCharMap['}'] = 0x00A3;	// Pound sterling symbol
         mSpecialGraphicsCharMap['f'] = 0x00B0;	// Degree symbol
-        mSpecialGraphicsCharMap['‘'] = 0x2B25;	// Diamond
+        mSpecialGraphicsCharMap['`'] = 0x2B25;	// Diamond
         mSpecialGraphicsCharMap['~'] = 0x2022;	// Bullet point
         mSpecialGraphicsCharMap['y'] = 0x2264;	// Less-than-or-equals sign (<=)
         mSpecialGraphicsCharMap['|'] = 0x2260;	// Not equals sign (!=)
