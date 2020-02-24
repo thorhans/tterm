@@ -71,9 +71,12 @@ android {
       // e.g.
       //   ‘c:\Users\«user»\.gradle\gradle.properties’.
          storeFile     file(ANDROID_STORE_FILE)
+
       // TODO Doesn't work any longer.
       // storePassword              // Set above.
+
          keyAlias      'tterm'
+
       // TODO Doesn't work any longer.
       // keyPassword                // Set above.
     }
@@ -154,9 +157,9 @@ android {
 
       resValue "string", "application_terminal", "TTerm debug"
       resValue "string", "activity_shortcut_create", "TTerm debug shortcut"
-      ndk {
-        abiFilters "armeabi-v7a" // Only compile for Ten.
-      }
+      // ndk {
+      //   abiFilters "armeabi-v7a" // Only compile for Ten.
+      // }
       resConfigs "en", "xhdpi"   // Only compile for Ten.
     }
     prod {
