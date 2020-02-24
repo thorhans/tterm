@@ -1,9 +1,9 @@
-/// `/top.gradle´ - top-level build file
+/// ‘/top.gradle’ - top-level build file
 /// 
 /// Sync'ed 2017-12-19 with
-///   (info "(android) `top.gradle´")
+///   (info "(android) ‘top.gradle’")
 ///
-/// See `1-BUILD.txt´ for build instruction. 
+/// See ‘1-BUILD.txt’ for build instruction. 
 ///
 /// Building:
 ///
@@ -11,12 +11,12 @@
 ///
 /// - gradle assembleProdRelease
 ///
-/// See `1-BUILD.txt´ for build instruction. 
+/// See ‘1-BUILD.txt’ for build instruction. 
 
 task wrapper (type: Wrapper) {
   //
-  // After updating `gradleVersion´ below, call `gradle wrapper´ or
-  // `./gradlew wrapper´ to update the wrapper.
+  // After updating ‘gradleVersion’ below, call ‘gradle wrapper’ or
+  // ‘./gradlew wrapper’ to update the wrapper.
   //
   gradleVersion = '4.4'
   distributionUrl =

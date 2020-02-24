@@ -1,6 +1,6 @@
-/// `/term/build.gradle´ - module build file
+/// ‘/term/build.gradle’ - module build file
 /// 
-/// See `/1-BUILD.txt´.
+/// See ‘/1-BUILD.txt’.
 
 apply plugin: 'com.android.application'
 
@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 //   IDE Android Studio's menu "Build" / "Generate signed APK", where
 //   you already have specified the password in the IDE.
 
-// Switch headless AWT off *before* including Groovy's `SwingBuilder´.
+// Switch headless AWT off *before* including Groovy's ‘SwingBuilder’.
 System.setProperty("java.awt.headless", "false");
 import groovy.swing.SwingBuilder
 
@@ -43,7 +43,7 @@ gradle.taskGraph.whenReady { taskGraph ->
             defaultButton: true, 
             text: 'OK', 
             actionPerformed: {
-              // Convert array `input.password´ to a string.
+              // Convert array ‘input.password’ to a string.
               password = '' + input.password;
               dispose();            // Close dialog.
           })
@@ -63,13 +63,13 @@ gradle.taskGraph.whenReady { taskGraph ->
 
 android {
   //T+{ ------------------------------------------------------------
-  // Add builds `dev´ and `prod´, part 1.
+  // Add builds ‘dev’ and ‘prod’, part 1.
   signingConfigs {
 
     release {
-      // Define `ANDROID_STORE_FILE´ in the global Gradle config file,
+      // Define ‘ANDROID_STORE_FILE’ in the global Gradle config file,
       // e.g.
-      //   `c:\Users\«user»\.gradle\gradle.properties´.
+      //   ‘c:\Users\«user»\.gradle\gradle.properties’.
          storeFile     file(ANDROID_STORE_FILE)
       // storePassword              // Set above.
          keyAlias      'tterm'
@@ -110,12 +110,12 @@ android {
         'proguard-rules.txt'
 
       //T+{ ------------------------------------------------------------
-      // Add builds `dev´ and `prod´, part 2.
+      // Add builds ‘dev’ and ‘prod’, part 2.
       signingConfig signingConfigs.release
       //T+} ------------------------------------------------------------
     }
 
-    // Diable Crashlytics in `debug´.
+    // Diable Crashlytics in ‘debug’.
     debug {
       ext.enableCrashlytics = false
     }
@@ -134,7 +134,7 @@ android {
   }
 
   //T+{ ------------------------------------------------------------
-  // Add builds `dev´ and `prod´, part 3.
+  // Add builds ‘dev’ and ‘prod’, part 3.
 
   flavorDimensions "dev-or-prod"
 
@@ -143,9 +143,9 @@ android {
       dimension "dev-or-prod"
       minSdkVersion 22 // Android 5.1
 
-      // This is necessary, and gives you separate settings for `dev´
-      // and `prod´. Without it, you can't install `prod´ without
-      // deinstalling `dev´ first, which deletes all TTerm Shortcuts
+      // This is necessary, and gives you separate settings for ‘dev’
+      // and ‘prod’. Without it, you can't install ‘prod’ without
+      // deinstalling ‘dev’ first, which deletes all TTerm Shortcuts
       // on your Home Screens.
       applicationIdSuffix ".dev"
       versionNameSuffix '-dev'

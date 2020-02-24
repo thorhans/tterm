@@ -21,11 +21,11 @@ import android.net.Uri;
 
 /** New procedure for launching a command in ATE.
  *
- * <p>Build the path and arguments into a Uri and set that into `Intent.data´:</p>
+ * <p>Build the path and arguments into a Uri and set that into ‘Intent.data’:</p>
  *
  * <p>{@code intent.data(new Uri.Builder().setScheme("file").setPath(path).setFragment(arguments))}</p>
  *
- * <p>The old procedure of using `Intent.Extra´ is still available but is discouraged.</p>
+ * <p>The old procedure of using ‘Intent.Extra’ is still available but is discouraged.</p>
  */
 public final class RunScript extends RemoteInterface {
     // ************************************************************
@@ -33,7 +33,7 @@ public final class RunScript extends RemoteInterface {
     // ************************************************************
 
     // ------------------------------------------------------------
-    // Do *not* rename these 3 strings to use `de.t2h.tterm´!
+    // Do *not* rename these 3 strings to use ‘de.t2h.tterm’!
     // ------------------------------------------------------------
 
     private static final String ACTION_RUN_SCRIPT = "jackpal.androidterm.RUN_SCRIPT";
@@ -59,7 +59,7 @@ public final class RunScript extends RemoteInterface {
             // Someone with the appropriate permissions has asked us to run a script.
             String handle = myIntent.getStringExtra(EXTRA_WINDOW_HANDLE);
             String command = null;
-            // First look in `Intent.data´ for the path; if not there, revert to the `EXTRA_INITIAL_COMMAND´
+            // First look in ‘Intent.data’ for the path; if not there, revert to the ‘EXTRA_INITIAL_COMMAND’
             // location.
             Uri uri = myIntent.getData();
             if(uri != null) { // scheme[path][arguments]
@@ -73,7 +73,7 @@ public final class RunScript extends RemoteInterface {
                 if(null != (s = uri.getFragment())) command += " " + s;
               }
             }
-            // If `Intent.data´ not used then fall back to old method.
+            // If ‘Intent.data’ not used then fall back to old method.
             if(command == null) command = myIntent.getStringExtra(EXTRA_INITIAL_COMMAND);
             if(handle != null) {
                 // Target the request at an existing window if open.

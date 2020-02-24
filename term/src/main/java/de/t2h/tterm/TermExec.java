@@ -13,7 +13,7 @@ import java.util.*;
  * subprocess.</p>
  *
  * <p>Pseudo-terminals are a powerful Unix feature that allows programs to interact with other programs they
- * start in slightly more human-like way. For example, a PTY owner can send `^C´ (aka SIGINT) to attached
+ * start in slightly more human-like way. For example, a PTY owner can send ‘^C’ (aka SIGINT) to attached
  * shell, even if said shell runs under a different user ID.</p>
  */
 public class TermExec {
@@ -71,7 +71,7 @@ public class TermExec {
      *
      * <p>You have to obtain this file descriptor yourself by calling
      * {@link android.os.ParcelFileDescriptor#open} on a special terminal multiplexer device (located at
-     * `/dev/ptmx´).</p>
+     * ‘/dev/ptmx’).</p>
      *
      * <p>Callers are responsible for closing the descriptor.</p>
      *

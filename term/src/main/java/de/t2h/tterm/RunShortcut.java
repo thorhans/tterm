@@ -29,7 +29,7 @@ public final class RunShortcut extends RemoteInterface {
     // ************************************************************
 
     // ------------------------------------------------------------
-    // Do *not* rename this strings to use `de.t2h.tterm´!
+    // Do *not* rename this strings to use ‘de.t2h.tterm’!
     // ------------------------------------------------------------
     //
     public static final String ACTION_RUN_SHORTCUT = "jackpal.androidterm.RUN_SHORTCUT";

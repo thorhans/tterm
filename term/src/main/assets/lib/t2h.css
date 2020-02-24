@@ -39,13 +39,13 @@ p.title {
 
 h1, h2, h3, h4 {
   margin-top:     1em;
-  margin-bottom:  1rem; /* The smaller `rem´. */
+  margin-bottom:  1rem; /* The smaller ‘rem’. */
   border-bottom:  3pt solid #c0c0c0;
   padding-bottom: 3pt;
 }
 
 h5 {
-  font-size: medium;  /* Same size as `p´. */
+  font-size: medium;  /* Same size as ‘p’. */
   margin-bottom: 1em;
 }
 
@@ -59,11 +59,11 @@ h5 {
  *
  * Ordinary tables are *not* figures, since they allow page breaks.
  *
- * See also HTML5's `<figure>´ and `<figcaption>´, which seem to be
+ * See also HTML5's ‘<figure>’ and ‘<figcaption>’, which seem to be
  * for floating figures.
  */
  
-/** The class `figure´ produces a non-floating figure, one per line. */
+/** The class ‘figure’ produces a non-floating figure, one per line. */
 *.figure {
   display: block; 
 
@@ -71,7 +71,7 @@ h5 {
   margin-right: 1em;
 }  
 
-/** The classes `figure stack´ produce a non-floating, stackable figure
+/** The classes ‘figure stack’ produce a non-floating, stackable figure
  * (several per line).
  *
  * By default, the figures are vertically centered.
@@ -99,11 +99,11 @@ h5 {
 
 /** Center text in figures. 
  *
- * If you want captions with the default text style, a `<p>´ tag at
- * the top or bottom of the element with class `figure´ is enough.
+ * If you want captions with the default text style, a ‘<p>’ tag at
+ * the top or bottom of the element with class ‘figure’ is enough.
  *
- * If the caption is too wide, set `max-width´ on the element with
- * class `figure´, e.g.
+ * If the caption is too wide, set ‘max-width’ on the element with
+ * class ‘figure’, e.g.
  *
  *  <div class="figure" style="max-width: 33%">
  *    <p>...</p>
@@ -155,13 +155,13 @@ img.standalone90 {
 
 /** Indent.
  *
- * To indent a single paragraph once, use the class `indent´ on `p´:
+ * To indent a single paragraph once, use the class ‘indent’ on ‘p’:
  *
  *   <p>Not indentend</p>
  *   
  *   <p class="indent">Indented once.</p>
  *
- * To indent several paragraphs or several times, nest `div´s:
+ * To indent several paragraphs or several times, nest ‘div’s:
  *    
  *   <div class="indent">
  *     <p>Also indented once.</p>
@@ -192,21 +192,21 @@ img.standalone90 {
  *   bullet at a different location and a different size.
  *
  *   So we don't use the browser's bullet, but a Unicode character
- *   with `li::before´.
+ *   with ‘li::before’.
  *
  * - Vertical spacing
  *
  *   I want "wide lists" (lists with more vertical space between the
  *   items) as the default.
  *
- *   To get narrow lists, use `<ul class="narrow">´, see below.
+ *   To get narrow lists, use ‘<ul class="narrow">’, see below.
  */
 ul { 
   /* Horizontal spacing
    * ------------------------------ */
    
-  /* IE indents its default `ul´ with `margin-left´, Firefox with
-   * `padding-left, so reset both. */ 
+  /* IE indents its default ‘ul’ with ‘margin-left’, Firefox with
+   * ‘padding-left, so reset both. */ 
   margin-left:  0em; 
   padding-left: 0em;
 }
@@ -220,14 +220,14 @@ ul, ol {
 
 /** Default list items.
  *
- * - Horizontal spacing: see `ul´ above.
- * - Vertical spacing: see `ul´ above.
+ * - Horizontal spacing: see ‘ul’ above.
+ * - Vertical spacing: see ‘ul’ above.
  */
 ul > li {
   /* Horizontal spacing
    * ------------------------------ */
 
-  /* We set the bullet with `li::before´ below. */
+  /* We set the bullet with ‘li::before’ below. */
   list-style:   none;   
 
   /* Distance between container's left margin and list item's left
@@ -238,8 +238,8 @@ ul > li, ol > li {
   /* Vertical spacing 
    * ------------------------------ */
   
-  margin-top:    1em;  /* `1em´ is Firefox's spacing of `p´. */
-  margin-bottom: 1em;  /* `1em´ is Firefox's spacing of `p´. */
+  margin-top:    1em;  /* ‘1em’ is Firefox's spacing of ‘p’. */
+  margin-bottom: 1em;  /* ‘1em’ is Firefox's spacing of ‘p’. */
 }
 
 /** Bullet for default list item. 
@@ -328,7 +328,7 @@ ul ul ul ul > li::before { content: "○"; }
 
 /** Narrow list items.
  *
- * To get a narrower list, use `<ul class="narrow">´, e.g.:
+ * To get a narrower list, use ‘<ul class="narrow">’, e.g.:
  *
  *   <ul class="narrow">
  *     <li>One</li>
@@ -376,7 +376,7 @@ dd {
  * Semantic markup
  * ============================================================ */
 
-/** `<code>´ and class `code´.
+/** ‘<code>’ and class ‘code’.
  *
  * In Chrome and Firefox the default font size is 16pt for serif fonts
  * and 13pt for monospace fonts, which is too small. 
@@ -396,8 +396,8 @@ c, code, *.code {
 
 /** Definition. 
  *
- * `dfn´ marks a defined term. The surrounding `p´, `dt´/`dd´ or
- * `section´ is the definition. Do not use it on a link to a
+ * ‘dfn’ marks a defined term. The surrounding ‘p’, ‘dt’/‘dd’ or
+ * ‘section’ is the definition. Do not use it on a link to a
  * definition.
  */
 dfn { 

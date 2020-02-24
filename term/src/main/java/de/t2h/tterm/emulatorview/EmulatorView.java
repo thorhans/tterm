@@ -66,7 +66,7 @@ public class EmulatorView
 
     /** Trap Alt and Meta.
      *
-     * <p>Routing the key codes `Alt´ and `Meta´ away from the IME allows Alt key processing to work on the
+     * <p>Routing the key codes ‘Alt’ and ‘Meta’ away from the IME allows Alt key processing to work on the
      * Asus Transformer TF101. It doesn't seem to harm anything else, but it also doesn't seem to be required
      * on other platforms.</p>
      *
@@ -132,7 +132,7 @@ public class EmulatorView
 
     /** Color scheme (default foreground/background colors). */
     private ColorScheme mColorScheme = BaseTextRenderer.defaultColorScheme;
-    /** Set this `EmulatorView´'s color scheme.
+    /** Set this ‘EmulatorView’'s color scheme.
      *
      * @param scheme  The {@link ColorScheme} to use (use null for the default scheme).
      *
@@ -178,7 +178,7 @@ public class EmulatorView
      *
      * @return  The rows for the visible view.
      *
-     *     This is calculated in `updateSize(int w, int h)´. Please call `updateSize(true)´ if the view
+     *     This is calculated in ‘updateSize(int w, int h)’. Please call ‘updateSize(true)’ if the view
      *     changed, to get the correct calculation before calling this.
      */
     public int getVisibleRows ()
@@ -366,17 +366,17 @@ public class EmulatorView
 
     private float mScrollRemainder;
 
-    // TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `mKeyListener´.
+    // TODO ThH: Improve encapsulation, ‘TermInputConnection’ accesses ‘mKeyListener’.
     TermKeyListener mKeyListener;
 
-    /// TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `setImeBuffer´.
+    /// TODO ThH: Improve encapsulation, ‘TermInputConnection’ accesses ‘setImeBuffer’.
     void setImeBuffer (String buffer) {
         if(! buffer.equals(mImeBuffer)) {
             invalidate();
         }
         mImeBuffer = buffer;
     }
-    // TODO ThH: Improve encapsulation, `TermInputConnection´ accesses mImeBuffer´.
+    // TODO ThH: Improve encapsulation, ‘TermInputConnection’ accesses mImeBuffer’.
     String mImeBuffer = "";
 
     /** Called by the TermSession when the contents of the view need updating. */
@@ -402,7 +402,7 @@ public class EmulatorView
     // { Init
     // ============================================================
 
-    /** Create an `EmulatorView´ for a {@link TermSession}.
+    /** Create an ‘EmulatorView’ for a {@link TermSession}.
      *
      * @param context The {@link Context} for the view.
      * @param session The {@link TermSession} this view will be displaying.
@@ -543,7 +543,7 @@ public class EmulatorView
 
     // } ------------------------------------------------------------
 
-    /** Page the terminal view (scroll it up or down by `delta´ screenfuls).
+    /** Page the terminal view (scroll it up or down by ‘delta’ screenfuls).
      *
      * @param delta  The number of screens to scroll.
      *
@@ -743,8 +743,8 @@ public class EmulatorView
 
     /** Called when a key is pressed in the view.
      *
-     * <p>On Ten7 with Swype, called for `Tab´ and `C-a´, but not for `a´, which is handled by code below
-     * `EmulatorView.onCreateInputConnection´.</p>
+     * <p>On Ten7 with Swype, called for ‘Tab’ and ‘C-a’, but not for ‘a’, which is handled by code below
+     * ‘EmulatorView.onCreateInputConnection’.</p>
      *
      * @param keyCode  The keycode of the key which was pressed.
      * @param event    A {@link KeyEvent} describing the event.
@@ -791,8 +791,8 @@ public class EmulatorView
 
     /** Called when a key is released in the view.
      *
-     * <p>On Ten7 with Swype, called for `Tab´ and `C-a´, but not for `a´, which is handled by code below
-     * `EmulatorView.onCreateInputConnection´.</p>
+     * <p>On Ten7 with Swype, called for ‘Tab’ and ‘C-a’, but not for ‘a’, which is handled by code below
+     * ‘EmulatorView.onCreateInputConnection’.</p>
      *
      * @param keyCode  The keycode of the key which was released.
      * @param event    A {@link KeyEvent} describing the event.
@@ -894,7 +894,7 @@ public class EmulatorView
         return event.isSystem();
     }
 
-    // TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `clearSpecialKeyStatus´.
+    // TODO ThH: Improve encapsulation, ‘TermInputConnection’ accesses ‘clearSpecialKeyStatus’.
     void clearSpecialKeyStatus () {
         if(mIsControlKeySent) {
             mIsControlKeySent = false;
@@ -942,7 +942,7 @@ public class EmulatorView
     }
 
     private void updateSize (int w, int h) {
-        // If we need to change the height, the right place is `TermViewFlipper´, not here.
+        // If we need to change the height, the right place is ‘TermViewFlipper’, not here.
 
         mColumns = Math.max(1, (int) (((float) w) / mCharacterWidth));
         mVisibleColumns = Math.max(1, (int) (((float) mVisibleWidth) / mCharacterWidth));
@@ -973,7 +973,7 @@ public class EmulatorView
             if(force || w != mVisibleWidth || h != mVisibleHeight) {
                 mVisibleWidth = w;
                 mVisibleHeight = h;
-                // If we need to change the height, the right place is `TermViewFlipper´, not here.
+                // If we need to change the height, the right place is ‘TermViewFlipper’, not here.
                 updateSize(mVisibleWidth, mVisibleHeight);
             }
         }
@@ -1057,9 +1057,9 @@ public class EmulatorView
     }
 
     /** Send a Ctrl key event to the terminal. */
-    // TODO ThH: `Term´ calls this when you press (1) the button `Ctrl´ or (2) the key mapped to `Ctrl´
-    // (`VolumeDown´ by default). It is not called for the `Ctrl´ key on a virtual or hardware keyboard.
-    // TODO ThH: Similar to `sendFnKey´, merge them.
+    // TODO ThH: ‘Term’ calls this when you press (1) the button ‘Ctrl’ or (2) the key mapped to ‘Ctrl’
+    // (‘VolumeDown’ by default). It is not called for the ‘Ctrl’ key on a virtual or hardware keyboard.
+    // TODO ThH: Similar to ‘sendFnKey’, merge them.
     public void sendControlKey () {
         mIsControlKeySent = true;
         mKeyListener.handleControlKey(/*down*/ true);
@@ -1071,7 +1071,7 @@ public class EmulatorView
      *
      * <p>The Fn modifier key can be used to generate various special characters and escape codes.</p>
      */
-    // TODO ThH: Similar to `sendControlKey´, merge them.
+    // TODO ThH: Similar to ‘sendControlKey’, merge them.
     public void sendFnKey () {
         mIsFnKeySent = true;
         mKeyListener.handleFnKey(/*down*/ true);
@@ -1091,7 +1091,7 @@ public class EmulatorView
         try {
             mKeyListener.handleKeyCode(keyCode, new KeyEvent(KeyEvent.ACTION_DOWN, keyCode), false);
         } catch(IOException e) {
-            ; // TODO ThH: Handle exceptions in `sendKey´.
+            ; // TODO ThH: Handle exceptions in ‘sendKey’.
         }
         invalidate();
     }
@@ -1128,7 +1128,7 @@ public class EmulatorView
         // Nothing to do if there's no text.
         if(line == null) return lineCount;
 
-        // If this is not a basic line, the array returned from `getScriptLine´ could have arbitrary garbage
+        // If this is not a basic line, the array returned from ‘getScriptLine’ could have arbitrary garbage
         // at the end -- find the point at which the line ends and only include that in the text to linkify.
         //
         // XXX: The fact that the array returned from getScriptLine() on a basic line contains no garbage is
@@ -1200,8 +1200,8 @@ public class EmulatorView
                 int endRow;
                 int endCol;
                 if(textIsBasic) {
-                    // `endRow´/`endCol´ must be the last character of the link, not one after -- otherwise
-                    // `endRow´ might be too large.
+                    // ‘endRow’/‘endCol’ must be the last character of the link, not one after -- otherwise
+                    // ‘endRow’ might be too large.
                     int spanLastPos = spanEnd - 1;
                     // Basic line -- can assume one char per column
                     startRow = spanStart / mColumns;

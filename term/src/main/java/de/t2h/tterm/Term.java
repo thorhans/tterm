@@ -141,7 +141,7 @@ public class Term extends Activity
 
     public static final int REQUEST_CHOOSE_WINDOW = 1;
 
-    // TODO Should this be in `jackpal.androidterm´ or `de.t2h.tterm´?
+    // TODO Should this be in ‘jackpal.androidterm’ or ‘de.t2h.tterm’?
     //   public static final String EXTRA_WINDOW_ID = "jackpal.androidterm.window_id";
     public static final String EXTRA_WINDOW_ID = "de.t2h.tterm.window_id";
 
@@ -155,7 +155,7 @@ public class Term extends Activity
     // { Path broadcasts
     // ------------------------------------------------------------
     //
-    // Do *not* rename these 4 strings to use `de.t2h.tterm´!
+    // Do *not* rename these 4 strings to use ‘de.t2h.tterm’!
 
     private static final String ACTION_PATH_BROADCAST = "jackpal.androidterm.broadcast.APPEND_TO_PATH";
     private static final String ACTION_PATH_PREPEND_BROADCAST = "jackpal.androidterm.broadcast.PREPEND_TO_PATH";
@@ -856,7 +856,7 @@ public class Term extends Activity
         switch(action) {
         case RemoteInterface.PRIVACT_OPEN_NEW_WINDOW:
             onResumeSelectWindow = Integer.MAX_VALUE;
-            // Sometimes Term.mTSConnection.onServiceConnected gets called *before* `onResumeSelectWindow´.
+            // Sometimes Term.mTSConnection.onServiceConnected gets called *before* ‘onResumeSelectWindow’.
             // As a quick fix, set displayed child again.
             if(mViewFlipper != null && mViewFlipper.getChildCount() > 0) {
                 mViewFlipper.setDisplayedChild(mViewFlipper.getChildCount() - 1);
@@ -1175,7 +1175,7 @@ public class Term extends Activity
 
         for(int i = 0; i < mExtraKeysCount; ++i) {
             PKeyButton button = (PKeyButton) infl.inflate(R.layout.extra_key, mExtraKeysRow,
-                false); // Pass `false´ so that `inflater´ returns the button, not the row.
+                false); // Pass ‘false’ so that ‘inflater’ returns the button, not the row.
             button.setModel(mExtraKeys[i]);
 
             mExtraKeysRow.addView(button);
@@ -1208,7 +1208,7 @@ public class Term extends Activity
       // Due to a bug in Android we can't use android:layout_height="wrap_content" here, since the buttons
       // don't shrink when we reduce the text size. So calculate height and width by hand.
       //
-      // We can't use `Button.setHeight´ because the parent LinearLayout recalculates that.
+      // We can't use ‘Button.setHeight’ because the parent LinearLayout recalculates that.
       //
       // TODO ThH: Since I don't understand layout metrics fully yet, the formulas are just a guess.
       float density = getResources().getDisplayMetrics().density;
@@ -1231,10 +1231,10 @@ public class Term extends Activity
     }
 
     // Android wont't tell you if the soft keyboard is being shown, so try to guess based on the height
-    // of `top_view´ (which is the root in the XML layout file, but not the root view returned by
-    // `View.getRootView´.
+    // of ‘top_view’ (which is the root in the XML layout file, but not the root view returned by
+    // ‘View.getRootView’.
     public boolean isSoftKeyboardShown () {
-      // The height of the `top_view´ changes when you toggle the soft keyboard, on my Nexus 7 in portrait
+      // The height of the ‘top_view’ changes when you toggle the soft keyboard, on my Nexus 7 in portrait
       // mode between 1058 and 1662.
       View topView = findViewById(R.id.top_view);
       if(topView == null) return true;

@@ -1,4 +1,4 @@
-# View `UML.uxf´ in UMLet.
+# View ‘UML.uxf’ in UMLet.
 # 
 # - TODO This works when I double-click it, but not when I start it from
 #   Bash???

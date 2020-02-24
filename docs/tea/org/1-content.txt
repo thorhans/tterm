@@ -1,5 +1,5 @@
 
-Folder `docs/tea/org´
+Folder ‘docs/tea/org’
 ************************************************************
 
 This folder contains original documentation for "Terminal Emulator for

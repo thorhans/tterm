@@ -12,11 +12,11 @@ import static android.view.KeyEvent.*;
 /** A programmable key's model.
  *
  * <p>There are 3 kinds of keys: they can "send" a key code, "write" a string, or be "special" and execute
- * arbitrary code, which is handled by `PKeyButton´.</p>
+ * arbitrary code, which is handled by ‘PKeyButton’.</p>
  *
  * @see PKeyButton
  *
- * TODO `Kind.send´ does not work for all keys yet.
+ * TODO ‘Kind.send’ does not work for all keys yet.
  */
 public class PKey {
 
@@ -68,21 +68,21 @@ public class PKey {
   private PKey repeat () { mRepeat = true; return this; }
   public boolean getRepeat () { return mRepeat; }
 
-  /** Used for `Kind.send´. */
+  /** Used for ‘Kind.send’. */
   private int mKeyCode;
   public int getKeyCode () {
     if(mKind != Kind.send) throw new RuntimeException("PKey tried to get unset keycode.");
     return mKeyCode;
   }
 
-  /** Used for `Kind.write´. */
+  /** Used for ‘Kind.write’. */
   private String mText;
   public String getText () {
     if(mKind != Kind.write) throw new RuntimeException("PKey tried to get unset Text.");
     return mText;
   }
 
-  /** `PKeyButton´s that represent this key.
+  /** ‘PKeyButton’s that represent this key.
    *
    * <p>You can add a key more than once, e.g. have two Control keys, so this must be a collection.</p>
    */
@@ -93,10 +93,10 @@ public class PKey {
 
   // TODO Modifiers should store state, not other keys.
   //
-  // TODO ThH: Change `int state´ to an `enum´. It's one of
-  // - `TextRenderer.MODE_OFF´
-  // - `TextRenderer.MODE_ON´
-  // - `TextRenderer.MODE_LOCKED´
+  // TODO ThH: Change ‘int state’ to an ‘enum’. It's one of
+  // - ‘TextRenderer.MODE_OFF’
+  // - ‘TextRenderer.MODE_ON’
+  // - ‘TextRenderer.MODE_LOCKED’
   public void setState (int state) {
     for(PKeyButton button : mButtons) {
       button.setState(state);
@@ -203,7 +203,7 @@ public class PKey {
     //    
     //     118  76     Keyboard Menu
     //    
-    // - Windows has key called `Menu´ or `Apps´ that opens the context menu. In the Windows API, it is
+    // - Windows has key called ‘Menu’ or ‘Apps’ that opens the context menu. In the Windows API, it is
     //   called ‘ VK_APPS’ and defined as 0x5D = 93.
     //    
     //     https://en.wikipedia.org/wiki/Menu_key
@@ -224,21 +224,21 @@ public class PKey {
     note063 = "Enter alternate symbols.",
     note064 = "Launch a browser application.",
     note065 = "Launch a mail application.",
-    note067 = "Deletes characters before the insertion point, unlike `FORWARD_DEL´.",
-    note078 = "Used to enter numeric symbols. This key is not Num Lock, it is more like `ALT_LEFT´ and is "
-            + "interpreted as an `ALT´ key by ´android.text.method.MetaKeyKeyListener´.",
-    note091 = "Mutes the microphone, unlike `VOLUME_MUTE´.",
+    note067 = "Deletes characters before the insertion point, unlike ‘FORWARD_DEL’.",
+    note078 = "Used to enter numeric symbols. This key is not Num Lock, it is more like ‘ALT_LEFT’ and is "
+            + "interpreted as an ‘ALT’ key by ’android.text.method.MetaKeyKeyListener’.",
+    note091 = "Mutes the microphone, unlike ‘VOLUME_MUTE’.",
     note094 = "Switch symbol sets (Emoji, Kao-moji).",
     note095 = "Switch character sets (Kanji, Katakana).",
-    note112 = "Deletes characters ahead of the insertion point, unlike `DEL´.",
+    note112 = "Deletes characters ahead of the insertion point, unlike ‘DEL’.",
     note122 = "Scrolling / moving the cursor to the start of a line / to the top of a list.",
     note123 = "Scrolling / moving the cursor to the end of a line / to the bottom of a list.",
     note124 = "Toggles insert / overwrite edit mode.",
-    note125 = "Navigates forward in the history stack, complement of `BACK´.",
-    note143 = "This is the Num Lock key, it is different from `NUM´. This key alters the behavior of other "
+    note125 = "Navigates forward in the history stack, complement of ‘BACK’.",
+    note143 = "This is the Num Lock key, it is different from ‘NUM’. This key alters the behavior of other "
             + "keys on the numeric keypad.",
     note158 = "For decimals or digit grouping.",
-    note164 = "Mutes the speaker, unlike `MUTE´. This key should normally be implemented as a toggle such "
+    note164 = "Mutes the speaker, unlike ‘MUTE’. This key should normally be implemented as a toggle such "
             + "that the first press mutes the speaker and the second press restores the original volume.",
     note171 = "On TV remotes, toggles picture-in-picture mode or other windowing functions. On Android Wear "
             + "devices, triggers a display offset.",
@@ -247,12 +247,12 @@ public class PKey {
     note205 = "Toggles silent or vibrate mode on and off. On some devices, the key may only operate when "
             + "long-pressed.",
     note219 = "Launche the global assist activity, not delivered to applications.",
-    note223 = "Puts the device to sleep. Behaves somewhat like `POWER´ but it has no effect if the device is "
+    note223 = "Puts the device to sleep. Behaves somewhat like ‘POWER’ but it has no effect if the device is "
             + "already asleep.",
-    note224 = "Wakes up the device. Behaves somewhat like `POWER´ but it has no effect if the device is "
+    note224 = "Wakes up the device. Behaves somewhat like ‘POWER’ but it has no effect if the device is "
             + "already awake.",
     note225 = "Initiates peripheral pairing mode.",
-    note227 = "The HDMI-CEC standard specifies keys `11´ and `12´, but not `10´.",
+    note227 = "The HDMI-CEC standard specifies keys ‘11’ and ‘12’, but not ‘10’.",
     note234 = "Initiates to enter multi-digit channel nubmber when each digit key is assigned for selecting "
             + "separate channel. Corresponds to Number Entry Mode (0x1D) of CEC User Control Code.",
     note256 = "Goes to the title list. Corresponds to Contents Menu (0x0B) of CEC User Control Code.",
@@ -263,7 +263,7 @@ public class PKey {
     note264 = "Main power/reset button on watch.";
 
   static {
-    // From `https://developer.android.com/reference/android/view/KeyEvent.html´
+    // From ‘https://developer.android.com/reference/android/view/KeyEvent.html’
       
     section("General I");
     // ------------------------------------------------------------
@@ -336,7 +336,7 @@ public class PKey {
     send( 65 , "Envelope"      , "Envelope special function" ).note(note065);
     send( 66 , "Enter"         , "Enter"                     );
     send( 67 , "Del"           , "Backspace"                 ).note(note067);
-    send( 68 , "Grave"         , "'`' (backtick"             );
+    send( 68 , "Grave"         , "'‘' (backtick"             );
     send( 69 , "Minus"         , "'-'"                       );
     send( 70 , "Equals"        , "'='"                       );
     send( 71 , "Left_Bracket"  , "'['"                       );

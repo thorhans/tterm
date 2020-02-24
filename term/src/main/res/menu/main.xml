@@ -29,7 +29,7 @@
     <!--
      ! - Added a settings *icon* in addition to the menu entry.
      ! - V 0.1.4: Icon is now a gear instead of a wrench. I found the icon in the Android SDK at
-     !     `sdk/platforms/android-25/data/res´
+     !     ‘sdk/platforms/android-25/data/res’
      !   and removed the  ring.
      !-->
     <item

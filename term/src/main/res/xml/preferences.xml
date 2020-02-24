@@ -154,7 +154,7 @@
           android:dialogTitle  = "@string/dialog_title_controlkey_preference" />
 
         <!--
-         ! Reuse `@array/entries_controlkey_preference´.
+         ! Reuse ‘@array/entries_controlkey_preference’.
          !
          ! <ListPreference
          !   android:key="fnkey"
@@ -263,7 +263,7 @@
         android:summary      = "@string/summary_allow_prepend_path_preference" />
 
       <!--
-       ! The home_path default is set dynamically in  `TermService.onCreate´.
+       ! The home_path default is set dynamically in  ‘TermService.onCreate’.
        ! -->
       <EditTextPreference
         android:key          = "home_path"

@@ -118,7 +118,7 @@ class TerminalEmulator {
     /** Escape processing state: Have seen an ESC character */
     private static final int ESC = 1;
 
-    /** Escape processing state: Have seen `ESC #´. */
+    /** Escape processing state: Have seen ‘ESC #’. */
     private static final int ESC_POUND = 2;
 
     /** Escape processing state: Have seen ESC and a character-set-select char. */
@@ -127,19 +127,19 @@ class TerminalEmulator {
     /** Escape processing state: Have seen ESC and a character-set-select char. */
     private static final int ESC_SELECT_RIGHT_PAREN = 4;
 
-    /** Escape processing state: `ESC [´. */
+    /** Escape processing state: ‘ESC [’. */
     private static final int ESC_LEFT_SQUARE_BRACKET = 5;
 
-    /** Escape processing state: `ESC [ ?´. */
+    /** Escape processing state: ‘ESC [ ?’. */
     private static final int ESC_LEFT_SQUARE_BRACKET_QUESTION_MARK = 6;
 
-    /** Escape processing state: `ESC %´. */
+    /** Escape processing state: ‘ESC %’. */
     private static final int ESC_PERCENT = 7;
 
-    /** Escape processing state: `ESC ]´ (AKA OSC - Operating System Controls). */
+    /** Escape processing state: ‘ESC ]’ (AKA OSC - Operating System Controls). */
     private static final int ESC_RIGHT_SQUARE_BRACKET = 8;
 
-    /** Escape processing state: `ESC ] ESC´ (AKA OSC - Operating System Controls). */
+    /** Escape processing state: ‘ESC ] ESC’ (AKA OSC - Operating System Controls). */
     private static final int ESC_RIGHT_SQUARE_BRACKET_ESC = 9;
 
     /** True if the current escape sequence should continue, false if the current escape sequence should be
@@ -343,7 +343,7 @@ class TerminalEmulator {
         mSpecialGraphicsCharMap['i'] = 0x240B;	// Vertical tab/"lantern"
         mSpecialGraphicsCharMap['}'] = 0x00A3;	// Pound sterling symbol
         mSpecialGraphicsCharMap['f'] = 0x00B0;	// Degree symbol
-        mSpecialGraphicsCharMap['`'] = 0x2B25;	// Diamond
+        mSpecialGraphicsCharMap['‘'] = 0x2B25;	// Diamond
         mSpecialGraphicsCharMap['~'] = 0x2022;	// Bullet point
         mSpecialGraphicsCharMap['y'] = 0x2264;	// Less-than-or-equals sign (<=)
         mSpecialGraphicsCharMap['|'] = 0x2260;	// Not equals sign (!=)
@@ -661,7 +661,7 @@ class TerminalEmulator {
 
         // Handle C1 control characters.
         if((b & 0x80) == 0x80 && (b & 0x7f) <= 0x1f) {
-            // `ESC` and `((code & 0x7f) + 0x40)´ is the two-byte escape sequence corresponding to a
+            // ‘ESC‘ and ‘((code & 0x7f) + 0x40)’ is the two-byte escape sequence corresponding to a
             // particular C1 code.
             process((byte) 27, false);
             process((byte) ((b & 0x7f) + 0x40), false);
@@ -784,7 +784,7 @@ class TerminalEmulator {
 
                 char[] chars = charBuf.array();
                 if(chars[0] >= 0x80 && chars[0] <= 0x9f) {
-                    // Sequence decoded to a C1 control character which needs to be sent through `process()´
+                    // Sequence decoded to a C1 control character which needs to be sent through ‘process()’
                     // again.
                     process((byte) chars[0], false);
                 } else {

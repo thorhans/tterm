@@ -1,4 +1,4 @@
-// © 2004-2018 Thorbjørn Hansen (http://t2h.de). Licensed as open source, see `/de/t2h/license.txt´.
+// © 2004-2018 Thorbjørn Hansen (http://t2h.de). Licensed as open source, see ‘/de/t2h/license.txt’.
 // These files are distributed WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
 // FITNESS FOR A PARTICULAR PURPOSE. See the license for details.
 

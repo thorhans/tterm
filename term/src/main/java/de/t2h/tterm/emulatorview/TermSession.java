@@ -182,7 +182,7 @@ public class TermSession {
     public interface FinishCallback {
         /** Callback function to be invoked when a {@link TermSession} finishes.
          *
-         * @param session  the `TermSession´ which has finished
+         * @param session  the ‘TermSession’ which has finished
          */
         void onSessionFinish (TermSession session);
     }
@@ -195,7 +195,7 @@ public class TermSession {
     public boolean isRunning () { return mIsRunning; }
 
     /** Needed to support pressing Enter to close finished session. */
-    // TODO Merge with `mIsRunning´?
+    // TODO Merge with ‘mIsRunning’?
     public boolean mIsExiting = false;
 
     // ------------------------------------------------------------
@@ -369,7 +369,7 @@ public class TermSession {
      *
      * <p>The written data will be consumed by the emulation client as input.</p>
      *
-     * <p>`write´ itself runs on the main thread. The default implementation writes the data into a circular
+     * <p>‘write’ itself runs on the main thread. The default implementation writes the data into a circular
      * buffer and signals the writer thread to copy it from there to the {@link OutputStream}.</p>
      * 
      * <p>Subclasses may override this method to modify the output before writing it to the stream, but
@@ -520,8 +520,8 @@ public class TermSession {
 
     /** Finish this terminal session.
      * 
-     * <p>Frees resources used by the terminal emulator and closes the attached `InputStream´ and
-     * `OutputStream´.</p>
+     * <p>Frees resources used by the terminal emulator and closes the attached ‘InputStream’ and
+     * ‘OutputStream’.</p>
      */
     public void finish () {
         mIsRunning = false;

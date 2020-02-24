@@ -48,7 +48,7 @@ public class HelpActivity extends Activity {
       settings.setDisplayZoomControls(false);
 
       // Necessary since API 24 (7.0), otherwise you get a fatal exception when you click on a link. For
-      // example, when you click on the link to `changelog.xhtml´, you get:
+      // example, when you click on the link to ‘changelog.xhtml’, you get:
       //   android.os.FileUriExposedException: file:///android_asset/changelog.xhtml exposed beyond app
       //   through Intent.getData()
       //
@@ -62,7 +62,7 @@ public class HelpActivity extends Activity {
 
       setContentView(mWebView);
 
-      // LATER Is there some reason why this code is better than `loadUlr´?
+      // LATER Is there some reason why this code is better than ‘loadUlr’?
       //
       //   try {
       //       InputStream fin = getAssets().open("1-index.xhtml");

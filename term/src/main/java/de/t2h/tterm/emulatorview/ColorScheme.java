@@ -18,12 +18,12 @@ package de.t2h.tterm.emulatorview;
 
 /** A class describing a color scheme for an {@link EmulatorView}.
  *
- * <p>`EmulatorView´ supports changing its default foreground, background, and cursor colors. Passing a
- * `ColorScheme´ to {@link EmulatorView#setColorScheme setColorScheme} will cause the`EmulatorView´ to use the
+ * <p>‘EmulatorView’ supports changing its default foreground, background, and cursor colors. Passing a
+ * ‘ColorScheme’ to {@link EmulatorView#setColorScheme setColorScheme} will cause the‘EmulatorView’ to use the
  * specified colors as its defaults.</p>
  *
  * <p>Cursor colors can be omitted when specifying a color scheme; if no cursor colors are specified,
- * `ColorScheme´ will automatically select suitable cursor colors for you.</p>
+ * ‘ColorScheme’ will automatically select suitable cursor colors for you.</p>
  *
  * @see EmulatorView#setColorScheme
  */

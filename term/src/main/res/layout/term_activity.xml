@@ -23,10 +23,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
   <!--
-   ! - TODO ThH: How do we set height, gravity and weight of the `TermViewFlipper´?
+   ! - TODO ThH: How do we set height, gravity and weight of the ‘TermViewFlipper’?
    !
-   !   With the current setting, the `TermViewFlipper´ continues *under* the button row. I currently fix that
-   !   with a hack in `TermViewFlipper.updateVisibleRect´. 
+   !   With the current setting, the ‘TermViewFlipper’ continues *under* the button row. I currently fix that
+   !   with a hack in ‘TermViewFlipper.updateVisibleRect’. 
   -->  
   <de.t2h.tterm.TermViewFlipper
       android:id="@+id/view_flipper"
@@ -46,6 +46,6 @@
       android:paddingLeft="1dp"
       android:paddingRight="1dp" >
 
-      <!-- Keys are added here using layout `extra_key.xml´. -->
+      <!-- Keys are added here using layout ‘extra_key.xml’. -->
   </de.t2h.tterm.key.PKeyRow>
 </LinearLayout>

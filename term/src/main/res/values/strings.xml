@@ -19,7 +19,7 @@
 
 <resources>
     <!--
-     ! Now set in `/term/build.gradle´.
+     ! Now set in ‘/term/build.gradle’.
      ! <string name="application_terminal">TTerm (beta)</string>
     -->
 
@@ -262,7 +262,7 @@
 
     <!-- AndroidManifest.xml -->
     <!--
-     ! Now set in `/term/build.gradle´.
+     ! Now set in ‘/term/build.gradle’.
      ! <string name="activity_shortcut_create">"TTerm shortcut"</string>
     -->
 

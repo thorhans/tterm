@@ -37,7 +37,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp" />
     <!--T!
-     !  Changed `class´.
+     !  Changed ‘class’.
     -->
     <view class="de.t2h.tterm.WindowList$CloseButton" android:id="@+id/window_list_close"
           android:layout_width="wrap_content"

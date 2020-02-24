@@ -1,5 +1,5 @@
 // ************************************************************
-// LATER Does no longer work since I merged module `emulatorview´ with module `term´.
+// LATER Does no longer work since I merged module ‘emulatorview’ with module ‘term’.
 // ************************************************************
 
 apply plugin: 'com.android.application'
@@ -34,6 +34,6 @@ android {
 }
 
 dependencies {
-    // LATER Does no longer work since I merged `emulatorview´ with `term´.
+    // LATER Does no longer work since I merged ‘emulatorview’ with ‘term’.
     compile project(':emulatorview')
 }

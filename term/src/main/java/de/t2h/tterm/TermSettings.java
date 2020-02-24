@@ -101,7 +101,7 @@ public class TermSettings
 
     // ------------------------------------------------------------
     //
-    // TODO These keys must correspond with `res/xml/preferences.xml´. Is there a way to guarantee it?
+    // TODO These keys must correspond with ‘res/xml/preferences.xml’. Is there a way to guarantee it?
 
     private static final String
 
@@ -119,8 +119,8 @@ public class TermSettings
 
         // Section "Extra keys"
 
-        EXTRAKEYS_STRING_KEY   = "extrakeys_string", // We can't use `extrakeys´ here, up to 2017-12-28 I used
-                                                     // that for `extrakeys_show´.
+        EXTRAKEYS_STRING_KEY   = "extrakeys_string", // We can't use ‘extrakeys’ here, up to 2017-12-28 I used
+                                                     // that for ‘extrakeys_show’.
         EXTRAKEY_SIZE_KEY      = "extrakeys_size",
         EXTRAKEYS_SHOWN_KEY    = "extrakeys_shown",
 

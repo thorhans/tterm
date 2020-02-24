@@ -32,7 +32,7 @@ class TermInputConnection extends BaseInputConnection {
     private int mSelectedTextStart;
     private int mSelectedTextEnd;
 
-    // TODO ThH: Improve encapsulation, `TermInputConnection´ accesses `mEmulatorView´.
+    // TODO ThH: Improve encapsulation, ‘TermInputConnection’ accesses ‘mEmulatorView’.
     private EmulatorView mEmulatorView;
 
     // ************************************************************
@@ -211,7 +211,7 @@ class TermInputConnection extends BaseInputConnection {
         if(actionCode == EditorInfo.IME_ACTION_UNSPECIFIED) {
             // Press Enter to close finished session for keyboard Swype.
             //
-            // For keyboard GBoard, see `TermKeyListener.handleKeyCode´.
+            // For keyboard GBoard, see ‘TermKeyListener.handleKeyCode’.
             //
             if(mEmulatorView.mTermSession.mIsExiting) {
                 mEmulatorView.mTermSession.finish();

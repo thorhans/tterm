@@ -25,15 +25,15 @@ public class PKeyButton extends Button {
   // ************************************************************
 
   private static OnClickListener mSendOnClick;
-  /** Register `onClick´ handler for `PKey´ with `Kind.send´. */
+  /** Register ‘onClick’ handler for ‘PKey’ with ‘Kind.send’. */
   public static void registerSendOnClick (OnClickListener onClick) { mSendOnClick = onClick; }
 
   private static OnClickListener mWriteOnClick;
-  /** Register `onClick´ handler for `PKey´ with `Kind.write´. */
+  /** Register ‘onClick’ handler for ‘PKey’ with ‘Kind.write’. */
   public static void registerWriteOnClick (OnClickListener onClick) { mWriteOnClick = onClick; }
 
   private static HashMap<String, OnClickListener> mSpecialOnClick = new HashMap<>();
-  /** Register `onClick´ handler for `PKey´ with `Kind.special´. */
+  /** Register ‘onClick’ handler for ‘PKey’ with ‘Kind.special’. */
   public static void registerSpecialOnClick (String name, OnClickListener onClick) {
     mSpecialOnClick.put(name, onClick); }
 
@@ -68,7 +68,7 @@ public class PKeyButton extends Button {
 
   /** Register a callback to be invoked when this button is clicked <b>or auto-repeats</b>.
    *
-   * <p>To handle a single key press, we pass the `callback´ directly to {@link Button#setOnClickListener},
+   * <p>To handle a single key press, we pass the ‘callback’ directly to {@link Button#setOnClickListener},
    * so a single callback object can handle many buttons.</p>
    * 
    * <p>To handle auto-repeats, we set up an {@link OnTouchListener} object for each auto-repeating key's
@@ -95,7 +95,7 @@ public class PKeyButton extends Button {
    * <p>I have not searched for a way to share this object between buttons yet, since it's only relevant if we
    * have very many auto-repeating keys./p>
    *
-   * TODO Move this to `de.t2h.widget´?
+   * TODO Move this to ‘de.t2h.widget’?
    */
   private static class RepeatingOnTouchListener implements View.OnTouchListener {
 
@@ -103,8 +103,8 @@ public class PKeyButton extends Button {
     // Attributes
     // ************************************************************
 
-    // The view passed in by `onTouch´. Since I haven't found a way to share a `RepeatingOnTouchListener´
-    // between two buttons yet, I could make `RepeatingOnTouchListener´ a non-static member class instead.
+    // The view passed in by ‘onTouch’. Since I haven't found a way to share a ‘RepeatingOnTouchListener’
+    // between two buttons yet, I could make ‘RepeatingOnTouchListener’ a non-static member class instead.
     private Button mButton;
 
     private Rect mRect;
@@ -143,14 +143,14 @@ public class PKeyButton extends Button {
           mHandler = new Handler();
           mHandler.postDelayed(mAction, 200);
 
-          return true;                          // Consume the event, since we called `performClick´.
+          return true;                          // Consume the event, since we called ‘performClick’.
 
         case MotionEvent.ACTION_MOVE:           // Has user moved outside the button?
           if(mRect.contains(v.getLeft() + (int) event.getX(), v.getTop() + (int) event.getY())) {
             break;
           }
           // break;                             // User moved outside the button, fall through to
-                                                // `ACTION_CANCEL´.
+                                                // ‘ACTION_CANCEL’.
 
         case MotionEvent.ACTION_CANCEL:
         case MotionEvent.ACTION_UP:

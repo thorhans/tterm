@@ -8,14 +8,14 @@ TTerm
 - Install the tools described in section (2) below.
 
 
-- To install the build type `debug´ with the flavor `dev´ on the
+- To install the build type ‘debug’ with the flavor ‘dev’ on the
   connected Android device:
 
     gradle installDevDebug
 
 
-- To assemble and sign the build type `release´ with the flavor
-  `prod´:
+- To assemble and sign the build type ‘release’ with the flavor
+  ‘prod’:
 
     gradle assembleProdRelease
 
@@ -34,7 +34,7 @@ TTerm
   - TODO On my device it complains about uninstalling, then I have to
     uninstall the app for all Android users on the device, which means
     that I loose the configuration. Research that further: There is a
-    switch for `adb uninstall´ to keep the config.
+    switch for ‘adb uninstall’ to keep the config.
 
 
 (2) Tools

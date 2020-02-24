@@ -7,8 +7,8 @@ List of intents
 
 Abbreviations:
 
-  `action.´   = `android.intent.action.´
-  `category.´ = `android.intent.category.´
+  ‘action.’   = ‘android.intent.action.’
+  ‘category.’ = ‘android.intent.category.’
 
 
 Public activities
@@ -47,7 +47,7 @@ Public activities
 
   ------------------------------------------------------------
 
-  // Runs the script passed in `Intent.data´.
+  // Runs the script passed in ‘Intent.data’.
   // 
   activity: RunScript {
     intent-filter: {
@@ -172,5 +172,5 @@ Private activities
       /src/main/java
       /jackpal/androidterm/sample/telnet/TermActivity.java
 
-  which might call `TermService´, or do something similar.
+  which might call ‘TermService’, or do something similar.
 

@@ -33,7 +33,7 @@ public class SessionList extends ArrayList<TermSession>
     // Attributes
     // ************************************************************
 
-    // `callbacks´
+    // ‘callbacks’
     
     LinkedList<UpdateCallback> callbacks = new LinkedList<UpdateCallback>();
 
@@ -52,7 +52,7 @@ public class SessionList extends ArrayList<TermSession>
         }
     }
 
-    // `titleChangedListeners´
+    // ‘titleChangedListeners’
 
     LinkedList<UpdateCallback> titleChangedListeners = new LinkedList<UpdateCallback>();
     UpdateCallback mTitleChangedListener = new UpdateCallback() {

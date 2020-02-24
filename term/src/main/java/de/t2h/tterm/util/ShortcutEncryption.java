@@ -124,13 +124,13 @@ public final class ShortcutEncryption {
          *
          *     <code>encKey + ":" + macKey<code>
          *
-         * where `encKey´ and `macKey´ are the Base64-encoded encryption and MAC keys.</p>
+         * where ‘encKey’ and ‘macKey’ are the Base64-encoded encryption and MAC keys.</p>
          */
         public String encode () {
             return encodeToBase64(encKey.getEncoded()) + ":" + encodeToBase64(macKey.getEncoded());
         }
 
-        /** Creates a new Keys object by decoding a string of the form output from `encode´. */
+        /** Creates a new Keys object by decoding a string of the form output from ‘encode’. */
         public static Keys decode (String encodedKeys) {
             String[] keys = COLON.split(encodedKeys);
             if(keys.length != 2) {

@@ -46,8 +46,8 @@
     -->
 
     <!--
-     ! When changing `entries_fontsize_preference´ in `arrays.xml´,
-     ! also change `entryvalues_fontsize_preference´ in `arraysNoLocalize.xml´.
+     ! When changing ‘entries_fontsize_preference’ in ‘arrays.xml’,
+     ! also change ‘entryvalues_fontsize_preference’ in ‘arraysNoLocalize.xml’.
     -->
     <string-array name="entries_fontsize_preference">
         <item>6 pt</item>

@@ -15,7 +15,7 @@ h1, h2, h3{
   content: url("../res/tterm72.png");
 
   /* Remove the baseline. For unknown reasons, setting
-   * `vertical-align: middle´ does not work here. */
+   * ‘vertical-align: middle’ does not work here. */
   height: 72px;
 
   display: inline-block;

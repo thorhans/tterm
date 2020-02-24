@@ -1,0 +1,378 @@
+
+./.gitignore,0
+
+./1-BUILD.txt,0
+
+./build.gradle,0
+
+./docs/artwork/TTerm.svg,0
+
+./docs/intents.txt,0
+
+./docs/tea/build-tea.txt,0
+
+./docs/tea/from-tea-to-tterm.txt,0
+
+./docs/tea/org/1-content.txt,0
+
+./docs/tea/org/Building.md,0
+
+./docs/tea/org/releaseChecklist.md,0
+
+./docs/tea/org/UTF-8-demo.txt,0
+
+./docs/tea/org/UTF-8-SMP-chars-demo.txt,0
+
+./docs/umlet.sh,0
+
+./gradle.properties,0
+
+./LICENSE,0
+
+./MODULE_LICENSE_APACHE2,0
+
+./NOTICE,0
+
+./README.txt,0
+
+./samples/intents/build.gradle,0
+
+./samples/intents/lint.xml,0
+
+./samples/intents/src/main/AndroidManifest.xml,0
+
+./samples/intents/src/main/java/de/t2h/tterm/sample/intents/IntentSampleActivity.java,0
+
+./samples/intents/src/main/res/layout/main.xml,0
+
+./samples/intents/src/main/res/values/strings.xml,0
+
+./samples/intents/src/main/res/values-ja/strings.xml,0
+
+./samples/intents/src/main/res/values-ko/strings.xml,0
+
+./samples/pathbroadcasts/build.gradle,0
+
+./samples/pathbroadcasts/src/main/AndroidManifest.xml,0
+
+./samples/pathbroadcasts/src/main/java/de/t2h/tterm/sample/pathbroadcasts/PathReceiver.java,0
+
+./samples/pathbroadcasts/src/main/res/values/strings.xml,0
+
+./samples/telnet/build.gradle,0
+
+./samples/telnet/src/main/AndroidManifest.xml,0
+
+./samples/telnet/src/main/java/de/t2h/tterm/sample/telnet/LaunchActivity.java,0
+
+./samples/telnet/src/main/java/de/t2h/tterm/sample/telnet/TelnetSession.java,0
+
+./samples/telnet/src/main/java/de/t2h/tterm/sample/telnet/TermActivity.java,0
+
+./samples/telnet/src/main/res/layout/launch_activity.xml,0
+
+./samples/telnet/src/main/res/layout/term_activity.xml,0
+
+./samples/telnet/src/main/res/values/strings.xml,0
+
+./samples/telnet/src/main/res/values-ko/strings.xml,0
+
+./settings.gradle,0
+
+./term/build.gradle,0
+
+./term/lint.xml,0
+
+./term/src/androidTest/java/jackpal/androidterm/libtermexec/ApplicationTest.java,0
+
+./term/src/main/aidl/de/t2h/tterm/libtermexec/v1/ITerminal.aidl,0
+
+./term/src/main/AndroidManifest.xml,0
+
+./term/src/main/assets/1-index.xhtml,0
+
+./term/src/main/assets/changelog.xhtml,0
+
+./term/src/main/assets/commands.xhtml,0
+
+./term/src/main/assets/concepts.xhtml,0
+
+./term/src/main/assets/config.xhtml,0
+
+./term/src/main/assets/features.xhtml,0
+
+./term/src/main/assets/files.xhtml,0
+
+./term/src/main/assets/integration.xhtml,0
+
+./term/src/main/assets/intro.xhtml,0
+
+./term/src/main/assets/lib/t2h.css,0
+
+./term/src/main/assets/lib/toc.css,0
+
+./term/src/main/assets/lib/tterm.css,0
+
+./term/src/main/assets/LICENSE,0
+
+./term/src/main/assets/licenses.xhtml,0
+
+./term/src/main/assets/planned.xhtml,0
+
+./term/src/main/assets/prg/emacs.xhtml,0
+
+./term/src/main/assets/programs.xhtml,0
+
+./term/src/main/assets/rooting.xhtml,0
+
+./term/src/main/assets/run/bash.xhtml,0
+
+./term/src/main/assets/run/busybox.xhtml,0
+
+./term/src/main/assets/run/debian.xhtml,0
+
+./term/src/main/assets/run/sh.xhtml,0
+
+./term/src/main/assets/run/termux.xhtml,0
+
+./term/src/main/assets/shells.xhtml,0
+
+./term/src/main/assets/sources.xhtml,0
+
+./term/src/main/assets/src/doc.js,0
+
+./term/src/main/assets/src/make.js,0
+
+./term/src/main/assets/src/tterm.css,0
+
+./term/src/main/assets/tea.xhtml,0
+
+./term/src/main/assets/usage.xhtml,0
+
+./term/src/main/java/de/t2h/tterm/BoundSession.java,0
+
+./term/src/main/java/de/t2h/tterm/compat/AndroidCompat.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/BaseTextRenderer.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/ByteQueue.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/ColorScheme.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/EmulatorDebug.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/EmulatorView.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/FullUnicodeLine.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/GrowableIntArray.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/package.html,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/PaintRenderer.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/Screen.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/StyleRow.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/TerminalEmulator.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/TermInputConnection.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/TermKeyListener.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/TermSession.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/TextRenderer.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/TextStyle.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/TranscriptScreen.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/UnicodeTranscript.java,0
+
+./term/src/main/java/de/t2h/tterm/emulatorview/UpdateCallback.java,0
+
+./term/src/main/java/de/t2h/tterm/Exec.java,0
+
+./term/src/main/java/de/t2h/tterm/GenericTermSession.java,0
+
+./term/src/main/java/de/t2h/tterm/HelpActivity.java,0
+
+./term/src/main/java/de/t2h/tterm/key/PKey.java,0
+
+./term/src/main/java/de/t2h/tterm/key/PKeyButton.java,0
+
+./term/src/main/java/de/t2h/tterm/key/PKeyRow.java,0
+
+./term/src/main/java/de/t2h/tterm/RemoteInterface.java,0
+
+./term/src/main/java/de/t2h/tterm/RunScript.java,0
+
+./term/src/main/java/de/t2h/tterm/RunShortcut.java,0
+
+./term/src/main/java/de/t2h/tterm/ShellTermSession.java,0
+
+./term/src/main/java/de/t2h/tterm/shortcuts/AddShortcut.java,0
+
+./term/src/main/java/de/t2h/tterm/shortcuts/ColorValue.java,0
+
+./term/src/main/java/de/t2h/tterm/shortcuts/FSNavigator.java,0
+
+./term/src/main/java/de/t2h/tterm/shortcuts/TextIcon.java,0
+
+./term/src/main/java/de/t2h/tterm/Term.java,0
+
+./term/src/main/java/de/t2h/tterm/TermDebug.java,0
+
+./term/src/main/java/de/t2h/tterm/TermExec.java,0
+
+./term/src/main/java/de/t2h/tterm/TermService.java,0
+
+./term/src/main/java/de/t2h/tterm/TermSettings.java,0
+
+./term/src/main/java/de/t2h/tterm/TermSettingsActivity.java,0
+
+./term/src/main/java/de/t2h/tterm/TermView.java,0
+
+./term/src/main/java/de/t2h/tterm/TermViewFlipper.java,0
+
+./term/src/main/java/de/t2h/tterm/util/SessionList.java,0
+
+./term/src/main/java/de/t2h/tterm/util/ShortcutEncryption.java,0
+
+./term/src/main/java/de/t2h/tterm/WindowList.java,0
+
+./term/src/main/java/de/t2h/tterm/WindowListAdapter.java,0
+
+./term/src/main/java/de/t2h/util/text/Text.java,0
+
+./term/src/main/jni/Android.mk,0
+
+./term/src/main/jni/libtermexec/Android.mk,0
+
+./term/src/main/jni/libtermexec/process.cpp,0
+
+./term/src/main/jni/libtermexec/process.h,0
+
+./term/src/main/jni/term/Android.mk,0
+
+./term/src/main/jni/term/common.cpp,0
+
+./term/src/main/jni/term/common.h,0
+
+./term/src/main/jni/term/termExec.cpp,0
+
+./term/src/main/jni/term/termExec.h,0
+
+./term/src/main/res/drawable/close_background.xml,0
+
+./term/src/main/res/layout/extra_key.xml,0
+
+./term/src/main/res/layout/help_activity.xml,0
+
+./term/src/main/res/layout/term_activity.xml,0
+
+./term/src/main/res/layout/window_list_item.xml,0
+
+./term/src/main/res/layout/window_list_new_window.xml,0
+
+./term/src/main/res/menu/main.xml,0
+
+./term/src/main/res/values/arrays.xml,0
+
+./term/src/main/res/values/arraysNoLocalize.xml,0
+
+./term/src/main/res/values/attrs.xml,0
+
+./term/src/main/res/values/defaults.xml,0
+
+./term/src/main/res/values/dimens.xml,0
+
+./term/src/main/res/values/id.xml,0
+
+./term/src/main/res/values/strings.xml,0
+
+./term/src/main/res/values/styles.xml,0
+
+./term/src/main/res/values-v21/colors.xml,0
+
+./term/src/main/res/values-v21/styles.xml,0
+
+./term/src/main/res/xml/preferences.xml,0
+
+./tests/controlSequences/256color.txt,0
+
+./tests/controlSequences/combiningCharReplacement.txt,0
+
+./tests/controlSequences/combiningChars.txt,0
+
+./tests/controlSequences/hideCursor.txt,0
+
+./tests/controlSequences/setTitle.txt,0
+
+./tests/controlSequences/showCursor.txt,0
+
+./tests/controlSequences/textStyle.txt,0
+
+./tests/emulatorview-test/AndroidManifest.xml,0
+
+./tests/emulatorview-test/ant.properties,0
+
+./tests/emulatorview-test/proguard-project.txt,0
+
+./tests/emulatorview-test/project.properties,0
+
+./tests/emulatorview-test/res/values/strings.xml,0
+
+./tests/emulatorview-test/src/jackpal/androidterm/emulatorview/InputConnectionTest.java,0
+
+./tests/emulatorview-test/src/jackpal/androidterm/emulatorview/ModifierKeyTest.java,0
+
+./tests/emulatorview-test/src/jackpal/androidterm/emulatorview/TermKeyListenerTest.java,0
+
+./tests/issue145/fuzzer.go,0
+
+./tests/issue145/issue145repro-2.txt,0
+
+./tests/issue145/issue145repro.txt,0
+
+./tests/issue145/README.md,0
+
+./tests/issue149/colors.go,0
+
+./tests/wideChars/combining-chars.txt,0
+
+./tests/wideChars/last-column-wrapping.txt,0
+
+./tests/wideChars/linkification.txt,0
+
+./tests/wideChars/overwriting1.txt,0
+
+./tests/wideChars/overwriting2.txt,0
+
+./tests/wideChars/overwriting3.txt,0
+
+./tests/wideChars/overwriting4.txt,0
+
+./tests/wideChars/overwriting5.txt,0
+
+./tests/wideChars/sip-chars.txt,0
+
+./tools/build-debug,0
+
+./tools/build-release,0
+
+./tools/import-icons,0
+
+./tools/increment-version-number,0
+
+./tools/install-sdk-packages,0
+
+./tools/push-and-run-debug,0
+
+./tools/push-and-run-release,0
+
+./tools/push-samples-debug,0
+
+./tools/sign-release-build,0

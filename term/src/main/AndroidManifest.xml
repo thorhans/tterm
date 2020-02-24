@@ -21,7 +21,7 @@
     <uses-permission android:name="jackpal.androidterm.permission.PREPEND_TO_PATH" />
 
     <!--T!{ ============================================================
-     ! `@string/application_terminal´ is now set in `/term/build.gradle´.
+     ! ‘@string/application_terminal’ is now set in ‘/term/build.gradle’.
      !T+} ============================================================ -->
     <application android:icon="@drawable/ic_launcher"
             android:label="@string/application_terminal"
@@ -110,7 +110,7 @@
         </service>
 
         <!--T+{ ============================================================
-         ! `@string/activity_shortcut_create´ is now set in `/term/build.gradle´.
+         ! ‘@string/activity_shortcut_create’ is now set in ‘/term/build.gradle’.
          !T+} ============================================================ -->
         <activity android:label="@string/activity_shortcut_create"
                 android:name=".shortcuts.AddShortcut"

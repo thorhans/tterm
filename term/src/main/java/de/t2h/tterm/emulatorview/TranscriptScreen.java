@@ -289,11 +289,11 @@ class TranscriptScreen implements Screen {
                     TextStyle.encode(0x0f, 0x00, TextStyle.fxNormal),
                 -1, 0, 0, 0, 0);
 
-            // Draw the rest of the line after `imeText´. (Looks like inserting instead of owerwriting.)
+            // Draw the rest of the line after ‘imeText’. (Looks like inserting instead of owerwriting.)
             //
             // TODO ThH: We don't check if the line gets too long, but it seems to work anyway.
             //
-            // TODO ThH: This made TTerm crash: Start my Emacs. Type `C-x C-c´. Swipe `yes´. I'll just catch
+            // TODO ThH: This made TTerm crash: Start my Emacs. Type ‘C-x C-c’. Swipe ‘yes’. I'll just catch
             // the exception for now.
             try {
                 renderer.drawTextRun(canvas, x, y, imePosition + imeLength, runWidth,

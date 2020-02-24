@@ -88,7 +88,7 @@ Building TEA
 (-) I got a message to update Gradle to 3.3. and the Android Gradle
     Plugin to 2.3.0, so do that.
     
-(a) Edit the project's `build.gradle´:
+(a) Edit the project's ‘build.gradle’:
 
       tea-1.0.70/build.gradle
       ============================================================
@@ -103,7 +103,7 @@ Building TEA
               classpath 'com.android.tools.build:gradle:2.3.0'
               classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.0'
 
-(b) Edit `build.gradle´ of the 5 modules:
+(b) Edit ‘build.gradle’ of the 5 modules:
 
       */build.gradle
       ============================================================
@@ -117,7 +117,7 @@ Building TEA
               targetSdkVersion 22
 
 
-(3) Use `ndkBuild´
+(3) Use ‘ndkBuild’
 ============================================================
 
 (-) The C++ code wasn't compiling, I got the error:
@@ -150,13 +150,13 @@ Building TEA
     but it didn't work.
 
     Ah, probably because I didn't also put it in
-    `.../term/gradle.properties´, which also has C++ code.
+    ‘.../term/gradle.properties’, which also has C++ code.
 
-(-) Since `useDeprecatedNdk´ didn't work, I tried to get `ndkBuild´ to
-    work. Apparently `ndkBuild´ is older than `CMake´, but it can use
-    TEA's `Android.mk´ from earlier versions.
+(-) Since ‘useDeprecatedNdk’ didn't work, I tried to get ‘ndkBuild’ to
+    work. Apparently ‘ndkBuild’ is older than ‘CMake’, but it can use
+    TEA's ‘Android.mk’ from earlier versions.
 
-(a) Add two `Android.mk´ files:
+(a) Add two ‘Android.mk’ files:
 
       tea-1.0.70/libtermexec/src/main/jni/Android.mk
       ============================================================
@@ -195,7 +195,7 @@ Building TEA
 
       include $(BUILD_SHARED_LIBRARY)
 
-(b) Change two `build.gradle´ files:
+(b) Change two ‘build.gradle’ files:
   
         tea-1.0.70/libtermexec/build.gradle
         ============================================================

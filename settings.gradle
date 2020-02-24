@@ -3,9 +3,9 @@ include ':term'
 // Still works, commented out to improve build speed.
 //   include ':samples:intents'
 
-// LATER Does no longer work since I merged module `emulatorview´ with module `term´.
+// LATER Does no longer work since I merged module ‘emulatorview’ with module ‘term’.
 //   include ':samples:pathbroadcasts'
 
-// LATER Does no longer work since I merged module `emulatorview´ with module `term´.
+// LATER Does no longer work since I merged module ‘emulatorview’ with module ‘term’.
 //   include ':samples:telnet'
 //T-} ------------------------------------------------------------

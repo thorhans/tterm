@@ -15,7 +15,7 @@ h1, h2, h3{
   content: url("../res/tterm72.png");
 
   /* Remove the baseline. For unknown reasons, setting
-   * `vertical-align: middle´ does not work here. */
+   * ‘vertical-align: middle’ does not work here. */
   height: 72px;
 
   display: inline-block;
@@ -40,7 +40,7 @@ code.cursor {
 
 /* A key or key code. */
 k {
-  /* See `code´ in `t2h.css´. */
+  /* See ‘code’ in ‘t2h.css’. */
   font-family: "Courier New", monospace, serif;
 }
 
@@ -67,7 +67,7 @@ table.border td, table.border th {
 }
 
 dl.code-commented > dt {
-  /* See `code´ in `t2h.css´. */
+  /* See ‘code’ in ‘t2h.css’. */
   font-family: "Courier New", monospace, serif;
   margin-top:    8pt;
   margin-bottom: 4pt;

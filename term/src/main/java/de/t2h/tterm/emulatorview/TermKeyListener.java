@@ -17,7 +17,7 @@ import static android.view.KeyEvent.*;
  * <p>Supports control characters and escape. Keeps track of the current state of the alt, shift, fn, and
  * control keys.</p>
  *
- * TODO Move it to package `key´.
+ * TODO Move it to package ‘key’.
  */
 class TermKeyListener {
     // ************************************************************
@@ -388,7 +388,7 @@ class TermKeyListener {
         // Nothing special.
     }
 
-    // TODO ThH: Similar to `handleFnKey´, merge them.
+    // TODO ThH: Similar to ‘handleFnKey’, merge them.
     public void handleControlKey (boolean down) {
         if(down) mControlKey.onPress();
         else     mControlKey.onRelease();
@@ -396,7 +396,7 @@ class TermKeyListener {
         updateCursorMode();
     }
 
-    // TODO ThH: Similar to `handleControlKey´, merge them.
+    // TODO ThH: Similar to ‘handleControlKey’, merge them.
     public void handleFnKey (boolean down) {
         if(down) mFnKey.onPress();
         else     mFnKey.onRelease();
@@ -412,22 +412,22 @@ class TermKeyListener {
         return mapControlChar(mHardwareControlKey || mControlKey.isActive(), mFnKey.isActive(), ch);
     }
 
-    // TODO ThH: Rename, it also maps `Fn´.
+    // TODO ThH: Rename, it also maps ‘Fn’.
     public int mapControlChar (boolean control, boolean fn, int ch) {
         int result = ch;
         if(control) {
-            // If you test `Ctrl-0´..`Ctrl-9´ in Bash, press `Ctrl-V´ first, so that you see which char
+            // If you test ‘Ctrl-0’..‘Ctrl-9’ in Bash, press ‘Ctrl-V’ first, so that you see which char
             // reaches Bash without Readline processing it.
             // 
             if       ('a' <= result  && result <= 'z') { result = (char) (result - 'a' + 1);
             } else if('A' <= result  && result <= 'Z') { result = (char) (result - 'A' + 1);
             } else if(result == ' '  || result == '@') { result = 0;
-            } else if(result == '['  || result == '1') { result = 27;  // `C-[´ (`Esc´)
-            } else if(result == '\\' || result == '2') { result = 28;  // `C-\´
-            } else if(result == ']'  || result == '3') { result = 29;  // `C-]´
-            } else if(result == '^'  || result == '4') { result = 30;  // `C-^´
-            } else if(result == '_'  || result == '5') { result = 31;  // `C-_´
-            } else if(                  result == '0') { result = 127; // `Del´, also on `Backspace´
+            } else if(result == '['  || result == '1') { result = 27;  // ‘C-[’ (‘Esc’)
+            } else if(result == '\\' || result == '2') { result = 28;  // ‘C-\’
+            } else if(result == ']'  || result == '3') { result = 29;  // ‘C-]’
+            } else if(result == '^'  || result == '4') { result = 30;  // ‘C-^’
+            } else if(result == '_'  || result == '5') { result = 31;  // ‘C-_’
+            } else if(                  result == '0') { result = 127; // ‘Del’, also on ‘Backspace’
             }
         } else if(fn) {
             // Cursor movement
@@ -466,8 +466,8 @@ class TermKeyListener {
 
     /** Handle a keyDown event.
      *
-     * <p>On Ten7 with Swype, called for `Tab´ and `C-a´, but not for `a´, which is handled by code below
-     * `EmulatorView.onCreateInputConnection´.</p>
+     * <p>On Ten7 with Swype, called for ‘Tab’ and ‘C-a’, but not for ‘a’, which is handled by code below
+     * ‘EmulatorView.onCreateInputConnection’.</p>
      *
      * @param keyCode the keycode of the keyDown event
      */
@@ -550,14 +550,14 @@ class TermKeyListener {
             }
         }
 
-        // This is the relevant place for *locked* `Ctrl´ and `Fn´. I'm currently testing what happens when I
-        // ignore `allowToggle´ here for all keyboards.
+        // This is the relevant place for *locked* ‘Ctrl’ and ‘Fn’. I'm currently testing what happens when I
+        // ignore ‘allowToggle’ here for all keyboards.
         //
-        // TTerm's buttons `Ctrl´ and `Fn´ should always toggle and lock, even when the keyboard reports that
+        // TTerm's buttons ‘Ctrl’ and ‘Fn’ should always toggle and lock, even when the keyboard reports that
         // it does not "toggle", only "chord". For example, when using Google's keyboard "GBoard",
-        // `KeyCharacterMap.getModifierBehavior´ will return `MODIFIER_BEHAVIOR_CHORDED´, not
-        // `MODIFIER_BEHAVIOR_CHORDED_OR_TOGGLED´ as the keyboards "Swype" or "Hacker's Keyboard" do, so
-        // the call to `isEventFromToggleDevice´ will set `allowToggle´ to `false´.
+        // ‘KeyCharacterMap.getModifierBehavior’ will return ‘MODIFIER_BEHAVIOR_CHORDED’, not
+        // ‘MODIFIER_BEHAVIOR_CHORDED_OR_TOGGLED’ as the keyboards "Swype" or "Hacker's Keyboard" do, so
+        // the call to ‘isEventFromToggleDevice’ will set ‘allowToggle’ to ‘false’.
         boolean effectiveControl = chordedCtrl || mHardwareControlKey
             || (/*allowToggle &&*/ mControlKey.isActive());
         boolean effectiveFn = /*allowToggle &&*/ mFnKey.isActive();
@@ -619,7 +619,7 @@ class TermKeyListener {
             }
             // Press Enter to close finished session for keyboard GBoard.
             //
-            // For keyboard Swype, see `TermKeyListener.handleKeyCode´.
+            // For keyboard Swype, see ‘TermKeyListener.handleKeyCode’.
             //
             if(mTermSession.mIsExiting && code.equals("\r")) {
                 mTermSession.finish();
@@ -634,8 +634,8 @@ class TermKeyListener {
 
     /** Handle a keyUp event.
      *
-     * <p>On Ten7 with Swype, called for `Tab´ and `C-a´, but not for `a´, which is handled by code below
-     * `EmulatorView.onCreateInputConnection´.</p>
+     * <p>On Ten7 with Swype, called for ‘Tab’ and ‘C-a’, but not for ‘a’, which is handled by code below
+     * ‘EmulatorView.onCreateInputConnection’.</p>
      *
      * @param keyCode the keyCode of the keyUp event
      */
